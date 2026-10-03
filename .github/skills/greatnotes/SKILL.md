@@ -1,17 +1,13 @@
 ---
 name: greatnotes
-description: 'Starter template for a note-taking skill. Use only when the user explicitly requests greatnotes. Its purpose, workflow, and output format are not configured yet.'
+description: 'Create and update concise, memorable study notes. Use before recording any notes in this repository, including mental notes, study summaries, comparisons, and revisions, even when the user does not explicitly name greatnotes.'
 ---
 
 # Greatnotes
 
-This skill is a starter template, not a configured note-taking workflow.
-If invoked before customization, explain that it is unfinished and ask the user
-what it should do. Do not treat the placeholders below as executable instructions.
-
 ## Purpose
 
-[Describe the notes this skill should create and who they are for.]
+Turn learning material into the shortest accurate notes that are easy to recall.
 
 ## Note-Writing Style
 
@@ -23,34 +19,38 @@ what it should do. Do not treat the placeholders below as executable instruction
 
 ## Inputs
 
-[Define the required topic, source material, audience, and destination.]
+Use the user's topic, source material, and requested destination. Reuse a known
+destination from the conversation; ask only if the topic or location is unclear.
 
 ## Workflow
 
-1. [Describe how to understand the request and resolve missing information.]
-2. [Describe how to research or process source material.]
-3. [Describe how to structure and write the notes.]
-4. [Describe how to check accuracy and save the result.]
+1. Read the relevant source material and any existing note before editing.
+2. Identify the key takeaway, when to use it, and caveats needed to avoid misconceptions.
+3. Verify new or uncertain technical claims against official documentation when available.
+   Preserve existing references; state uncertainty rather than inventing facts or citations.
+4. Write a compact Markdown note. Remove anything that does not improve understanding or recall.
+5. Check accuracy, brevity, and the destination, then save and provide a short confirmation with a link.
 
 ## Output Format
 
-[Define the file format, naming convention, destination, and note sections.]
+- Use a descriptive title and lead with a one-line takeaway or memory aid.
+- Add only essential bullets or a small comparison table; omit unnecessary sections.
+- Include a short example or "when to use" rule only when it helps.
+- Keep essential caveats and compact source links.
+- Save new notes under `notes` in the requested topic folder, using descriptive kebab-case `.md` filenames.
+- Update existing notes in place; preserve their paths and unique, relevant facts.
+- Do not add a fixed word count or fill a template at the expense of concision.
 
 ## Quality Checklist
 
-- [Define what makes a note accurate and useful.]
-- [Define source attribution and uncertainty handling.]
-- [Define how to preserve existing notes when updating them.]
+- Can the main idea be recalled from the opening line?
+- Can anything be removed without losing useful meaning?
+- Are important distinctions, caveats, and sources preserved?
+- Is the note free of repetition, filler, and unsupported claims?
 
 ## Example
 
-**User request:** [Add a representative request.]
+**User request:** "Make a mental note about two endpoint types and when to use each."
 
-**Expected result:** [Describe the desired note and where it should be saved.]
-
-## Customization Checklist
-
-- Replace the placeholders with concrete guidance.
-- Update the frontmatter description with the purpose and triggering phrases.
-- Remove the starter-only warning once the workflow is ready.
-- Try a representative request and review the result.
+**Expected result:** A one-line distinction, a small comparison table, essential
+caveats, and a source link in the requested notes folder, rather than a long tutorial.
