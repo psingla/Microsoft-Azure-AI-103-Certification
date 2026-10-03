@@ -27,6 +27,11 @@ I've been using Microsoft Foundry (formerly Azure AI Foundry),the Azure Cosmos D
 ## My Study Approach
 
 I'll work through the official Microsoft Learn content to solidify my understanding, build small projects where needed, and test my knowledge with the practice questions in this repo. I'll keep the content concise and relevant.
+
+## Acknowledgments
+
+Special thanks to [himanshu231204](https://github.com/himanshu231204) for sharing [Microsoft-Azure-AI-103](https://github.com/himanshu231204/Microsoft-Azure-AI-103), from which portions of this repository's content are adapted. Your contribution to the learning community is greatly appreciated.
+
 ## Course Structure
 
 The course has **4 learning paths** with **34 modules total**:
