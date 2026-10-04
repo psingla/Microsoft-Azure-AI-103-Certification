@@ -11,8 +11,10 @@ Flag suspected secrets, exact resource endpoints, and private information
 immediately without repeating their values. Pause the affected action until
 resolved. Before check-in, review the exact staged content as well as working
 changes; before pushing, include outgoing commits. Incomplete checks are not
-approval to proceed. This assistant workflow does not install a Git hook or
-block commits made outside the assistant.
+approval to proceed. Install the repository's pre-commit hook for local
+enforcement; the skill alone cannot block commits outside the assistant.
+The `sensitive-data-check` workflow is a CI backstop, not prevention of the
+initial push. Do not bypass a failed check or add broad allowlists to pass it.
 
 ## Study notes
 

@@ -9,8 +9,14 @@ description: 'Prevent accidental disclosure of secrets, real resource endpoints,
 
 Keep sensitive information out of repository content and shared output. Warn
 the user as soon as a suspected exposure is detected, not only at commit time.
-This is an assistant workflow, not an installed Git hook or a guarantee that all
-secrets will be detected. It cannot block commits made outside the assistant.
+This skill is an assistant workflow, not a guarantee that all secrets will be
+detected. Repository automation complements it: `.pre-commit-config.yaml` runs
+Gitleaks on staged changes once installed locally, and `sensitive-data-check`
+scans checked-out Git history in CI. Both use `.gitleaks.toml`, which extends
+built-in secret rules with real Azure resource addresses and literal credentials.
+The hook must be installed in each clone. CI runs after upload and cannot prevent
+initial disclosure. Pattern matching does not replace contextual review of
+private data, arbitrary endpoints, screenshots, or other binary content.
 
 ## What to protect
 

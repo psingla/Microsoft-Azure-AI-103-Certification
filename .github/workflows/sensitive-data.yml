@@ -1,0 +1,29 @@
+name: Sensitive data
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sensitive-data-check:
+    name: sensitive-data-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.4"
+          cache: false
+      - name: Install pinned scanner
+        run: go install github.com/zricethezav/gitleaks/v8@v8.24.3
+      - name: Test endpoint and staged-content protection
+        run: bash .github/scripts/test-sensitive-data.sh
+      - name: Scan checked-out history
+        run: gitleaks git --config=.gitleaks.toml --redact=100 --no-banner --log-opts="--all --full-history" .

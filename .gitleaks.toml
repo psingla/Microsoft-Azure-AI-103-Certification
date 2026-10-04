@@ -1,0 +1,15 @@
+title = "Repository secrets and private Azure endpoints"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "azure-resource-endpoint"
+description = "Real Azure resource address; use an angle-bracket placeholder"
+regex = '''(?i)\b(?:https?://)?[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?\.(?:openai\.azure\.(?:com|us|cn)|services\.ai\.azure\.com|cognitiveservices\.azure\.(?:com|us|cn)|search\.windows\.net|(?:blob|dfs|file|queue|table)\.core\.windows\.net|vault\.azure\.net|documents\.azure\.com)(?:[/:?#][^\s"'<>`\\]*)?'''
+
+[[rules]]
+id = "literal-credential"
+description = "Quoted literal credential; use runtime configuration"
+regex = '''(?i)\b(?:api[_-]?key|password|passwd|client[_-]?secret|access[_-]?token)\b["']?\s*[:=]\s*["']([a-z0-9][a-z0-9_./+!@#$%^&*()=:;?,~-]{7,})["']'''
+secretGroup = 1

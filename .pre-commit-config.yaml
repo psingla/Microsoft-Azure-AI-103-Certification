@@ -1,0 +1,9 @@
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.24.3
+    hooks:
+      - id: gitleaks
+        name: Block secrets and real Azure endpoints
+        entry: gitleaks git --pre-commit --staged --redact=100 --no-banner
+        args: [--config=.gitleaks.toml]
+        always_run: true

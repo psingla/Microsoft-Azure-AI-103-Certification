@@ -34,6 +34,28 @@ I'll work through the official Microsoft Learn content to solidify my understand
 2. Read [Foundry endpoints, SDKs, and Responses](./notes/Develop%20generative%20AI%20apps%20in%20Azure/foundry-endpoints-mental-note.md): choose an endpoint, choose an SDK, connect clients, then generate responses.
 3. Return to [Certification context](./Context-Certification.md#4-must-know-retrieval-and-extraction-end-to-end): retrieval, agents, other modalities, evaluation and operations, then troubleshooting (sections 4-9).
 
+## Before Committing: Sensitive-Data Checks
+
+Install the local hook in each clone (Python, Git, and internet access are required):
+
+```powershell
+python -m pip install pre-commit
+python -m pre_commit install --install-hooks
+```
+
+Before committing staged changes, you can also run:
+
+```powershell
+python -m pre_commit run gitleaks
+```
+
+- Gitleaks checks staged additions for secrets and real Azure resource addresses, using [.gitleaks.toml](./.gitleaks.toml). Redaction is enabled and verbose finding output is disabled to avoid exposing snippets or commit-author details. A failed scan blocks the commit. Use placeholders such as `https://<resource>.openai.azure.com/openai/v1/` and runtime credentials instead of real values.
+- This checks the Git index, not unsaved editor content or unstaged changes. The Go-based scanner is installed by pre-commit; initial setup needs dependency downloads.
+- [The CI workflow](./.github/workflows/sensitive-data.yml) tests the rules and scans checked-out history on pushes and pull requests. An endpoint removed from the latest file may still cause a historical finding.
+- In GitHub branch protection/rulesets, require **`sensitive-data-check`** for the default branch and restrict direct pushes/bypasses. Adding the workflow alone does not enable branch protection.
+- Local hooks can be bypassed. CI detects issues **after upload**, so it cannot undo exposure. Neither regex scanning nor the assistant skill guarantees detection of all private data or image/binary content.
+- If a credential has been exposed, revoke/rotate it. For private endpoints, sanitize current content and assess historical exposure; coordinate any history rewrite rather than force-pushing automatically.
+
 ## Acknowledgments
 
 Special thanks to [himanshu231204](https://github.com/himanshu231204) for sharing [Microsoft-Azure-AI-103](https://github.com/himanshu231204/Microsoft-Azure-AI-103), from which some portions of this repository's content are adapted. Your contribution to the learning community is greatly appreciated.
