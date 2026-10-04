@@ -19,3 +19,4 @@ response = openai_client.responses.create(
 )
 
 print(response.output_text)
+print(response.id, response.usage)
