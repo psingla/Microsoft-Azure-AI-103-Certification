@@ -34,19 +34,7 @@ These concepts apply across AI platforms, not just Azure or AI-103.
 
 ![AI stack illustrated using a human-body analogy: LLM, RAG, MCP, skills, and AI agents](./assets/images/ai-stack-human-body.png)
 
-*Infographic credit: GenAI.works. See the clarifications below.*
-
-**Remember: models generate, retrieval grounds, protocols connect, skills guide, agents act.**
-
-| Component | Human-body analogy | Role |
-|-----------|--------------------|------|
-| **LLM (large language model)** | Brain | Generates and reasons over text using learned patterns and the context supplied to it; it has no automatic access to live information. |
-| **RAG (retrieval-augmented generation)** | Brain with a library | Retrieves relevant external information and supplies it as context for an answer, without retraining the model. |
-| **MCP (Model Context Protocol)** | Nervous system | Standardizes how AI applications connect to tools and contextual resources exposed by servers. |
-| **Agent skills** | Practiced know-how | Package reusable instructions, resources, and sometimes scripts for recurring tasks; loading behavior depends on the agent framework. |
-| **AI agent** | Brain with hands | Uses a model and tools to choose and execute steps toward a goal, within configured permissions and controls. |
-
-The analogy is a memory aid, not a required architecture: agents need not use RAG, MCP, or skills. Grounding does not guarantee correct answers, and tool access does not grant permission to act.
+*Infographic credit: GenAI.works.*
 
 ## Acknowledgments
 
