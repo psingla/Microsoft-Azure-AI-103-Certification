@@ -39,12 +39,12 @@ These concepts apply across AI platforms, not just Azure or AI-103.
 
 The course has **4 learning paths** with **34 modules total**:
 
-| Learning Path | Weight | My Priority (1–5) |
-|---------------|--------|-------------------|
-| [Develop generative AI apps in Azure](https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/) | 30–35% | **5/5 — Core focus** |
-| [Develop AI agents on Azure](#lp2) | 30–35% | **5/5 — Core focus** |
-| [Develop natural language solutions in Azure](#lp3) | 10–15% | **3/5 — Supporting knowledge** |
-| [Extract insights from visual data on Azure](#lp4) | 20–30% | **3/5 — Supporting knowledge** |
+| Official Learning Path | My Learnings | Weight | My Priority (1–5) |
+|------------------------|--------------|--------|-------------------|
+| [Develop generative AI apps in Azure](https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/) | — | 30–35% | **5/5 — Core focus** |
+| [Develop AI agents on Azure](#lp2) | — | 30–35% | **5/5 — Core focus** |
+| [Develop natural language solutions in Azure](#lp3) | — | 10–15% | **3/5 — Supporting knowledge** |
+| [Extract insights from visual data on Azure](#lp4) | — | 20–30% | **3/5 — Supporting knowledge** |
 
 *My Priority reflects my current learning focus, not exam weight: 1 = lowest, 5 = highest. Ratings can change as I progress.*
 
