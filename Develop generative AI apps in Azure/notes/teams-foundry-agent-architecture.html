@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Microsoft Agent Framework on Foundry Agent Service, with Teams publishing and end-to-end response streaming.">
+  <title>Teams + Foundry | Streaming Agent Architecture</title>
+  <style>
+    :root { color-scheme: light; --ink: #182b43; --muted: #52647a; --blue: #245bd6; --teal: #087f72; --line: #dce4ef; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f0f4f9; color: var(--ink); font: 15px/1.6 "Segoe UI", Arial, sans-serif; }
+    header { background: #10243c; color: white; padding: 45px max(24px, calc((100vw - 1180px) / 2)) 38px; }
+    .eyebrow { color: #8fdad0; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; font-weight: 700; margin: 0 0 12px; }
+    h1 { font-size: clamp(28px, 4vw, 43px); line-height: 1.15; letter-spacing: -1px; margin: 0 0 16px; }
+    header p { color: #c4d4e8; max-width: 780px; margin: 0; font-size: 17px; }
+    header strong { color: white; }
+    .summary { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px; }
+    .summary span { border: 1px solid #47617e; border-radius: 30px; padding: 5px 13px; font-size: 12px; color: #e0ebf7; }
+    main { max-width: 1228px; margin: 0 auto; padding: 28px 24px 40px; }
+    .panel { background: white; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 22px; overflow: hidden; box-shadow: 0 5px 20px #20395106; }
+    .panel-head { padding: 23px 26px 0; display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; }
+    .kicker { color: var(--teal); font-size: 11px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; margin: 0 0 5px; }
+    h2 { font-size: 22px; line-height: 1.3; margin: 0 0 7px; }
+    .subtitle { color: var(--muted); margin: 0; font-size: 14px; }
+    .pill { background: #e9f6f2; color: #096657; border: 1px solid #bfe1d7; white-space: nowrap; border-radius: 20px; padding: 4px 11px; font-size: 11px; font-weight: 700; }
+    .diagram-scroll { overflow-x: auto; padding: 8px 18px 0; }
+    .diagram-scroll:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
+    svg { width: 100%; min-width: 920px; height: auto; display: block; font-family: "Segoe UI", Arial, sans-serif; }
+    svg .title { font-size: 17px; font-weight: 700; fill: #182b43; }
+    svg .body { font-size: 12px; fill: #465c75; }
+    svg .label { font-size: 10px; font-weight: 700; letter-spacing: 1px; fill: #52647a; }
+    svg .flow { font-size: 10px; font-weight: 600; }
+    .legend { display: flex; flex-wrap: wrap; gap: 18px; padding: 0 26px 20px; font-size: 12px; color: var(--muted); }
+    .legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .swatch { width: 28px; height: 3px; background: var(--blue); display: inline-block; }
+    .swatch.return { background: var(--teal); }
+    .swatch.state { background: none; border-top: 2px dashed #7488a2; }
+    .callout { margin: 0 26px 24px; border-left: 4px solid var(--teal); background: #eff8f5; padding: 12px 16px; font-size: 14px; }
+    code { font: 0.92em Consolas, monospace; overflow-wrap: anywhere; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding: 0 26px 25px; }
+    .step { border-top: 1px solid var(--line); padding-top: 13px; }
+    .step b { display: block; font-size: 13px; }
+    .step p { color: var(--muted); font-size: 12px; margin: 5px 0 0; }
+    .direct { display: grid; grid-template-columns: 1fr 42px 1.5fr 42px 1.2fr; align-items: center; gap: 8px; padding: 24px 26px; }
+    .direct-node { background: #f5f7fc; border: 1px solid var(--line); border-radius: 10px; padding: 18px; text-align: center; }
+    .direct-node b { display: block; font-size: 14px; }
+    .direct-node span { display: block; font-size: 12px; color: var(--muted); margin-top: 5px; }
+    .arrow { text-align: center; color: var(--blue); font-size: 24px; }
+    .warning { background: #fff8e9; border-color: #c48a15; }
+    .constraints { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .constraint { border: 1px solid var(--line); border-radius: 12px; padding: 19px; background: white; }
+    .constraint h3 { margin: 0 0 8px; font-size: 15px; }
+    .constraint p { color: var(--muted); font-size: 13px; margin: 0; }
+    .sources { margin-top: 24px; color: var(--muted); font-size: 12px; }
+    .sources h2 { font-size: 14px; }
+    .sources ul { padding-left: 18px; }
+    a { color: #204fb4; text-underline-offset: 3px; }
+    footer { border-top: 1px solid var(--line); margin-top: 18px; padding-top: 14px; font-size: 12px; color: var(--muted); }
+    @media (max-width: 700px) {
+      header { padding: 28px 20px; }
+      main { padding: 18px 12px 30px; }
+      .panel-head { padding: 20px 18px 0; flex-direction: column; gap: 8px; }
+      .steps { grid-template-columns: 1fr 1fr; padding: 0 18px 20px; }
+      .callout { margin: 0 18px 20px; }
+      .constraints { grid-template-columns: 1fr; gap: 10px; }
+      .direct { grid-template-columns: 1fr; padding: 20px 18px; }
+      .arrow { transform: rotate(90deg); line-height: 1; }
+      .legend { padding-left: 18px; }
+    }
+    @media print {
+      body { background: white; font-size: 11px; }
+      header { background: white; color: #182b43; padding: 0 0 16px; }
+      header p, header strong, .eyebrow, .summary span { color: #182b43; }
+      main { padding: 16px 0; max-width: none; }
+      .panel { box-shadow: none; break-inside: avoid; }
+      .diagram-scroll { overflow: visible; }
+      svg { min-width: 0; }
+      .constraints, .sources { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">Architecture / conversational AI</p>
+    <h1>Build with MAF. Run in Foundry.<br>Talk through Teams.</h1>
+    <p><strong>Teams is the interface, not the agent host.</strong> Microsoft Agent Framework
+      defines the behavior; Foundry Agent Service runs the hosted agent.</p>
+    <div class="summary" aria-label="Architecture responsibilities">
+      <span>MAF = Microsoft Agent Framework</span>
+      <span>FAS = Foundry Agent Service</span>
+      <span>Streaming = progressive answer text</span>
+    </div>
+  </header>
+  <main>
+    <section class="panel" aria-labelledby="custom-heading">
+      <div class="panel-head">
+        <div>
+          <p class="kicker">Option A / explicit streaming control</p>
+          <h2 id="custom-heading">Custom Teams adapter + Foundry-hosted agent</h2>
+          <p class="subtitle">Two streaming legs, joined by an adapter you own. Read requests left to right; answers return right to left.</p>
+        </div>
+        <span class="pill">Controlled streaming UX</span>
+      </div>
+      <div class="diagram-scroll" tabindex="0" role="region" aria-label="Architecture diagram; scroll horizontally on small screens">
+        <svg viewBox="0 0 1120 455" role="img" aria-labelledby="diagram-title diagram-desc">
+          <title id="diagram-title">Teams to Microsoft Agent Framework through Foundry Agent Service</title>
+          <desc id="diagram-desc">A Teams personal chat exchanges activities through Azure Bot Service with a custom Teams adapter hosted separately.
+            The adapter invokes a Microsoft Agent Framework agent hosted in Foundry using the Responses API.
+            Foundry sends server-sent text events back to the adapter, which buffers them and sends Teams streaming activities.
+            The adapter maps each authorized Teams conversation to a Foundry conversation or session.
+            The agent calls model deployments and optional tools or retrieval services.</desc>
+          <defs>
+            <marker id="request-tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#245bd6"/>
+            </marker>
+            <marker id="answer-tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#087f72"/>
+            </marker>
+          </defs>
+          <rect x="9" y="30" width="410" height="296" rx="15" fill="#f6f5fc" stroke="#deddef"/>
+          <rect x="438" y="30" width="242" height="296" rx="15" fill="#f3f7fd" stroke="#d6e3f7"/>
+          <rect x="797" y="30" width="314" height="391" rx="15" fill="#eff8f5" stroke="#c6e4d8"/>
+          <text x="25" y="56" class="label">MICROSOFT 365 / CHANNEL</text>
+          <text x="454" y="56" class="label">YOUR APP HOSTING</text>
+          <text x="813" y="56" class="label">FOUNDRY AGENT SERVICE</text>
+          <text x="454" y="76" class="body">App Service or Container Apps</text>
+          <text x="813" y="76" class="body">Managed hosted-agent runtime</text>
+
+          <rect x="25" y="112" width="164" height="180" rx="12" fill="white" stroke="#d2cde9"/>
+          <circle cx="51" cy="140" r="14" fill="#6256a8"/>
+          <text x="51" y="145" text-anchor="middle" fill="white" font-size="13" font-weight="700">T</text>
+          <text x="42" y="177" class="title">Teams user</text>
+          <text x="42" y="199" class="body">Personal / 1:1 chat</text>
+          <text x="42" y="239" class="body">Send a question</text>
+          <text x="42" y="260" class="body">See the answer grow</text>
+
+          <rect x="256" y="112" width="146" height="180" rx="12" fill="white" stroke="#d2cde9"/>
+          <text x="272" y="143" class="label">CHANNEL ROUTING</text>
+          <text x="272" y="178" class="title">Azure Bot</text>
+          <text x="272" y="200" class="title">Service</text>
+          <text x="272" y="240" class="body">Teams channel</text>
+          <text x="272" y="261" class="body">Activity delivery</text>
+
+          <rect x="454" y="112" width="210" height="180" rx="12" fill="white" stroke="#bdd1ee"/>
+          <text x="470" y="143" class="label">YOUR INTEGRATION CODE</text>
+          <text x="470" y="178" class="title">Teams adapter</text>
+          <text x="470" y="201" class="body">Teams-capable SDK</text>
+          <text x="470" y="230" class="body">Authenticate + map context</text>
+          <text x="470" y="251" class="body">Buffer + forward text</text>
+          <text x="470" y="272" class="body">Finish / cancel / report errors</text>
+
+          <rect x="813" y="112" width="282" height="180" rx="12" fill="white" stroke="#b6dccc"/>
+          <text x="831" y="143" class="label">CUSTOM CODE IN A CONTAINER</text>
+          <text x="831" y="178" class="title">MAF agent</text>
+          <text x="831" y="201" class="body">Instructions, orchestration, tool calls</text>
+          <rect x="830" y="224" width="248" height="49" rx="7" fill="#edf7f2"/>
+          <text x="843" y="244" class="body">Foundry-compatible hosting adapter</text>
+          <text x="843" y="262" class="body">Responses protocol + streaming</text>
+
+          <path d="M189 188 H256" stroke="#245bd6" stroke-width="2" marker-end="url(#request-tip)"/>
+          <path d="M256 217 H189" stroke="#087f72" stroke-width="2" marker-end="url(#answer-tip)"/>
+          <path d="M402 188 H454" stroke="#245bd6" stroke-width="2" marker-end="url(#request-tip)"/>
+          <path d="M454 217 H402" stroke="#087f72" stroke-width="2" marker-end="url(#answer-tip)"/>
+          <path d="M664 167 H813" stroke="#245bd6" stroke-width="2" marker-end="url(#request-tip)"/>
+          <text x="738" y="138" text-anchor="middle" fill="#245bd6" class="flow">Responses API</text>
+          <text x="738" y="153" text-anchor="middle" fill="#245bd6" class="flow">stream = true</text>
+          <path d="M813 222 H664" stroke="#087f72" stroke-width="2" marker-end="url(#answer-tip)"/>
+          <text x="738" y="246" text-anchor="middle" fill="#087f72" class="flow">SSE text deltas</text>
+          <text x="738" y="261" text-anchor="middle" fill="#087f72" class="flow">+ lifecycle events</text>
+          <text x="215" y="313" text-anchor="middle" class="body">Teams streaming activities, not raw SSE</text>
+
+          <path d="M559 292 V352" stroke="#7488a2" stroke-dasharray="5 4" stroke-width="1.5"/>
+          <rect x="438" y="352" width="242" height="69" rx="10" fill="#f8fafc" stroke="#cdd7e4" stroke-dasharray="5 4"/>
+          <text x="454" y="376" class="title" style="font-size:14px">Conversation mapping / state</text>
+          <text x="454" y="397" class="body">Teams identity + chat to Foundry</text>
+          <text x="454" y="412" class="body">conversation / session; isolate users</text>
+
+          <path d="M954 292 V320 M874 320 H1035 M874 320 V339 M1035 320 V339" fill="none" stroke="#7488a2" stroke-width="1.5"/>
+          <rect x="813" y="339" width="122" height="64" rx="9" fill="white" stroke="#b6dccc"/>
+          <text x="874" y="364" text-anchor="middle" class="title" style="font-size:14px">Model</text>
+          <text x="874" y="385" text-anchor="middle" class="body">deployment</text>
+          <rect x="951" y="339" width="144" height="64" rx="9" fill="white" stroke="#b6dccc"/>
+          <text x="1023" y="364" text-anchor="middle" class="title" style="font-size:14px">Tools / retrieval</text>
+          <text x="1023" y="385" text-anchor="middle" class="body">optional dependencies</text>
+          <text x="25" y="378" class="body">Build: MAF agent + hosting adapter</text>
+          <text x="25" y="400" class="body">Deploy: container to Foundry Hosted Agents</text>
+          <text x="813" y="441" class="body">Dependencies may run outside this boundary.</text>
+        </svg>
+      </div>
+      <div class="legend" aria-label="Diagram legend">
+        <span><i class="swatch" aria-hidden="true"></i>Request / invocation</span>
+        <span><i class="swatch return" aria-hidden="true"></i>Progressive response</span>
+        <span><i class="swatch state" aria-hidden="true"></i>Application state</span>
+      </div>
+      <div class="callout"><strong>The critical bridge:</strong> <code>stream=True</code> streams from Foundry to your
+        adapter. The adapter must separately send <strong>Teams streaming messages</strong> to update the user's chat.</div>
+      <div class="steps" aria-label="Streaming lifecycle">
+        <div class="step"><b>01 / Receive</b><p>Validate the incoming activity and retrieve the correct conversation mapping.</p></div>
+        <div class="step"><b>02 / Invoke</b><p>Call the hosted agent through an authenticated Responses API connection.</p></div>
+        <div class="step"><b>03 / Relay</b><p>Consume text deltas, buffer updates, and emit them through the Teams streaming SDK.</p></div>
+        <div class="step"><b>04 / Complete</b><p>Send the final message. Handle stop requests, failures, and incomplete responses.</p></div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="direct-heading">
+      <div class="panel-head">
+        <div>
+          <p class="kicker">Option B / less integration code</p>
+          <h2 id="direct-heading">Publish directly from Foundry</h2>
+          <p class="subtitle">Foundry prepares the Teams app package and enables the Activity protocol and channel authorization.</p>
+        </div>
+        <span class="pill">Simpler publishing path</span>
+      </div>
+      <div class="direct" aria-label="Teams connects through the Foundry-managed channel integration to the hosted MAF agent">
+        <div class="direct-node"><b>Microsoft Teams</b><span>User-facing app</span></div>
+        <div class="arrow" aria-hidden="true">&#8596;</div>
+        <div class="direct-node"><b>Foundry-managed Teams integration</b><span>Azure Bot Service + Activity protocol</span></div>
+        <div class="arrow" aria-hidden="true">&#8596;</div>
+        <div class="direct-node"><b>Hosted MAF agent</b><span>Your code running in Foundry</span></div>
+      </div>
+      <div class="callout warning"><strong>Validate the end-to-end experience:</strong> do not assume that backend
+        SSE support guarantees progressive rendering through the managed Teams integration. Test your agent in Teams;
+        choose the custom adapter when you need explicit control of streaming behavior.</div>
+    </section>
+
+    <section aria-labelledby="constraints-heading">
+      <h2 id="constraints-heading">Design constraints to carry into implementation</h2>
+      <div class="constraints">
+        <article class="constraint"><h3>Personal chat, one stream</h3><p>Teams streaming is supported in 1:1 chats,
+          with one concurrent streaming response per chat. Use a non-streaming fallback for other scopes.</p></article>
+        <article class="constraint"><h3>Buffer, don't flood</h3><p>For manual REST delivery, Microsoft recommends
+          buffering tokens for about 1.5-2 seconds. Updates contain accumulated text; SDK helpers handle the streaming mechanics.</p></article>
+        <article class="constraint"><h3>Keep the boundaries secure</h3><p>Validate Teams activity tokens, use Entra
+          authentication and least-privilege access to Foundry, and isolate conversation state. Organization-wide publishing needs admin approval.</p></article>
+      </div>
+    </section>
+    <section class="sources" aria-labelledby="sources-heading">
+      <h2 id="sources-heading">Official references</h2>
+      <ul>
+        <li><a href="https://learn.microsoft.com/en-us/azure/foundry/how-to/develop/framework-hosted-agents">Host Microsoft Agent Framework agents in Foundry</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/publish-copilot">Publish Foundry agents to Teams and Microsoft 365 Copilot</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/microsoftteams/platform/bots/streaming-ux">Teams streaming support, SDKs, and constraints</a></li>
+      </ul>
+    </section>
+    <footer>Conceptual architecture, not a deployed system. Documentation reviewed 4 October 2026.
+      Self-contained HTML; no external scripts, fonts, or service calls. Use your browser's Print command to save a PDF.</footer>
+  </main>
+</body>
+</html>
