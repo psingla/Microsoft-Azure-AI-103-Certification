@@ -35,10 +35,6 @@ These concepts apply across AI platforms, not just Azure or AI-103.
 
 *Infographic credit: GenAI.works.*
 
-## Acknowledgments
-
-Special thanks to [himanshu231204](https://github.com/himanshu231204) for sharing [Microsoft-Azure-AI-103](https://github.com/himanshu231204/Microsoft-Azure-AI-103), from which some portions of this repository's content are adapted. Your contribution to the learning community is greatly appreciated.
-
 ## Course Structure
 
 The course has **4 learning paths** with **34 modules total**:
@@ -113,6 +109,10 @@ The course has **4 learning paths** with **34 modules total**:
 | 4.6 | [Analyze video](https://learn.microsoft.com/training/modules/analyze-video/) | ☐ | [→](modules/04-vision/06-analyze-video/) |
 | 4.7 | [Develop a vision-enabled generative AI application](https://learn.microsoft.com/training/modules/develop-generative-ai-vision-apps/) | ☐ | [→](modules/04-vision/07-vision-enabled-generative-ai/) |
 | 4.8 | [Generate images with AI](https://learn.microsoft.com/training/modules/generate-images-azure-openai/) | ☐ | [→](modules/04-vision/08-generate-images-ai/) |
+
+## Acknowledgments
+
+Special thanks to [himanshu231204](https://github.com/himanshu231204) for sharing [Microsoft-Azure-AI-103](https://github.com/himanshu231204/Microsoft-Azure-AI-103), from which some portions of this repository's content are adapted. Your contribution to the learning community is greatly appreciated.
 
 ---
 
