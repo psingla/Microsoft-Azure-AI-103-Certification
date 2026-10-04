@@ -112,7 +112,7 @@ The course has **4 learning paths** with **34 modules total**:
 
 ## Acknowledgments
 
-Special thanks to [himanshu231204](https://github.com/himanshu231204) for sharing [Microsoft-Azure-AI-103](https://github.com/himanshu231204/Microsoft-Azure-AI-103), from which some portions of this repository's content are adapted. Your contribution to the learning community is greatly appreciated.
+Special thanks to [himanshu231204](https://github.com/himanshu231204) for sharing [Microsoft-Azure-AI-103](https://github.com/himanshu231204/Microsoft-Azure-AI-103), from which the above-mentioned question bank is taken.
 
 ---
 
