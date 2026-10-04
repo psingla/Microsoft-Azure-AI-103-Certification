@@ -9,7 +9,6 @@
 [![Exam](https://img.shields.io/badge/Exam-AI103-blue?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/credentials/certifications/exams/ai-103)
 [![Course](https://img.shields.io/badge/Course-AI103T00--A-0078D4?style=for-the-badge&logo=microsoftlearn&logoColor=white)](https://learn.microsoft.com/training/courses/ai-103t00)
 [![Azure AI Foundry](https://img.shields.io/badge/Azure_AI_Foundry-Foundry_Portal-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)](https://ai.azure.com)
-[![Status](https://img.shields.io/badge/Status-Not_Started-lightgrey?style=for-the-badge)](#progress)
 [![Modules](https://img.shields.io/badge/Modules-34-green?style=for-the-badge)](#course-structure)
 [![Last Updated](https://img.shields.io/badge/Last_Updated-2026--10--03-purple?style=for-the-badge)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange?style=for-the-badge)](./LICENSE)
@@ -124,36 +123,14 @@ The course has **4 learning paths** with **34 modules total**:
 | [Course Page](https://learn.microsoft.com/training/courses/ai-103t00) | Official course overview |
 | [Foundry Portal](https://ai.azure.com) | Azure AI Foundry |
 
-## Progress
-
-[![Microsoft Learn Achievement](https://img.shields.io/badge/Microsoft_Learn-Achievement_Badge-0078D4?style=for-the-badge&logo=microsoftlearn&logoColor=white)](https://learn.microsoft.com/en-us/users/himanshukumar-1965/achievements/eghlmzmp)
-
-| Metric | Status |
-|--------|--------|
-| **Modules completed** | 0 / 34 |
-| **Exam status** | Not taken |
-| **Current focus** | LP1 Module 1.1 — Plan and prepare to develop AI solutions on Azure |
-
 ---
 
 <div align="center">
-
-### What's Inside
-
-| | |
-|---|---|
-| **Exam Guide** | [AI-103 Study Guide](AI-103-Study-Guide.md) — Full skills measured (April 2026) |
-| **Agents Deep-Dive** | [Agents.md](Agents.md) — 600+ lines covering agentic AI, MCP, multi-agent, production patterns |
-| **Hands-On Roadmap** | 8-level project progression from prompt agent → production hosted agent with `azd` |
-| **Module Tracker** | 34 modules across 4 learning paths with status tables |
-
----
 
 [![Exam](https://img.shields.io/badge/Exam-AI103-blue?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/credentials/certifications/exams/ai-103)
 [![Course](https://img.shields.io/badge/Course-AI103T00--A-0078D4?style=for-the-badge&logo=microsoftlearn&logoColor=white)](https://learn.microsoft.com/training/courses/ai-103t00)
 [![Azure AI Foundry](https://img.shields.io/badge/Azure_AI_Foundry-Portal-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)](https://ai.azure.com)
 [![Microsoft Learn Badge](https://img.shields.io/badge/Microsoft_Learn-Badge-0078D4?style=for-the-badge&logo=microsoftlearn&logoColor=white)](https://learn.microsoft.com/en-us/users/himanshukumar-1965/achievements/eghlmzmp)
-[![Status](https://img.shields.io/badge/Status-Not_Started-lightgrey?style=for-the-badge)](#progress)
 
 *Last updated: 2026-10-03*
 
