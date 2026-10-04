@@ -6,7 +6,7 @@ token_provider = get_bearer_token_provider(
 )
 
 openai_client = OpenAI(  
-  base_url = "https://pramodmafprj3-resource.openai.azure.com/openai/v1",  
+  base_url = "https://<service>-resource.openai.azure.com/openai/v1",  
   api_key=token_provider,
 )
 # Generate a response using the OpenAI-compatible client
