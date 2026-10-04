@@ -44,6 +44,17 @@
 - **Simple integration:** call `client.responses.create(...)` through the OpenAI-compatible client.
 - **Check model support:** Foundry catalog availability or OpenAI compatibility alone does not guarantee Responses support, including for non-OpenAI models. Check the model, endpoint, and region; use Chat Completions when required for compatibility.
 
+## 5. Use async for concurrent requests
+
+**Async overlaps network waits; it does not make an individual model response faster.**
+
+- Use `AsyncOpenAI` and `await` for non-blocking API calls, allowing other async work to run while a request waits.
+- For Entra authentication, import `DefaultAzureCredential` and `get_bearer_token_provider` from `azure.identity.aio`; the token-provider callable must be awaitable. Close both credential and client with `async with`.
+- The main throughput benefit comes from running independent requests concurrently, for example with `asyncio.gather()`. Awaiting requests one by one is still sequential.
+- Limit concurrency to respect rate limits and quota; more simultaneous requests are not always better.
+
+The [async example](../project/asynch.py) and [simple chat example](../project/simplechat.py) read `AZURE_OPENAI_BASE_URL` from the local environment. Set it to the full Azure OpenAI API base URL (including `/openai/v1/`); do not commit its real value.
+
 ## Sources
 
 [Microsoft Learn: SDKs and endpoints](https://learn.microsoft.com/en-us/azure/foundry/how-to/develop/sdk-overview) (source checked: 2026-10-04).
