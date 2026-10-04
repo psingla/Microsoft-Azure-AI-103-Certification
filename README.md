@@ -41,7 +41,7 @@ The course has **4 learning paths** with **34 modules total**:
 
 | Official Learning Path | My Learnings | Weight | My Priority (1–5) |
 |------------------------|--------------|--------|-------------------|
-| [Develop generative AI apps in Azure](https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/) | — | 30–35% | **5/5 — Core focus** |
+| [Develop generative AI apps in Azure](https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/) | [Notes and projects](https://github.com/psingla/Microsoft-Azure-AI-103-Certification/tree/main/Develop%20generative%20AI%20apps%20in%20Azure) | 30–35% | **5/5 — Core focus** |
 | [Develop AI agents on Azure](#lp2) | — | 30–35% | **5/5 — Core focus** |
 | [Develop natural language solutions in Azure](#lp3) | — | 10–15% | **3/5 — Supporting knowledge** |
 | [Extract insights from visual data on Azure](#lp4) | — | 20–30% | **3/5 — Supporting knowledge** |
