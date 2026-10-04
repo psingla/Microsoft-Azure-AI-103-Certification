@@ -19,15 +19,25 @@
 - `project.get_openai_client()` returns an OpenAI SDK client. Import OpenAI classes or types when used explicitly; obtaining the client through Foundry does not itself require an `import openai` statement.
 - **Combine them:** use `AIProjectClient` for project features and its OpenAI client for supported model APIs. Let `get_openai_client()` configure the project's OpenAI route; the bare project URL is not an OpenAI `base_url`.
 
+## Responses API
+
+**Prefer Responses for new Foundry response-generation workflows where supported; Chat Completions is not universally replaced.**
+
+- **Stateful turns:** link requests with `previous_response_id` or use a supported conversation mechanism; unrelated requests do not automatically share context.
+- **Unified experience:** combines Chat Completions and Assistants-style capabilities, including tool use.
+- **Simple integration:** call `client.responses.create(...)` through the OpenAI-compatible client.
+- **Check model support:** Foundry catalog availability or OpenAI compatibility alone does not guarantee Responses support, including for non-OpenAI models. Check the model, endpoint, and region; use Chat Completions when required for compatibility.
+
+[Microsoft Learn: Responses API](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/responses) (source checked: 2026-10-04).
+
 ## Choosing MAF, Foundry SDK, or OpenAI SDK
 
 **Microsoft Agent Framework (MAF) = agent behavior; Foundry SDK = platform access; endpoint = where requests go.**
 
-| Choose | When |
-| --- | --- |
-| MAF | Building agents with tools, conversation state, or multi-agent workflows; use its reusable orchestration. |
-| Foundry SDK | Foundry Agent Service, hosted tools and approval workflows, cloud evaluations, project connections and metadata, and tracing integration. Choose for Foundry-specific platform features. |
-| OpenAI SDK | Direct inference with maximum OpenAI API compatibility and minimal Foundry coupling: Chat Completions, Responses, embeddings, or Images where supported. Useful for moving existing OpenAI code to Azure. |
+| | MAF | Foundry SDK | OpenAI SDK |
+| --- | --- | --- | --- |
+| **Features** | Agent loops, tools, conversation state, multi-agent workflows, and model-provider integrations | Foundry Agent Service, hosted tools and approvals, connections, metadata, cloud evaluations, tracing integration, and model access through the project's OpenAI client | Chat Completions, Responses, embeddings, Images, and model tool calls where supported; your app supplies orchestration |
+| **When to use** | Build agents or multi-agent workflows with reusable orchestration | Access Foundry-specific project and service features | Make direct model calls or move existing OpenAI code to Azure with minimal changes and Foundry coupling |
 
 - **Compatibility is not universal:** API support depends on the endpoint and deployed model. Supported non-OpenAI models can also use the OpenAI SDK; model vendor alone does not determine SDK choice.
 - **OpenAI SDK is not a project-management SDK:** it does not replace Foundry's connections or cloud evaluation APIs, even when used through the project.
