@@ -11,17 +11,27 @@
 | Auth | Microsoft Entra ID + project permissions | Entra ID or API key, if enabled |
 | URL | `https://<resource>.services.ai.azure.com/api/projects/<project>` | `https://<resource>.openai.azure.com/openai/v1/` |
 
-## MAF vs Foundry SDK
+## Foundry chat uses the OpenAI SDK
+
+**Foundry connects to the project; the OpenAI SDK provides the chat client.**
+
+- Install `openai` alongside `azure-ai-projects` and `azure-identity` for this workflow.
+- `project.get_openai_client()` returns an OpenAI SDK client. Import OpenAI classes or types when used explicitly; obtaining the client through Foundry does not itself require an `import openai` statement.
+- **Combine them:** use `AIProjectClient` for project features and its OpenAI client for supported model APIs. Let `get_openai_client()` configure the project's OpenAI route; the bare project URL is not an OpenAI `base_url`.
+
+## Choosing MAF, Foundry SDK, or OpenAI SDK
 
 **Microsoft Agent Framework (MAF) = agent behavior; Foundry SDK = platform access; endpoint = where requests go.**
 
 | Choose | When |
 | --- | --- |
 | MAF | Building agents with tools, conversation state, or multi-agent workflows; use its reusable orchestration. |
-| Foundry SDK | Calling Foundry project APIs directly for agents, connections, evaluations, or project configuration, without framework abstractions. |
-| OpenAI SDK | Making direct model calls, such as chat or embeddings, without agent orchestration. |
+| Foundry SDK | Foundry Agent Service, hosted tools and approval workflows, cloud evaluations, project connections and metadata, and tracing integration. Choose for Foundry-specific platform features. |
+| OpenAI SDK | Direct inference with maximum OpenAI API compatibility and minimal Foundry coupling: Chat Completions, Responses, embeddings, or Images where supported. Useful for moving existing OpenAI code to Azure. |
 
+- **Compatibility is not universal:** API support depends on the endpoint and deployed model. Supported non-OpenAI models can also use the OpenAI SDK; model vendor alone does not determine SDK choice.
+- **OpenAI SDK is not a project-management SDK:** it does not replace Foundry's connections or cloud evaluation APIs, even when used through the project.
 - **They work together:** MAF's Foundry integration uses the Foundry SDK underneath; it does not replace all Foundry SDK capabilities.
 - **MAF does not remove the endpoint choice:** its Foundry integration uses the project endpoint; its Azure OpenAI integration uses the corresponding model endpoint.
 
-[Microsoft Learn: SDKs and endpoints](https://learn.microsoft.com/en-us/azure/foundry/how-to/develop/sdk-overview) (source checked: 2026-10-03).
+[Microsoft Learn: SDKs and endpoints](https://learn.microsoft.com/en-us/azure/foundry/how-to/develop/sdk-overview) (source checked: 2026-10-04).

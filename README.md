@@ -30,7 +30,7 @@ I'll work through the official Microsoft Learn content to solidify my understand
 
 ## Acknowledgments
 
-Special thanks to [himanshu231204](https://github.com/himanshu231204) for sharing [Microsoft-Azure-AI-103](https://github.com/himanshu231204/Microsoft-Azure-AI-103), from which portions of this repository's content are adapted. Your contribution to the learning community is greatly appreciated.
+Special thanks to [himanshu231204](https://github.com/himanshu231204) for sharing [Microsoft-Azure-AI-103](https://github.com/himanshu231204/Microsoft-Azure-AI-103), from which some portions of this repository's content are adapted. Your contribution to the learning community is greatly appreciated.
 
 ## Course Structure
 
