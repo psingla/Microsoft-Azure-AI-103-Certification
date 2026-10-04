@@ -2,7 +2,8 @@
 
 > **Purpose:** A selective revision companion, not another full set of notes. Keep what helps choose, implement, troubleshoot, or secure an exam scenario.
 > **Verified against:** [Official AI-103 study guide](https://learn.microsoft.com/credentials/certifications/resources/study-guides/ai-103), accessed 2026-10-04.
-> **Related:** [Full exam objectives](./AI-103-Study-Guide.md) | [Deep-dive context](./Context.md) | [SDK and endpoint notes](./notes/01-genai/03-develop-ai-app-foundry-sdk/README.md)
+> **Related:** [Full exam objectives](https://learn.microsoft.com/credentials/certifications/resources/study-guides/ai-103) | [SDK and endpoint notes](./notes/Develop%20generative%20AI%20apps%20in%20Azure/foundry-endpoints-mental-note.md)
+> **Study order:** Priorities -> architecture -> connections -> retrieval -> agents -> other modalities -> evaluation and operations -> troubleshooting.
 
 ## 1. Priorities, Not Predictions
 
@@ -52,7 +53,33 @@ Planning plus generative AI/agents account for **55-65%** of the published weigh
 
 > Exam insight: Know how to read and complete client/credential/model-call patterns. Do not rely on claims that SDK implementation details cannot appear on the exam.
 
-## 4. Must Know: Tools, Memory, and Orchestration
+For the SDK comparison, client setup, and Responses API, read the [SDK and endpoint notes](./notes/Develop%20generative%20AI%20apps%20in%20Azure/foundry-endpoints-mental-note.md), then continue below.
+
+## 4. Must Know: Retrieval and Extraction End to End
+
+```text
+Ingest -> OCR/layout/field extraction -> Enrich/chunk -> Embed -> Index
+Query -> Retrieve -> Optional semantic reranking -> Supply context -> Generate
+```
+
+| Distinction | Remember |
+|-------------|----------|
+| Keyword search | Lexical matching; useful for exact terms and identifiers |
+| Vector search | Similarity using embeddings |
+| Hybrid search | Combines keyword and vector retrieval |
+| Semantic ranking | Reranks retrieved results; not the definition of hybrid search |
+| OCR | Extracts text; does not by itself supply all layout/field semantics |
+| Document Intelligence | Document-focused extraction, including prebuilt and custom models |
+| Content Understanding | Analyzers for structured information from documents and other modalities |
+
+- Preserve source identifiers and useful structure for citations, filtering, and downstream reasoning.
+- Understand built-in/custom enrichment skills, chunking, embedding compatibility, and index updates.
+- Configure Content Understanding analyzers for required fields and structured or Markdown outputs.
+- Enforce document permissions during retrieval; an instruction such as "do not reveal confidential data" is insufficient.
+
+> Exam insight: Grounding reduces unsupported generation but does not guarantee correctness. Evaluate retrieval quality separately from answer quality.
+
+## 5. Must Know: Tools, Memory, and Orchestration
 
 | Scenario | Appropriate Capability |
 |----------|------------------------|
@@ -78,31 +105,19 @@ Define tool schema -> Model requests call -> App/framework validates and execute
 - Use explicit completion criteria, step limits, and controlled retries. More agents add coordination, latency, and cost.
 - MCP standardizes integration; it does not automatically host a remote server or make its outputs trustworthy.
 
-## 5. Must Know: Retrieval and Extraction End to End
+## 6. Must Know: The Other Three Domains
 
-```text
-Ingest -> OCR/layout/field extraction -> Enrich/chunk -> Embed -> Index
-Query -> Retrieve -> Optional semantic reranking -> Supply context -> Generate
-```
+| Domain | Minimum Revision Checklist |
+|--------|----------------------------|
+| Vision | Generation versus analysis; reference-image inputs; inpainting/masks and editing controls; video generation/editing/analysis; captions, visual Q&A, accessibility descriptions; object/region identification |
+| Multimodal understanding and safety | Content Understanding analyzers and the guide's single-task/pro-mode objectives; unsafe visual content; image-based indirect prompt injection; watermarking and visual policy requirements |
+| Text | Entities, topics, sentiment/tone, summaries, sensitive-content detection; domain-specific extraction; structured JSON outputs; Translator versus LLM-powered translation |
+| Speech | Speech-to-text versus text-to-speech; custom speech; speech translation; audio reasoning; speech as an agent input/output modality |
+| Extraction | OCR plus layout and field extraction; multimodal ingestion; enrichment/indexing; structured or Markdown output feeding RAG and tools |
 
-| Distinction | Remember |
-|-------------|----------|
-| Keyword search | Lexical matching; useful for exact terms and identifiers |
-| Vector search | Similarity using embeddings |
-| Hybrid search | Combines keyword and vector retrieval |
-| Semantic ranking | Reranks retrieved results; not the definition of hybrid search |
-| OCR | Extracts text; does not by itself supply all layout/field semantics |
-| Document Intelligence | Document-focused extraction, including prebuilt and custom models |
-| Content Understanding | Analyzers for structured information from documents and other modalities |
+**Do not memorize a model name as proof of capability.** Verify that the selected model/API supports the required operation, such as image editing or audio input.
 
-- Preserve source identifiers and useful structure for citations, filtering, and downstream reasoning.
-- Understand built-in/custom enrichment skills, chunking, embedding compatibility, and index updates.
-- Configure Content Understanding analyzers for required fields and structured or Markdown outputs.
-- Enforce document permissions during retrieval; an instruction such as "do not reveal confidential data" is insufficient.
-
-> Exam insight: Grounding reduces unsupported generation but does not guarantee correctness. Evaluate retrieval quality separately from answer quality.
-
-## 6. Must Know: Evaluation, Safety, and Operations
+## 7. Must Know: Evaluation, Safety, and Operations
 
 | Measure / Control | What It Establishes |
 |-------------------|---------------------|
@@ -124,18 +139,6 @@ Query -> Retrieve -> Optional semantic reranking -> Supply context -> Generate
 - Version prompts, tool schemas, model/deployment configuration, and infrastructure. Use evaluation gates, environment separation, and rollback in CI/CD.
 
 > Exam insight: Content filtering is not authorization. A harmless-looking request to transfer money still requires access checks and appropriate approval.
-
-## 7. Must Know: The Other Three Domains
-
-| Domain | Minimum Revision Checklist |
-|--------|----------------------------|
-| Vision | Generation versus analysis; reference-image inputs; inpainting/masks and editing controls; video generation/editing/analysis; captions, visual Q&A, accessibility descriptions; object/region identification |
-| Multimodal understanding and safety | Content Understanding analyzers and the guide's single-task/pro-mode objectives; unsafe visual content; image-based indirect prompt injection; watermarking and visual policy requirements |
-| Text | Entities, topics, sentiment/tone, summaries, sensitive-content detection; domain-specific extraction; structured JSON outputs; Translator versus LLM-powered translation |
-| Speech | Speech-to-text versus text-to-speech; custom speech; speech translation; audio reasoning; speech as an agent input/output modality |
-| Extraction | OCR plus layout and field extraction; multimodal ingestion; enrichment/indexing; structured or Markdown output feeding RAG and tools |
-
-**Do not memorize a model name as proof of capability.** Verify that the selected model/API supports the required operation, such as image editing or audio input.
 
 ## 8. High-Value Additions: Diagnose Before Changing the Model
 

@@ -28,6 +28,12 @@ I've been using Microsoft Foundry (formerly Azure AI Foundry),the Azure Cosmos D
 
 I'll work through the official Microsoft Learn content to solidify my understanding, build small projects where needed, and test my knowledge with the practice questions in this repo. I'll keep the content concise and relevant.
 
+## Study Notes: Reading Order
+
+1. Start with [Certification context](./Context-Certification.md): exam priorities, architecture choices, and connection fundamentals (sections 1-3).
+2. Read [Foundry endpoints, SDKs, and Responses](./notes/Develop%20generative%20AI%20apps%20in%20Azure/foundry-endpoints-mental-note.md): choose an endpoint, choose an SDK, connect clients, then generate responses.
+3. Return to [Certification context](./Context-Certification.md#4-must-know-retrieval-and-extraction-end-to-end): retrieval, agents, other modalities, evaluation and operations, then troubleshooting (sections 4-9).
+
 ## Acknowledgments
 
 Special thanks to [himanshu231204](https://github.com/himanshu231204) for sharing [Microsoft-Azure-AI-103](https://github.com/himanshu231204/Microsoft-Azure-AI-103), from which some portions of this repository's content are adapted. Your contribution to the learning community is greatly appreciated.
