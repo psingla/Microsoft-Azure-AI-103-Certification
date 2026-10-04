@@ -28,6 +28,26 @@ I've been using Microsoft Foundry (formerly Azure AI Foundry),the Azure Cosmos D
 
 I'll work through the official Microsoft Learn content to solidify my understanding, build small projects where needed, and test my knowledge with the practice questions in this repo. I'll keep the content concise and relevant.
 
+## The AI Stack: Beyond This Certification
+
+These concepts apply across AI platforms, not just Azure or AI-103.
+
+![AI stack illustrated using a human-body analogy: LLM, RAG, MCP, skills, and AI agents](./assets/images/ai-stack-human-body.png)
+
+*Infographic credit: GenAI.works. See the clarifications below.*
+
+**Remember: models generate, retrieval grounds, protocols connect, skills guide, agents act.**
+
+| Component | Human-body analogy | Role |
+|-----------|--------------------|------|
+| **LLM (large language model)** | Brain | Generates and reasons over text using learned patterns and the context supplied to it; it has no automatic access to live information. |
+| **RAG (retrieval-augmented generation)** | Brain with a library | Retrieves relevant external information and supplies it as context for an answer, without retraining the model. |
+| **MCP (Model Context Protocol)** | Nervous system | Standardizes how AI applications connect to tools and contextual resources exposed by servers. |
+| **Agent skills** | Practiced know-how | Package reusable instructions, resources, and sometimes scripts for recurring tasks; loading behavior depends on the agent framework. |
+| **AI agent** | Brain with hands | Uses a model and tools to choose and execute steps toward a goal, within configured permissions and controls. |
+
+The analogy is a memory aid, not a required architecture: agents need not use RAG, MCP, or skills. Grounding does not guarantee correct answers, and tool access does not grant permission to act.
+
 ## Acknowledgments
 
 Special thanks to [himanshu231204](https://github.com/himanshu231204) for sharing [Microsoft-Azure-AI-103](https://github.com/himanshu231204/Microsoft-Azure-AI-103), from which some portions of this repository's content are adapted. Your contribution to the learning community is greatly appreciated.
