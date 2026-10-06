@@ -54,7 +54,7 @@ These concepts apply across AI platforms, not just Azure or AI-103.
 
 ## Acknowledgments
 
-Special thanks to [himanshu231204](https://github.com/himanshu231204) for sharing [Microsoft-Azure-AI-103](https://github.com/himanshu231204/Microsoft-Azure-AI-103), from which the above-mentioned question bank is taken.
+Special thanks to [himanshu231204](https://github.com/himanshu231204) for sharing [Microsoft-Azure-AI-103](https://github.com/himanshu231204/Microsoft-Azure-AI-103), the source of the question bank linked above. I haven't worked through the question bank yet, so I haven't verified its answers.
 
 ---
 
