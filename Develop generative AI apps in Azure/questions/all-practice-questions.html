@@ -1,0 +1,5284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="All 410 practice questions from AI-103 Learning Path 1: Develop generative AI apps in Azure.">
+  <title>AI-103: Generative AI Practice Questions</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-alt: #eef4ff;
+      --text: #172033;
+      --muted: #5d6b82;
+      --border: #d9e2f1;
+      --brand: #175cd3;
+      --brand-dark: #0b3b8f;
+      --accent: #0f766e;
+      --answer: #ecfdf3;
+      --answer-border: #6ce9a6;
+      --shadow: 0 10px 30px rgba(16, 35, 70, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c1424;
+        --surface: #131e31;
+        --surface-alt: #172844;
+        --text: #edf3ff;
+        --muted: #aebbd0;
+        --border: #2a3b57;
+        --brand: #84adff;
+        --brand-dark: #b2ccff;
+        --accent: #5fe9d0;
+        --answer: #102d28;
+        --answer-border: #159577;
+        --shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+      line-height: 1.65;
+    }
+    a { color: var(--brand); }
+    code {
+      padding: 0.12rem 0.35rem;
+      border-radius: 0.35rem;
+      background: var(--surface-alt);
+      font: 0.9em Consolas, "Cascadia Code", monospace;
+    }
+    pre {
+      overflow-x: auto;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      background: var(--surface-alt);
+    }
+    pre code { padding: 0; background: none; }
+
+    .hero {
+      padding: 3.5rem max(1.25rem, calc((100vw - 1180px) / 2));
+      color: #fff;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(95, 233, 208, 0.35), transparent 28rem),
+        linear-gradient(135deg, #0b3b8f, #175cd3 55%, #0f766e);
+    }
+    .eyebrow {
+      margin: 0 0 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      line-height: 1.08;
+    }
+    .hero-description {
+      max-width: 720px;
+      margin: 1rem 0 1.75rem;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 1.08rem;
+    }
+    .stats { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .stat {
+      padding: 0.65rem 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      font-weight: 650;
+    }
+
+    .toolbar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding: 0.85rem max(1.25rem, calc((100vw - 1180px) / 2));
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      backdrop-filter: blur(14px);
+    }
+    .search {
+      min-width: min(100%, 330px);
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 0.65rem;
+      background: var(--surface);
+      color: var(--text);
+      font: inherit;
+    }
+    button, select {
+      padding: 0.72rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 0.65rem;
+      background: var(--surface);
+      color: var(--text);
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+    }
+    button:hover, select:hover { border-color: var(--brand); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 1.5rem;
+      width: min(1180px, calc(100% - 2.5rem));
+      margin: 1.5rem auto 4rem;
+      align-items: start;
+    }
+    .sidebar {
+      position: sticky;
+      top: 5.2rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .sidebar h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .sidebar nav { display: grid; gap: 0.25rem; }
+    .sidebar a {
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 0.4rem;
+      padding: 0.55rem;
+      border-radius: 0.55rem;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      line-height: 1.3;
+    }
+    .sidebar a:hover { background: var(--surface-alt); color: var(--brand); }
+    .sidebar a span { color: var(--brand); font-weight: 800; }
+    .content { min-width: 0; }
+    #result-count {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+    .module-card {
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      scroll-margin-top: 5.5rem;
+    }
+    .module-card[hidden] { display: none; }
+    .module-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, var(--surface-alt), var(--surface));
+    }
+    .module-header h2 { margin: 0.15rem 0 0; font-size: 1.35rem; }
+    .module-number {
+      color: var(--brand);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .question-count {
+      flex: none;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: var(--brand);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 750;
+    }
+    .module-content { padding: 1.5rem clamp(1rem, 4vw, 2.25rem) 2.5rem; }
+    .module-content > h1:first-of-type { display: none; }
+    .module-content h2, .module-content h3 {
+      margin-top: 2.1rem;
+      scroll-margin-top: 5.5rem;
+    }
+    .module-content hr {
+      margin: 1.7rem 0;
+      border: 0;
+      border-top: 1px solid var(--border);
+    }
+    .module-content blockquote {
+      margin: 1rem 0;
+      padding: 0.75rem 1rem;
+      border-left: 4px solid var(--brand);
+      background: var(--surface-alt);
+      color: var(--muted);
+    }
+    .module-content blockquote p { margin: 0; }
+    .module-content ul, .module-content ol { padding-left: 1.6rem; }
+    .module-content li { margin: 0.25rem 0; }
+    .module-content p:has(> strong:first-child) { margin-top: 1.5rem; }
+    details {
+      margin: 0.8rem 0 1.4rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--answer-border);
+      border-radius: 0.7rem;
+      background: var(--answer);
+    }
+    summary {
+      color: var(--accent);
+      font-weight: 800;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.92rem;
+    }
+    th, td { padding: 0.65rem; border: 1px solid var(--border); text-align: left; }
+    th { background: var(--surface-alt); }
+    .no-results {
+      padding: 2rem;
+      border: 1px dashed var(--border);
+      border-radius: 1rem;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    @media (max-width: 850px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .sidebar nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .toolbar { position: static; }
+    }
+    @media (max-width: 540px) {
+      .hero { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+      .layout { width: min(100% - 1rem, 1180px); }
+      .sidebar nav { grid-template-columns: 1fr; }
+      .module-header { align-items: flex-start; flex-direction: column; }
+      .toolbar > * { width: 100%; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { background: #fff; color: #000; font-size: 10pt; }
+      .toolbar, .sidebar { display: none !important; }
+      .hero { padding: 1.5rem; background: none; color: #000; }
+      .hero-description { color: #333; }
+      .stat { border-color: #999; background: none; }
+      .layout { display: block; width: 100%; margin: 0; }
+      .module-card { break-before: page; border: 0; box-shadow: none; }
+      .module-header { padding: 1rem 0; background: none; }
+      .module-content { padding: 0; }
+      details { break-inside: avoid; }
+      details:not([open]) > *:not(summary) { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Microsoft AI-103 · Learning Path 1</p>
+    <h1>Generative AI Practice Questions</h1>
+    <p class="hero-description">
+      One study file containing every practice question, answer, and explanation from all eight
+      modules in <strong>01-genai</strong>.
+    </p>
+    <div class="stats">
+      <span class="stat">410 questions</span>
+      <span class="stat">8 modules</span>
+      <span class="stat">Offline &amp; print ready</span>
+    </div>
+  </header>
+
+  <div class="toolbar" role="search">
+    <input class="search" id="search" type="search" placeholder="Search questions, answers, or topics…" aria-label="Search all content">
+    <select id="module-filter" aria-label="Filter by module">
+      <option value="all">All modules</option>
+      <option value="1">1.1 Plan and Prepare</option><option value="2">1.2 Choose and Deploy Models</option><option value="3">1.3 Develop an AI App with the Foundry SDK</option><option value="4">1.4 Get Started with Prompt Flow</option><option value="5">1.5 Develop a RAG-based Solution</option><option value="6">1.6 Fine-tune a Language Model</option><option value="7">1.7 Implement Responsible Generative AI</option><option value="8">1.8 Evaluate Generative AI Performance</option>
+    </select>
+    <button id="expand-answers" type="button">Show inline answers</button>
+    <button id="print" type="button">Print / Save PDF</button>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Jump to module</h2>
+      <nav><a href="#module-1" data-module-link="1"><span>01</span>1.1 Plan and Prepare</a><a href="#module-2" data-module-link="2"><span>02</span>1.2 Choose and Deploy Models</a><a href="#module-3" data-module-link="3"><span>03</span>1.3 Develop an AI App with the Foundry SDK</a><a href="#module-4" data-module-link="4"><span>04</span>1.4 Get Started with Prompt Flow</a><a href="#module-5" data-module-link="5"><span>05</span>1.5 Develop a RAG-based Solution</a><a href="#module-6" data-module-link="6"><span>06</span>1.6 Fine-tune a Language Model</a><a href="#module-7" data-module-link="7"><span>07</span>1.7 Implement Responsible Generative AI</a><a href="#module-8" data-module-link="8"><span>08</span>1.8 Evaluate Generative AI Performance</a></nav>
+    </aside>
+    <main class="content">
+      <p id="result-count" aria-live="polite">Showing all 8 modules and 410 questions.</p>
+      
+        <article class="module-card" id="module-1" data-module="1" data-label="1.1 Plan and Prepare">
+          <header class="module-header">
+            <div>
+              <span class="module-number">Module 1 of 8</span>
+              <h2>1.1 Plan and Prepare</h2>
+            </div>
+            <span class="question-count">50 questions</span>
+          </header>
+          <div class="module-content"><h1 id="01-plan-and-prepare-module-1-1-practice-questions-plan-and-prepare-to-develop-ai-solutions-on-azure">Module 1.1 — Practice Questions: Plan and Prepare to Develop AI Solutions on Azure</h1>
+<blockquote>
+<p><strong>50 questions</strong> covering AI capabilities, Foundry Tools, Microsoft Foundry, Developer Tools &amp; SDKs, and Responsible AI.
+Answers and explanations at the bottom.</p>
+</blockquote>
+<hr />
+<h2 id="01-plan-and-prepare-section-a-ai-capabilities-q1-q15">Section A — AI Capabilities (Q1–Q15)</h2>
+<p><strong>1.</strong> Which of the following best describes generative AI?</p>
+<ul>
+<li>A) Classifies input data into predefined categories</li>
+<li>B) Generates original content such as text, code, or images from prompts</li>
+<li>C) Extracts structured data from documents</li>
+<li>D) Converts speech to text in real time</li>
+</ul>
+<p><strong>2.</strong> A company wants to extract key-value pairs from thousands of scanned invoices. Which AI capability does this fall under?</p>
+<ul>
+<li>A) Natural Language Processing</li>
+<li>B) Computer Vision</li>
+<li>C) Information Extraction</li>
+<li>D) Generative AI</li>
+</ul>
+<p><strong>3.</strong> Which Azure service is used for entity extraction and sentiment analysis from text?</p>
+<ul>
+<li>A) Azure Speech</li>
+<li>B) Azure Language</li>
+<li>C) Azure Vision</li>
+<li>D) Azure Translator</li>
+</ul>
+<p><strong>4.</strong> An AI agent is defined by which three core components?</p>
+<ul>
+<li>A) LLM, instructions, and tools</li>
+<li>B) Model, database, and API</li>
+<li>C) Prompt, response, and memory</li>
+<li>D) Training data, model weights, and inference endpoint</li>
+</ul>
+<p><strong>5.</strong> Which of the following is NOT one of the five core AI capabilities?</p>
+<ul>
+<li>A) Computer Vision</li>
+<li>B) Natural Language Processing</li>
+<li>C) Database Optimization</li>
+<li>D) Information Extraction</li>
+</ul>
+<p><strong>6.</strong> Traditional AI models typically require what that generative AI models do not?</p>
+<ul>
+<li>A) An internet connection</li>
+<li>B) Labeled training data for specific tasks</li>
+<li>C) A cloud deployment</li>
+<li>D) A REST API endpoint</li>
+</ul>
+<p><strong>7.</strong> What distinguishes a generative AI model from a traditional classification model?</p>
+<ul>
+<li>A) Generative AI only works with text</li>
+<li>B) Generative AI produces open-ended, original outputs</li>
+<li>C) Traditional AI requires more compute</li>
+<li>D) Generative AI cannot be fine-tuned</li>
+</ul>
+<p><strong>8.</strong> You need to build a system that translates customer support tickets from French to English in real time. Which Azure service should you use?</p>
+<ul>
+<li>A) Azure Language</li>
+<li>B) Azure Translator</li>
+<li>C) Azure Speech</li>
+<li>D) Azure Document Intelligence</li>
+</ul>
+<p><strong>9.</strong> Which Azure service enables speech-to-text and text-to-speech capabilities?</p>
+<ul>
+<li>A) Azure Speech</li>
+<li>B) Azure Language</li>
+<li>C) Azure Vision</li>
+<li>D) Azure Translator</li>
+</ul>
+<p><strong>10.</strong> A multimodal AI model can process which combination of inputs?</p>
+<ul>
+<li>A) Text only</li>
+<li>B) Text and images</li>
+<li>C) Text, images, audio, and video</li>
+<li>D) Structured data only</li>
+</ul>
+<p><strong>11.</strong> Azure Content Understanding is best suited for which scenario?</p>
+<ul>
+<li>A) Translating documents between languages</li>
+<li>B) Analyzing text sentiment in customer reviews</li>
+<li>C) Extracting structured data from forms, images, video, and audio streams</li>
+<li>D) Converting text to natural-sounding speech</li>
+</ul>
+<p><strong>12.</strong> What is the primary difference between NLP and Computer Vision?</p>
+<ul>
+<li>A) NLP processes images; Vision processes text</li>
+<li>B) NLP processes text; Vision interprets visual data</li>
+<li>C) Both are identical but use different models</li>
+<li>D) NLP requires a larger model</li>
+</ul>
+<p><strong>13.</strong> Which capability would you use to build an app that reads a photograph of a receipt and returns the total amount?</p>
+<ul>
+<li>A) Natural Language Processing</li>
+<li>B) Computer Speech</li>
+<li>C) Information Extraction (Document Intelligence)</li>
+<li>D) Generative AI</li>
+</ul>
+<p><strong>14.</strong> Foundation models used in generative AI are characterized by:</p>
+<ul>
+<li>A) Being task-specific with small training datasets</li>
+<li>B) Being trained on massive datasets and adaptable to many tasks</li>
+<li>C) Only supporting text output</li>
+<li>D) Requiring labeled training data for every new task</li>
+</ul>
+<p><strong>15.</strong> An AI agent can autonomously execute multi-step tasks because it can:</p>
+<ul>
+<li>A) Only generate text responses</li>
+<li>B) Reason over requests and call tools, APIs, and code</li>
+<li>C) Replace all human oversight entirely</li>
+<li>D) Only retrieve information from a database</li>
+</ul>
+<hr />
+<h2 id="01-plan-and-prepare-section-b-foundry-tools-q16-q25">Section B — Foundry Tools (Q16–Q25)</h2>
+<p><strong>16.</strong> Foundry Tools are best described as:</p>
+<ul>
+<li>A) Custom models you build from scratch</li>
+<li>B) Prebuilt, out-of-the-box AI APIs and models you can integrate</li>
+<li>C) Open-source libraries you must host yourself</li>
+<li>D) Database management systems</li>
+</ul>
+<p><strong>17.</strong> Which Foundry Tool would you use to extract key-value pairs from a scanned tax form?</p>
+<ul>
+<li>A) Azure Language</li>
+<li>B) Azure Document Intelligence</li>
+<li>C) Azure Speech</li>
+<li>D) Azure Translator</li>
+</ul>
+<p><strong>18.</strong> Azure Language provides which of the following capabilities?</p>
+<ul>
+<li>A) Text-to-speech and speech-to-text</li>
+<li>B) Entity extraction, sentiment analysis, and summarization</li>
+<li>C) Image classification and object detection</li>
+<li>D) Document OCR and form extraction</li>
+</ul>
+<p><strong>19.</strong> What was the previous name of the Azure AI services that are now called Foundry Tools?</p>
+<ul>
+<li>A) Azure Machine Learning Services</li>
+<li>B) Azure Cognitive Services</li>
+<li>C) Azure Data Factory</li>
+<li>D) Azure DevOps AI</li>
+</ul>
+<p><strong>20.</strong> How do client applications authenticate with Foundry Tools?</p>
+<ul>
+<li>A) OAuth with GitHub</li>
+<li>B) Project key or token-based authentication (Entra ID)</li>
+<li>C) Username and password only</li>
+<li>D) API gateway with static IP whitelisting</li>
+</ul>
+<p><strong>21.</strong> Which Foundry Tool would you use to convert a podcast audio file into a text transcript?</p>
+<ul>
+<li>A) Azure Language</li>
+<li>B) Azure Translator</li>
+<li>C) Azure Speech</li>
+<li>D) Azure Content Understanding</li>
+</ul>
+<p><strong>22.</strong> Which statement about Foundry Tools is TRUE?</p>
+<ul>
+<li>A) They are always more expensive than generative AI</li>
+<li>B) They are more cost-effective and predictable than generative AI for specific tasks</li>
+<li>C) They require custom model training before use</li>
+<li>D) They only work with English language</li>
+</ul>
+<p><strong>23.</strong> You need to analyze customer feedback text and determine whether the sentiment is positive, negative, or neutral. Which Foundry Tool should you use?</p>
+<ul>
+<li>A) Azure Speech</li>
+<li>B) Azure Language</li>
+<li>C) Azure Translator</li>
+<li>D) Azure Document Intelligence</li>
+</ul>
+<p><strong>24.</strong> Azure Content Understanding differs from Azure Document Intelligence because it:</p>
+<ul>
+<li>A) Only processes text documents</li>
+<li>B) Handles multimodal inputs including forms, images, video, and audio streams</li>
+<li>C) Is limited to PDF file processing</li>
+<li>D) Requires custom model training for every use case</li>
+</ul>
+<p><strong>25.</strong> Which Foundry Tool is best for a scenario where you need to provide real-time voice-based customer service in multiple languages?</p>
+<ul>
+<li>A) Azure Language + Azure Translator</li>
+<li>B) Azure Speech + Azure Translator</li>
+<li>C) Azure Document Intelligence + Azure Vision</li>
+<li>D) Azure Content Understanding + Azure Language</li>
+</ul>
+<hr />
+<h2 id="01-plan-and-prepare-section-c-microsoft-foundry-platform-q26-q35">Section C — Microsoft Foundry Platform (Q26–Q35)</h2>
+<p><strong>26.</strong> In Microsoft Foundry, what is a &quot;Project&quot;?</p>
+<ul>
+<li>A) A billing unit for Azure resources</li>
+<li>B) An organizational unit that manages models, agents, tools, and knowledge</li>
+<li>C) A specific LLM deployment</li>
+<li>D) A container for storing training data</li>
+</ul>
+<p><strong>27.</strong> Which component of Microsoft Foundry provides the underlying compute, storage, and AI tools?</p>
+<ul>
+<li>A) Project</li>
+<li>B) Foundry Resource</li>
+<li>C) Model deployment</li>
+<li>D) Agent</li>
+</ul>
+<p><strong>28.</strong> How many projects can a single Foundry Resource support?</p>
+<ul>
+<li>A) Exactly one</li>
+<li>B) Up to five</li>
+<li>C) Multiple projects</li>
+<li>D) Unlimited projects with no restriction</li>
+</ul>
+<p><strong>29.</strong> What is Foundry IQ?</p>
+<ul>
+<li>A) A model evaluation metric</li>
+<li>B) A central MCP-based knowledge connection for agent context</li>
+<li>C) A billing management tool</li>
+<li>D) A deployment automation service</li>
+</ul>
+<p><strong>30.</strong> The Foundry Portal provides which of the following?</p>
+<ul>
+<li>A) Only a command-line interface</li>
+<li>B) A web-based visual interface to find, deploy, and test models and agents</li>
+<li>C) Only SDK-based interactions</li>
+<li>D) Only CI/CD pipeline management</li>
+</ul>
+<p><strong>31.</strong> Which of the following is TRUE about the Foundry SDK?</p>
+<ul>
+<li>A) It only works with Python</li>
+<li>B) It provides programmatic access for automation and CI/CD pipelines</li>
+<li>C) It replaces the need for Azure subscriptions</li>
+<li>D) It only supports C# development</li>
+</ul>
+<p><strong>32.</strong> A data scientist wants to deploy a model from the Foundry Models catalog. Where can they do this?</p>
+<ul>
+<li>A) Only via Azure CLI</li>
+<li>B) Only via the Foundry portal</li>
+<li>C) Via the Foundry portal, Foundry Toolkit for VS Code, or Foundry SDK</li>
+<li>D) Only via REST API calls</li>
+</ul>
+<p><strong>33.</strong> What is the relationship between a Foundry Resource and a Project?</p>
+<ul>
+<li>A) Projects contain Resources</li>
+<li>B) Resources contain Projects</li>
+<li>C) They are the same thing</li>
+<li>D) Projects and Resources are independent</li>
+</ul>
+<p><strong>34.</strong> In Microsoft Foundry, &quot;Agents&quot; are defined as:</p>
+<ul>
+<li>A) Pre-trained models from the catalog</li>
+<li>B) Named AI configurations combining an LLM, instructions, and tools</li>
+<li>C) Storage containers for model artifacts</li>
+<li>D) Authentication tokens for API access</li>
+</ul>
+<p><strong>35.</strong> Which of the following is NOT a component managed within a Foundry Project?</p>
+<ul>
+<li>A) Models</li>
+<li>B) Agents</li>
+<li>C) Virtual Machine scale sets</li>
+<li>D) Knowledge stores</li>
+</ul>
+<hr />
+<h2 id="01-plan-and-prepare-section-d-developer-tools-sdks-q36-q40">Section D — Developer Tools &amp; SDKs (Q36–Q40)</h2>
+<p><strong>36.</strong> The Foundry Toolkit for VS Code allows developers to:</p>
+<ul>
+<li>A) Only browse model catalog</li>
+<li>B) Browse project resources, deploy models, test agents, and generate integration code</li>
+<li>C) Only write Python scripts</li>
+<li>D) Only manage Azure billing</li>
+</ul>
+<p><strong>37.</strong> Which IDE is best suited for .NET/C# developers working on Azure AI solutions?</p>
+<ul>
+<li>A) Visual Studio Code</li>
+<li>B) Visual Studio</li>
+<li>C) GitHub Copilot</li>
+<li>D) Azure Cloud Shell</li>
+</ul>
+<p><strong>38.</strong> OpenAI SDKs can be used with Foundry models because:</p>
+<ul>
+<li>A) Foundry models are identical to OpenAI models</li>
+<li>B) Foundry provides an OpenAI-compatible endpoint</li>
+<li>C) OpenAI owns the Foundry service</li>
+<li>D) OpenAI SDKs only work with Foundry</li>
+</ul>
+<p><strong>39.</strong> Which programming languages are supported by the Microsoft Foundry SDK?</p>
+<ul>
+<li>A) Python only</li>
+<li>B) C# only</li>
+<li>C) Python, C#, Node.js, TypeScript, Java, and others</li>
+<li>D) JavaScript only</li>
+</ul>
+<p><strong>40.</strong> What is GitHub Copilot's role in AI development on Azure?</p>
+<ul>
+<li>A) It deploys models to production</li>
+<li>B) It provides AI-assisted coding within VS/VS Code</li>
+<li>C) It replaces the need for Foundry SDK</li>
+<li>D) It manages Azure subscriptions</li>
+</ul>
+<hr />
+<h2 id="01-plan-and-prepare-section-e-responsible-ai-q41-q50">Section E — Responsible AI (Q41–Q50)</h2>
+<p><strong>41.</strong> How many Responsible AI principles does Microsoft define?</p>
+<ul>
+<li>A) 4</li>
+<li>B) 5</li>
+<li>C) 6</li>
+<li>D) 8</li>
+</ul>
+<p><strong>42.</strong> A loan approval AI system must not discriminate based on gender or ethnicity. Which Responsible AI principle does this relate to?</p>
+<ul>
+<li>A) Privacy &amp; Security</li>
+<li>B) Fairness</li>
+<li>C) Transparency</li>
+<li>D) Accountability</li>
+</ul>
+<p><strong>43.</strong> Which principle requires that AI systems are understandable and their limitations are disclosed to users?</p>
+<ul>
+<li>A) Fairness</li>
+<li>B) Inclusiveness</li>
+<li>C) Transparency</li>
+<li>D) Accountability</li>
+</ul>
+<p><strong>44.</strong> A medical diagnosis AI system must function reliably under all conditions because failure could endanger lives. This is an example of which principle?</p>
+<ul>
+<li>A) Reliability &amp; Safety</li>
+<li>B) Fairness</li>
+<li>C) Inclusiveness</li>
+<li>D) Privacy &amp; Security</li>
+</ul>
+<p><strong>45.</strong> Which Responsible AI principle addresses the need to protect training data and respect user privacy?</p>
+<ul>
+<li>A) Fairness</li>
+<li>B) Privacy &amp; Security</li>
+<li>C) Accountability</li>
+<li>D) Transparency</li>
+</ul>
+<p><strong>46.</strong> What does the Inclusiveness principle ensure?</p>
+<ul>
+<li>A) AI models are free from bias</li>
+<li>B) AI systems empower everyone and engage all people regardless of ability</li>
+<li>C) AI predictions are explainable</li>
+<li>D) Developers are legally responsible</li>
+</ul>
+<p><strong>47.</strong> Which principle ensures that people remain responsible for AI systems and their outcomes?</p>
+<ul>
+<li>A) Fairness</li>
+<li>B) Reliability &amp; Safety</li>
+<li>C) Transparency</li>
+<li>D) Accountability</li>
+</ul>
+<p><strong>48.</strong> Azure AI Content Safety is used for:</p>
+<ul>
+<li>A) Deploying models to production</li>
+<li>B) Detecting and managing harmful content in text and images</li>
+<li>C) Managing Azure billing</li>
+<li>D) Training custom models</li>
+</ul>
+<p><strong>49.</strong> When evaluating an AI model for fairness, you should:</p>
+<ul>
+<li>A) Only measure overall accuracy</li>
+<li>B) Test for fairness across subgroups, not just overall accuracy</li>
+<li>C) Ignore edge cases</li>
+<li>D) Only test with the training dataset</li>
+</ul>
+<p><strong>50.</strong> Which Azure tool provides prompt injection and jailbreak detection for AI agents?</p>
+<ul>
+<li>A) Azure Monitor</li>
+<li>B) Azure AI Content Safety (risk detection)</li>
+<li>C) Azure Key Vault</li>
+<li>D) Azure Application Insights</li>
+</ul>
+<hr />
+<h2 id="01-plan-and-prepare-answers-explanations">Answers &amp; Explanations</h2>
+<h3 id="01-plan-and-prepare-section-a-ai-capabilities">Section A — AI Capabilities</h3>
+<table>
+<thead>
+<tr>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td><strong>B</strong></td>
+  <td>Generative AI generates original content (text, code, images) from natural language prompts, unlike traditional AI that classifies or predicts.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><strong>C</strong></td>
+  <td>Extracting structured data (key-value pairs) from documents falls under Information Extraction, which combines language, vision, and speech processing.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><strong>B</strong></td>
+  <td>Azure Language provides entity extraction, sentiment analysis, summarization, and other text analytics capabilities.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><strong>A</strong></td>
+  <td>An AI agent combines an LLM (reasoning engine), instructions (scope/role/rules), and tools (APIs, code, databases, search).</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><strong>C</strong></td>
+  <td>Database Optimization is not an AI capability. The five are: Generative AI/Agents, NLP, Computer Speech, Computer Vision, Information Extraction.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><strong>B</strong></td>
+  <td>Traditional AI models typically require labeled training data for specific tasks, while generative AI uses prompt-based, few-shot learning.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><strong>B</strong></td>
+  <td>Generative AI produces open-ended, original outputs; traditional AI produces fixed outputs (labels, numbers).</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><strong>B</strong></td>
+  <td>Azure Translator provides state-of-the-art translation across many languages, suitable for real-time text translation.</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><strong>A</strong></td>
+  <td>Azure Speech provides text-to-speech, speech-to-text, real-time live speech, and conversational voice apps.</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><strong>C</strong></td>
+  <td>Multimodal AI models can process text, images, audio, and video — enabling richer understanding and generation.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><strong>C</strong></td>
+  <td>Azure Content Understanding handles multimodal analysis — extracting structured data from forms, images, video, and audio streams.</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><strong>B</strong></td>
+  <td>NLP processes and understands text; Computer Vision interprets images, video, and visual data.</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><strong>C</strong></td>
+  <td>Reading a receipt photograph and extracting the total is Information Extraction using Document Intelligence.</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td><strong>B</strong></td>
+  <td>Foundation models are trained on massive datasets and are adaptable to many tasks without task-specific retraining.</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><strong>B</strong></td>
+  <td>Agents can reason, plan, and call tools/APIs to execute multi-step tasks autonomously or semi-autonomously.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="01-plan-and-prepare-section-b-foundry-tools">Section B — Foundry Tools</h3>
+<table>
+<thead>
+<tr>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>16</td>
+  <td><strong>B</strong></td>
+  <td>Foundry Tools are prebuilt, out-of-the-box AI APIs and models that you can integrate without building custom AI.</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td><strong>B</strong></td>
+  <td>Azure Document Intelligence provides pre-built and custom models for extracting data from invoices, receipts, forms, and tax documents.</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td><strong>B</strong></td>
+  <td>Azure Language provides entity extraction, sentiment analysis, summarization, conversational models, and Q&amp;A capabilities.</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td><strong>B</strong></td>
+  <td>Foundry Tools were previously called &quot;Azure AI Services&quot; and &quot;Azure Cognitive Services&quot; (still reflected in some APIs/SDKs).</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td><strong>B</strong></td>
+  <td>Client apps authenticate using a project key or token-based authentication via Microsoft Entra ID.</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td><strong>C</strong></td>
+  <td>Azure Speech handles speech-to-text conversion, making it suitable for transcribing audio files to text.</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td><strong>B</strong></td>
+  <td>Foundry Tools are more cost-effective and predictable than generative AI for specific, well-defined tasks.</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td><strong>B</strong></td>
+  <td>Azure Language provides sentiment analysis capabilities to classify text as positive, negative, or neutral.</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td><strong>B</strong></td>
+  <td>Azure Content Understanding handles multimodal inputs (forms, images, video, audio), while Document Intelligence focuses on documents.</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td><strong>B</strong></td>
+  <td>Azure Speech (voice I/O) combined with Azure Translator (multi-language) enables real-time voice-based multilingual customer service.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="01-plan-and-prepare-section-c-microsoft-foundry-platform">Section C — Microsoft Foundry Platform</h3>
+<table>
+<thead>
+<tr>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>26</td>
+  <td><strong>B</strong></td>
+  <td>A Project is the organizational unit that manages models, agents, tools, knowledge, and connections within a Foundry Resource.</td>
+</tr>
+<tr>
+  <td>27</td>
+  <td><strong>B</strong></td>
+  <td>The Foundry Resource is the Azure resource that provides compute, storage, AI tools, and services.</td>
+</tr>
+<tr>
+  <td>28</td>
+  <td><strong>C</strong></td>
+  <td>A single Foundry Resource supports multiple projects.</td>
+</tr>
+<tr>
+  <td>29</td>
+  <td><strong>B</strong></td>
+  <td>Foundry IQ is the central MCP-based knowledge connection that provides agent context from data stores.</td>
+</tr>
+<tr>
+  <td>30</td>
+  <td><strong>B</strong></td>
+  <td>The Foundry Portal is a web-based visual interface for finding, deploying, testing models and agents, managing resources, and finding endpoints.</td>
+</tr>
+<tr>
+  <td>31</td>
+  <td><strong>B</strong></td>
+  <td>The Foundry SDK provides programmatic access for automation and CI/CD pipelines via scripts or DevOps.</td>
+</tr>
+<tr>
+  <td>32</td>
+  <td><strong>C</strong></td>
+  <td>Models can be deployed via the Foundry portal, Foundry Toolkit for VS Code, or Foundry SDK — multiple options.</td>
+</tr>
+<tr>
+  <td>33</td>
+  <td><strong>B</strong></td>
+  <td>A Foundry Resource contains one or more Projects. Projects are managed within Resources.</td>
+</tr>
+<tr>
+  <td>34</td>
+  <td><strong>B</strong></td>
+  <td>Agents are named AI configurations combining an LLM, instructions, and tools.</td>
+</tr>
+<tr>
+  <td>35</td>
+  <td><strong>C</strong></td>
+  <td>Virtual Machine scale sets are Azure infrastructure, not a component within a Foundry Project. Projects manage Models, Agents, Tools, and Knowledge.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="01-plan-and-prepare-section-d-developer-tools-sdks">Section D — Developer Tools &amp; SDKs</h3>
+<table>
+<thead>
+<tr>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>36</td>
+  <td><strong>B</strong></td>
+  <td>The Foundry Toolkit for VS Code lets developers browse project resources, deploy models, test agents in playgrounds, and generate integration code.</td>
+</tr>
+<tr>
+  <td>37</td>
+  <td><strong>B</strong></td>
+  <td>Visual Studio is best suited for .NET/C# developers and Windows-focused development.</td>
+</tr>
+<tr>
+  <td>38</td>
+  <td><strong>B</strong></td>
+  <td>Foundry provides an OpenAI-compatible endpoint, so OpenAI SDKs work seamlessly with Foundry model deployments.</td>
+</tr>
+<tr>
+  <td>39</td>
+  <td><strong>C</strong></td>
+  <td>The Foundry SDK supports Python, C#, Node.js, TypeScript, Java, and other languages.</td>
+</tr>
+<tr>
+  <td>40</td>
+  <td><strong>B</strong></td>
+  <td>GitHub Copilot provides AI-assisted coding within VS and VS Code, helping developers write code faster.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="01-plan-and-prepare-section-e-responsible-ai">Section E — Responsible AI</h3>
+<table>
+<thead>
+<tr>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>41</td>
+  <td><strong>C</strong></td>
+  <td>Microsoft defines 6 Responsible AI principles: Fairness, Reliability &amp; Safety, Privacy &amp; Security, Inclusiveness, Transparency, Accountability.</td>
+</tr>
+<tr>
+  <td>42</td>
+  <td><strong>B</strong></td>
+  <td>Fairness ensures AI systems treat all people fairly without bias based on gender, ethnicity, or other characteristics.</td>
+</tr>
+<tr>
+  <td>43</td>
+  <td><strong>C</strong></td>
+  <td>Transparency requires AI systems to be understandable and disclose limitations, training data usage, and confidence scores.</td>
+</tr>
+<tr>
+  <td>44</td>
+  <td><strong>A</strong></td>
+  <td>Reliability &amp; Safety requires AI systems to perform reliably under all conditions — critical for systems where failure risks lives.</td>
+</tr>
+<tr>
+  <td>45</td>
+  <td><strong>B</strong></td>
+  <td>Privacy &amp; Security addresses protecting training data, respecting user privacy, and securing prediction data.</td>
+</tr>
+<tr>
+  <td>46</td>
+  <td><strong>B</strong></td>
+  <td>Inclusiveness ensures AI empowers everyone and engages all people regardless of ability, gender, or other characteristics.</td>
+</tr>
+<tr>
+  <td>47</td>
+  <td><strong>D</strong></td>
+  <td>Accountability ensures people remain responsible for AI systems — developers must validate models and ensure legal/responsible standards.</td>
+</tr>
+<tr>
+  <td>48</td>
+  <td><strong>B</strong></td>
+  <td>Azure AI Content Safety detects and manages harmful content in both text and images, including violence, hate, sexual content, and self-harm.</td>
+</tr>
+<tr>
+  <td>49</td>
+  <td><strong>B</strong></td>
+  <td>Fairness evaluation requires testing across subgroups, not just overall accuracy, to identify bias against specific populations.</td>
+</tr>
+<tr>
+  <td>50</td>
+  <td><strong>B</strong></td>
+  <td>Azure AI Content Safety provides risk detection including prompt injection and jailbreak detection for AI agents.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="01-plan-and-prepare-score-guide">Score Guide</h2>
+<table>
+<thead>
+<tr>
+  <th>Score</th>
+  <th>Rating</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>45–50</td>
+  <td>🏆 Excellent — Ready for the exam</td>
+</tr>
+<tr>
+  <td>35–44</td>
+  <td>👍 Good — Review weak areas</td>
+</tr>
+<tr>
+  <td>25–34</td>
+  <td>📚 Fair — Re-read module notes</td>
+</tr>
+<tr>
+  <td>Below 25</td>
+  <td>⚠️ Needs work — Study the module thoroughly</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Generated: 2026-08-02 · Based on Module 1.1 notes from Microsoft Learn</em></p>
+</div>
+        </article>
+        
+        <article class="module-card" id="module-2" data-module="2" data-label="1.2 Choose and Deploy Models">
+          <header class="module-header">
+            <div>
+              <span class="module-number">Module 2 of 8</span>
+              <h2>1.2 Choose and Deploy Models</h2>
+            </div>
+            <span class="question-count">50 questions</span>
+          </header>
+          <div class="module-content"><h1 id="02-choose-deploy-models-module-1-2-practice-questions">Module 1.2 — Practice Questions</h1>
+<blockquote>
+<p><strong>50 questions</strong> covering the model catalog, deployment, optimization, and responsible AI for Module 1.2.</p>
+</blockquote>
+<hr />
+<h2 id="02-choose-deploy-models-section-1-model-catalog-basics-q1-15">Section 1: Model Catalog Basics (Q1–15)</h2>
+<p><strong>Q1.</strong> What is the primary purpose of the model catalog in Microsoft Foundry?</p>
+<ul>
+<li>A) To train custom models from scratch</li>
+<li>B) To browse, compare, filter, and deploy foundation models</li>
+<li>C) To manage Azure subscriptions and billing</li>
+<li>D) To deploy containerized applications</li>
+</ul>
+<p><strong>Q2.</strong> Which of the following is a category of models available in the Foundry model catalog?</p>
+<ul>
+<li>A) Models sold by Azure</li>
+<li>B) Models from partners and community</li>
+<li>C) Both A and B</li>
+<li>D) Neither A nor B</li>
+</ul>
+<p><strong>Q3.</strong> Which of these models is &quot;sold by Azure&quot; (Azure OpenAI family)?</p>
+<ul>
+<li>A) Llama 4 Scout</li>
+<li>B) Mistral Large</li>
+<li>C) GPT-4o</li>
+<li>D) DeepSeek-R1</li>
+</ul>
+<p><strong>Q4.</strong> How can you filter the model catalog? (Select all that apply)</p>
+<ul>
+<li>A) By Collection (provider/vendor)</li>
+<li>B) By Task (text generation, embeddings, etc.)</li>
+<li>C) By Modality (text, image, audio)</li>
+<li>D) All of the above</li>
+</ul>
+<p><strong>Q5.</strong> What does a model card in the catalog display?</p>
+<ul>
+<li>A) License, modality, supported tasks, deployment templates</li>
+<li>B) Only the model name</li>
+<li>C) Only pricing information</li>
+<li>D) Only the deployment button</li>
+</ul>
+<p><strong>Q6.</strong> Where do you access the model catalog in Foundry?</p>
+<ul>
+<li>A) Build → Models (or Discover → Models)</li>
+<li>B) Settings → Models</li>
+<li>C) Home → Storage</li>
+<li>D) Monitor → Models</li>
+</ul>
+<p><strong>Q7.</strong> What is the difference between &quot;sold by Azure&quot; models and &quot;partner&quot; models?</p>
+<ul>
+<li>A) Sold by Azure models have Microsoft support + enterprise SLA; partner models have provider support</li>
+<li>B) There is no difference</li>
+<li>C) Partner models are free; Azure models are paid</li>
+<li>D) Sold by Azure models can only be deployed to managed compute</li>
+</ul>
+<p><strong>Q8.</strong> Which provider offers the Llama model family in the catalog?</p>
+<ul>
+<li>A) Microsoft</li>
+<li>B) Meta</li>
+<li>C) Google</li>
+<li>D) Amazon</li>
+</ul>
+<p><strong>Q9.</strong> What is a &quot;deployment template&quot; in the context of managed compute?</p>
+<ul>
+<li>A) A pre-configured setup that defines runtime, accelerator family/count, and context length</li>
+<li>B) A Docker container image</li>
+<li>C) A Python script for model training</li>
+<li>D) A pricing calculator</li>
+</ul>
+<p><strong>Q10.</strong> You want to find all embedding models in the catalog. Which filter should you use?</p>
+<ul>
+<li>A) Collection → Azure</li>
+<li>B) Task → Embeddings</li>
+<li>C) Modality → Image</li>
+<li>D) Deployment → Serverless</li>
+</ul>
+<p><strong>Q11.</strong> Which of these is a text embedding model available in the catalog?</p>
+<ul>
+<li>A) DALL·E 3</li>
+<li>B) Whisper</li>
+<li>C) text-embedding-3-large</li>
+<li>GPT-4o-mini</li>
+</ul>
+<p><strong>Q12.</strong> The model catalog allows you to:</p>
+<ul>
+<li>A) Request a model not currently in the catalog</li>
+<li>B) Only use pre-approved models</li>
+<li>C) Deploy models without any selection</li>
+<li>D) None of the above</li>
+</ul>
+<p><strong>Q13.</strong> What is the &quot;New Foundry&quot; toggle in the portal?</p>
+<ul>
+<li>A) A switch between the new and classic Foundry UI</li>
+<li>B) A button to create a new project</li>
+<li>C) A billing toggle</li>
+<li>D) A feature flag for beta models</li>
+</ul>
+<p><strong>Q14.</strong> Which model family is best suited for image generation?</p>
+<ul>
+<li>A) GPT-4o</li>
+<li>B) Phi-4</li>
+<li>C) DALL·E 3</li>
+<li>D) text-embedding-3-small</li>
+</ul>
+<p><strong>Q15.</strong> What information is required when deploying a model via SDK/REST (not portal)?</p>
+<ul>
+<li>A) Model ID, Deployment Template ID, Accelerator type</li>
+<li>B) Only the model name</li>
+<li>C) Only the Azure subscription ID</li>
+<li>D) Only the deployment name</li>
+</ul>
+<hr />
+<h2 id="02-choose-deploy-models-section-2-deployment-options-q16-25">Section 2: Deployment Options (Q16–25)</h2>
+<p><strong>Q16.</strong> What are the two main deployment types in Foundry?</p>
+<ul>
+<li>A) Serverless API and Managed Compute</li>
+<li>B) Container Apps and App Service</li>
+<li>C) VM and Kubernetes</li>
+<li>D) Functions and Logic Apps</li>
+</ul>
+<p><strong>Q17.</strong> Which deployment type requires NO infrastructure management?</p>
+<ul>
+<li>A) Serverless API</li>
+<li>B) Managed Compute</li>
+<li>C) Container Apps</li>
+<li>D) Virtual Machines</li>
+</ul>
+<p><strong>Q18.</strong> In a serverless API deployment, how are you billed?</p>
+<ul>
+<li>A) Per inference call (token-based)</li>
+<li>B) Per hour (VM-based)</li>
+<li>C) Per GB of storage</li>
+<li>D) Per network request</li>
+</ul>
+<p><strong>Q19.</strong> What is a &quot;Provisioned Throughput (PTU)&quot; deployment type?</p>
+<ul>
+<li>A) Guaranteed throughput for enterprise SLAs</li>
+<li>B) A free tier for testing</li>
+<li>C) A managed compute option</li>
+<li>D) A deprecated deployment type</li>
+</ul>
+<p><strong>Q20.</strong> When deploying to managed compute, what does the &quot;capacity&quot; value control?</p>
+<ul>
+<li>A) Number of model instances (each instance uses the accelerator count from the template)</li>
+<li>B) Maximum token limit</li>
+<li>C) Number of concurrent users</li>
+<li>D) Storage allocation</li>
+</ul>
+<p><strong>Q21.</strong> What happens with the shared quota managed compute endpoint?</p>
+<ul>
+<li>A) It is deleted after 168 hours (7 days)</li>
+<li>B) It runs indefinitely</li>
+<li>C) It is migrated to serverless after 24 hours</li>
+<li>D) It is paused after 48 hours</li>
+</ul>
+<p><strong>Q22.</strong> What is the deployment name used for?</p>
+<ul>
+<li>A) It's the <code>model</code> parameter in your API calls to route requests</li>
+<li>B) It's the display name in the portal only</li>
+<li>C) It's the Azure resource group name</li>
+<li>D) It's the storage account name</li>
+</ul>
+<p><strong>Q23.</strong> Which deployment type has the lowest latency?</p>
+<ul>
+<li>A) Global Standard (serverless)</li>
+<li>B) Managed Compute</li>
+<li>C) Standard (serverless)</li>
+<li>D) They all have the same latency</li>
+</ul>
+<p><strong>Q24.</strong> For a partner model deployment, what must you accept before deploying?</p>
+<ul>
+<li>A) Azure Marketplace terms of use</li>
+<li>B) Microsoft Privacy Policy</li>
+<li>C) Azure SLA agreement</li>
+<li>D) Nothing — it's automatic</li>
+</ul>
+<p><strong>Q25.</strong> How long does a managed compute deployment typically take to provision?</p>
+<ul>
+<li>A) 10–15 minutes</li>
+<li>B) 1–2 seconds</li>
+<li>C) 1–2 hours</li>
+<li>D) 24 hours</li>
+</ul>
+<hr />
+<h2 id="02-choose-deploy-models-section-3-model-selection-optimization-q26-40">Section 3: Model Selection &amp; Optimization (Q26–40)</h2>
+<p><strong>Q26.</strong> You need a cost-effective model for a high-volume FAQ chatbot. Which should you choose?</p>
+<ul>
+<li>A) GPT-4o</li>
+<li>B) GPT-4o-mini</li>
+<li>C) o3</li>
+<li>D) DALL·E 3</li>
+</ul>
+<p><strong>Q27.</strong> What does the &quot;temperature&quot; parameter control?</p>
+<ul>
+<li>A) Randomness/creativity of the output (0 = deterministic, higher = more random)</li>
+<li>B) Maximum response length</li>
+<li>C) Number of API calls</li>
+<li>D) Model deployment region</li>
+</ul>
+<p><strong>Q28.</strong> Which temperature setting is best for factual, consistent responses?</p>
+<ul>
+<li>A) 0.0</li>
+<li>B) 1.5</li>
+<li>C) 2.0</li>
+<li>D) Any temperature works equally</li>
+</ul>
+<p><strong>Q29.</strong> What is the &quot;top-p&quot; parameter?</p>
+<ul>
+<li>A) Controls diversity of token sampling (nucleus sampling)</li>
+<li>B) Sets the maximum number of tokens</li>
+<li>C) Defines the system message</li>
+<li>D) Configures the deployment region</li>
+</ul>
+<p><strong>Q30.</strong> Which parameter limits the maximum length of the model's response?</p>
+<ul>
+<li>A) Max tokens</li>
+<li>B) Temperature</li>
+<li>C) Top-p</li>
+<li>D) Stop sequences</li>
+</ul>
+<p><strong>Q31.</strong> What are &quot;stop sequences&quot;?</p>
+<ul>
+<li>A) Strings that tell the model to stop generating when encountered</li>
+<li>B) API keys for authentication</li>
+<li>C) Deployment region identifiers</li>
+<li>D) Model version numbers</li>
+</ul>
+<p><strong>Q32.</strong> You want the model to always produce the same output for the same input. What should you set?</p>
+<ul>
+<li>A) Temperature = 0</li>
+<li>B) Temperature = 2.0</li>
+<li>C) Max tokens = 4096</li>
+<li>D) Top-p = 0.5</li>
+</ul>
+<p><strong>Q33.</strong> What is &quot;few-shot learning&quot; in prompt engineering?</p>
+<ul>
+<li>A) Providing a few input/output examples in the prompt</li>
+<li>B) Training the model on a small dataset</li>
+<li>C) Deploying a model with minimal configuration</li>
+<li>D) Using only one API call</li>
+</ul>
+<p><strong>Q34.</strong> What is chain-of-thought prompting?</p>
+<ul>
+<li>A) Asking the model to &quot;think step by step&quot; before answering</li>
+<li>B) Chaining multiple API calls together</li>
+<li>C) Using multiple models in sequence</li>
+<li>D) Storing conversation history in a database</li>
+</ul>
+<p><strong>Q35.</strong> RAG stands for:</p>
+<ul>
+<li>A) Retrieval-Augmented Generation</li>
+<li>B) Random Access Generation</li>
+<li>C) Real-time AI Gateway</li>
+<li>D) Remote Agent Group</li>
+</ul>
+<p><strong>Q36.</strong> How does RAG reduce hallucination?</p>
+<ul>
+<li>A) By grounding the model's responses in retrieved documents from your own data</li>
+<li>B) By increasing the temperature</li>
+<li>C) By using a larger model</li>
+<li>D) By disabling content filtering</li>
+</ul>
+<p><strong>Q37.</strong> Which evaluation metric measures whether the model's response is grounded in the source data?</p>
+<ul>
+<li>A) Groundedness</li>
+<li>B) Coherence</li>
+<li>C) Fluency</li>
+<li>D) Relevance</li>
+</ul>
+<p><strong>Q38.</strong> What is fine-tuning used for?</p>
+<ul>
+<li>A) Training the model on your specific data for consistent behavior</li>
+<li>B) Changing the model's deployment region</li>
+<li>C) Adjusting the VM SKU</li>
+<li>D) Managing Azure billing</li>
+</ul>
+<p><strong>Q39.</strong> Which fine-tuning approach uses reinforcement learning with human feedback?</p>
+<ul>
+<li>A) DPO (Direct Preference Optimization)</li>
+<li>B) SFT (Supervised Fine-Tuning)</li>
+<li>C) Both A and B</li>
+<li>D) Neither A nor B</li>
+</ul>
+<p><strong>Q40.</strong> When should you use fine-tuning instead of prompt engineering?</p>
+<ul>
+<li>A) When prompt engineering + RAG aren't enough to achieve consistent behavior</li>
+<li>B) Always — fine-tuning is always better</li>
+<li>C) Only for image generation models</li>
+<li>D) Never — prompt engineering is always sufficient</li>
+</ul>
+<hr />
+<h2 id="02-choose-deploy-models-section-4-testing-playground-q41-45">Section 4: Testing &amp; Playground (Q41–45)</h2>
+<p><strong>Q41.</strong> Where do you test your deployed model interactively in Foundry?</p>
+<ul>
+<li>A) Playground</li>
+<li>B) Azure Portal</li>
+<li>C) Visual Studio Code</li>
+<li>D) GitHub</li>
+</ul>
+<p><strong>Q42.</strong> What can you do in the Foundry Playground?</p>
+<ul>
+<li>A) Send messages, adjust parameters (temperature, max tokens), compare models</li>
+<li>B) Only view the model card</li>
+<li>C) Only manage billing</li>
+<li>D) Only deploy new models</li>
+</ul>
+<p><strong>Q43.</strong> What does &quot;frequency penalty&quot; do?</p>
+<ul>
+<li>A) Reduces repetition of common tokens</li>
+<li>B) Increases response length</li>
+<li>C) Changes the model's personality</li>
+<li>D) Adds new training data</li>
+</ul>
+<p><strong>Q44.</strong> What does &quot;presence penalty&quot; do?</p>
+<ul>
+<li>A) Encourages the model to introduce new topics</li>
+<li>B) Limits the number of API calls</li>
+<li>C) Changes the deployment type</li>
+<li>D) Disables content filtering</li>
+</ul>
+<p><strong>Q45.</strong> You want to compare two model versions side-by-side. What feature should you use?</p>
+<ul>
+<li>A) Playground comparison mode</li>
+<li>B) Azure Monitor</li>
+<li>C) Cost Management</li>
+<li>D) Resource Groups</li>
+</ul>
+<hr />
+<h2 id="02-choose-deploy-models-section-5-responsible-ai-content-filtering-q46-50">Section 5: Responsible AI &amp; Content Filtering (Q46–50)</h2>
+<p><strong>Q46.</strong> Content filtering in Foundry detects harmful content across which categories?</p>
+<ul>
+<li>A) Hate, Self-Harm, Sexual, Violence</li>
+<li>B) Spam, Phishing, Malware, Ransomware</li>
+<li>C) Low, Medium, High, Critical</li>
+<li>D) Input, Output, Process, Storage</li>
+</ul>
+<p><strong>Q47.</strong> Is content filtering enabled by default for new deployments?</p>
+<ul>
+<li>A) Yes — it's on by default</li>
+<li>B) No — you must enable it manually</li>
+<li>C) Only for serverless deployments</li>
+<li>D) Only for Azure OpenAI models</li>
+</ul>
+<p><strong>Q48.</strong> What is &quot;prompt injection&quot;?</p>
+<ul>
+<li>A) An attack where malicious instructions are embedded in user input to manipulate model behavior</li>
+<li>B) A way to improve model performance</li>
+<li>C) A deployment configuration</li>
+<li>D) A billing optimization</li>
+</ul>
+<p><strong>Q49.</strong> What are &quot;Prompt Shields&quot;?</p>
+<ul>
+<li>A) A feature that detects prompt injection attempts</li>
+<li>B) A firewall for Azure resources</li>
+<li>C) A deployment template</li>
+<li>D) A model variant</li>
+</ul>
+<p><strong>Q50.</strong> What is &quot;indirect prompt injection&quot;?</p>
+<ul>
+<li>A) Malicious instructions embedded in images or files the model processes</li>
+<li>B) A type of serverless deployment</li>
+<li>C) A model optimization technique</li>
+<li>D) A content filtering category</li>
+</ul>
+<hr />
+<h2 id="02-choose-deploy-models-answer-key">Answer Key</h2>
+<table>
+<thead>
+<tr>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>B</td>
+  <td>11</td>
+  <td>C</td>
+  <td>21</td>
+  <td>A</td>
+  <td>31</td>
+  <td>A</td>
+  <td>41</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>C</td>
+  <td>12</td>
+  <td>A</td>
+  <td>22</td>
+  <td>A</td>
+  <td>32</td>
+  <td>A</td>
+  <td>42</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>C</td>
+  <td>13</td>
+  <td>A</td>
+  <td>23</td>
+  <td>A</td>
+  <td>33</td>
+  <td>A</td>
+  <td>43</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>D</td>
+  <td>14</td>
+  <td>C</td>
+  <td>24</td>
+  <td>A</td>
+  <td>34</td>
+  <td>A</td>
+  <td>44</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>A</td>
+  <td>15</td>
+  <td>A</td>
+  <td>25</td>
+  <td>A</td>
+  <td>35</td>
+  <td>A</td>
+  <td>45</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>A</td>
+  <td>16</td>
+  <td>A</td>
+  <td>26</td>
+  <td>B</td>
+  <td>36</td>
+  <td>A</td>
+  <td>46</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>A</td>
+  <td>17</td>
+  <td>A</td>
+  <td>27</td>
+  <td>A</td>
+  <td>37</td>
+  <td>A</td>
+  <td>47</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>B</td>
+  <td>18</td>
+  <td>A</td>
+  <td>28</td>
+  <td>A</td>
+  <td>38</td>
+  <td>A</td>
+  <td>48</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>A</td>
+  <td>19</td>
+  <td>A</td>
+  <td>29</td>
+  <td>A</td>
+  <td>39</td>
+  <td>A</td>
+  <td>49</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>B</td>
+  <td>20</td>
+  <td>A</td>
+  <td>30</td>
+  <td>A</td>
+  <td>40</td>
+  <td>A</td>
+  <td>50</td>
+  <td>A</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="02-choose-deploy-models-explanations">Explanations</h2>
+<p><strong>Q1 (B):</strong> The model catalog lets you browse, compare, filter, and deploy models — not train them.</p>
+<p><strong>Q3 (C):</strong> GPT-4o is an Azure OpenAI model (&quot;sold by Azure&quot;). Llama, Mistral, DeepSeek are partner models.</p>
+<p><strong>Q7 (A):</strong> &quot;Sold by Azure&quot; = Microsoft support + enterprise SLA. Partner models = provider support, varying SLAs.</p>
+<p><strong>Q15 (A):</strong> SDK/REST deployment requires Model ID, Deployment Template ID, and Accelerator type — the portal wizard provides these values.</p>
+<p><strong>Q18 (A):</strong> Serverless = pay per inference call (token-based). Managed compute = pay per VM hour.</p>
+<p><strong>Q20 (A):</strong> Capacity = number of model instances. Each instance uses the accelerator count from the template (e.g., 1 template = 1 H100).</p>
+<p><strong>Q22 (A):</strong> The deployment name becomes the <code>model</code> parameter in API calls — pick a stable, application-friendly name.</p>
+<p><strong>Q27 (A):</strong> Temperature controls randomness. 0 = deterministic, 1+ = more creative. It does NOT affect max tokens or API calls.</p>
+<p><strong>Q32 (A):</strong> Temperature = 0 ensures the model always picks the most probable token = same output for same input.</p>
+<p><strong>Q35 (A):</strong> RAG = Retrieval-Augmented Generation. Retrieve relevant docs → pass as context → model generates grounded answers.</p>
+<p><strong>Q40 (A):</strong> Fine-tuning is used when prompt engineering + RAG can't achieve consistent behavior. It's not always better — it adds complexity and cost.</p>
+<p><strong>Q47 (A):</strong> Content filtering is ON by default for all new deployments. You can customize it but should never disable it.</p>
+<p><strong>Q48 (A):</strong> Prompt injection = malicious instructions in user input that trick the model into ignoring its system prompt.</p>
+<p><strong>Q50 (A):</strong> Indirect prompt injection = malicious text embedded in images or documents the model processes, triggering unintended behavior.</p>
+</div>
+        </article>
+        
+        <article class="module-card" id="module-3" data-module="3" data-label="1.3 Develop an AI App with the Foundry SDK">
+          <header class="module-header">
+            <div>
+              <span class="module-number">Module 3 of 8</span>
+              <h2>1.3 Develop an AI App with the Foundry SDK</h2>
+            </div>
+            <span class="question-count">50 questions</span>
+          </header>
+          <div class="module-content"><h1 id="03-develop-ai-app-foundry-sdk-module-1-3-develop-an-ai-app-with-the-foundry-sdk-practice-questions">Module 1.3: Develop an AI App with the Foundry SDK — Practice Questions</h1>
+<blockquote>
+<p>50 practice questions covering Microsoft Foundry SDK, project connections, and chat app development.</p>
+</blockquote>
+<hr />
+<h2 id="03-develop-ai-app-foundry-sdk-questions">Questions</h2>
+<p><strong>1.</strong> What is the primary Python package for connecting to a Microsoft Foundry project?</p>
+<ul>
+<li>A) azure-ai-language</li>
+<li>B) azure-ai-projects</li>
+<li>C) azure-ai-openai</li>
+<li>D) azure-foundry-sdk</li>
+</ul>
+<p><strong>2.</strong> Which authentication method does the Foundry SDK use by default in Python?</p>
+<ul>
+<li>A) API Key authentication</li>
+<li>B) OAuth 2.0 client credentials</li>
+<li>C) DefaultAzureCredential</li>
+<li>D) SAS token authentication</li>
+</ul>
+<p><strong>3.</strong> What is the correct way to create an AIProjectClient in Python?</p>
+<ul>
+<li>A) <code>AIProjectClient(endpoint, credential)</code></li>
+<li>B) <code>AIProjectClient(credential=DefaultAzureCredential(), endpoint=project_endpoint)</code></li>
+<li>C) <code>AIProjectClient.create(endpoint, credential)</code></li>
+<li>D) <code>FoundryClient(endpoint, credential)</code></li>
+</ul>
+<p><strong>4.</strong> Which method returns all connections in a Foundry project?</p>
+<ul>
+<li>A) <code>project_client.connections.get_all()</code></li>
+<li>B) <code>project_client.connections.list()</code></li>
+<li>C) <code>project_client.get_connections()</code></li>
+<li>D) <code>project_client.connections.fetch()</code></li>
+</ul>
+<p><strong>5.</strong> How do you get a connection with its credentials?</p>
+<ul>
+<li>A) <code>connections.get(name)</code></li>
+<li>B) <code>connections.get(name, include_credentials=True)</code></li>
+<li>C) <code>connections.get_with_credentials(name)</code></li>
+<li>D) <code>connections.fetch(name, credentials=True)</code></li>
+</ul>
+<p><strong>6.</strong> What does the <code>get_openai_client()</code> method return?</p>
+<ul>
+<li>A) A direct Azure OpenAI client</li>
+<li>B) An OpenAI-compatible client authenticated via the project</li>
+<li>C) A Foundry-specific AI client</li>
+<li>D) A REST API client</li>
+</ul>
+<p><strong>7.</strong> Which package must be installed in addition to <code>azure-ai-projects</code> for authentication?</p>
+<ul>
+<li>A) azure-auth</li>
+<li>B) azure-identity</li>
+<li>C) azure-security</li>
+<li>D) azure-core</li>
+</ul>
+<p><strong>8.</strong> What is the purpose of the <code>DefaultAzureCredential</code> class?</p>
+<ul>
+<li>A) It generates API keys for Azure services</li>
+<li>B) It authenticates using environment variables, Azure CLI, or managed identity</li>
+<li>C) It encrypts data sent to Azure</li>
+<li>D) It manages Azure subscriptions</li>
+</ul>
+<p><strong>9.</strong> Which SDK parameter specifies which model deployment to use in a chat completion?</p>
+<ul>
+<li>A) <code>deployment_id</code></li>
+<li>B) <code>model</code></li>
+<li>C) <code>model_name</code></li>
+<li>D) <code>deployment_name</code></li>
+</ul>
+<p><strong>10.</strong> What is the correct format for a Foundry project endpoint?</p>
+<ul>
+<li>A) <code>https://&lt;resource&gt;.openai.azure.com</code></li>
+<li>B) <code>https://&lt;resource&gt;.services.ai.azure.com/api/projects/&lt;project&gt;</code></li>
+<li>C) <code>https://&lt;resource&gt;.cognitiveservices.azure.com</code></li>
+<li>D) <code>https://&lt;resource&gt;.azurewebsites.net</code></li>
+</ul>
+<p><strong>11.</strong> Which method is used to list connections filtered by type?</p>
+<ul>
+<li>A) <code>connections.list(connection_type=ConnectionType.AZURE_OPEN_AI)</code></li>
+<li>B) <code>connections.filter(type=&quot;AzureOpenAI&quot;)</code></li>
+<li>C) <code>connections.get_by_type(&quot;AzureOpenAI&quot;)</code></li>
+<li>D) <code>connections.search(connection_type=&quot;OpenAI&quot;)</code></li>
+</ul>
+<p><strong>12.</strong> What authentication is required before running Foundry SDK code?</p>
+<ul>
+<li>A) No authentication needed</li>
+<li>B) Azure CLI <code>az login</code> or managed identity</li>
+<li>C) Only API keys</li>
+<li>D) Only environment variables</li>
+</ul>
+<p><strong>13.</strong> Which of the following is TRUE about the Foundry SDK's OpenAI client?</p>
+<ul>
+<li>A) It only works with OpenAI models</li>
+<li>B) It works with any model deployed in the Foundry resource</li>
+<li>C) It requires separate authentication for each model</li>
+<li>D) It can only be used in Python</li>
+</ul>
+<p><strong>14.</strong> What is the role of the <code>api_version</code> parameter in <code>get_openai_client()</code>?</p>
+<ul>
+<li>A) Specifies the Azure region</li>
+<li>B) Sets the OpenAI API version to use</li>
+<li>C) Defines the model version</li>
+<li>D) Sets the SDK version</li>
+</ul>
+<p><strong>15.</strong> Which of the following is NOT a valid connection type in Foundry?</p>
+<ul>
+<li>A) <code>AZURE_OPEN_AI</code></li>
+<li>B) <code>AZURE_AI_SEARCH</code></li>
+<li>C) <code>AWS_S3</code></li>
+<li>D) <code>AZURE_BLOB_STORAGE</code></li>
+</ul>
+<p><strong>16.</strong> What is the purpose of the <code>connections</code> property on <code>AIProjectClient</code>?</p>
+<ul>
+<li>A) To create new connections</li>
+<li>B) To access and manage resource connections in the project</li>
+<li>C) To delete connections</li>
+<li>D) To authenticate connections</li>
+</ul>
+<p><strong>17.</strong> Which Python package provides OpenAI-compatible chat completion functionality?</p>
+<ul>
+<li>A) azure-openai</li>
+<li>B) openai</li>
+<li>C) azure-ai-chat</li>
+<li>D) foundry-openai</li>
+</ul>
+<p><strong>18.</strong> What does the <code>chat.completions.create()</code> method return?</p>
+<ul>
+<li>A) A string response</li>
+<li>B) A response object with choices containing message content</li>
+<li>C) A JSON object</li>
+<li>D) A stream of tokens</li>
+</ul>
+<p><strong>19.</strong> Which of the following is a valid use case for the Foundry SDK?</p>
+<ul>
+<li>A) Only for chat applications</li>
+<li>B) Accessing models, agents, evaluations, and tracing</li>
+<li>C) Only for image generation</li>
+<li>D) Only for text analysis</li>
+</ul>
+<p><strong>20.</strong> What is the correct way to access the model response from a chat completion?</p>
+<ul>
+<li>A) <code>response.content</code></li>
+<li>B) <code>response.choices[0].message.content</code></li>
+<li>C) <code>response.message</code></li>
+<li>D) <code>response.text</code></li>
+</ul>
+<p><strong>21.</strong> Which of the following languages are supported by the Foundry SDK?</p>
+<ul>
+<li>A) Only Python</li>
+<li>B) Python, C#, JavaScript, Java</li>
+<li>C) Only Python and C#</li>
+<li>D) Python and JavaScript only</li>
+</ul>
+<p><strong>22.</strong> What is the purpose of the <code>system</code> role in a chat completion message?</p>
+<ul>
+<li>A) To provide user input</li>
+<li>B) To set the assistant's behavior and instructions</li>
+<li>C) To define the model deployment</li>
+<li>D) To specify the API version</li>
+</ul>
+<p><strong>23.</strong> How do you install the Foundry SDK for Python?</p>
+<ul>
+<li>A) <code>npm install azure-ai-projects</code></li>
+<li>B) <code>pip install azure-ai-projects</code></li>
+<li>C) <code>dotnet add package Azure.AI.Projects</code></li>
+<li>D) <code>cargo install azure-ai-projects</code></li>
+</ul>
+<p><strong>24.</strong> What is the benefit of using the project's OpenAI client over a direct OpenAI client?</p>
+<ul>
+<li>A) It's faster</li>
+<li>B) It automatically manages authentication and endpoint resolution</li>
+<li>C) It supports more models</li>
+<li>D) It has lower latency</li>
+</ul>
+<p><strong>25.</strong> Which of the following is required to run Foundry SDK code?</p>
+<ul>
+<li>A) Azure subscription only</li>
+<li>B) Azure CLI login or managed identity + project endpoint</li>
+<li>C) Only a project endpoint</li>
+<li>D) Only API keys</li>
+</ul>
+<p><strong>26.</strong> What is the structure of a Foundry project's resource hierarchy?</p>
+<ul>
+<li>A) Subscription → Resource Group → Project</li>
+<li>B) Foundry Resource (Hub) → Project → Connections</li>
+<li>C) Account → Project → Model</li>
+<li>D) Tenant → Subscription → Resource</li>
+</ul>
+<p><strong>27.</strong> Which method is used to get a specific connection by name?</p>
+<ul>
+<li>A) <code>connections.get(connection_name)</code></li>
+<li>B) <code>connections.fetch(connection_name)</code></li>
+<li>C) <code>connections.find(connection_name)</code></li>
+<li>D) <code>connections.retrieve(connection_name)</code></li>
+</ul>
+<p><strong>28.</strong> What is the default value of the <code>include_credentials</code> parameter in <code>connections.get()</code>?</p>
+<ul>
+<li>A) False</li>
+<li>B) True</li>
+<li>C) None</li>
+<li>D) It has no default</li>
+</ul>
+<p><strong>29.</strong> Which of the following is a valid message role in a chat completion?</p>
+<ul>
+<li>A) <code>assistant</code></li>
+<li>B) <code>user</code></li>
+<li>C) <code>system</code></li>
+<li>D) All of the above</li>
+</ul>
+<p><strong>30.</strong> What is the purpose of the <code>Foundry Toolkit for VS Code</code>?</p>
+<ul>
+<li>A) To replace the Foundry SDK</li>
+<li>B) To simplify Foundry development with visual tools</li>
+<li>C) To only manage Azure resources</li>
+<li>D) To only test models</li>
+</ul>
+<p><strong>31.</strong> Which of the following is TRUE about the Foundry SDK?</p>
+<ul>
+<li>A) It provides programmatic access for automation and CI/CD</li>
+<li>B) It only works in the Foundry portal</li>
+<li>C) It requires a GUI to function</li>
+<li>D) It only supports REST APIs</li>
+</ul>
+<p><strong>32.</strong> How can models be deployed in Azure AI Foundry?</p>
+<ul>
+<li>A) Only via the portal</li>
+<li>B) Via the portal, Foundry Toolkit for VS Code, or Foundry SDK</li>
+<li>C) Only via CLI</li>
+<li>D) Only via SDK</li>
+</ul>
+<p><strong>33.</strong> What is the role of the <code>messages</code> parameter in <code>chat.completions.create()</code>?</p>
+<ul>
+<li>A) It defines the model to use</li>
+<li>B) It contains the conversation history (system, user, assistant messages)</li>
+<li>C) It specifies the API endpoint</li>
+<li>D) It sets the temperature</li>
+</ul>
+<p><strong>34.</strong> Which of the following is a connection type supported by Foundry?</p>
+<ul>
+<li>A) <code>AZURE_OPEN_AI</code></li>
+<li>B) <code>AZURE_AI_SEARCH</code></li>
+<li>C) <code>AZURE_BLOB_STORAGE</code></li>
+<li>D) All of the above</li>
+</ul>
+<p><strong>35.</strong> What is the purpose of the <code>connections.list()</code> method?</p>
+<ul>
+<li>A) To create new connections</li>
+<li>B) To retrieve all connections in the project</li>
+<li>C) To delete connections</li>
+<li>D) To update connections</li>
+</ul>
+<p><strong>36.</strong> Which of the following is required to use the Foundry SDK in Python?</p>
+<ul>
+<li>A) Only <code>azure-ai-projects</code></li>
+<li>B) <code>azure-ai-projects</code> + <code>azure-identity</code> + <code>openai</code></li>
+<li>C) Only <code>openai</code></li>
+<li>D) Only <code>azure-identity</code></li>
+</ul>
+<p><strong>37.</strong> What is the correct way to handle exceptions in Foundry SDK code?</p>
+<ul>
+<li>A) Use try-except blocks</li>
+<li>B) Ignore errors</li>
+<li>C) Use only print statements</li>
+<li>D) No error handling needed</li>
+</ul>
+<p><strong>38.</strong> Which of the following is a valid way to authenticate to Azure?</p>
+<ul>
+<li>A) Azure CLI <code>az login</code></li>
+<li>B) Managed Identity</li>
+<li>C) Environment variables</li>
+<li>D) All of the above</li>
+</ul>
+<p><strong>39.</strong> What programming languages does the Foundry SDK support?</p>
+<ul>
+<li>A) Python, C#, Node.js, TypeScript, Java</li>
+<li>B) Only Python and C#</li>
+<li>C) Only JavaScript</li>
+<li>D) Python only</li>
+</ul>
+<p><strong>40.</strong> What is the benefit of using <code>DefaultAzureCredential</code>?</p>
+<ul>
+<li>A) It's the only authentication method</li>
+<li>B) It automatically tries multiple authentication methods</li>
+<li>C) It's faster than other methods</li>
+<li>D) It doesn't require Azure CLI</li>
+</ul>
+<p><strong>41.</strong> Which method is used to send a chat completion request?</p>
+<ul>
+<li>A) <code>chat_client.send(message)</code></li>
+<li>B) <code>chat_client.chat.completions.create(model, messages)</code></li>
+<li>C) <code>chat_client.complete(prompt)</code></li>
+<li>D) <code>chat_client.chat(message)</code></li>
+</ul>
+<p><strong>42.</strong> What is the purpose of the <code>model</code> parameter in <code>chat.completions.create()</code>?</p>
+<ul>
+<li>A) It specifies the API version</li>
+<li>B) It identifies the deployed model to use</li>
+<li>C) It defines the message format</li>
+<li>D) It sets the response type</li>
+</ul>
+<p><strong>43.</strong> Which of the following is TRUE about Foundry project connections?</p>
+<ul>
+<li>A) They are only defined at the project level</li>
+<li>B) They can be defined at both hub and project levels</li>
+<li>C) They cannot be filtered by type</li>
+<li>D) They don't include credentials</li>
+</ul>
+<p><strong>44.</strong> What is the correct way to print a connection's name and type?</p>
+<ul>
+<li>A) <code>print(connection)</code></li>
+<li>B) <code>print(f&quot;{connection.name} ({connection.type})&quot;)</code></li>
+<li>C) <code>print(connection.name, connection.type)</code></li>
+<li>D) <code>print(connection.details)</code></li>
+</ul>
+<p><strong>45.</strong> Which of the following is a valid use case for the Foundry SDK?</p>
+<ul>
+<li>A) Creating chat applications</li>
+<li>B) Accessing project connections</li>
+<li>C) Running evaluations</li>
+<li>D) All of the above</li>
+</ul>
+<p><strong>46.</strong> What is the purpose of the <code>get_openai_client()</code> method?</p>
+<ul>
+<li>A) To create a new OpenAI account</li>
+<li>B) To get an authenticated OpenAI client for model interaction</li>
+<li>C) To deploy new models</li>
+<li>D) To manage connections</li>
+</ul>
+<p><strong>47.</strong> Which of the following is required to access a Foundry project?</p>
+<ul>
+<li>A) Only the project name</li>
+<li>B) Project endpoint + authentication</li>
+<li>C) Only authentication</li>
+<li>D) Only the endpoint</li>
+</ul>
+<p><strong>48.</strong> What is the correct way to install the <code>azure-identity</code> package?</p>
+<ul>
+<li>A) <code>pip install azure-auth</code></li>
+<li>B) <code>pip install azure-identity</code></li>
+<li>C) <code>pip install azure-security</code></li>
+<li>D) <code>pip install azure-core</code></li>
+</ul>
+<p><strong>49.</strong> Which of the following is TRUE about the Foundry SDK?</p>
+<ul>
+<li>A) It only works with OpenAI models</li>
+<li>B) It works with any model in the Foundry resource</li>
+<li>C) It requires a specific model version</li>
+<li>D) It only supports chat models</li>
+</ul>
+<p><strong>50.</strong> What is the purpose of the <code>try-except</code> block in the chat example?</p>
+<ul>
+<li>A) To catch and handle authentication errors</li>
+<li>B) To catch and handle any exceptions during SDK operations</li>
+<li>C) To retry failed requests</li>
+<li>D) To log all operations</li>
+</ul>
+<hr />
+<h2 id="03-develop-ai-app-foundry-sdk-answer-key">Answer Key</h2>
+<table>
+<thead>
+<tr>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td><strong>B</strong></td>
+  <td><code>azure-ai-projects</code> is the core Python package for connecting to Foundry projects.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><strong>C</strong></td>
+  <td><code>DefaultAzureCredential</code> is the default authentication method, supporting Azure CLI, managed identity, and environment variables.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><strong>B</strong></td>
+  <td>The correct syntax uses keyword arguments: <code>AIProjectClient(credential=DefaultAzureCredential(), endpoint=project_endpoint)</code>.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><strong>B</strong></td>
+  <td><code>connections.list()</code> returns a collection of all connection objects in the project.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><strong>B</strong></td>
+  <td>Set <code>include_credentials=True</code> to retrieve the connection with its authentication credentials.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><strong>B</strong></td>
+  <td><code>get_openai_client()</code> returns an OpenAI-compatible client that is already authenticated via the project.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><strong>B</strong></td>
+  <td><code>azure-identity</code> provides <code>DefaultAzureCredential</code> for authentication.</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><strong>B</strong></td>
+  <td><code>DefaultAzureCredential</code> tries multiple authentication methods: Azure CLI, environment variables, managed identity, etc.</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><strong>B</strong></td>
+  <td>The <code>model</code> parameter specifies which deployed model to use for the chat completion.</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><strong>B</strong></td>
+  <td>Foundry project endpoints follow the format: <code>https://&lt;resource&gt;.services.ai.azure.com/api/projects/&lt;project&gt;</code>.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><strong>A</strong></td>
+  <td>Use <code>connections.list(connection_type=ConnectionType.AZURE_OPEN_AI)</code> to filter by connection type.</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><strong>B</strong></td>
+  <td>You must be authenticated via <code>az login</code> or managed identity before the SDK can access your project.</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><strong>B</strong></td>
+  <td>The OpenAI client works with any model deployed in the Foundry resource, including non-OpenAI models.</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td><strong>B</strong></td>
+  <td><code>api_version</code> specifies which OpenAI API version to use for the client.</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><strong>C</strong></td>
+  <td>AWS_S3 is not a supported connection type in Azure Foundry.</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td><strong>B</strong></td>
+  <td>The <code>connections</code> property provides access to manage and retrieve resource connections.</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td><strong>B</strong></td>
+  <td>The <code>openai</code> package provides OpenAI-compatible functionality used with the Foundry SDK.</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td><strong>B</strong></td>
+  <td>The response object contains <code>choices</code> with message content accessible via <code>response.choices[0].message.content</code>.</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td><strong>B</strong></td>
+  <td>The Foundry SDK supports accessing models, agents, evaluations, tracing, and more.</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td><strong>B</strong></td>
+  <td>Access the response content via <code>response.choices[0].message.content</code>.</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td><strong>B</strong></td>
+  <td>The Foundry SDK supports Python, C#, JavaScript, TypeScript, and Java.</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td><strong>B</strong></td>
+  <td>The <code>system</code> role sets the assistant's behavior and instructions for the conversation.</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td><strong>B</strong></td>
+  <td>Use <code>pip install azure-ai-projects</code> to install the Python package.</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td><strong>B</strong></td>
+  <td>The project's OpenAI client automatically manages authentication and endpoint resolution.</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td><strong>B</strong></td>
+  <td>You need Azure CLI login (or managed identity) plus the project endpoint.</td>
+</tr>
+<tr>
+  <td>26</td>
+  <td><strong>B</strong></td>
+  <td>The hierarchy is: Foundry Resource (Hub) → Project → Connections.</td>
+</tr>
+<tr>
+  <td>27</td>
+  <td><strong>A</strong></td>
+  <td>Use <code>connections.get(connection_name)</code> to retrieve a specific connection.</td>
+</tr>
+<tr>
+  <td>28</td>
+  <td><strong>B</strong></td>
+  <td>The default value is <code>True</code>, so credentials are included by default.</td>
+</tr>
+<tr>
+  <td>29</td>
+  <td><strong>D</strong></td>
+  <td>Valid roles are <code>system</code>, <code>user</code>, and <code>assistant</code>.</td>
+</tr>
+<tr>
+  <td>30</td>
+  <td><strong>B</strong></td>
+  <td>The Foundry Toolkit for VS Code simplifies development with visual tools and integrated testing.</td>
+</tr>
+<tr>
+  <td>31</td>
+  <td><strong>A</strong></td>
+  <td>The Foundry SDK provides programmatic access for automation and CI/CD pipelines.</td>
+</tr>
+<tr>
+  <td>32</td>
+  <td><strong>B</strong></td>
+  <td>Models can be deployed via the portal, Foundry Toolkit for VS Code, or the SDK.</td>
+</tr>
+<tr>
+  <td>33</td>
+  <td><strong>B</strong></td>
+  <td>The <code>messages</code> parameter contains the conversation history with role/content pairs.</td>
+</tr>
+<tr>
+  <td>34</td>
+  <td><strong>D</strong></td>
+  <td>All three are valid connection types in Azure Foundry.</td>
+</tr>
+<tr>
+  <td>35</td>
+  <td><strong>B</strong></td>
+  <td><code>connections.list()</code> retrieves all connections in the project.</td>
+</tr>
+<tr>
+  <td>36</td>
+  <td><strong>B</strong></td>
+  <td>You need all three packages: <code>azure-ai-projects</code>, <code>azure-identity</code>, and <code>openai</code>.</td>
+</tr>
+<tr>
+  <td>37</td>
+  <td><strong>A</strong></td>
+  <td>Use try-except blocks to catch and handle exceptions in SDK code.</td>
+</tr>
+<tr>
+  <td>38</td>
+  <td><strong>D</strong></td>
+  <td>All three methods are valid ways to authenticate to Azure.</td>
+</tr>
+<tr>
+  <td>39</td>
+  <td><strong>A</strong></td>
+  <td>The SDK supports Python, C#, Node.js, TypeScript, and Java.</td>
+</tr>
+<tr>
+  <td>40</td>
+  <td><strong>B</strong></td>
+  <td><code>DefaultAzureCredential</code> automatically tries multiple authentication methods.</td>
+</tr>
+<tr>
+  <td>41</td>
+  <td><strong>B</strong></td>
+  <td>Use <code>chat_client.chat.completions.create(model, messages)</code> to send a chat completion request.</td>
+</tr>
+<tr>
+  <td>42</td>
+  <td><strong>B</strong></td>
+  <td>The <code>model</code> parameter identifies which deployed model to use.</td>
+</tr>
+<tr>
+  <td>43</td>
+  <td><strong>B</strong></td>
+  <td>Connections can be defined at both the hub and project levels.</td>
+</tr>
+<tr>
+  <td>44</td>
+  <td><strong>B</strong></td>
+  <td>Use an f-string to print the connection name and type.</td>
+</tr>
+<tr>
+  <td>45</td>
+  <td><strong>D</strong></td>
+  <td>The Foundry SDK supports all three use cases and more.</td>
+</tr>
+<tr>
+  <td>46</td>
+  <td><strong>B</strong></td>
+  <td><code>get_openai_client()</code> returns an authenticated OpenAI client for model interaction.</td>
+</tr>
+<tr>
+  <td>47</td>
+  <td><strong>B</strong></td>
+  <td>You need both the project endpoint and authentication to access a Foundry project.</td>
+</tr>
+<tr>
+  <td>48</td>
+  <td><strong>B</strong></td>
+  <td>Use <code>pip install azure-identity</code> to install the package.</td>
+</tr>
+<tr>
+  <td>49</td>
+  <td><strong>B</strong></td>
+  <td>The Foundry SDK works with any model in the Foundry resource.</td>
+</tr>
+<tr>
+  <td>50</td>
+  <td><strong>B</strong></td>
+  <td>The try-except block catches and handles any exceptions during SDK operations.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Questions created: 2026-08-03 · Based on Microsoft Learn Module 1.3</em></p>
+</div>
+        </article>
+        
+        <article class="module-card" id="module-4" data-module="4" data-label="1.4 Get Started with Prompt Flow">
+          <header class="module-header">
+            <div>
+              <span class="module-number">Module 4 of 8</span>
+              <h2>1.4 Get Started with Prompt Flow</h2>
+            </div>
+            <span class="question-count">60 questions</span>
+          </header>
+          <div class="module-content"><div align="center">
+
+<h1 id="04-prompt-flow-module-1-4-get-started-with-prompt-flow">Module 1.4: Get Started with Prompt Flow</h1>
+<h2 id="04-prompt-flow-practice-questions-60">Practice Questions (60)</h2>
+</div>
+
+<hr />
+<h3 id="04-prompt-flow-section-1-prompt-flow-fundamentals-10-questions">Section 1: Prompt Flow Fundamentals (10 questions)</h3>
+<p><strong>1. What is the primary purpose of Prompt Flow in Azure AI Foundry?</strong></p>
+<p>A) To deploy machine learning models
+B) To streamline the development cycle of LLM-based AI applications
+C) To manage Azure subscriptions
+D) To create virtual machines</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) To streamline the development cycle of LLM-based AI applications</strong></p>
+<p>Prompt Flow is a development tool designed to simplify prototyping, experimenting, iterating, and deploying AI applications powered by Large Language Models.</p>
+</details>
+
+<hr />
+<p><strong>2. Which of the following is NOT a key capability of Prompt Flow?</strong></p>
+<p>A) Orchestrate executable flows with LLMs and Python tools
+B) Create prompt variants and compare performance
+C) Manage Azure billing and costs
+D) Test, debug, and iterate flows easily</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>C) Manage Azure billing and costs</strong></p>
+<p>Prompt Flow focuses on development capabilities (orchestration, testing, variants) but does not manage billing or costs directly.</p>
+</details>
+
+<hr />
+<p><strong>3. What does DAG stand for in the context of Prompt Flow visualization?</strong></p>
+<p>A) Data Access Gateway
+B) Directed Acyclic Graph
+C) Dynamic Application Generator
+D) Distributed Application Grid</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Directed Acyclic Graph</strong></p>
+<p>A DAG (Directed Acyclic Graph) is the visual representation of the flow structure, showing connectivity and dependencies between nodes.</p>
+</details>
+
+<hr />
+<p><strong>4. In Prompt Flow, what is a &quot;node&quot;?</strong></p>
+<p>A) A virtual machine in Azure
+B) A specific tool with unique capabilities in the flow
+C) A user account
+D) A database table</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) A specific tool with unique capabilities in the flow</strong></p>
+<p>Nodes represent individual tools (LLM, Python, Prompt, etc.) that handle data processing, task execution, and algorithmic operations.</p>
+</details>
+
+<hr />
+<p><strong>5. What templating language do LLM and Prompt tools use for dynamic prompt generation?</strong></p>
+<p>A) Jinja
+B) Mustache
+C) Handlebars
+D) EJS</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>A) Jinja</strong></p>
+<p>LLM and Prompt tools use Jinja templating with <code>{{variable}}</code> syntax to dynamically generate prompts based on inputs.</p>
+</details>
+
+<hr />
+<p><strong>6. What is the file that defines the flow structure in Prompt Flow?</strong></p>
+<p>A) <code>config.json</code>
+B) <code>flow.dag.yaml</code>
+C) <code>prompt_flow.py</code>
+D) <code>settings.yml</code></p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) <code>flow.dag.yaml</code></strong></p>
+<p>The <code>flow.dag.yaml</code> file defines the flow structure, including inputs, outputs, nodes, and connections.</p>
+</details>
+
+<hr />
+<p><strong>7. Which built-in tool is used to execute custom Python code in a flow?</strong></p>
+<p>A) LLM tool
+B) Prompt tool
+C) Python tool
+D) Serp API tool</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>C) Python tool</strong></p>
+<p>The Python tool allows you to execute custom Python code for data processing and custom logic.</p>
+</details>
+
+<hr />
+<p><strong>8. What is the purpose of the Serp API tool in Prompt Flow?</strong></p>
+<p>A) To execute Python code
+B) To integrate web search capabilities
+C) To manage database connections
+D) To handle authentication</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) To integrate web search capabilities</strong></p>
+<p>The Serp API tool enables web search integration within your flow for retrieving information from the internet.</p>
+</details>
+
+<hr />
+<p><strong>9. How do you reference a flow input within a node?</strong></p>
+<p>A) <code>$input.&lt;name&gt;</code>
+B) <code>${input.&lt;name&gt;}</code>
+C) <code>@input.&lt;name&gt;</code>
+D) <code>#input.&lt;name&gt;</code></p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) <code>${input.&lt;name&gt;}</code></strong></p>
+<p>Flow inputs are referenced using the <code>${input.&lt;name&gt;}</code> syntax, such as <code>${input.question}</code>.</p>
+</details>
+
+<hr />
+<p><strong>10. What is the purpose of the Content Safety tool in Prompt Flow?</strong></p>
+<p>A) To generate content
+B) To filter and ensure content safety
+C) To store content in databases
+D) To encrypt content</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) To filter and ensure content safety</strong></p>
+<p>The Content Safety tool provides content filtering and safety checks to ensure generated content meets safety guidelines.</p>
+</details>
+
+<hr />
+<h3 id="04-prompt-flow-section-2-flow-types-10-questions">Section 2: Flow Types (10 questions)</h3>
+<p><strong>11. How many flow types does Prompt Flow offer?</strong></p>
+<p>A) 2
+B) 3
+C) 4
+D) 5</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) 3</strong></p>
+<p>Prompt Flow offers three flow types: Standard, Chat, and Evaluation.</p>
+</details>
+
+<hr />
+<p><strong>12. Which flow type is designed for general application development?</strong></p>
+<p>A) Chat flow
+B) Evaluation flow
+C) Standard flow
+D) Deployment flow</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>C) Standard flow</strong></p>
+<p>The Standard flow is designed for general application development with flexibility across different domains.</p>
+</details>
+
+<hr />
+<p><strong>13. Which flow type is specifically tailored for conversational applications?</strong></p>
+<p>A) Standard flow
+B) Chat flow
+C) Evaluation flow
+D) Batch flow</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Chat flow</strong></p>
+<p>Chat flow is specifically designed for conversational application development with enhanced support for chat inputs/outputs.</p>
+</details>
+
+<hr />
+<p><strong>14. What are the three required components in a Chat flow?</strong></p>
+<p>A) Input, Processing, Output
+B) Chat input, Chat history, Chat output
+C) User message, Bot response, Database
+D) Question, Answer, Context</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Chat input, Chat history, Chat output</strong></p>
+<p>Chat flow requires: Chat input (user messages), Chat history (auto-managed record), and Chat output (AI responses).</p>
+</details>
+
+<hr />
+<p><strong>15. What is the special characteristic of <code>chat_history</code> in Chat flow?</strong></p>
+<p>A) It must be manually configured
+B) It is automatically managed by Prompt Flow
+C) It is optional
+D) It stores only user messages</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) It is automatically managed by Prompt Flow</strong></p>
+<p><code>chat_history</code> is automatically stored and managed - you cannot manually set its value.</p>
+</details>
+
+<hr />
+<p><strong>16. Which flow type is used to evaluate the performance of previous flow runs?</strong></p>
+<p>A) Standard flow
+B) Chat flow
+C) Evaluation flow
+D) Test flow</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>C) Evaluation flow</strong></p>
+<p>Evaluation flow takes outputs from previous flow runs as inputs to evaluate performance and output metrics.</p>
+</details>
+
+<hr />
+<p><strong>17. In a Chat flow, how do you designate an input as the chat input?</strong></p>
+<p>A) By setting a special flag in the YAML
+B) By marking it in the Inputs section
+C) By naming it &quot;chat_input&quot;
+D) It is automatically detected</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) By marking it in the Inputs section</strong></p>
+<p>You mark one of the inputs as the Chat input in the Inputs section, then populate it via the Chat box.</p>
+</details>
+
+<hr />
+<p><strong>18. Which flow type would you use to compare different model versions?</strong></p>
+<p>A) Standard flow
+B) Chat flow
+C) Evaluation flow
+D) All of the above</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>C) Evaluation flow</strong></p>
+<p>Evaluation flow enables you to assess performance of previous run results and output metrics for comparison.</p>
+</details>
+
+<hr />
+<p><strong>19. What is the primary benefit of Chat flow over Standard flow for conversational apps?</strong></p>
+<p>A) Faster execution
+B) Enhanced support for chat inputs/outputs and history management
+C) Lower cost
+D) Better security</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Enhanced support for chat inputs/outputs and history management</strong></p>
+<p>Chat flow provides specialized features for conversational context that Standard flow doesn't have.</p>
+</details>
+
+<hr />
+<p><strong>20. Can a Standard flow be used for building a chatbot?</strong></p>
+<p>A) Yes, always
+B) No, never
+C) Yes, but Chat flow is recommended
+D) Only with special configuration</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>C) Yes, but Chat flow is recommended</strong></p>
+<p>While you could build a chatbot with Standard flow, Chat flow provides better support for conversational features.</p>
+</details>
+
+<hr />
+<h3 id="04-prompt-flow-section-3-connections-and-runtimes-10-questions">Section 3: Connections and Runtimes (10 questions)</h3>
+<p><strong>21. What is a &quot;connection&quot; in Prompt Flow?</strong></p>
+<p>A) A network cable
+B) A resource linking your flow to external services
+C) A database table
+D) A user account</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) A resource linking your flow to external services</strong></p>
+<p>Connections link your flow to external services like Azure OpenAI, Azure AI Search, etc.</p>
+</details>
+
+<hr />
+<p><strong>22. Which of the following is NOT a valid connection type in Prompt Flow?</strong></p>
+<p>A) Azure OpenAI
+B) OpenAI
+C) AWS S3
+D) Azure AI Search</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>C) AWS S3</strong></p>
+<p>Valid connection types include Azure OpenAI, OpenAI, Azure AI Search, and Custom connections, but not AWS S3.</p>
+</details>
+
+<hr />
+<p><strong>23. What is a &quot;compute session&quot; in Prompt Flow?</strong></p>
+<p>A) A user login session
+B) The computing resources required to run flows
+C) A database connection
+D) An API key</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) The computing resources required to run flows</strong></p>
+<p>A compute session provides the computing resources (including Docker image with dependencies) needed to execute flows.</p>
+</details>
+
+<hr />
+<p><strong>24. What is the advantage of compute sessions over compute instances?</strong></p>
+<p>A) They are cheaper
+B) They are automatically managed
+C) They have more CPU power
+D) They support more languages</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) They are automatically managed</strong></p>
+<p>Compute sessions automatically manage the lifecycle of sessions and underlying compute, unlike compute instances.</p>
+</details>
+
+<hr />
+<p><strong>25. How do you add custom packages to a compute session?</strong></p>
+<p>A) By modifying Azure settings
+B) By adding them to <code>requirements.txt</code>
+C) By calling Azure support
+D) By reinstalling the runtime</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) By adding them to <code>requirements.txt</code></strong></p>
+<p>Custom packages are added to the <code>requirements.txt</code> file in the flow folder, which is installed when the compute session starts.</p>
+</details>
+
+<hr />
+<p><strong>26. What should you NOT pin in <code>requirements.txt</code> for compute sessions?</strong></p>
+<p>A) Your custom packages
+B) <code>promptflow</code> and <code>promptflow-tools</code> versions
+C) Third-party libraries
+D) Python version</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) <code>promptflow</code> and <code>promptflow-tools</code> versions</strong></p>
+<p>Don't pin <code>promptflow</code> and <code>promptflow-tools</code> versions as they're already included in the base image.</p>
+</details>
+
+<hr />
+<p><strong>27. What is the idle shutdown timeout for compute sessions when using CLI/SDK?</strong></p>
+<p>A) 15 minutes
+B) 30 minutes
+C) 1 hour
+D) 2 hours</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>C) 1 hour</strong></p>
+<p>The idle shutdown is one hour when using CLI/SDK to submit flow runs.</p>
+</details>
+
+<hr />
+<p><strong>28. Where can you create connections in Azure AI Foundry?</strong></p>
+<p>A) Only via CLI
+B) Prompt flow → Connections → Create
+C) Only via REST API
+D) Only via Python SDK</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Prompt flow → Connections → Create</strong></p>
+<p>Connections can be created via Portal UI, REST API, or Python SDK.</p>
+</details>
+
+<hr />
+<p><strong>29. What role is required for users to manage compute sessions?</strong></p>
+<p>A) Owner
+B) Contributor
+C) AzureML Data Scientist
+D) Reader</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>C) AzureML Data Scientist</strong></p>
+<p>Users need the AzureML Data Scientist role assigned to the workspace for compute session management.</p>
+</details>
+
+<hr />
+<p><strong>30. What is the purpose of the <code>additional_includes</code> field in <code>flow.dag.yaml</code>?</strong></p>
+<p>A) To add more inputs
+B) To reference files outside the flow folder
+C) To add more outputs
+D) To configure logging</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) To reference files outside the flow folder</strong></p>
+<p>The <code>additional_includes</code> field lets you reference files like <code>requirements.txt</code> from parent folders.</p>
+</details>
+
+<hr />
+<h3 id="04-prompt-flow-section-4-variants-and-monitoring-10-questions">Section 4: Variants and Monitoring (10 questions)</h3>
+<p><strong>31. What is a &quot;variant&quot; in Prompt Flow?</strong></p>
+<p>A) A different flow type
+B) A specific version of a tool node with distinct settings
+C) A different Azure subscription
+D) A type of connection</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) A specific version of a tool node with distinct settings</strong></p>
+<p>A variant is a specific version of a tool node (currently only LLM tools) with different settings like prompts or configurations.</p>
+</details>
+
+<hr />
+<p><strong>32. Which tool type currently supports variants in Prompt Flow?</strong></p>
+<p>A) Python tool
+B) Prompt tool
+C) LLM tool
+D) All tools</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>C) LLM tool</strong></p>
+<p>Currently, variants are only supported in the LLM tool.</p>
+</details>
+
+<hr />
+<p><strong>33. What can you vary in LLM tool variants?</strong></p>
+<p>A) Only the prompt content
+B) Only the connection settings
+C) Both prompt content and connection settings
+D) The flow structure</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>C) Both prompt content and connection settings</strong></p>
+<p>Variants can represent different prompt content or different connection settings (like temperature).</p>
+</details>
+
+<hr />
+<p><strong>34. What is the main benefit of using variants?</strong></p>
+<p>A) They make flows run faster
+B) They help identify optimal prompt/configuration combinations
+C) They reduce Azure costs
+D) They simplify deployment</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) They help identify optimal prompt/configuration combinations</strong></p>
+<p>Variants enable systematic testing to find the best performing configuration.</p>
+</details>
+
+<hr />
+<p><strong>35. How do variants help with prompt engineering?</strong></p>
+<p>A) They eliminate the need for testing
+B) They allow tracking and comparing performance of each prompt version
+C) They automatically improve prompts
+D) They replace manual coding</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) They allow tracking and comparing performance of each prompt version</strong></p>
+<p>Variants make it easy to manage prompt tuning history and compare different versions.</p>
+</details>
+
+<hr />
+<p><strong>36. What is GenAIOps in the context of Prompt Flow?</strong></p>
+<p>A) A type of flow
+B) A template for building LLM apps with best practices
+C) A monitoring tool
+D) A deployment method</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) A template for building LLM apps with best practices</strong></p>
+<p>GenAIOps with Prompt Flow provides templates and guidance for building LLM-infused applications with production best practices.</p>
+</details>
+
+<hr />
+<p><strong>37. What feature does GenAIOps provide for comparing flow versions in production?</strong></p>
+<p>A) Blue-green deployment
+B) A/B deployment
+C) Canary deployment
+D) Rolling deployment</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) A/B deployment</strong></p>
+<p>GenAIOps implements A/B deployments to compare different flow versions in real-world settings.</p>
+</details>
+
+<hr />
+<p><strong>38. What does &quot;centralized code&quot; mean in GenAIOps?</strong></p>
+<p>A) Code is stored on one server
+B) Single repository for all flows
+C) Code is written by one person
+D) Code runs on one machine</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Single repository for all flows</strong></p>
+<p>GenAIOps supports hosting code for multiple prompt flows in a single repository, like a library for flows.</p>
+</details>
+
+<hr />
+<p><strong>39. What is the purpose of evaluation flows in the variant testing process?</strong></p>
+<p>A) To deploy flows
+B) To assess quality and effectiveness of prompts and flows
+C) To create new flows
+D) To manage connections</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) To assess quality and effectiveness of prompts and flows</strong></p>
+<p>Evaluation flows enable you to assess the quality and effectiveness of your prompts and flows.</p>
+</details>
+
+<hr />
+<p><strong>40. What reporting does GenAIOps provide for variant configurations?</strong></p>
+<p>A) No reporting
+B) Detailed metrics for each variant configuration
+C) Only error logs
+D) Only deployment status</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Detailed metrics for each variant configuration</strong></p>
+<p>GenAIOps generates detailed reports with metrics collection, experiments, and variant bulk runs.</p>
+</details>
+
+<hr />
+<h3 id="04-prompt-flow-section-5-advanced-topics-and-best-practices-10-questions">Section 5: Advanced Topics and Best Practices (10 questions)</h3>
+<p><strong>41. What is the syntax to reference a node's output in a flow?</strong></p>
+<p>A) <code>${node.output}</code>
+B) <code>node.output</code>
+C) <code>@node.output</code>
+D) <code>#node.output</code></p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>A) <code>${node.output}</code></strong></p>
+<p>Node outputs are referenced using <code>${&lt;node name&gt;.output}</code> or <code>${&lt;node name&gt;.output.&lt;field name&gt;}</code>.</p>
+</details>
+
+<hr />
+<p><strong>42. How do you access a specific field from a node's output?</strong></p>
+<p>A) <code>${node.output.field}</code>
+B) <code>${node.output.field}</code>
+C) <code>${node.field.output}</code>
+D) <code>${field.node.output}</code></p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) <code>${node.output.field}</code></strong></p>
+<p>Use <code>${&lt;node name&gt;.output.&lt;field name&gt;}</code> to access specific fields.</p>
+</details>
+
+<hr />
+<p><strong>43. What happens when you click &quot;Validate and parse input&quot; in the flow editor?</strong></p>
+<p>A) The flow is deployed
+B) The system automatically parses node inputs based on prompts/code
+C) The flow is deleted
+D) A new node is created</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) The system automatically parses node inputs based on prompts/code</strong></p>
+<p>This feature automatically parses node inputs based on prompt templates and Python function inputs.</p>
+</details>
+
+<hr />
+<p><strong>44. Can a Chat flow have multiple inputs?</strong></p>
+<p>A) No, only one input is allowed
+B) Yes, but only one can be marked as chat input
+C) Yes, all can be chat inputs
+D) Only if using Standard flow</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Yes, but only one can be marked as chat input</strong></p>
+<p>A chat flow can have multiple inputs, but you mark one as the Chat input in the Inputs section.</p>
+</details>
+
+<hr />
+<p><strong>45. What is the purpose of the graph view in the flow editor?</strong></p>
+<p>A) To edit node code
+B) To visualize workflow structure only
+C) To manage connections
+D) To deploy the flow</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) To visualize workflow structure only</strong></p>
+<p>The graph view is for visualization only - you cannot edit it directly, but can select nodes to edit in the flatten view.</p>
+</details>
+
+<hr />
+<p><strong>46. What is the recommended way to test a Chat flow during development?</strong></p>
+<p>A) Deploy to production
+B) Use the Chat box in the authoring page
+C) Use CLI commands
+D) Wait for user feedback</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Use the Chat box in the authoring page</strong></p>
+<p>You can test Chat flow by selecting &quot;Chat&quot; at the top of the page to open a Chat box for conversation.</p>
+</details>
+
+<hr />
+<p><strong>47. What is the purpose of the &quot;flatten&quot; view in Prompt Flow?</strong></p>
+<p>A) To compress files
+B) The main working area for authoring flows
+C) To flatten the DAG graph
+D) To reduce node count</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) The main working area for authoring flows</strong></p>
+<p>The Flow or flatten view is the main working area where you author the flow by adding/removing nodes and editing.</p>
+</details>
+
+<hr />
+<p><strong>48. How do you switch from compute instance runtime to compute session?</strong></p>
+<p>A) Delete and recreate
+B) Modify the runtime settings in the flow
+C) Contact Azure support
+D) It's not possible</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Modify the runtime settings in the flow</strong></p>
+<p>You can switch by preparing <code>requirements.txt</code>, optionally specifying a custom image in <code>flow.dag.yaml</code>, and using serverless compute.</p>
+</details>
+
+<hr />
+<p><strong>49. What is the status of Prompt Flow as of 2026?</strong></p>
+<p>A) Actively developed with new features
+B) Will be retired on April 20, 2027
+C) Deprecated immediately
+D) Merged into Azure DevOps</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Will be retired on April 20, 2027</strong></p>
+<p>Prompt flow will be retired on April 20, 2027, and is no longer recommended for new development.</p>
+</details>
+
+<hr />
+<p><strong>50. What is the recommended alternative to Prompt Flow for new development?</strong></p>
+<p>A) Azure Machine Learning
+B) Microsoft Agent Framework
+C) Azure DevOps
+D) GitHub Actions</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Microsoft Agent Framework</strong></p>
+<p>Microsoft Agent Framework is the recommended alternative for new development after Prompt Flow's retirement.</p>
+</details>
+
+<hr />
+<h3 id="04-prompt-flow-section-6-reasoning-models-auth-and-genaiops-10-questions">Section 6: Reasoning Models, Auth, and GenAIOps (10 questions)</h3>
+<p><strong>51. Which prompt flow tool does NOT support reasoning models like OpenAI o-series?</strong></p>
+<p>A) Python tool
+B) LLM tool
+C) Serp API tool
+D) Content Safety tool</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) LLM tool</strong></p>
+<p>The LLM tool in prompt flow doesn't support reasoning models. For reasoning model integration, use the Python tool to call the model APIs directly.</p>
+</details>
+
+<hr />
+<p><strong>52. How should you integrate a reasoning model into a prompt flow?</strong></p>
+<p>A) Use the LLM tool with a reasoning model connection
+B) Use the Python tool to call the model APIs directly
+C) Use the Serp API tool
+D) Reasoning models cannot be used with prompt flow at all</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Use the Python tool to call the model APIs directly</strong></p>
+<p>Since the LLM tool doesn't support reasoning models, the recommended approach is to call reasoning model APIs from the Python tool.</p>
+</details>
+
+<hr />
+<p><strong>53. Which two authentication modes does prompt flow support for Azure OpenAI connections?</strong></p>
+<p>A) API Key and Microsoft Entra ID
+B) Username/Password and API Key
+C) Certificate and SAS token
+D) Anonymous and API Key</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>A) API Key and Microsoft Entra ID</strong></p>
+<p>Prompt flow supports either API Key or Microsoft Entra ID authentication for Azure OpenAI resources.</p>
+</details>
+
+<hr />
+<p><strong>54. Which auth mode is preferred for production scenarios?</strong></p>
+<p>A) API Key
+B) Microsoft Entra ID
+C) Anonymous
+D) Shared Access Signature</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Microsoft Entra ID</strong></p>
+<p>Microsoft Entra ID authentication enables managed identity and role-based access, which is the preferred approach for production.</p>
+</details>
+
+<hr />
+<p><strong>55. Which of the following is NOT a way to create a prompt flow?</strong></p>
+<p>A) Clone from the gallery
+B) Create from scratch
+C) Import existing flow files from a file share
+D) Generate automatically from a deployed endpoint</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>D) Generate automatically from a deployed endpoint</strong></p>
+<p>You can create a flow by cloning gallery samples, creating from scratch, or importing existing flow files — but not by generating from a deployed endpoint.</p>
+</details>
+
+<hr />
+<p><strong>56. What file defines a prompt flow's structure?</strong></p>
+<p>A) requirements.txt
+B) flow.dag.yaml
+C) main.py
+D) config.json</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) flow.dag.yaml</strong></p>
+<p>Each flow folder contains a flow.dag.yaml file that defines the flow's structure, along with source code files and system folders.</p>
+</details>
+
+<hr />
+<p><strong>57. Which GenAIOps feature allows deploying flows to App Service, Kubernetes, and Azure managed compute?</strong></p>
+<p>A) A/B deployment
+B) Multiple deployment targets
+C) Centralized code hosting
+D) Comprehensive reporting</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Multiple deployment targets</strong></p>
+<p>The platform generates Docker images infused with your flow and compute session, deployable to any target platform that supports Docker — including Azure App Service, Kubernetes, and Azure managed compute.</p>
+</details>
+
+<hr />
+<p><strong>58. What does &quot;conditional data and model registration&quot; do in GenAIOps?</strong></p>
+<p>A) Registers new dataset/model versions only when the data changes
+B) Always registers every run
+C) Deletes old datasets automatically
+D) Registers models only in production</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>A) Registers new dataset/model versions only when the data changes</strong></p>
+<p>The platform registers a new dataset version for the data asset and flows in the model registry only when there's a change in the dataset.</p>
+</details>
+
+<hr />
+<p><strong>59. Which benefit of prompt flow enables multiple users to work together and maintain version control?</strong></p>
+<p>A) All-in-one platform
+B) Collaboration
+C) Variants
+D) Evaluation flows</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) Collaboration</strong></p>
+<p>Prompt flow supports team collaboration so multiple users can work together on prompt engineering projects, share knowledge, and maintain version control.</p>
+</details>
+
+<hr />
+<p><strong>60. What is the status of prompt flow container images as of 2026?</strong></p>
+<p>A) Receiving regular security updates
+B) No longer receiving updates, including security and package updates
+C) Only receiving minor updates
+D) Receiving updates until 2030</p>
+<details>
+<summary>Answer</summary>
+
+<p><strong>B) No longer receiving updates, including security and package updates</strong></p>
+<p>Prompt flow container images (including promptflow-runtime, promptflow-runtime-stable, and promptflow-python) are no longer receiving updates, including security and package updates, ahead of the April 20, 2027 retirement.</p>
+</details>
+
+<hr />
+<h3 id="04-prompt-flow-score-tracking">Score Tracking</h3>
+<table>
+<thead>
+<tr>
+  <th>Section</th>
+  <th>Questions</th>
+  <th>Your Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Section 1: Prompt Flow Fundamentals</td>
+  <td>1-10</td>
+  <td>__ / 10</td>
+</tr>
+<tr>
+  <td>Section 2: Flow Types</td>
+  <td>11-20</td>
+  <td>__ / 10</td>
+</tr>
+<tr>
+  <td>Section 3: Connections and Runtimes</td>
+  <td>21-30</td>
+  <td>__ / 10</td>
+</tr>
+<tr>
+  <td>Section 4: Variants and Monitoring</td>
+  <td>31-40</td>
+  <td>__ / 10</td>
+</tr>
+<tr>
+  <td>Section 5: Advanced Topics</td>
+  <td>41-50</td>
+  <td>__ / 10</td>
+</tr>
+<tr>
+  <td>Section 6: Reasoning Models, Auth, and GenAIOps</td>
+  <td>51-60</td>
+  <td>__ / 10</td>
+</tr>
+<tr>
+  <td><strong>Total</strong></td>
+  <td><strong>1-60</strong></td>
+  <td><strong>__ / 60</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Practice questions created: 2026-08-03 · Updated: 2026-08-04 · Based on Microsoft Learn Module 1.4</em></p>
+</div>
+        </article>
+        
+        <article class="module-card" id="module-5" data-module="5" data-label="1.5 Develop a RAG-based Solution">
+          <header class="module-header">
+            <div>
+              <span class="module-number">Module 5 of 8</span>
+              <h2>1.5 Develop a RAG-based Solution</h2>
+            </div>
+            <span class="question-count">50 questions</span>
+          </header>
+          <div class="module-content"><h1 id="05-rag-solution-module-1-5-practice-questions-develop-a-rag-based-solution-with-your-own-data-using-azure-ai-foundry">Module 1.5: Practice Questions — Develop a RAG-based Solution with Your Own Data Using Azure AI Foundry</h1>
+<p>50 practice questions covering all concepts from this module. Answers at the bottom.</p>
+<hr />
+<h2 id="05-rag-solution-rag-fundamentals-q1-q10">RAG Fundamentals (Q1–Q10)</h2>
+<p><strong>Q1.</strong> What does RAG stand for?</p>
+<ul>
+<li>A) Retrieval Augmented Generation</li>
+<li>B) Rapid Application Generation</li>
+<li>C) Resource-Augmented Gateway</li>
+<li>D) Real-time Analytics Gateway</li>
+</ul>
+<p><strong>Q2.</strong> What is the primary purpose of RAG?</p>
+<ul>
+<li>A) To fine-tune a model on custom data</li>
+<li>B) To ground LLM responses in your own data</li>
+<li>C) To deploy models to edge devices</li>
+<li>D) To generate training data for models</li>
+</ul>
+<p><strong>Q3.</strong> What are the three steps in the RAG workflow?</p>
+<ul>
+<li>A) Train, Deploy, Monitor</li>
+<li>B) Retrieve, Augment, Generate</li>
+<li>C) Index, Query, Respond</li>
+<li>D) Embed, Search, Answer</li>
+</ul>
+<p><strong>Q4.</strong> What is &quot;grounding data&quot; in a RAG context?</p>
+<ul>
+<li>A) The initial training data for the LLM</li>
+<li>B) Retrieved content provided to the model to reduce guessing</li>
+<li>C) The system message configuration</li>
+<li>D) The embedding model weights</li>
+</ul>
+<p><strong>Q5.</strong> Why is RAG preferred over using an LLM alone for private data?</p>
+<ul>
+<li>A) RAG is cheaper to run</li>
+<li>B) LLMs don't know private or frequently changing information</li>
+<li>C) RAG eliminates all hallucinations</li>
+<li>D) RAG requires no index</li>
+</ul>
+<p><strong>Q6.</strong> What is the role of an &quot;index&quot; in RAG?</p>
+<ul>
+<li>A) It stores model weights</li>
+<li>B) It organizes content for efficient retrieval</li>
+<li>C) It fine-tunes the LLM</li>
+<li>D) It generates embeddings</li>
+</ul>
+<p><strong>Q7.</strong> Which of the following is NOT a retrieval mode supported by Azure AI Search?</p>
+<ul>
+<li>A) Keyword search</li>
+<li>B) Semantic search</li>
+<li>C) Vector search</li>
+<li>D) Audio search</li>
+</ul>
+<p><strong>Q8.</strong> What are &quot;embeddings&quot; in the context of RAG?</p>
+<ul>
+<li>A) API keys for authentication</li>
+<li>B) Numeric representations of content for vector similarity search</li>
+<li>C) Configuration files for the index</li>
+<li>D) System messages for the LLM</li>
+</ul>
+<p><strong>Q9.</strong> In the RAG workflow, when does the &quot;augment&quot; step occur?</p>
+<ul>
+<li>A) Before the user asks a question</li>
+<li>B) After the model generates a response</li>
+<li>C) After retrieval, when the query and retrieved content are combined into a prompt</li>
+<li>D) During the indexing phase</li>
+</ul>
+<p><strong>Q10.</strong> What problem does RAG solve that fine-tuning does NOT?</p>
+<ul>
+<li>A) Changing model behavior and style</li>
+<li>B) Providing access to frequently changing or private data</li>
+<li>C) Reducing model latency</li>
+<li>D) Improving model accuracy on classification tasks</li>
+</ul>
+<hr />
+<h2 id="05-rag-solution-azure-ai-search-q11-q20">Azure AI Search (Q11–Q20)</h2>
+<p><strong>Q11.</strong> What is Azure AI Search?</p>
+<ul>
+<li>A) A web search engine for Azure documentation</li>
+<li>B) A fully managed cloud service that connects your data to AI</li>
+<li>C) A CDN for static content</li>
+<li>D) A load balancer for API calls</li>
+</ul>
+<p><strong>Q12.</strong> Which search mode combines keyword + vector retrieval?</p>
+<ul>
+<li>A) Semantic search</li>
+<li>B) Hybrid search</li>
+<li>C) Full-text search</li>
+<li>D) Agentic search</li>
+</ul>
+<p><strong>Q13.</strong> What are the two pricing models for Azure AI Search?</p>
+<ul>
+<li>A) Free and Premium</li>
+<li>B) Dedicated and Serverless</li>
+<li>C) Standard and Enterprise</li>
+<li>D) Basic and Advanced</li>
+</ul>
+<p><strong>Q14.</strong> Which pricing model is best for infrequent, bursty workloads?</p>
+<ul>
+<li>A) Dedicated</li>
+<li>B) Serverless</li>
+<li>C) Premium</li>
+<li>D) Enterprise</li>
+</ul>
+<p><strong>Q15.</strong> What is &quot;AI enrichment&quot; in Azure AI Search?</p>
+<ul>
+<li>A) Encrypting data at rest</li>
+<li>B) Chunking, vectorizing, and transforming raw content</li>
+<li>C) Load balancing across replicas</li>
+<li>D) Monitoring query performance</li>
+</ul>
+<p><strong>Q16.</strong> Which of the following is a supported data source for Azure AI Search indexers?</p>
+<ul>
+<li>A) Azure Blob Storage</li>
+<li>B) AWS S3</li>
+<li>C) Google Cloud Storage</li>
+<li>D) Dropbox</li>
+</ul>
+<p><strong>Q17.</strong> What is the difference between &quot;classic search&quot; and &quot;agentic retrieval&quot;?</p>
+<ul>
+<li>A) Classic search uses vector embeddings; agentic does not</li>
+<li>B) Classic search targets a single index; agentic retrieval uses knowledge bases with LLM-assisted planning</li>
+<li>C) Classic search is faster; agentic retrieval is slower</li>
+<li>D) There is no difference</li>
+</ul>
+<p><strong>Q18.</strong> What does &quot;semantic ranking&quot; do in Azure AI Search?</p>
+<ul>
+<li>A) Sorts results alphabetically</li>
+<li>B) Filters noise and prioritizes truly relevant passages based on meaning</li>
+<li>C) Removes duplicate documents</li>
+<li>D) Compresses index size</li>
+</ul>
+<p><strong>Q19.</strong> Which Azure AI Search feature is required for agentic retrieval?</p>
+<ul>
+<li>A) Knowledge base</li>
+<li>B) Blob indexer</li>
+<li>C) Semantic config</li>
+<li>D) Shared private link</li>
+</ul>
+<p><strong>Q20.</strong> What is the maximum batch size when pushing documents to Azure AI Search?</p>
+<ul>
+<li>A) 100 documents or 1 MB</li>
+<li>B) 500 documents or 8 MB</li>
+<li>C) 1,000 documents or 16 MB</li>
+<li>D) 5,000 documents or 64 MB</li>
+</ul>
+<hr />
+<h2 id="05-rag-solution-data-import-q21-q25">Data Import (Q21–Q25)</h2>
+<p><strong>Q21.</strong> When should you use the &quot;push&quot; method for data import?</p>
+<ul>
+<li>A) When you need automated scheduling</li>
+<li>B) When you need real-time sync or custom data sources</li>
+<li>C) When using AI enrichment</li>
+<li>D) When using integrated vectorization</li>
+</ul>
+<p><strong>Q22.</strong> What is the difference between &quot;merge&quot; and &quot;mergeOrUpload&quot; indexing actions?</p>
+<ul>
+<li>A) No difference</li>
+<li>B) Merge fails if document doesn't exist; mergeOrUpload creates it if new</li>
+<li>C) MergeOrUpload is slower</li>
+<li>D) Merge always creates new documents</li>
+</ul>
+<p><strong>Q23.</strong> Which method MUST you use if you need AI enrichment or integrated vectorization?</p>
+<ul>
+<li>A) Push method</li>
+<li>B) Pull method (indexers)</li>
+<li>C) REST API</li>
+<li>D) Portal only</li>
+</ul>
+<p><strong>Q24.</strong> What does an indexer do in Azure AI Search?</p>
+<ul>
+<li>A) Queries the search index</li>
+<li>B) Automatically pulls data from a source and loads it into an index</li>
+<li>C) Creates embedding vectors</li>
+<li>D) Manages user permissions</li>
+</ul>
+<p><strong>Q25.</strong> Which indexing action removes a document from the index?</p>
+<ul>
+<li>A) Upload</li>
+<li>B) Merge</li>
+<li>C) Delete</li>
+<li>D) MergeOrUpload</li>
+</ul>
+<hr />
+<h2 id="05-rag-solution-agentic-rag-q26-q30">Agentic RAG (Q26–Q30)</h2>
+<p><strong>Q26.</strong> What is agentic retrieval (agentic RAG)?</p>
+<ul>
+<li>A) A single-query retrieval approach</li>
+<li>B) A multi-query pipeline using LLM-assisted planning and parallel execution</li>
+<li>C) A manual retrieval process</li>
+<li>D) A retrieval method that doesn't use indexes</li>
+</ul>
+<p><strong>Q27.</strong> What advantage does agentic RAG have over classic RAG for multi-turn conversations?</p>
+<ul>
+<li>A) It's cheaper</li>
+<li>B) It uses conversation history for context-aware query planning</li>
+<li>C) It requires fewer resources</li>
+<li>D) It doesn't need an index</li>
+</ul>
+<p><strong>Q28.</strong> How does agentic RAG handle complex queries?</p>
+<ul>
+<li>A) Sends the entire query to one index</li>
+<li>B) Breaks down into multiple focused subqueries and runs them in parallel</li>
+<li>C) Only uses keyword search</li>
+<li>D) Ignores the query complexity</li>
+</ul>
+<p><strong>Q29.</strong> What does agentic RAG return in its response?</p>
+<ul>
+<li>A) Only the answer text</li>
+<li>B) Grounding data, citations, execution metadata, and optional LLM-formulated answer</li>
+<li>C) Raw database records</li>
+<li>D) Just the search score</li>
+</ul>
+<p><strong>Q30.</strong> When is agentic RAG most appropriate?</p>
+<ul>
+<li>A) Simple Q&amp;A over a small document set</li>
+<li>B) Complex enterprise scenarios with large datasets and multi-turn conversations</li>
+<li>C) Real-time streaming applications</li>
+<li>D) Edge deployment scenarios</li>
+</ul>
+<hr />
+<h2 id="05-rag-solution-building-rag-in-foundry-q31-q35">Building RAG in Foundry (Q31–Q35)</h2>
+<p><strong>Q31.</strong> What are the three implementation paths for RAG in Azure AI Foundry?</p>
+<ul>
+<li>A) Portal, SDK, and CLI</li>
+<li>B) Portal (no-code), SDK (code), and Prompt Flow (visual)</li>
+<li>C) Python, C#, and Java</li>
+<li>D) REST API, gRPC, and WebSocket</li>
+</ul>
+<p><strong>Q32.</strong> In a Prompt Flow RAG workflow, what are the three main nodes?</p>
+<ul>
+<li>A) Input, Process, Output</li>
+<li>B) Embed Text, Vector DB Lookup, LLM node</li>
+<li>C) Query, Search, Respond</li>
+<li>D) Connect, Retrieve, Generate</li>
+</ul>
+<p><strong>Q33.</strong> Which SDK is used to connect to Azure AI Search from Python?</p>
+<ul>
+<li>A) azure-ai-search</li>
+<li>B) azure-search-documents</li>
+<li>C) azure-cognitiveservices-search</li>
+<li>D) azure-index-sdk</li>
+</ul>
+<p><strong>Q34.</strong> In the Foundry Portal, how do you add RAG capabilities to an agent?</p>
+<ul>
+<li>A) Write custom code</li>
+<li>B) Add data and create an index, then enable retrieval as a tool</li>
+<li>C) Deploy a new model</li>
+<li>D) Create a new project</li>
+</ul>
+<p><strong>Q35.</strong> What is the recommended approach when building an agent that needs retrieval as a tool?</p>
+<ul>
+<li>A) Use fine-tuning</li>
+<li>B) Use the File search tool for agents</li>
+<li>C) Hard-code the responses</li>
+<li>D) Use a web search API</li>
+</ul>
+<hr />
+<h2 id="05-rag-solution-rag-patterns-q36-q40">RAG Patterns (Q36–Q40)</h2>
+<p><strong>Q36.</strong> Which RAG pattern is best for a single document collection with simple queries?</p>
+<ul>
+<li>A) Multi-Index RAG</li>
+<li>B) Simple RAG</li>
+<li>C) Agentic RAG</li>
+<li>D) Hybrid RAG</li>
+</ul>
+<p><strong>Q37.</strong> In a Multi-Index RAG pattern, what happens to the query?</p>
+<ul>
+<li>A) It's sent to all indexes simultaneously</li>
+<li>B) It's routed to the appropriate index(es) based on the query type</li>
+<li>C) It's only sent to the first index</li>
+<li>D) It's ignored</li>
+</ul>
+<p><strong>Q38.</strong> When should you use fine-tuning instead of RAG?</p>
+<ul>
+<li>A) When you need answers grounded in private data</li>
+<li>B) When you need to change model behavior, style, or task performance</li>
+<li>C) When you need real-time data</li>
+<li>D) When you have no training data</li>
+</ul>
+<p><strong>Q39.</strong> What is the key difference between RAG and fine-tuning?</p>
+<ul>
+<li>A) RAG changes model behavior; fine-tuning adds knowledge</li>
+<li>B) RAG adds knowledge; fine-tuning changes model behavior</li>
+<li>C) They are the same thing</li>
+<li>D) RAG is only for text; fine-tuning is for images</li>
+</ul>
+<p><strong>Q40.</strong> In a RAG system, what should you instruct the model to do when the answer isn't in the retrieved context?</p>
+<ul>
+<li>A) Make up an answer</li>
+<li>B) Say &quot;I don't know&quot;</li>
+<li>C) Search the internet</li>
+<li>D) Return an error</li>
+</ul>
+<hr />
+<h2 id="05-rag-solution-security-and-production-q41-q45">Security and Production (Q41–Q45)</h2>
+<p><strong>Q41.</strong> What authentication method is recommended for production RAG systems?</p>
+<ul>
+<li>A) API keys</li>
+<li>B) Microsoft Entra ID</li>
+<li>C) Basic auth</li>
+<li>D) No authentication</li>
+</ul>
+<p><strong>Q42.</strong> How should you treat retrieved content in a RAG system?</p>
+<ul>
+<li>A) As trusted input</li>
+<li>B) As untrusted input (risk of prompt injection)</li>
+<li>C) As encrypted data</li>
+<li>D) As temporary data</li>
+</ul>
+<p><strong>Q43.</strong> What is document-level access control in Azure AI Search?</p>
+<ul>
+<li>A) Encrypting documents at rest</li>
+<li>B) Security filters that control which documents a user can see</li>
+<li>C) Compressing documents</li>
+<li>D) Deleting documents after access</li>
+</ul>
+<p><strong>Q44.</strong> Why do retrieved passages increase costs?</p>
+<ul>
+<li>A) They require more storage</li>
+<li>B) They increase input tokens, which increases LLM API costs</li>
+<li>C) They require additional Azure subscriptions</li>
+<li>D) They increase network bandwidth</li>
+</ul>
+<p><strong>Q45.</strong> What should you do if your RAG system has latency issues?</p>
+<ul>
+<li>A) Use a larger model</li>
+<li>B) Reduce top-N results, add filters, use caching</li>
+<li>C) Add more documents to the index</li>
+<li>D) Disable vector search</li>
+</ul>
+<hr />
+<h2 id="05-rag-solution-troubleshooting-q46-q50">Troubleshooting (Q46–Q50)</h2>
+<p><strong>Q46.</strong> If your index isn't returning relevant passages, what should you review?</p>
+<ul>
+<li>A) Model temperature</li>
+<li>B) Chunking strategy, embedding model quality, and search configuration</li>
+<li>C) API endpoint URL</li>
+<li>D) User authentication</li>
+</ul>
+<p><strong>Q47.</strong> What causes &quot;hallucination despite grounding&quot; in RAG?</p>
+<ul>
+<li>A) Too many documents in the index</li>
+<li>B) Weak prompt instructions that don't tell the model to stick to retrieved content</li>
+<li>C) Using vector search instead of keyword search</li>
+<li>D) Having too few embeddings</li>
+</ul>
+<p><strong>Q48.</strong> How can you prevent the model from exceeding token limits with retrieved passages?</p>
+<ul>
+<li>A) Increase the token limit</li>
+<li>B) Implement passage filtering, ranking, or summarization</li>
+<li>C) Use a smaller embedding model</li>
+<li>D) Reduce the number of queries</li>
+</ul>
+<p><strong>Q49.</strong> If your RAG responses are inaccurate despite good retrieval, what is the likely cause?</p>
+<ul>
+<li>A) Poor prompt design</li>
+<li>B) The index is empty</li>
+<li>C) The model is too old</li>
+<li>D) The data source is disconnected</li>
+</ul>
+<p><strong>Q50.</strong> What is the relationship between data preparation quality and RAG response quality?</p>
+<ul>
+<li>A) No relationship</li>
+<li>B) Poor data preparation directly impacts response quality</li>
+<li>C) Data preparation only affects indexing speed</li>
+<li>D) Data preparation is optional for RAG</li>
+</ul>
+<hr />
+<h2 id="05-rag-solution-agentic-vs-classic-content-prep-and-modern-builds-q51-q60">Agentic vs Classic, Content Prep, and Modern Builds (Q51–Q60)</h2>
+<p><strong>Q51.</strong> When should you use agentic retrieval over classic RAG?</p>
+<ul>
+<li>A) When you need GA features only</li>
+<li>B) When your client is an agent or chatbot and you need the highest relevance</li>
+<li>C) When you need fine-grained control over the query pipeline</li>
+<li>D) When simplicity and speed are the top priorities</li>
+</ul>
+<p><strong>Q52.</strong> When is classic RAG preferred?</p>
+<ul>
+<li>A) For new RAG implementations</li>
+<li>B) When you need structured responses with citations</li>
+<li>C) When you have existing orchestration code you want to preserve</li>
+<li>D) When queries are complex and conversational</li>
+</ul>
+<p><strong>Q53.</strong> Which of the following is a challenge of RAG implementations?</p>
+<ul>
+<li>A) Too much documentation</li>
+<li>B) Token constraints — LLMs accept limited token inputs</li>
+<li>C) Lack of available models</li>
+<li>D) No need for access control</li>
+</ul>
+<p><strong>Q54.</strong> What does a knowledge source do in agentic retrieval?</p>
+<ul>
+<li>A) Stores the trained model weights</li>
+<li>B) Auto-generates the chunking and vectorization pipelines</li>
+<li>C) Replaces the LLM</li>
+<li>D) Handles user authentication</li>
+</ul>
+<p><strong>Q55.</strong> What is the correct order of the RAG data pipeline steps?</p>
+<ul>
+<li>A) Embed → Chunk → Persist → Enrich</li>
+<li>B) Chunk → Enrich → Embed → Persist</li>
+<li>C) Persist → Embed → Chunk → Enrich</li>
+<li>D) Enrich → Persist → Chunk → Embed</li>
+</ul>
+<p><strong>Q56.</strong> Which technique maximizes recall by combining keyword and vector search?</p>
+<ul>
+<li>A) Scoring profiles only</li>
+<li>B) Hybrid queries</li>
+<li>C) Synonym maps only</li>
+<li>D) Semantic ranking only</li>
+</ul>
+<p><strong>Q57.</strong> What do scoring profiles do in Azure AI Search?</p>
+<ul>
+<li>A) Delete low-scoring documents</li>
+<li>B) Boost specific fields or criteria</li>
+<li>C) Change the model temperature</li>
+<li>D) Increase the index size</li>
+</ul>
+<p><strong>Q58.</strong> Which Azure AI Search feature addresses terminology mismatches?</p>
+<ul>
+<li>A) Vector weighting</li>
+<li>B) Synonym maps and semantic ranking</li>
+<li>C) OCR</li>
+<li>D) Indexers</li>
+</ul>
+<p><strong>Q59.</strong> Which SDK approach does the module's client application use to ground responses in a search index?</p>
+<ul>
+<li>A) azure-search-documents only</li>
+<li>B) Azure OpenAI client with the Chat Completions <code>data_sources</code> extension (&quot;on your data&quot;)</li>
+<li>C) Azure Cognitive Services SDK</li>
+<li>D) Azure Storage SDK</li>
+</ul>
+<p><strong>Q60.</strong> Which SDK is used for a code-first RAG app in the Foundry portal?</p>
+<ul>
+<li>A) azure-ai-projects (AIProjectClient)</li>
+<li>B) azure-storage-blob</li>
+<li>C) azure-keyvault-secrets</li>
+<li>D) azure-monitor-opentelemetry only</li>
+</ul>
+<hr />
+<h2 id="05-rag-solution-answers">Answers</h2>
+<table>
+<thead>
+<tr>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>A</td>
+  <td>11</td>
+  <td>B</td>
+  <td>21</td>
+  <td>B</td>
+  <td>31</td>
+  <td>B</td>
+  <td>41</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>B</td>
+  <td>12</td>
+  <td>B</td>
+  <td>22</td>
+  <td>B</td>
+  <td>32</td>
+  <td>B</td>
+  <td>42</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>B</td>
+  <td>13</td>
+  <td>B</td>
+  <td>23</td>
+  <td>B</td>
+  <td>33</td>
+  <td>B</td>
+  <td>43</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>B</td>
+  <td>14</td>
+  <td>B</td>
+  <td>24</td>
+  <td>B</td>
+  <td>34</td>
+  <td>B</td>
+  <td>44</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>B</td>
+  <td>15</td>
+  <td>B</td>
+  <td>25</td>
+  <td>C</td>
+  <td>35</td>
+  <td>B</td>
+  <td>45</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>B</td>
+  <td>16</td>
+  <td>A</td>
+  <td>26</td>
+  <td>B</td>
+  <td>36</td>
+  <td>B</td>
+  <td>46</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>D</td>
+  <td>17</td>
+  <td>B</td>
+  <td>27</td>
+  <td>B</td>
+  <td>37</td>
+  <td>B</td>
+  <td>47</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>B</td>
+  <td>18</td>
+  <td>B</td>
+  <td>28</td>
+  <td>B</td>
+  <td>38</td>
+  <td>B</td>
+  <td>48</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>C</td>
+  <td>19</td>
+  <td>A</td>
+  <td>29</td>
+  <td>B</td>
+  <td>39</td>
+  <td>B</td>
+  <td>49</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>B</td>
+  <td>20</td>
+  <td>C</td>
+  <td>30</td>
+  <td>B</td>
+  <td>40</td>
+  <td>B</td>
+  <td>50</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>51</td>
+  <td>B</td>
+  <td>52</td>
+  <td>C</td>
+  <td>53</td>
+  <td>B</td>
+  <td>54</td>
+  <td>B</td>
+  <td>55</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>56</td>
+  <td>B</td>
+  <td>57</td>
+  <td>B</td>
+  <td>58</td>
+  <td>B</td>
+  <td>59</td>
+  <td>B</td>
+  <td>60</td>
+  <td>A</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Practice questions created: 2026-08-04 · Updated: 2026-08-04 · Source: Microsoft Learn module content</em></p>
+</div>
+        </article>
+        
+        <article class="module-card" id="module-6" data-module="6" data-label="1.6 Fine-tune a Language Model">
+          <header class="module-header">
+            <div>
+              <span class="module-number">Module 6 of 8</span>
+              <h2>1.6 Fine-tune a Language Model</h2>
+            </div>
+            <span class="question-count">50 questions</span>
+          </header>
+          <div class="module-content"><h1 id="06-fine-tune-language-model-module-1-6-practice-questions-fine-tune-a-language-model-with-azure-ai-foundry">Module 1.6: Practice Questions — Fine-tune a Language Model with Azure AI Foundry</h1>
+<p>50 practice questions covering all concepts from this module. Answers at the bottom.</p>
+<hr />
+<h2 id="06-fine-tune-language-model-fine-tuning-fundamentals-q1-q10">Fine-tuning Fundamentals (Q1–Q10)</h2>
+<p><strong>Q1.</strong> What is fine-tuning a language model?</p>
+<ul>
+<li>A) Training a model from scratch on new data</li>
+<li>B) Adapting a pretrained model to a specific task using task-specific data</li>
+<li>C) Changing the model's deployment region</li>
+<li>D) Increasing the model's token limit</li>
+</ul>
+<p><strong>Q2.</strong> What does fine-tuning adjust to improve task performance?</p>
+<ul>
+<li>A) The training dataset</li>
+<li>B) The model's weights</li>
+<li>C) The API endpoint</li>
+<li>D) The content filter settings</li>
+</ul>
+<p><strong>Q3.</strong> What technique does Azure OpenAI use to make fine-tuning faster and more affordable?</p>
+<ul>
+<li>A) Full retraining</li>
+<li>B) LoRA (Low-Rank Adaptation)</li>
+<li>C) Quantization</li>
+<li>D) Distillation only</li>
+</ul>
+<p><strong>Q4.</strong> How does LoRA reduce training cost?</p>
+<ul>
+<li>A) By training on fewer examples</li>
+<li>B) By approximating the high-rank weight matrix with a lower-rank one and fine-tuning only a small subset of important parameters</li>
+<li>C) By using a smaller GPU</li>
+<li>D) By skipping the validation step</li>
+</ul>
+<p><strong>Q5.</strong> What is the main benefit of fine-tuning compared to few-shot learning?</p>
+<ul>
+<li>A) It requires no training data</li>
+<li>B) It trains on many more examples than can fit in a prompt</li>
+<li>C) It is always cheaper</li>
+<li>D) It doesn't change model weights</li>
+</ul>
+<p><strong>Q6.</strong> Which of the following is NOT a benefit of fine-tuned models?</p>
+<ul>
+<li>A) Shorter prompts and token savings</li>
+<li>B) Lower-latency requests</li>
+<li>C) Higher quality results than prompt engineering alone</li>
+<li>D) Automatic access to fresh real-time data</li>
+</ul>
+<p><strong>Q7.</strong> What does &quot;distillation&quot; mean in the context of fine-tuning?</p>
+<ul>
+<li>A) Removing low-quality examples from the dataset</li>
+<li>B) Using a large model's outputs to fine-tune a smaller, more efficient model</li>
+<li>C) Compressing the model's weights</li>
+<li>D) Training with a higher learning rate</li>
+</ul>
+<p><strong>Q8.</strong> Why can fine-tuning reduce inference costs?</p>
+<ul>
+<li>A) The model is deployed on cheaper hardware automatically</li>
+<li>B) Fine-tuned models need shorter prompts, reducing tokens per request</li>
+<li>C) Fine-tuning disables content filtering</li>
+<li>D) The model caches all responses</li>
+</ul>
+<p><strong>Q9.</strong> Which is a valid reason to fine-tune a model?</p>
+<ul>
+<li>A) To add frequently changing private data</li>
+<li>B) To change the model's style and tone</li>
+<li>C) To eliminate the need for a search index permanently</li>
+<li>D) To increase the model's context window</li>
+</ul>
+<p><strong>Q10.</strong> What is the primary difference between fine-tuning and RAG?</p>
+<ul>
+<li>A) Fine-tuning adds knowledge; RAG changes behavior</li>
+<li>B) Fine-tuning changes model behavior; RAG adds fresh/private knowledge at query time</li>
+<li>C) They are identical approaches</li>
+<li>D) RAG modifies model weights; fine-tuning does not</li>
+</ul>
+<hr />
+<h2 id="06-fine-tune-language-model-when-to-fine-tune-q11-q20">When to Fine-tune (Q11–Q20)</h2>
+<p><strong>Q11.</strong> Which scenario is best suited for fine-tuning?</p>
+<ul>
+<li>A) Content that changes frequently, like news</li>
+<li>B) A specific task with proprietary data and stable content</li>
+<li>C) Broad coverage across many unrelated topics</li>
+<li>D) When you have no training data</li>
+</ul>
+<p><strong>Q12.</strong> Which scenario is best suited for RAG?</p>
+<ul>
+<li>A) A specialized task with unique data</li>
+<li>B) Dynamic or changing content and wide topic coverage</li>
+<li>C) When the base model needs style changes</li>
+<li>D) When you need structured output formats</li>
+</ul>
+<p><strong>Q13.</strong> What is the recommended dataset size to START a fine-tuning effort?</p>
+<ul>
+<li>A) 5 examples</li>
+<li>B) 10 examples</li>
+<li>C) 50 well-crafted examples</li>
+<li>D) 10,000 examples</li>
+</ul>
+<p><strong>Q14.</strong> Which use case does fine-tuning help with by embedding examples into the model?</p>
+<ul>
+<li>A) Reducing prompt engineering overhead</li>
+<li>B) Increasing model context window</li>
+<li>C) Reducing inference hardware requirements</li>
+<li>D) Enabling real-time data retrieval</li>
+</ul>
+<p><strong>Q15.</strong> Fine-tuning is especially valuable when a scenario has numerous what?</p>
+<ul>
+<li>A) Edge cases</li>
+<li>B) Users</li>
+<li>C) Models</li>
+<li>D) Regions</li>
+</ul>
+<p><strong>Q16.</strong> What is a common use case for fine-tuning models to produce structured output?</p>
+<ul>
+<li>A) Free-form creative writing</li>
+<li>B) Generating outputs in specific formats or schemas</li>
+<li>C) Translating between languages</li>
+<li>D) Summarizing long documents</li>
+</ul>
+<p><strong>Q17.</strong> When should you choose RAG over fine-tuning?</p>
+<ul>
+<li>A) When you need consistent output style</li>
+<li>B) When you need the most current information</li>
+<li>C) When you have a unique proprietary dataset</li>
+<li>D) When the model must follow a strict format</li>
+</ul>
+<p><strong>Q18.</strong> How can fine-tuning enhance tool usage?</p>
+<ul>
+<li>A) It increases the number of tools available</li>
+<li>B) It improves accuracy and consistency of tool calling, even without full tool definitions</li>
+<li>C) It removes the need for function definitions entirely</li>
+<li>D) It makes tool calls faster</li>
+</ul>
+<p><strong>Q19.</strong> Which combination is often recommended for best performance?</p>
+<ul>
+<li>A) Fine-tuning alone, no RAG</li>
+<li>B) RAG alone, no fine-tuning</li>
+<li>C) Combining fine-tuning with retrieval to better use retrieved data</li>
+<li>D) Neither — always use prompt engineering</li>
+</ul>
+<p><strong>Q20.</strong> If your task doesn't need constant updates and you have unique domain data, what should you choose?</p>
+<ul>
+<li>A) RAG</li>
+<li>B) Fine-tuning</li>
+<li>C) Prompt engineering only</li>
+<li>D) Web search integration</li>
+</ul>
+<hr />
+<h2 id="06-fine-tune-language-model-training-methods-q21-q28">Training Methods (Q21–Q28)</h2>
+<p><strong>Q21.</strong> Which training method is supported by all non-reasoning models?</p>
+<ul>
+<li>A) DPO</li>
+<li>B) RFT</li>
+<li>C) SFT (Supervised Fine-tuning)</li>
+<li>D) CPT</li>
+</ul>
+<p><strong>Q22.</strong> Which training method is supported by reasoning models like o4-mini?</p>
+<ul>
+<li>A) SFT</li>
+<li>B) RFT (Reinforcement Fine-tuning)</li>
+<li>C) DPO</li>
+<li>D) LoRA only</li>
+</ul>
+<p><strong>Q23.</strong> Which training method uses chosen vs rejected response pairs?</p>
+<ul>
+<li>A) SFT</li>
+<li>B) DPO (Direct Preference Optimization)</li>
+<li>C) RFT</li>
+<li>D) Continued pretraining</li>
+</ul>
+<p><strong>Q24.</strong> DPO is supported by which model family?</p>
+<ul>
+<li>A) GPT-4o</li>
+<li>B) Llama 4</li>
+<li>C) Phi-3</li>
+<li>D) Mistral</li>
+</ul>
+<p><strong>Q25.</strong> In DPO, what does the <code>beta</code> hyperparameter control?</p>
+<ul>
+<li>A) The batch size</li>
+<li>B) How much the model can drift from the reference model</li>
+<li>C) The number of epochs</li>
+<li>D) The learning rate multiplier</li>
+</ul>
+<p><strong>Q26.</strong> What does RFT use to evaluate model outputs during training?</p>
+<ul>
+<li>A) Human reviewers only</li>
+<li>B) Graders</li>
+<li>C) The validation set only</li>
+<li>D) Rule-based regex</li>
+</ul>
+<p><strong>Q27.</strong> Which of the following is an RFT-specific hyperparameter?</p>
+<ul>
+<li>A) batch_size</li>
+<li>B) n_epochs</li>
+<li>C) reasoning_effort</li>
+<li>D) seed</li>
+</ul>
+<p><strong>Q28.</strong> Which statement is true about training methods?</p>
+<ul>
+<li>A) All models support all training methods</li>
+<li>B) Not all models support all training methods</li>
+<li>C) DPO is supported by all models</li>
+<li>D) RFT is only for non-reasoning models</li>
+</ul>
+<hr />
+<h2 id="06-fine-tune-language-model-data-preparation-q29-q38">Data Preparation (Q29–Q38)</h2>
+<p><strong>Q29.</strong> What file format is required for fine-tuning training data?</p>
+<ul>
+<li>A) CSV</li>
+<li>B) JSONL (JSON Lines)</li>
+<li>C) Parquet</li>
+<li>D) XML</li>
+</ul>
+<p><strong>Q30.</strong> Which API's conversational format must the data use?</p>
+<ul>
+<li>A) Completion API</li>
+<li>B) Chat Completions API</li>
+<li>C) Embeddings API</li>
+<li>D) Fine-tuning API</li>
+</ul>
+<p><strong>Q31.</strong> What encoding is required for training data files?</p>
+<ul>
+<li>A) UTF-8 with a byte-order mark (BOM)</li>
+<li>B) ASCII</li>
+<li>C) UTF-16</li>
+<li>D) Base64</li>
+</ul>
+<p><strong>Q32.</strong> What is the maximum file size for training/validation data?</p>
+<ul>
+<li>A) 100 MB</li>
+<li>B) 512 MB</li>
+<li>C) 1 GB</li>
+<li>D) 10 MB</li>
+</ul>
+<p><strong>Q33.</strong> What are the three allowed roles in a chat-format message?</p>
+<ul>
+<li>A) user, bot, admin</li>
+<li>B) system, user, assistant</li>
+<li>C) prompt, response, context</li>
+<li>D) input, output, error</li>
+</ul>
+<p><strong>Q34.</strong> What rule applies to the last message in each training conversation?</p>
+<ul>
+<li>A) It must be a user message</li>
+<li>B) It must be an assistant message</li>
+<li>C) It can be any role</li>
+<li>D) It must be a system message</li>
+</ul>
+<p><strong>Q35.</strong> What does the optional <code>weight</code> key/value pair do?</p>
+<ul>
+<li>A) Increases the model's learning rate</li>
+<li>B) Skips fine-tuning on specific assistant messages</li>
+<li>C) Changes the response length</li>
+<li>D) Sets the number of epochs</li>
+</ul>
+<p><strong>Q36.</strong> What values can the <code>weight</code> parameter take?</p>
+<ul>
+<li>A) Any number</li>
+<li>B) 0 or 1</li>
+<li>C) Only 1</li>
+<li>D) 0.5 only</li>
+</ul>
+<p><strong>Q37.</strong> Why should you include your best instructions/prompts in every training example?</p>
+<ul>
+<li>A) To increase file size</li>
+<li>B) To get the best results, especially with fewer than 100 examples</li>
+<li>C) To speed up training</li>
+<li>D) To reduce the token limit</li>
+</ul>
+<p><strong>Q38.</strong> Which models support vision fine-tuning with images in JSONL?</p>
+<ul>
+<li>A) gpt-4o (2024-08-06) and gpt-4.1 (2025-04-14)</li>
+<li>B) Only Llama models</li>
+<li>C) Phi-3 only</li>
+<li>D) All models</li>
+</ul>
+<hr />
+<h2 id="06-fine-tune-language-model-dataset-size-and-quality-q39-q42">Dataset Size and Quality (Q39–Q42)</h2>
+<p><strong>Q39.</strong> What is the MINIMUM number of training examples for a fine-tuning job to proceed?</p>
+<ul>
+<li>A) 5</li>
+<li>B) 10</li>
+<li>C) 50</li>
+<li>D) 100</li>
+</ul>
+<p><strong>Q40.</strong> What happens if you train with only 10 examples?</p>
+<ul>
+<li>A) The job fails</li>
+<li>B) The model is noticeably improved</li>
+<li>C) The job runs but won't noticeably influence model responses</li>
+<li>D) The job automatically generates more data</li>
+</ul>
+<p><strong>Q41.</strong> What is the effect of doubling the dataset size?</p>
+<ul>
+<li>A) No effect on quality</li>
+<li>B) Can lead to a linear increase in model quality</li>
+<li>C) Always halves training time</li>
+<li>D) Guarantees the model improves</li>
+</ul>
+<p><strong>Q42.</strong> What can happen if you train on a large amount of low-quality data?</p>
+<ul>
+<li>A) The model performs better than expected</li>
+<li>B) The model can perform much worse than expected</li>
+<li>C) Nothing changes</li>
+<li>D) Training automatically stops</li>
+</ul>
+<hr />
+<h2 id="06-fine-tune-language-model-portal-workflow-and-hyperparameters-q43-q50">Portal Workflow and Hyperparameters (Q43–Q50)</h2>
+<p><strong>Q43.</strong> In the Azure AI Foundry portal, where do you start fine-tuning?</p>
+<ul>
+<li>A) Deployments → New deployment</li>
+<li>B) Fine-tuning → + Fine-tune model</li>
+<li>C) Models → Train</li>
+<li>D) Evaluation → Create job</li>
+</ul>
+<p><strong>Q44.</strong> What does the <code>suffix</code> parameter do?</p>
+<ul>
+<li>A) Sets the learning rate</li>
+<li>B) Identifies the fine-tuned model (up to 18 characters appended to the name)</li>
+<li>C) Defines the training region</li>
+<li>D) Controls the batch size</li>
+</ul>
+<p><strong>Q45.</strong> Which hyperparameter controls reproducibility of a fine-tuning job?</p>
+<ul>
+<li>A) batch_size</li>
+<li>B) seed</li>
+<li>C) n_epochs</li>
+<li>D) beta</li>
+</ul>
+<p><strong>Q46.</strong> What is the recommended range for <code>learning_rate_multiplier</code>?</p>
+<ul>
+<li>A) 0.02 to 0.2</li>
+<li>B) 1 to 10</li>
+<li>C) 0.5 to 0.9</li>
+<li>D) 100 to 1000</li>
+</ul>
+<p><strong>Q47.</strong> When <code>batch_size</code> is set to -1, how is it calculated?</p>
+<ul>
+<li>A) Fixed at 128</li>
+<li>B) 0.2% of examples in the training set (max 256)</li>
+<li>C) Equal to the number of epochs</li>
+<li>D) Half the file size</li>
+</ul>
+<p><strong>Q48.</strong> Which training tier guarantees data residency?</p>
+<ul>
+<li>A) Global</li>
+<li>B) Developer</li>
+<li>C) Standard</li>
+<li>D) Free</li>
+</ul>
+<p><strong>Q49.</strong> Which training tier uses idle capacity and may preempt jobs?</p>
+<ul>
+<li>A) Standard</li>
+<li>B) Global</li>
+<li>C) Developer</li>
+<li>D) Premium</li>
+</ul>
+<p><strong>Q50.</strong> What is required for automatic deployment of a fine-tuned model?</p>
+<ul>
+<li>A) A valid API key only</li>
+<li>B) Foundry Owner role or deployments/write permission; OpenAI models only</li>
+<li>C) A subscription with Enterprise Agreement</li>
+<li>D) At least 1000 training examples</li>
+</ul>
+<hr />
+<h2 id="06-fine-tune-language-model-answers">Answers</h2>
+<table>
+<thead>
+<tr>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>B</td>
+  <td>11</td>
+  <td>B</td>
+  <td>21</td>
+  <td>C</td>
+  <td>31</td>
+  <td>A</td>
+  <td>41</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>B</td>
+  <td>12</td>
+  <td>B</td>
+  <td>22</td>
+  <td>B</td>
+  <td>32</td>
+  <td>B</td>
+  <td>42</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>B</td>
+  <td>13</td>
+  <td>C</td>
+  <td>23</td>
+  <td>B</td>
+  <td>33</td>
+  <td>B</td>
+  <td>43</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>B</td>
+  <td>14</td>
+  <td>A</td>
+  <td>24</td>
+  <td>A</td>
+  <td>34</td>
+  <td>B</td>
+  <td>44</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>B</td>
+  <td>15</td>
+  <td>A</td>
+  <td>25</td>
+  <td>B</td>
+  <td>35</td>
+  <td>B</td>
+  <td>45</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>D</td>
+  <td>16</td>
+  <td>B</td>
+  <td>26</td>
+  <td>B</td>
+  <td>36</td>
+  <td>B</td>
+  <td>46</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>B</td>
+  <td>17</td>
+  <td>B</td>
+  <td>27</td>
+  <td>C</td>
+  <td>37</td>
+  <td>B</td>
+  <td>47</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>B</td>
+  <td>18</td>
+  <td>B</td>
+  <td>28</td>
+  <td>B</td>
+  <td>38</td>
+  <td>A</td>
+  <td>48</td>
+  <td>C</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>B</td>
+  <td>19</td>
+  <td>C</td>
+  <td>29</td>
+  <td>B</td>
+  <td>39</td>
+  <td>B</td>
+  <td>49</td>
+  <td>C</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>B</td>
+  <td>20</td>
+  <td>B</td>
+  <td>30</td>
+  <td>B</td>
+  <td>40</td>
+  <td>C</td>
+  <td>50</td>
+  <td>B</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Practice questions created: 2026-08-04 · Source: Microsoft Learn module content</em></p>
+</div>
+        </article>
+        
+        <article class="module-card" id="module-7" data-module="7" data-label="1.7 Implement Responsible Generative AI">
+          <header class="module-header">
+            <div>
+              <span class="module-number">Module 7 of 8</span>
+              <h2>1.7 Implement Responsible Generative AI</h2>
+            </div>
+            <span class="question-count">50 questions</span>
+          </header>
+          <div class="module-content"><h1 id="07-responsible-generative-ai-module-1-7-practice-questions-implement-a-responsible-generative-ai-solution">Module 1.7: Practice Questions — Implement a Responsible Generative AI Solution</h1>
+<p>50 practice questions covering all concepts from this module. Answers at the bottom.</p>
+<hr />
+<h2 id="07-responsible-generative-ai-the-responsible-ai-process-q1-q10">The Responsible AI Process (Q1–Q10)</h2>
+<p><strong>Q1.</strong> What is the four-stage process for responsible generative AI solution development?</p>
+<ul>
+<li>A) Plan, Build, Test, Deploy</li>
+<li>B) Map, Measure, Mitigate, Manage</li>
+<li>C) Identify, Analyze, Fix, Monitor</li>
+<li>D) Design, Develop, Validate, Release</li>
+</ul>
+<p><strong>Q2.</strong> Which external framework do the responsible AI stages correspond closely to?</p>
+<ul>
+<li>A) ISO 27001</li>
+<li>B) NIST AI Risk Management Framework</li>
+<li>C) GDPR</li>
+<li>D) SOC 2</li>
+</ul>
+<p><strong>Q3.</strong> During which stage do you identify and prioritize potential harms?</p>
+<ul>
+<li>A) Measure</li>
+<li>B) Mitigate</li>
+<li>C) Map</li>
+<li>D) Manage</li>
+</ul>
+<p><strong>Q4.</strong> During which stage do you quantify the presence of harms in generated outputs?</p>
+<ul>
+<li>A) Map</li>
+<li>B) Measure</li>
+<li>C) Mitigate</li>
+<li>D) Manage</li>
+</ul>
+<p><strong>Q5.</strong> During which stage do you apply content filters and guardrails?</p>
+<ul>
+<li>A) Map</li>
+<li>B) Measure</li>
+<li>C) Mitigate</li>
+<li>D) Manage</li>
+</ul>
+<p><strong>Q6.</strong> During which stage do you create incident response and rollback plans?</p>
+<ul>
+<li>A) Map</li>
+<li>B) Measure</li>
+<li>C) Mitigate</li>
+<li>D) Manage</li>
+</ul>
+<p><strong>Q7.</strong> What is the primary goal of the Measure stage?</p>
+<ul>
+<li>A) To identify all possible harms</li>
+<li>B) To create a baseline quantifying harms and track improvements</li>
+<li>C) To deploy the solution to production</li>
+<li>D) To write user documentation</li>
+</ul>
+<p><strong>Q8.</strong> Which statement best describes the purpose of responsible AI in generative AI solutions?</p>
+<ul>
+<li>A) To improve model accuracy</li>
+<li>B) To minimize the risk of harmful content generation</li>
+<li>C) To reduce infrastructure costs</li>
+<li>D) To increase token throughput</li>
+</ul>
+<p><strong>Q9.</strong> Which stage involves defining a deployment and operational readiness plan?</p>
+<ul>
+<li>A) Map</li>
+<li>B) Measure</li>
+<li>C) Mitigate</li>
+<li>D) Manage</li>
+</ul>
+<p><strong>Q10.</strong> How does the process ensure harms are addressed iteratively?</p>
+<ul>
+<li>A) By deploying to all users at once</li>
+<li>B) By measuring a baseline, mitigating, then retesting against the baseline</li>
+<li>C) By disabling all content filtering</li>
+<li>D) By ignoring stakeholder feedback</li>
+</ul>
+<hr />
+<h2 id="07-responsible-generative-ai-map-potential-harms-q11-q20">Map Potential Harms (Q11–Q20)</h2>
+<p><strong>Q11.</strong> What is the FIRST step in mapping potential harms?</p>
+<ul>
+<li>A) Prioritize identified harms</li>
+<li>B) Test and verify the harms</li>
+<li>C) Identify potential harms</li>
+<li>D) Document and share the harms</li>
+</ul>
+<p><strong>Q12.</strong> What is the correct order of steps in the Map stage?</p>
+<ul>
+<li>A) Identify → Test → Prioritize → Document</li>
+<li>B) Identify → Prioritize → Test and verify → Document and share</li>
+<li>C) Prioritize → Identify → Document → Test</li>
+<li>D) Test → Document → Identify → Prioritize</li>
+</ul>
+<p><strong>Q13.</strong> Which of the following is a common type of potential harm in a generative AI solution?</p>
+<ul>
+<li>A) Generating content that is offensive, pejorative, or discriminatory</li>
+<li>B) Generating content that is factually accurate</li>
+<li>C) Generating content that is well-formatted</li>
+<li>D) Generating content that is too brief</li>
+</ul>
+<p><strong>Q14.</strong> Which document should you consult to understand Azure OpenAI Service-specific considerations?</p>
+<ul>
+<li>A) The OpenAI pricing page</li>
+<li>B) The Azure OpenAI Service transparency note</li>
+<li>C) The Azure SLA agreement</li>
+<li>D) The model deployment log</li>
+</ul>
+<p><strong>Q15.</strong> How should potential harms be prioritized?</p>
+<ul>
+<li>A) Alphabetically</li>
+<li>B) By likelihood of occurrence and level of impact</li>
+<li>C) By the number of lines of code affected</li>
+<li>D) Randomly</li>
+</ul>
+<p><strong>Q16.</strong> In prioritizing harms, what must be taken into account?</p>
+<ul>
+<li>A) Only the intended use of the solution</li>
+<li>B) Only the potential for misuse</li>
+<li>C) Both the intended use and the potential for misuse</li>
+<li>D) Neither intended use nor misuse</li>
+</ul>
+<p><strong>Q17.</strong> What is red teaming in the context of responsible AI?</p>
+<ul>
+<li>A) A team of testers that deliberately probes the solution to produce harmful results</li>
+<li>B) A team that fixes production incidents</li>
+<li>C) A team that writes documentation</li>
+<li>D) A team that manages deployments</li>
+</ul>
+<p><strong>Q18.</strong> What should be done with the successes of the red team?</p>
+<ul>
+<li>A) Ignored, since they are hypothetical</li>
+<li>B) Documented and reviewed to determine realistic likelihood of harmful output</li>
+<li>C) Deleted from the records</li>
+<li>D) Automatically fixed in production</li>
+</ul>
+<p><strong>Q19.</strong> What can testing reveal in addition to verifying known harms?</p>
+<ul>
+<li>A) Previously unidentified harms</li>
+<li>B) The model's exact training data</li>
+<li>C) The cost of the deployment</li>
+<li>D) The number of API calls made</li>
+</ul>
+<p><strong>Q20.</strong> After documenting and sharing verified harms, what should you do with the prioritized list?</p>
+<ul>
+<li>A) Discard it</li>
+<li>B) Maintain it and add to it if new harms are identified</li>
+<li>C) Share it only with customers</li>
+<li>D) Store it in a private database forever</li>
+</ul>
+<hr />
+<h2 id="07-responsible-generative-ai-measure-potential-harms-q21-q28">Measure Potential Harms (Q21–Q28)</h2>
+<p><strong>Q21.</strong> What is the goal of the measurement process?</p>
+<ul>
+<li>A) To eliminate all harmful output</li>
+<li>B) To create an initial baseline that quantifies harms and track improvements</li>
+<li>C) To deploy the solution faster</li>
+<li>D) To increase model temperature</li>
+</ul>
+<p><strong>Q22.</strong> What is the FIRST step in the three-step measurement approach?</p>
+<ul>
+<li>A) Submit prompts and retrieve output</li>
+<li>B) Apply pre-defined criteria to evaluate output</li>
+<li>C) Prepare a diverse selection of input prompts likely to result in each harm</li>
+<li>D) Share results with stakeholders</li>
+</ul>
+<p><strong>Q23.</strong> What is the THIRD step in the three-step measurement approach?</p>
+<ul>
+<li>A) Prepare diverse input prompts</li>
+<li>B) Submit prompts and retrieve output</li>
+<li>C) Apply pre-defined criteria to categorize the output by harm level</li>
+<li>D) Deploy the solution</li>
+</ul>
+<p><strong>Q24.</strong> What is required of the criteria used to categorize output?</p>
+<ul>
+<li>A) They should be flexible and change each time</li>
+<li>B) They must be strict and can be applied consistently</li>
+<li>C) They should only apply to text output</li>
+<li>D) They are optional</li>
+</ul>
+<p><strong>Q25.</strong> How should you start testing in most scenarios?</p>
+<ul>
+<li>A) Immediately automate with a classification model</li>
+<li>B) Manually test a small set of inputs to ensure criteria are well-defined</li>
+<li>C) Test only in production</li>
+<li>D) Skip testing entirely</li>
+</ul>
+<p><strong>Q26.</strong> How can automated testing evaluate output?</p>
+<ul>
+<li>A) By using a classification model to automatically evaluate the output</li>
+<li>B) By asking users to rate responses</li>
+<li>C) By analyzing infrastructure logs only</li>
+<li>D) By reducing the number of test cases</li>
+</ul>
+<p><strong>Q27.</strong> Why should you periodically perform manual testing even after automating?</p>
+<ul>
+<li>A) To increase token usage</li>
+<li>B) To validate new scenarios and ensure the automated solution performs as expected</li>
+<li>C) To satisfy legal requirements only</li>
+<li>D) To slow down the testing process</li>
+</ul>
+<p><strong>Q28.</strong> What should be done with the results of the measurement process?</p>
+<ul>
+<li>A) Kept secret</li>
+<li>B) Documented and shared with stakeholders</li>
+<li>C) Deleted after each iteration</li>
+<li>D) Used only for internal tuning</li>
+</ul>
+<hr />
+<h2 id="07-responsible-generative-ai-mitigate-potential-harms-four-layers-q29-q40">Mitigate Potential Harms — Four Layers (Q29–Q40)</h2>
+<p><strong>Q29.</strong> How many layers of mitigation are applied in a generative AI solution?</p>
+<ul>
+<li>A) Two</li>
+<li>B) Three</li>
+<li>C) Four</li>
+<li>D) Five</li>
+</ul>
+<p><strong>Q30.</strong> Which of the following is the correct list of mitigation layers?</p>
+<ul>
+<li>A) Model, Safety System, System message and grounding, User experience</li>
+<li>B) Model, Database, API, Frontend</li>
+<li>C) Prompt, Data, Compute, Storage</li>
+<li>D) Input, Processing, Output, Feedback</li>
+</ul>
+<p><strong>Q31.</strong> Selecting a simpler, more appropriate model for the task belongs to which layer?</p>
+<ul>
+<li>A) Safety System</li>
+<li>B) Model</li>
+<li>C) User experience</li>
+<li>D) Grounding</li>
+</ul>
+<p><strong>Q32.</strong> Fine-tuning a foundational model with your own training data belongs to which layer?</p>
+<ul>
+<li>A) Model</li>
+<li>B) Safety System</li>
+<li>C) User experience</li>
+<li>D) Grounding</li>
+</ul>
+<p><strong>Q33.</strong> Content filters and prompt shields belong to which layer?</p>
+<ul>
+<li>A) Model</li>
+<li>B) Safety System</li>
+<li>C) System message and grounding</li>
+<li>D) User experience</li>
+</ul>
+<p><strong>Q34.</strong> Adding RAG to retrieve contextual data from trusted sources belongs to which layer?</p>
+<ul>
+<li>A) Model</li>
+<li>B) Safety System</li>
+<li>C) System message and grounding</li>
+<li>D) User experience</li>
+</ul>
+<p><strong>Q35.</strong> Designing the UI to constrain inputs to specific subjects belongs to which layer?</p>
+<ul>
+<li>A) Model</li>
+<li>B) Safety System</li>
+<li>C) System message and grounding</li>
+<li>D) User experience</li>
+</ul>
+<p><strong>Q36.</strong> What do prompt shields detect?</p>
+<ul>
+<li>A) Model latency issues</li>
+<li>B) Systematic abuse, such as attempts to subvert the system prompt</li>
+<li>C) Token overuse</li>
+<li>D) Network failures</li>
+</ul>
+<p><strong>Q37.</strong> Which mitigation helps maximize the likelihood of relevant, nonharmful output by grounding prompts?</p>
+<ul>
+<li>A) Increasing model size</li>
+<li>B) Retrieval augmented generation (RAG)</li>
+<li>C) Disabling content filters</li>
+<li>D) Removing system messages</li>
+</ul>
+<p><strong>Q38.</strong> What should user-facing documentation be transparent about?</p>
+<ul>
+<li>A) Only the pricing</li>
+<li>B) Capabilities, limitations, models, and potential harms not always addressed by mitigations</li>
+<li>C) Only the release date</li>
+<li>D) Nothing — documentation is optional</li>
+</ul>
+<p><strong>Q39.</strong> Which layer focuses on platform-level configurations like guardrails?</p>
+<ul>
+<li>A) Model</li>
+<li>B) Safety System</li>
+<li>C) System message and grounding</li>
+<li>D) User experience</li>
+</ul>
+<p><strong>Q40.</strong> Applying input and output validation is a mitigation at which layer?</p>
+<ul>
+<li>A) Model</li>
+<li>B) Safety System</li>
+<li>C) System message and grounding</li>
+<li>D) User experience</li>
+</ul>
+<hr />
+<h2 id="07-responsible-generative-ai-guardrails-and-content-filters-q41-q46">Guardrails and Content Filters (Q41–Q46)</h2>
+<p><strong>Q41.</strong> How many severity levels do content filters classify content into?</p>
+<ul>
+<li>A) Two</li>
+<li>B) Three</li>
+<li>C) Four</li>
+<li>D) Five</li>
+</ul>
+<p><strong>Q42.</strong> Which of the following is NOT one of the severity levels?</p>
+<ul>
+<li>A) Safe</li>
+<li>B) Medium</li>
+<li>C) High</li>
+<li>D) Critical</li>
+</ul>
+<p><strong>Q43.</strong> How many categories of potential harm do content filters cover?</p>
+<ul>
+<li>A) Three</li>
+<li>B) Four</li>
+<li>C) Five</li>
+<li>D) Seven</li>
+</ul>
+<p><strong>Q44.</strong> Which of the following is one of the five content filter categories?</p>
+<ul>
+<li>A) Task-adherence</li>
+<li>B) Grammar</li>
+<li>C) Latency</li>
+<li>D) Cost</li>
+</ul>
+<p><strong>Q45.</strong> What is the purpose of guardrails in Microsoft Foundry?</p>
+<ul>
+<li>A) To increase model throughput</li>
+<li>B) To apply criteria that suppress prompts and responses based on content filters</li>
+<li>C) To reduce deployment time</li>
+<li>D) To improve token efficiency</li>
+</ul>
+<p><strong>Q46.</strong> Which category of harm includes content that deviates from the intended task or system instructions?</p>
+<ul>
+<li>A) Violence</li>
+<li>B) Self-harm</li>
+<li>C) Task-adherence</li>
+<li>D) Sexual</li>
+</ul>
+<hr />
+<h2 id="07-responsible-generative-ai-manage-a-responsible-generative-ai-solution-q47-q50">Manage a Responsible Generative AI Solution (Q47–Q50)</h2>
+<p><strong>Q47.</strong> Which of the following is a common prerelease compliance review?</p>
+<ul>
+<li>A) Legal</li>
+<li>B) Weather</li>
+<li>C) Traffic</li>
+<li>D) Marketing</li>
+</ul>
+<p><strong>Q48.</strong> What does a phased delivery plan enable you to do?</p>
+<ul>
+<li>A) Release to all users immediately</li>
+<li>B) Release to a restricted group first to gather feedback before wider release</li>
+<li>C) Skip testing</li>
+<li>D) Avoid incident response</li>
+</ul>
+<p><strong>Q49.</strong> What is the purpose of a rollback plan?</p>
+<ul>
+<li>A) To define steps to revert the solution to a previous state if an incident occurs</li>
+<li>B) To deploy faster</li>
+<li>C) To increase user counts</li>
+<li>D) To disable telemetry</li>
+</ul>
+<p><strong>Q50.</strong> What capability should you implement to handle system misuse?</p>
+<ul>
+<li>A) Block specific users, applications, or client IP addresses</li>
+<li>B) Increase model temperature</li>
+<li>C) Remove all content filters</li>
+<li>D) Disable user feedback</li>
+</ul>
+<hr />
+<h2 id="07-responsible-generative-ai-answers">Answers</h2>
+<table>
+<thead>
+<tr>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>B</td>
+  <td>11</td>
+  <td>C</td>
+  <td>21</td>
+  <td>B</td>
+  <td>31</td>
+  <td>B</td>
+  <td>41</td>
+  <td>C</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>B</td>
+  <td>12</td>
+  <td>B</td>
+  <td>22</td>
+  <td>C</td>
+  <td>32</td>
+  <td>A</td>
+  <td>42</td>
+  <td>D</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>C</td>
+  <td>13</td>
+  <td>A</td>
+  <td>23</td>
+  <td>C</td>
+  <td>33</td>
+  <td>B</td>
+  <td>43</td>
+  <td>C</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>B</td>
+  <td>14</td>
+  <td>B</td>
+  <td>24</td>
+  <td>B</td>
+  <td>34</td>
+  <td>C</td>
+  <td>44</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>C</td>
+  <td>15</td>
+  <td>B</td>
+  <td>25</td>
+  <td>B</td>
+  <td>35</td>
+  <td>D</td>
+  <td>45</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>D</td>
+  <td>16</td>
+  <td>C</td>
+  <td>26</td>
+  <td>A</td>
+  <td>36</td>
+  <td>B</td>
+  <td>46</td>
+  <td>C</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>B</td>
+  <td>17</td>
+  <td>A</td>
+  <td>27</td>
+  <td>B</td>
+  <td>37</td>
+  <td>B</td>
+  <td>47</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>B</td>
+  <td>18</td>
+  <td>B</td>
+  <td>28</td>
+  <td>B</td>
+  <td>38</td>
+  <td>B</td>
+  <td>48</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>D</td>
+  <td>19</td>
+  <td>A</td>
+  <td>29</td>
+  <td>C</td>
+  <td>39</td>
+  <td>B</td>
+  <td>49</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>B</td>
+  <td>20</td>
+  <td>B</td>
+  <td>30</td>
+  <td>A</td>
+  <td>40</td>
+  <td>D</td>
+  <td>50</td>
+  <td>A</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Practice questions created: 2026-08-04 · Source: Microsoft Learn module content</em></p>
+</div>
+        </article>
+        
+        <article class="module-card" id="module-8" data-module="8" data-label="1.8 Evaluate Generative AI Performance">
+          <header class="module-header">
+            <div>
+              <span class="module-number">Module 8 of 8</span>
+              <h2>1.8 Evaluate Generative AI Performance</h2>
+            </div>
+            <span class="question-count">50 questions</span>
+          </header>
+          <div class="module-content"><h1 id="08-evaluate-genai-performance-module-1-8-practice-questions-evaluate-generative-ai-performance">Module 1.8: Practice Questions — Evaluate Generative AI Performance</h1>
+<p>50 practice questions covering all concepts from this module. Answers at the bottom.</p>
+<hr />
+<h2 id="08-evaluate-genai-performance-why-evaluation-matters-q1-q5">Why Evaluation Matters (Q1–Q5)</h2>
+<p><strong>Q1.</strong> What are the two primary reasons to evaluate a generative AI app?</p>
+<ul>
+<li>A) Cost reduction and faster deployment</li>
+<li>B) Quality assurance and continuous improvement</li>
+<li>C) Marketing and branding</li>
+<li>D) Compliance and licensing</li>
+</ul>
+<p><strong>Q2.</strong> How does evaluation contribute to user satisfaction?</p>
+<ul>
+<li>A) By reducing the number of users</li>
+<li>B) By ensuring the app provides accurate and relevant responses</li>
+<li>C) By increasing token usage</li>
+<li>D) By disabling content filters</li>
+</ul>
+<p><strong>Q3.</strong> What is the iterative nature of evaluation?</p>
+<ul>
+<li>A) Evaluate once before deployment only</li>
+<li>B) Build → evaluate → improve → re-evaluate</li>
+<li>C) Deploy → forget → redeploy</li>
+<li>D) Test only after production issues arise</li>
+</ul>
+<p><strong>Q4.</strong> Which of the following best describes the purpose of continuous improvement through evaluation?</p>
+<ul>
+<li>A) To keep the app unchanged over time</li>
+<li>B) To identify areas for enhancement and iteratively improve performance</li>
+<li>C) To reduce the number of test prompts</li>
+<li>D) To eliminate human involvement</li>
+</ul>
+<p><strong>Q5.</strong> What does quality assurance in evaluation primarily ensure?</p>
+<ul>
+<li>A) The app is cheap to run</li>
+<li>B) The app provides accurate and relevant responses</li>
+<li>C) The app uses the newest model</li>
+<li>D) The app has no user interface</li>
+</ul>
+<hr />
+<h2 id="08-evaluate-genai-performance-what-you-can-evaluate-models-and-chat-flows-q6-q10">What You Can Evaluate — Models and Chat Flows (Q6–Q10)</h2>
+<p><strong>Q6.</strong> At which level can you evaluate an individual language model?</p>
+<ul>
+<li>A) By analyzing the input, the output, and optionally comparing to a predefined expected output</li>
+<li>B) By only analyzing the training data</li>
+<li>C) By only analyzing the model's parameters</li>
+<li>D) By only analyzing the deployment region</li>
+</ul>
+<p><strong>Q7.</strong> What is a chat flow in the context of generative AI apps?</p>
+<ul>
+<li>A) A single language model call</li>
+<li>B) An orchestrated executable flow that can combine multiple language models and Python code</li>
+<li>C) A database query</li>
+<li>D) A content filter</li>
+</ul>
+<p><strong>Q8.</strong> When evaluating a chat flow, what can you assess?</p>
+<ul>
+<li>A) Only the final output</li>
+<li>B) The complete flow and its individual components</li>
+<li>C) Only the input prompts</li>
+<li>D) Only the Python code</li>
+</ul>
+<p><strong>Q9.</strong> What is the recommended evaluation progression?</p>
+<ul>
+<li>A) Test the complete chat flow first, then the individual model</li>
+<li>B) Start with testing an individual model, then test the complete chat flow</li>
+<li>C) Only test the chat flow</li>
+<li>D) Only test the individual model</li>
+</ul>
+<p><strong>Q10.</strong> Which of the following is NOT a valid evaluation target in the Foundry portal?</p>
+<ul>
+<li>A) A deployed model</li>
+<li>B) A prompt flow</li>
+<li>C) A dataset of preexisting outputs</li>
+<li>D) A virtual machine</li>
+</ul>
+<hr />
+<h2 id="08-evaluate-genai-performance-model-benchmarks-q11-q20">Model Benchmarks (Q11–Q20)</h2>
+<p><strong>Q11.</strong> What are model benchmarks?</p>
+<ul>
+<li>A) Private metrics only visible to your team</li>
+<li>B) Publicly available metrics across models and datasets</li>
+<li>C) Metrics computed only after deployment</li>
+<li>D) Metrics based on user feedback</li>
+</ul>
+<p><strong>Q12.</strong> What is the primary purpose of model benchmarks?</p>
+<ul>
+<li>A) To evaluate your app's production traffic</li>
+<li>B) To understand how a model performs relative to others</li>
+<li>C) To replace manual evaluations</li>
+<li>D) To measure content safety</li>
+</ul>
+<p><strong>Q13.</strong> Which benchmark metric returns 1 if generated text matches the answer exactly and 0 otherwise?</p>
+<ul>
+<li>A) Coherence</li>
+<li>B) Fluency</li>
+<li>C) Accuracy</li>
+<li>D) GPT similarity</li>
+</ul>
+<p><strong>Q14.</strong> Which benchmark metric measures whether output flows smoothly and reads naturally?</p>
+<ul>
+<li>A) Accuracy</li>
+<li>B) Coherence</li>
+<li>C) GPT similarity</li>
+<li>D) F1 score</li>
+</ul>
+<p><strong>Q15.</strong> Which benchmark metric assesses adherence to grammatical rules and syntactic structures?</p>
+<ul>
+<li>A) Fluency</li>
+<li>B) Accuracy</li>
+<li>C) GPT similarity</li>
+<li>D) ROUGE</li>
+</ul>
+<p><strong>Q16.</strong> Which benchmark metric quantifies semantic similarity between a ground truth sentence and the AI-generated prediction?</p>
+<ul>
+<li>A) Accuracy</li>
+<li>B) Coherence</li>
+<li>C) GPT similarity</li>
+<li>D) BLEU</li>
+</ul>
+<p><strong>Q17.</strong> Where can you explore model benchmarks for all available models in the Foundry portal?</p>
+<ul>
+<li>A) After deploying a model</li>
+<li>B) Before deploying a model</li>
+<li>C) Only in production</li>
+<li>D) Only in the SDK</li>
+</ul>
+<p><strong>Q18.</strong> Which statement about model benchmarks is TRUE?</p>
+<ul>
+<li>A) They are computed from your own app's traffic</li>
+<li>B) They are public, comparative metrics used to compare models against each other</li>
+<li>C) They replace the need for manual evaluation</li>
+<li>D) They measure content safety only</li>
+</ul>
+<p><strong>Q19.</strong> Which of the following is a commonly used model benchmark?</p>
+<ul>
+<li>A) Groundedness</li>
+<li>B) GPT similarity</li>
+<li>C) Relevance</li>
+<li>D) Self-harm</li>
+</ul>
+<p><strong>Q20.</strong> Model benchmarks are most useful for which decision?</p>
+<ul>
+<li>A) Choosing which model to deploy</li>
+<li>B) Choosing which content filter to apply</li>
+<li>C) Choosing which region to deploy in</li>
+<li>D) Choosing which test dataset to use</li>
+</ul>
+<hr />
+<h2 id="08-evaluate-genai-performance-manual-evaluations-q21-q30">Manual Evaluations (Q21–Q30)</h2>
+<p><strong>Q21.</strong> Who performs manual evaluations?</p>
+<ul>
+<li>A) Automated scripts</li>
+<li>B) Human raters</li>
+<li>C) GPT models</li>
+<li>D) NLP algorithms</li>
+</ul>
+<p><strong>Q22.</strong> What insights can manual evaluations provide that automated metrics might miss?</p>
+<ul>
+<li>A) Token counts</li>
+<li>B) Context relevance and user satisfaction</li>
+<li>C) Latency measurements</li>
+<li>D) Cost per request</li>
+</ul>
+<p><strong>Q23.</strong> Which criteria can human evaluators use to rate responses?</p>
+<ul>
+<li>A) Relevance, informativeness, and engagement</li>
+<li>B) Token count and latency</li>
+<li>C) CPU usage and memory</li>
+<li>D) Region and pricing</li>
+</ul>
+<p><strong>Q24.</strong> What should you prepare before beginning manual evaluation?</p>
+<ul>
+<li>A) A diverse set of test prompts</li>
+<li>B) A production deployment</li>
+<li>C) A content filter</li>
+<li>D) A billing report</li>
+</ul>
+<p><strong>Q25.</strong> Which prompt categories should your test prompts cover?</p>
+<ul>
+<li>A) Common user questions, edge cases, and potential failure points</li>
+<li>B) Only common user questions</li>
+<li>C) Only edge cases</li>
+<li>D) Only failure points</li>
+</ul>
+<p><strong>Q26.</strong> What is the chat playground ideal for?</p>
+<ul>
+<li>A) Production monitoring</li>
+<li>B) Early development — testing prompts and tweaking system messages</li>
+<li>C) Final deployment</li>
+<li>D) Cost optimization</li>
+</ul>
+<p><strong>Q27.</strong> In the chat playground, what can you tweak to improve the model's response?</p>
+<ul>
+<li>A) The prompt or system message</li>
+<li>B) The deployment region</li>
+<li>C) The subscription</li>
+<li>D) The content filter severity</li>
+</ul>
+<p><strong>Q28.</strong> What does the manual evaluations feature allow you to do?</p>
+<ul>
+<li>A) Upload a dataset with multiple questions and optionally expected responses</li>
+<li>B) Deploy the model to production</li>
+<li>C) Create a new subscription</li>
+<li>D) Generate billing reports</li>
+</ul>
+<p><strong>Q29.</strong> How do you rate model responses in the manual evaluations feature?</p>
+<ul>
+<li>A) With a thumbs up or down feature</li>
+<li>B) With a numeric score from 1 to 100</li>
+<li>C) With a star rating out of 10</li>
+<li>D) With a pass/fail boolean</li>
+</ul>
+<p><strong>Q30.</strong> Based on manual evaluation ratings, which of the following can you change to improve the model?</p>
+<ul>
+<li>A) Input prompt, system message, model, or model parameters</li>
+<li>B) Deployment region only</li>
+<li>C) Subscription tier only</li>
+<li>D) Content filter category only</li>
+</ul>
+<hr />
+<h2 id="08-evaluate-genai-performance-automated-evaluations-q31-q40">Automated Evaluations (Q31–Q40)</h2>
+<p><strong>Q31.</strong> What can automated evaluations assess in the Foundry portal?</p>
+<ul>
+<li>A) Quality and content safety performance of models, datasets, or prompt flows</li>
+<li>B) Only model latency</li>
+<li>C) Only infrastructure cost</li>
+<li>D) Only user interface design</li>
+</ul>
+<p><strong>Q32.</strong> What data is needed to evaluate a model?</p>
+<ul>
+<li>A) A dataset of prompts and responses, optionally with ground truth</li>
+<li>B) Only a list of model names</li>
+<li>C) Only deployment regions</li>
+<li>D) Only billing data</li>
+</ul>
+<p><strong>Q33.</strong> Which of the following is a way to compile evaluation data?</p>
+<ul>
+<li>A) Manual compilation, existing application output, or AI-generated data</li>
+<li>B) Only manual compilation</li>
+<li>C) Only existing application output</li>
+<li>D) Only AI-generated data</li>
+</ul>
+<p><strong>Q34.</strong> How can AI-generated evaluation data be used?</p>
+<ul>
+<li>A) Generate prompts/responses, then edit them to reflect desired output and use as ground truth</li>
+<li>B) Use them directly without editing</li>
+<li>C) Use them only for production traffic</li>
+<li>D) Use them only for billing</li>
+</ul>
+<p><strong>Q35.</strong> Which evaluator category measures the quality of responses using AI models and standard NLP metrics?</p>
+<ul>
+<li>A) Risk and Safety</li>
+<li>B) AI Quality</li>
+<li>C) Protected material</li>
+<li>D) Groundedness</li>
+</ul>
+<p><strong>Q36.</strong> Which evaluator category assesses responses for content safety issues?</p>
+<ul>
+<li>A) AI Quality</li>
+<li>B) Risk and Safety</li>
+<li>C) Coherence</li>
+<li>D) Fluency</li>
+</ul>
+<p><strong>Q37.</strong> Which of the following is a Risk and Safety concern?</p>
+<ul>
+<li>A) Coherence</li>
+<li>B) Violence</li>
+<li>C) Fluency</li>
+<li>D) Similarity</li>
+</ul>
+<p><strong>Q38.</strong> Which of the following is an AI Quality metric?</p>
+<ul>
+<li>A) Self-harm</li>
+<li>B) Relevance</li>
+<li>C) Hate</li>
+<li>D) Sexual content</li>
+</ul>
+<p><strong>Q39.</strong> Which evaluator compares generated responses to ground truth based on standard metrics?</p>
+<ul>
+<li>A) Coherence</li>
+<li>B) F1 Score</li>
+<li>C) Protected material</li>
+<li>D) Fluency</li>
+</ul>
+<p><strong>Q40.</strong> Which evaluator metric uses an AI model to judge the structure and logical flow of ideas in a response?</p>
+<ul>
+<li>A) F1 Score</li>
+<li>B) Coherence</li>
+<li>C) Protected material</li>
+<li>D) Accuracy</li>
+</ul>
+<hr />
+<h2 id="08-evaluate-genai-performance-ai-assisted-and-nlp-metrics-q41-q50">AI-Assisted and NLP Metrics (Q41–Q50)</h2>
+<p><strong>Q41.</strong> What does groundedness evaluate?</p>
+<ul>
+<li>A) How well generated answers align with information from the input source</li>
+<li>B) How grammatically correct the response is</li>
+<li>C) How similar the response is to ground truth</li>
+<li>D) How fast the response is generated</li>
+</ul>
+<p><strong>Q42.</strong> Even if an answer is factually correct, when is it scored as ungrounded?</p>
+<ul>
+<li>A) When it is not verifiable against the source/context</li>
+<li>B) When it is too long</li>
+<li>C) When it uses complex vocabulary</li>
+<li>D) When it is generated quickly</li>
+</ul>
+<p><strong>Q43.</strong> Which metric requires context data in addition to prompt and completion?</p>
+<ul>
+<li>A) Coherence</li>
+<li>B) Fluency</li>
+<li>C) Groundedness</li>
+<li>D) Similarity</li>
+</ul>
+<p><strong>Q44.</strong> Which metric requires ground truth data in addition to prompt and completion?</p>
+<ul>
+<li>A) Coherence</li>
+<li>B) Fluency</li>
+<li>C) Groundedness</li>
+<li>D) Similarity</li>
+</ul>
+<p><strong>Q45.</strong> Which metrics require only prompt and completion (no context or ground truth)?</p>
+<ul>
+<li>A) Coherence and Fluency</li>
+<li>B) Groundedness and Relevance</li>
+<li>C) Similarity and Groundedness</li>
+<li>D) Relevance and Similarity</li>
+</ul>
+<p><strong>Q46.</strong> What does the F1-score measure?</p>
+<ul>
+<li>A) The ratio of shared words between generated and ground truth answers</li>
+<li>B) The latency of the response</li>
+<li>C) The cost of the response</li>
+<li>D) The number of tokens in the prompt</li>
+</ul>
+<p><strong>Q47.</strong> Which NLP metric is most associated with translation evaluation?</p>
+<ul>
+<li>A) ROUGE</li>
+<li>B) BLEU</li>
+<li>C) F1 score</li>
+<li>D) Accuracy</li>
+</ul>
+<p><strong>Q48.</strong> Which NLP metric is most associated with summarization evaluation?</p>
+<ul>
+<li>A) BLEU</li>
+<li>B) METEOR</li>
+<li>C) ROUGE</li>
+<li>D) GPT similarity</li>
+</ul>
+<p><strong>Q49.</strong> What is required for AI-assisted quality evaluations in the Foundry portal?</p>
+<ul>
+<li>A) A deployed GPT evaluator model and an Azure OpenAI connection</li>
+<li>B) A virtual machine</li>
+<li>C) A content filter</li>
+<li>D) A billing account only</li>
+</ul>
+<p><strong>Q50.</strong> How can evaluation results be viewed in the Foundry portal?</p>
+<ul>
+<li>A) As aggregate metrics and sample-level metrics, comparable across runs</li>
+<li>B) Only as a single overall score</li>
+<li>C) Only as raw logs</li>
+<li>D) Only as a pass/fail result</li>
+</ul>
+<hr />
+<h2 id="08-evaluate-genai-performance-answers">Answers</h2>
+<table>
+<thead>
+<tr>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+  <th>Q</th>
+  <th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>B</td>
+  <td>11</td>
+  <td>B</td>
+  <td>21</td>
+  <td>B</td>
+  <td>31</td>
+  <td>A</td>
+  <td>41</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>B</td>
+  <td>12</td>
+  <td>B</td>
+  <td>22</td>
+  <td>B</td>
+  <td>32</td>
+  <td>A</td>
+  <td>42</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>B</td>
+  <td>13</td>
+  <td>C</td>
+  <td>23</td>
+  <td>A</td>
+  <td>33</td>
+  <td>A</td>
+  <td>43</td>
+  <td>C</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>B</td>
+  <td>14</td>
+  <td>B</td>
+  <td>24</td>
+  <td>A</td>
+  <td>34</td>
+  <td>A</td>
+  <td>44</td>
+  <td>D</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>B</td>
+  <td>15</td>
+  <td>A</td>
+  <td>25</td>
+  <td>A</td>
+  <td>35</td>
+  <td>B</td>
+  <td>45</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>A</td>
+  <td>16</td>
+  <td>C</td>
+  <td>26</td>
+  <td>B</td>
+  <td>36</td>
+  <td>B</td>
+  <td>46</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>B</td>
+  <td>17</td>
+  <td>B</td>
+  <td>27</td>
+  <td>A</td>
+  <td>37</td>
+  <td>B</td>
+  <td>47</td>
+  <td>B</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>B</td>
+  <td>18</td>
+  <td>B</td>
+  <td>28</td>
+  <td>A</td>
+  <td>38</td>
+  <td>B</td>
+  <td>48</td>
+  <td>C</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>B</td>
+  <td>19</td>
+  <td>B</td>
+  <td>29</td>
+  <td>A</td>
+  <td>39</td>
+  <td>B</td>
+  <td>49</td>
+  <td>A</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>D</td>
+  <td>20</td>
+  <td>A</td>
+  <td>30</td>
+  <td>A</td>
+  <td>40</td>
+  <td>B</td>
+  <td>50</td>
+  <td>A</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Practice questions created: 2026-08-04 · Source: Microsoft Learn module content</em></p>
+</div>
+        </article>
+        
+      <div class="no-results" id="no-results" hidden>No modules match your search.</div>
+    </main>
+  </div>
+
+  <script>
+    (() => {
+      const search = document.querySelector("#search");
+      const filter = document.querySelector("#module-filter");
+      const articles = [...document.querySelectorAll(".module-card")];
+      const resultCount = document.querySelector("#result-count");
+      const noResults = document.querySelector("#no-results");
+      const answerButton = document.querySelector("#expand-answers");
+      let answersOpen = false;
+
+      const update = () => {
+        const term = search.value.trim().toLocaleLowerCase();
+        const moduleValue = filter.value;
+        let visible = 0;
+        let questions = 0;
+
+        for (const article of articles) {
+          const moduleMatches = moduleValue === "all" || article.dataset.module === moduleValue;
+          const textMatches = !term || article.textContent.toLocaleLowerCase().includes(term);
+          const show = moduleMatches && textMatches;
+          article.hidden = !show;
+          if (show) {
+            visible += 1;
+            const badge = article.querySelector(".question-count");
+            questions += Number.parseInt(badge.textContent, 10);
+          }
+        }
+
+        noResults.hidden = visible !== 0;
+        resultCount.textContent = term
+          ? `Found ${visible} matching module${visible === 1 ? "" : "s"} (${
+              questions
+            } total questions in those modules).`
+          : `Showing ${visible} module${visible === 1 ? "" : "s"} and ${questions} questions.`;
+      };
+
+      search.addEventListener("input", update);
+      filter.addEventListener("change", update);
+      answerButton.addEventListener("click", () => {
+        answersOpen = !answersOpen;
+        document.querySelectorAll("details").forEach((details) => {
+          details.open = answersOpen;
+        });
+        answerButton.textContent = answersOpen ? "Hide inline answers" : "Show inline answers";
+      });
+      document.querySelector("#print").addEventListener("click", () => window.print());
+    })();
+  </script>
+</body>
+</html>

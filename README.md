@@ -39,12 +39,12 @@ These concepts apply across AI platforms, not just Azure or AI-103.
 
 The course has **4 learning paths** with **34 modules total**:
 
-| Official Learning Path | My Learnings | Weight | My Priority (1–5) |
-|------------------------|--------------|--------|-------------------|
-| [Develop generative AI apps in Azure](https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/) | [Notes and projects](https://github.com/psingla/Microsoft-Azure-AI-103-Certification/tree/main/Develop%20generative%20AI%20apps%20in%20Azure) | 30–35% | **5/5 — Core focus** |
-| [Develop AI agents on Azure](https://learn.microsoft.com/en-us/training/paths/develop-ai-agents-azure/) | — | 30–35% | **5/5 — Core focus** |
-| [Develop natural language solutions in Azure](#lp3) | — | 10–15% | **3/5 — Supporting knowledge** |
-| [Extract insights from visual data on Azure](#lp4) | — | 20–30% | **3/5 — Supporting knowledge** |
+| Official Learning Path | My Learnings | Practice Questions | Weight | My Priority (1–5) |
+|------------------------|--------------|--------------------|--------|-------------------|
+| [Develop generative AI apps in Azure](https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/) | [Notes and projects](https://github.com/psingla/Microsoft-Azure-AI-103-Certification/tree/main/Develop%20generative%20AI%20apps%20in%20Azure) | [Question bank](modules/01-genai/) | 30–35% | **5/5 — Core focus** |
+| [Develop AI agents on Azure](https://learn.microsoft.com/en-us/training/paths/develop-ai-agents-azure/) | — | [Question bank](modules/02-agents/) | 30–35% | **5/5 — Core focus** |
+| [Develop natural language solutions in Azure](#lp3) | — | — | 10–15% | **3/5 — Supporting knowledge** |
+| [Extract insights from visual data on Azure](#lp4) | — | — | 20–30% | **3/5 — Supporting knowledge** |
 
 *My Priority reflects my current learning focus, not exam weight: 1 = lowest, 5 = highest. Ratings can change as I progress.*
 
