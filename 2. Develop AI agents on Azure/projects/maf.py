@@ -2,6 +2,8 @@
 
 Install requirements-maf.txt and sign in with `az login`.
 Run with the "MAF: Foundry chat" F5 configuration to use the repository .venv.
+For terminal runs, activate .venv first; existing terminals may still use system
+Python. Keep both Agent Framework packages at the versions in requirements-maf.txt.
 Set AZURE_AI_PROJECT_ENDPOINT and AZURE_AI_MODEL_DEPLOYMENT_NAME, or enter them
 when prompted. The same session is reused until exit, but not saved for restarts.
 Source: https://learn.microsoft.com/en-us/training/modules/develop-ai-agent-with-semantic-kernel/3-create-azure-ai-agent
