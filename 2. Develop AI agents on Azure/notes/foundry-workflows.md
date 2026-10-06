@@ -9,4 +9,6 @@
 
 This retirement applies to the Foundry Workflows feature, not to workflow orchestration in Microsoft Agent Framework.
 
+![Foundry portal notice: workflows retire on December 1, 2026; use Microsoft Agent Framework for new workflows.](images/foundry-workflows-retirement.png)
+
 Source: [Foundry workflows and migration guidance](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/workflow) (verified 2026-10-06).
