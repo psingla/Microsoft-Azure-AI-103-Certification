@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="All 100 AI-103 practice questions from the completed agent modules.">
+  <title>AI-103: Agent Practice Questions</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f7fb; --surface: #fff; --surface-alt: #eef4ff;
+      --text: #172033; --muted: #5d6b82; --border: #d9e2f1;
+      --brand: #175cd3; --accent: #0f766e; --answer: #ecfdf3;
+      --answer-border: #6ce9a6; --shadow: 0 10px 30px rgba(16,35,70,.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c1424; --surface: #131e31; --surface-alt: #172844;
+        --text: #edf3ff; --muted: #aebbd0; --border: #2a3b57;
+        --brand: #84adff; --accent: #5fe9d0; --answer: #102d28;
+        --answer-border: #159577; --shadow: 0 12px 35px rgba(0,0,0,.25);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.65 Inter, "Segoe UI", system-ui, sans-serif; }
+    a { color: var(--brand); }
+    code { padding: .12rem .35rem; border-radius: .35rem; background: var(--surface-alt); font: .9em Consolas, monospace; }
+    .hero { padding: 3.5rem max(1.25rem, calc((100vw - 1180px)/2)); color: #fff; background: radial-gradient(circle at 85% 15%,rgba(95,233,208,.35),transparent 28rem),linear-gradient(135deg,#0b3b8f,#175cd3 55%,#0f766e); }
+    .eyebrow { margin: 0 0 .5rem; font-size: .85rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .hero h1 { max-width: 850px; margin: 0; font-size: clamp(2rem,5vw,3.75rem); line-height: 1.08; }
+    .hero p { max-width: 720px; color: rgba(255,255,255,.88); font-size: 1.08rem; }
+    .stats { display: flex; flex-wrap: wrap; gap: .75rem; }
+    .stat { padding: .65rem .95rem; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; background: rgba(255,255,255,.12); font-weight: 650; }
+    .toolbar { position: sticky; z-index: 20; top: 0; display: flex; flex-wrap: wrap; gap: .75rem; padding: .85rem max(1.25rem,calc((100vw - 1180px)/2)); border-bottom: 1px solid var(--border); background: color-mix(in srgb,var(--surface) 92%,transparent); backdrop-filter: blur(14px); }
+    input, select, button { padding: .72rem .9rem; border: 1px solid var(--border); border-radius: .65rem; background: var(--surface); color: var(--text); font: inherit; }
+    input { min-width: min(100%,330px); flex: 1; }
+    button, select { font-weight: 650; cursor: pointer; }
+    button:hover, select:hover { border-color: var(--brand); }
+    .layout { display: grid; grid-template-columns: 270px minmax(0,1fr); gap: 1.5rem; width: min(1180px,calc(100% - 2.5rem)); margin: 1.5rem auto 4rem; align-items: start; }
+    .sidebar { position: sticky; top: 5.2rem; padding: 1rem; border: 1px solid var(--border); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow); }
+    .sidebar h2 { margin: 0 0 .65rem; color: var(--muted); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+    .sidebar nav { display: grid; gap: .25rem; }
+    .sidebar a { display: grid; grid-template-columns: 2rem 1fr; gap: .4rem; padding: .55rem; border-radius: .55rem; color: var(--text); text-decoration: none; font-size: .9rem; line-height: 1.3; }
+    .sidebar a:hover { background: var(--surface-alt); color: var(--brand); }
+    .sidebar a span { color: var(--brand); font-weight: 800; }
+    #result-count { color: var(--muted); }
+    .module-card { margin-bottom: 1.5rem; overflow: hidden; border: 1px solid var(--border); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow); scroll-margin-top: 5.5rem; }
+    .module-card[hidden] { display: none; }
+    .module-header { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); background: linear-gradient(135deg,var(--surface-alt),var(--surface)); }
+    .module-header h2 { margin: .15rem 0 0; font-size: 1.35rem; }
+    .module-number { color: var(--brand); font-size: .75rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .question-count { flex: none; padding: .35rem .7rem; border-radius: 999px; background: var(--brand); color: #fff; font-size: .8rem; font-weight: 750; }
+    .module-content { padding: 1.5rem clamp(1rem,4vw,2.25rem) 2.5rem; }
+    .module-content > h1:first-child { display: none; }
+    .module-content h2 { margin-top: 2.25rem; padding-bottom: .45rem; border-bottom: 1px solid var(--border); }
+    .module-content hr { margin: 1.7rem 0; border: 0; border-top: 1px solid var(--border); }
+    .choices { padding-left: 1.6rem; list-style: none; }
+    .choices li { margin: .25rem 0; }
+    details { margin: .8rem 0 1.4rem; border: 1px solid var(--answer-border); border-radius: .65rem; background: var(--answer); }
+    summary { padding: .65rem .85rem; color: var(--accent); font-weight: 750; cursor: pointer; }
+    details div { padding: 0 .85rem .8rem; }
+    mark { border-radius: .2rem; background: #fde68a; color: #172033; }
+    .empty { padding: 2rem; border: 1px dashed var(--border); border-radius: 1rem; text-align: center; color: var(--muted); }
+    @media (max-width: 800px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static; } }
+    @media print { .toolbar,.sidebar { display:none; } .layout { display:block; width:100%; } details:not([open]) > *:not(summary) { display:block; } .module-card { break-before:page; border:0; box-shadow:none; } }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Microsoft AI-103 Study Guide</p>
+    <h1>Agent Practice Questions</h1>
+    <p>All practice questions from the completed modules in Learning Path 2: Develop AI agents.</p>
+    <div class="stats"><span class="stat">100 questions</span><span class="stat">2 modules</span><span class="stat">Answers included</span></div>
+  </header>
+  <div class="toolbar">
+    <input id="search" type="search" placeholder="Search questions, choices, and answers..." aria-label="Search questions">
+    <select id="module-filter" aria-label="Filter by module">
+      <option value="all">All modules</option>
+      <option value="1">2.1 Develop AI Agents with Microsoft Foundry and VS Code</option><option value="2">2.2 Integrate Custom Tools into Your Agent</option>
+    </select>
+    <button id="expand-all" type="button">Show all answers</button>
+    <button id="collapse-all" type="button">Hide all answers</button>
+  </div>
+  <div class="layout">
+    <aside class="sidebar"><h2>Modules</h2><nav><a href="#module-1"><span>01</span>2.1 Develop AI Agents with Microsoft Foundry and VS Code</a><a href="#module-2"><span>02</span>2.2 Integrate Custom Tools into Your Agent</a></nav></aside>
+    <main>
+      <p id="result-count" aria-live="polite">Showing all 2 modules and 100 questions.</p>
+      <div id="empty" class="empty" hidden>No modules match your search.</div>
+      
+        <article class="module-card" id="module-1" data-label="2.1 Develop AI Agents with Microsoft Foundry and VS Code">
+          <header class="module-header">
+            <div><div class="module-number">Module 1 of 2</div><h2>2.1 Develop AI Agents with Microsoft Foundry and VS Code</h2></div>
+            <div class="question-count">50 questions</div>
+          </header>
+          <div class="module-content">
+<h1>Module 2.1 — Practice Questions</h1>
+<p><strong>Module</strong>: Develop AI agents with Microsoft Foundry and Visual Studio Code <strong>Source</strong>: <a href="https://learn.microsoft.com/training/modules/develop-ai-agents-azure-vs-code/" target="_blank" rel="noopener noreferrer">Microsoft Learn</a></p>
+<p>50 practice questions covering AI agent fundamentals, Foundry Agent Service, VS Code development, tools, testing, and deployment.</p>
+<hr>
+<h2>Section 1: AI Agent Fundamentals (Q1–10)</h2>
+<p class="question"><strong>Q1.</strong> What three core elements combine to form an AI agent?</p>
+<ul class="choices">
+<li>A) Model, dataset, and training pipeline</li>
+<li>B) LLM, instructions, and tools</li>
+<li>C) Endpoint, key, and container</li>
+<li>D) Thread, message, and run</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — An AI agent combines an LLM (reasoning engine), instructions (role/scope), and tools (APIs, code, data).</div></details>
+<p class="question"><strong>Q2.</strong> Which statement best distinguishes an AI agent from a plain LLM call?</p>
+<ul class="choices">
+<li>A) An agent always uses a larger model</li>
+<li>B) An agent can call tools and iterate toward a goal, while a plain call is one-shot</li>
+<li>C) A plain call maintains conversation state</li>
+<li>D) There is no difference</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Agents are goal-directed, can call tools, and iterate; a plain LLM call is a single prompt→response.</div></details>
+<p class="question"><strong>Q3.</strong> In the classic function-calling loop, who actually executes the custom function?</p>
+<ul class="choices">
+<li>A) The LLM</li>
+<li>B) The Foundry Agent Service</li>
+<li>C) Your application code</li>
+<li>D) The model deployment</li>
+</ul>
+<details><summary>Answer</summary><div><strong>C</strong> — The agent <em>requests</em> a function call, but <strong>your app</strong> executes the function and submits the output back.</div></details>
+<p class="question"><strong>Q4.</strong> What is the correct order of the 5-step function-calling pattern?</p>
+<ul class="choices">
+<li>A) Create agent → define tools → send prompt → execute → final response</li>
+<li>B) Define tools → create agent → send prompt → execute and return → final response</li>
+<li>C) Send prompt → define tools → create agent → execute → final response</li>
+<li>D) Define tools → send prompt → create agent → final response → execute</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Define function tools → create agent → send prompt → execute and return → get final response.</div></details>
+<p class="question"><strong>Q5.</strong> Which of the following is NOT one of the three core ingredients of an AI agent?</p>
+<ul class="choices">
+<li>A) LLM</li>
+<li>B) Instructions</li>
+<li>C) Tools</li>
+<li>D) A dedicated GPU</li>
+</ul>
+<details><summary>Answer</summary><div><strong>D</strong> — Agents are defined by LLM + instructions + tools; compute is managed by the platform.</div></details>
+<p class="question"><strong>Q6.</strong> What is a "thread" in agent terminology?</p>
+<ul class="choices">
+<li>A) A single model inference</li>
+<li>B) A conversation session between an agent and a user</li>
+<li>C) A container instance</li>
+<li>D) A tool definition</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — A thread is a conversation session; it stores messages and auto-truncates to fit the model's context.</div></details>
+<p class="question"><strong>Q7.</strong> What is a "run" in agent terminology?</p>
+<ul class="choices">
+<li>A) A single execution of an agent that can span multiple threads and messages</li>
+<li>B) A single message in a conversation</li>
+<li>C) The deployment of an agent</li>
+<li>D) A tool call</li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — A run is a single execution of an agent that can span multiple threads and messages.</div></details>
+<p class="question"><strong>Q8.</strong> Which element of an agent defines its role, scope, and behavioral rules?</p>
+<ul class="choices">
+<li>A) The model</li>
+<li>B) The instructions (system prompt)</li>
+<li>C) The tools</li>
+<li>D) The endpoint</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Instructions define the agent's role, scope, and behavioral rules.</div></details>
+<p class="question"><strong>Q9.</strong> What is the primary purpose of tools in an agent?</p>
+<ul class="choices">
+<li>A) To increase model size</li>
+<li>B) To let the agent access external capabilities like APIs, data, and code execution</li>
+<li>C) To replace the LLM</li>
+<li>D) To store conversation history</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Tools extend the agent's capabilities to access APIs, data, search, and run code.</div></details>
+<p class="question"><strong>Q10.</strong> Which statement about agent state is correct?</p>
+<ul class="choices">
+<li>A) Agents are always stateless</li>
+<li>B) Agents maintain conversation state through threads</li>
+<li>C) State is stored only in the model weights</li>
+<li>D) Agents cannot remember prior messages</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Agents maintain conversation state through threads, which store messages across turns.</div></details>
+<hr>
+<h2>Section 2: Foundry Agent Service (Q11–20)</h2>
+<p class="question"><strong>Q11.</strong> What does Microsoft Foundry Agent Service provide for the agents you define?</p>
+<ul class="choices">
+<li>A) Only model hosting</li>
+<li>B) Hosting, scaling, identity, state, and monitoring</li>
+<li>C) Only tool definitions</li>
+<li>D) Only authentication</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Agent Service handles hosting, scaling, identity, state, and monitoring.</div></details>
+<p class="question"><strong>Q12.</strong> Which agent type is defined entirely through configuration with no runtime code to maintain?</p>
+<ul class="choices">
+<li>A) Hosted agent</li>
+<li>B) Prompt agent</li>
+<li>C) Container agent</li>
+<li>D) Function agent</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Prompt agents are config-only (instructions, model, tools); no app code or compute to manage.</div></details>
+<p class="question"><strong>Q13.</strong> Which agent type ships as a container image or zip of source code and runs on Azure Container Apps?</p>
+<ul class="choices">
+<li>A) Prompt agent</li>
+<li>B) Hosted agent</li>
+<li>C) Portal agent</li>
+<li>D) Playground agent</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Hosted agents are code-based, shipped as a container image or source zip, and run on Azure Container Apps.</div></details>
+<p class="question"><strong>Q14.</strong> Which agent type is best suited for agents that call custom code or require custom orchestration?</p>
+<ul class="choices">
+<li>A) Prompt agent</li>
+<li>B) Hosted agent</li>
+<li>C) Both equally</li>
+<li>D) Neither</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Hosted agents are best for custom code, multi-agent, and custom protocols.</div></details>
+<p class="question"><strong>Q15.</strong> What is the Responses API?</p>
+<ul class="choices">
+<li>A) A separate model deployment type</li>
+<li>B) The single model-and-tools endpoint behind every agent type</li>
+<li>C) A tool for web search</li>
+<li>D) A monitoring service</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The Responses API is the single model-and-tools endpoint behind every agent type.</div></details>
+<p class="question"><strong>Q16.</strong> Which agent type has automatic, dedicated Microsoft Entra identity per agent?</p>
+<ul class="choices">
+<li>A) Prompt agents only</li>
+<li>B) Hosted agents only</li>
+<li>C) Both prompt and hosted agents</li>
+<li>D) Neither</li>
+</ul>
+<details><summary>Answer</summary><div><strong>C</strong> — Both agent types have agent identity; hosted agents get an automatic dedicated Entra identity per agent.</div></details>
+<p class="question"><strong>Q17.</strong> What is the cost model difference for hosted agents compared to prompt agents?</p>
+<ul class="choices">
+<li>A) Hosted agents are always free</li>
+<li>B) Hosted agents add container compute costs on top of inference and tool usage</li>
+<li>C) Prompt agents cost more</li>
+<li>D) There is no difference</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Hosted agents cost per-call inference + tool usage <strong>+ container compute</strong>.</div></details>
+<p class="question"><strong>Q18.</strong> Which agent type is best for a fast start with no custom orchestration?</p>
+<ul class="choices">
+<li>A) Hosted agent</li>
+<li>B) Prompt agent</li>
+<li>C) Container agent</li>
+<li>D) Multi-agent</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Prompt agents are best for fast start and agents without custom orchestration.</div></details>
+<p class="question"><strong>Q19.</strong> What does the additive pattern of the Responses API allow?</p>
+<ul class="choices">
+<li>A) Adding more models to an agent</li>
+<li>B) Calling Foundry models + platform tools directly, then later packaging the same code as a hosted agent</li>
+<li>C) Adding more tools to the catalog</li>
+<li>D) Combining multiple subscriptions</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — You can call the Responses API directly, then package the same code as a hosted agent later.</div></details>
+<p class="question"><strong>Q20.</strong> Which of the following is a key feature of Foundry Agent Service?</p>
+<ul class="choices">
+<li>A) Manual scaling only</li>
+<li>B) Automatic scaling</li>
+<li>C) No identity management</li>
+<li>D) No monitoring</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Agent Service provides automatic scaling (request volume for prompt agents, container instances for hosted agents).</div></details>
+<hr>
+<h2>Section 3: Development Approaches &amp; Portal (Q21–30)</h2>
+<p class="question"><strong>Q21.</strong> Which of the following is NOT a development approach for building agents?</p>
+<ul class="choices">
+<li>A) Foundry portal</li>
+<li>B) VS Code extension (designer)</li>
+<li>C) SDK / REST</li>
+<li>D) Azure DevOps pipelines only</li>
+</ul>
+<details><summary>Answer</summary><div><strong>D</strong> — Agents can be built via portal, VS Code, and SDK/REST; DevOps is for CI/CD, not the primary authoring surface.</div></details>
+<p class="question"><strong>Q22.</strong> What is the recommended platform for AI development on Azure?</p>
+<ul class="choices">
+<li>A) Azure Cognitive Services</li>
+<li>B) Microsoft Foundry</li>
+<li>C) Azure Machine Learning only</li>
+<li>D) Azure Functions</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Microsoft Foundry is the recommended platform for AI development on Azure.</div></details>
+<p class="question"><strong>Q23.</strong> When configuring an agent, what model reference do you use?</p>
+<ul class="choices">
+<li>A) The model family name (e.g., GPT-4o)</li>
+<li>B) The model deployment name</li>
+<li>C) The model's training date</li>
+<li>D) The model's parameter count</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — You reference the <strong>model deployment name</strong> (what you chose when deploying the model).</div></details>
+<p class="question"><strong>Q24.</strong> What is the first prerequisite for building an agent in the Foundry portal?</p>
+<ul class="choices">
+<li>A) A deployed model in a Foundry project</li>
+<li>B) A GitHub Copilot subscription</li>
+<li>C) A container registry</li>
+<li>D) A custom function</li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — You need a Foundry project with a deployed model.</div></details>
+<p class="question"><strong>Q25.</strong> Which approach is best for CI/CD-friendly, programmatic agent creation?</p>
+<ul class="choices">
+<li>A) Foundry portal</li>
+<li>B) VS Code designer</li>
+<li>C) SDK / REST</li>
+<li>D) Playground</li>
+</ul>
+<details><summary>Answer</summary><div><strong>C</strong> — SDK/REST is CI/CD-friendly and enables programmatic control and automation.</div></details>
+<p class="question"><strong>Q26.</strong> Where do you create and test agents visually without writing code?</p>
+<ul class="choices">
+<li>A) In the model catalog</li>
+<li>B) In the Foundry portal and VS Code designer</li>
+<li>C) In Azure DevOps</li>
+<li>D) In the container registry</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The Foundry portal and VS Code designer provide visual agent authoring.</div></details>
+<p class="question"><strong>Q27.</strong> What is the purpose of the agent playground?</p>
+<ul class="choices">
+<li>A) To deploy agents</li>
+<li>B) To send messages to a deployed agent and verify its behavior</li>
+<li>C) To create models</li>
+<li>D) To manage subscriptions</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The playground lets you test a deployed agent by sending prompts and viewing outputs.</div></details>
+<p class="question"><strong>Q28.</strong> Which of the following is required to deploy an agent to Agent Service?</p>
+<ul class="choices">
+<li>A) A custom container</li>
+<li>B) A deployed model in the project</li>
+<li>C) A GitHub Copilot subscription</li>
+<li>D) A custom function</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — You need a deployed model in your Foundry project to build and deploy an agent.</div></details>
+<p class="question"><strong>Q29.</strong> What does the "Open in VS Code for the Web" capability in the playground do?</p>
+<ul class="choices">
+<li>A) Deploys the agent to production</li>
+<li>B) Imports your code sample, API endpoint, and key into a VS Code workspace</li>
+<li>C) Deletes the model</li>
+<li>D) Creates a new subscription</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — It imports the code sample, endpoint, and key into a VS Code for the Web workspace.</div></details>
+<p class="question"><strong>Q30.</strong> Which statement about agent authoring is correct?</p>
+<ul class="choices">
+<li>A) Agents can only be authored in the portal</li>
+<li>B) Agents are declarative and can be authored in the portal, VS Code, or SDK/REST</li>
+<li>C) Agents require custom code in all cases</li>
+<li>D) Agents cannot be edited after deployment</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Agents are declarative (YAML) and authorable across portal, VS Code, and SDK/REST.</div></details>
+<hr>
+<h2>Section 4: VS Code Extension &amp; Configuration (Q31–40)</h2>
+<p class="question"><strong>Q31.</strong> What is the name of the VS Code extension for Foundry agent development?</p>
+<ul class="choices">
+<li>A) Azure Tools</li>
+<li>B) Microsoft Foundry Toolkit for Visual Studio Code</li>
+<li>C) GitHub Copilot</li>
+<li>D) C# Dev Kit</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The <strong>Microsoft Foundry Toolkit for Visual Studio Code</strong> extension (aka.ms/foundrytk).</div></details>
+<p class="question"><strong>Q32.</strong> What format is used to define an agent's configuration in VS Code?</p>
+<ul class="choices">
+<li>A) JSON</li>
+<li>B) YAML</li>
+<li>C) XML</li>
+<li>D) TOML</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Agents are defined declaratively in <strong>YAML</strong>.</div></details>
+<p class="question"><strong>Q33.</strong> In the agent YAML, which field specifies the model deployment?</p>
+<ul class="choices">
+<li>A) <code>name</code></li>
+<li>B) <code>model.id</code></li>
+<li>C) <code>instructions</code></li>
+<li>D) <code>version</code></li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — <code>model.id</code> specifies the model deployment (e.g., <code>gpt-4o-1</code>).</div></details>
+<p class="question"><strong>Q34.</strong> Which field in the agent YAML defines the agent's behavioral rules?</p>
+<ul class="choices">
+<li>A) <code>model</code></li>
+<li>B) <code>instructions</code></li>
+<li>C) <code>tools</code></li>
+<li>D) <code>metadata</code></li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The <code>instructions</code> field defines the agent's system instructions/behavior.</div></details>
+<p class="question"><strong>Q35.</strong> How do you deploy an agent created in the VS Code designer?</p>
+<ul class="choices">
+<li>A) Select <strong>Create Agent on Microsoft Foundry</strong></li>
+<li>B) Run <code>az deploy</code></li>
+<li>C) Push to GitHub</li>
+<li>D) Select <strong>Open Playground</strong></li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — Select <strong>Create Agent on Microsoft Foundry</strong> in the designer to deploy.</div></details>
+<p class="question"><strong>Q36.</strong> How do you update a deployed agent's configuration?</p>
+<ul class="choices">
+<li>A) Delete and recreate it</li>
+<li>B) <strong>AGENT PREFERENCES</strong> → <strong>Edit Agent</strong> → edit → <strong>Update Agent on Microsoft Foundry</strong></li>
+<li>C) Edit the model directly</li>
+<li>D) It cannot be updated</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Edit the agent, then select <strong>Update Agent on Microsoft Foundry</strong>; changes take effect immediately.</div></details>
+<p class="question"><strong>Q37.</strong> What does the <strong>View Code</strong> option in the AGENT PREFERENCES pane do?</p>
+<ul class="choices">
+<li>A) Deploys the agent</li>
+<li>B) Generates a sample code file to interact with the agent programmatically</li>
+<li>C) Deletes the agent</li>
+<li>D) Opens the model catalog</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — <strong>View Code</strong> generates boilerplate code for interacting with the deployed agent.</div></details>
+<p class="question"><strong>Q38.</strong> When generating sample code, which selections can you make?</p>
+<ul class="choices">
+<li>A) SDK, language, and authentication method</li>
+<li>B) Model and region only</li>
+<li>C) Subscription and resource group only</li>
+<li>D) Container and image only</li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — You choose the preferred SDK, language, and authentication method.</div></details>
+<p class="question"><strong>Q39.</strong> Where do you view conversation threads created during agent runs in VS Code?</p>
+<ul class="choices">
+<li>A) <strong>Resources</strong> → <strong>Classic</strong> → <strong>Threads</strong></li>
+<li>B) The model catalog</li>
+<li>C) The container registry</li>
+<li>D) Azure DevOps</li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — Threads appear under <strong>Resources</strong> → <strong>Classic</strong> → <strong>Threads</strong>.</div></details>
+<p class="question"><strong>Q40.</strong> What does <strong>View run info</strong> on the THREAD DETAILS pane open?</p>
+<ul class="choices">
+<li>A) A YAML file</li>
+<li>B) A <code>.json</code> file with agent configuration, messages, and tool calls</li>
+<li>C) The playground</li>
+<li>D) The model catalog</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — It opens a <code>.json</code> file with run details including config, messages, and tool calls.</div></details>
+<hr>
+<h2>Section 5: Tools, Testing, Deployment &amp; Integration (Q41–50)</h2>
+<p class="question"><strong>Q41.</strong> Which tool grounds an agent with real-time web information and inline citations?</p>
+<ul class="choices">
+<li>A) File Search</li>
+<li>B) Grounding with Bing search</li>
+<li>C) Code Interpreter</li>
+<li>D) OpenAPI tool</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Grounding with Bing search provides real-time web info with inline citations.</div></details>
+<p class="question"><strong>Q42.</strong> Which tool lets an agent write and run Python code in a sandboxed environment?</p>
+<ul class="choices">
+<li>A) File Search</li>
+<li>B) Code Interpreter</li>
+<li>C) Bing Grounding</li>
+<li>D) MCP tool</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Code Interpreter lets the agent write and run Python code in a sandbox.</div></details>
+<p class="question"><strong>Q43.</strong> Which tool connects an agent to an external API via an OpenAPI spec?</p>
+<ul class="choices">
+<li>A) File Search</li>
+<li>B) OpenAPI 3.0 tool</li>
+<li>C) Code Interpreter</li>
+<li>D) Bing Grounding</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The OpenAPI 3.0 tool connects to external APIs via an OpenAPI spec.</div></details>
+<p class="question"><strong>Q44.</strong> Which tool augments an agent with knowledge from uploaded files?</p>
+<ul class="choices">
+<li>A) File Search</li>
+<li>B) Bing Grounding</li>
+<li>C) Code Interpreter</li>
+<li>D) Function calling</li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — File Search augments agents with knowledge from uploaded files/proprietary documents.</div></details>
+<p class="question"><strong>Q45.</strong> Which tool connects an agent to tools hosted on an existing MCP endpoint?</p>
+<ul class="choices">
+<li>A) OpenAPI tool</li>
+<li>B) MCP tool</li>
+<li>C) Code Interpreter</li>
+<li>D) File Search</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The MCP tool connects to tools hosted on an existing MCP endpoint.</div></details>
+<p class="question"><strong>Q46.</strong> To ground an agent with data from an existing Azure AI Search index, which tool do you use?</p>
+<ul class="choices">
+<li>A) File Search</li>
+<li>B) Azure AI Search</li>
+<li>C) Bing Grounding</li>
+<li>D) Code Interpreter</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Azure AI Search grounds agents with data from an existing index (chat with your data).</div></details>
+<p class="question"><strong>Q47.</strong> What is the standard Python SDK pattern for consuming a Foundry agent?</p>
+<ul class="choices">
+<li>A) <code>OpenAIClient</code> with an API key</li>
+<li>B) <code>AIProjectClient</code> + <code>DefaultAzureCredential</code></li>
+<li>C) <code>BlobServiceClient</code> + connection string</li>
+<li>D) <code>ComputeClient</code> + SAS token</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Use <code>AIProjectClient</code> with <code>DefaultAzureCredential</code> for keyless auth.</div></details>
+<p class="question"><strong>Q48.</strong> Which authentication approach should you use in production code?</p>
+<ul class="choices">
+<li>A) Hardcoded API keys</li>
+<li>B) Keyless auth via <code>DefaultAzureCredential</code> (managed identity)</li>
+<li>C) Shared access signatures</li>
+<li>D) Anonymous access</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Use keyless auth via <code>DefaultAzureCredential</code>; never hardcode keys in code.</div></details>
+<p class="question"><strong>Q49.</strong> What does <code>DefaultAzureCredential</code> try in order?</p>
+<ul class="choices">
+<li>A) Env → CLI → managed identity</li>
+<li>B) CLI → managed identity → env (and other sources)</li>
+<li>C) Managed identity → CLI → env</li>
+<li>D) Keys → tokens → certificates</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — <code>DefaultAzureCredential</code> tries CLI, managed identity, env, and other sources in order.</div></details>
+<p class="question"><strong>Q50.</strong> Which SDK packages are the primary ones for agent development in Python?</p>
+<ul class="choices">
+<li>A) <code>azure-ai-projects</code> and <code>azure-identity</code></li>
+<li>B) <code>azure-storage-blob</code> and <code>azure-keyvault</code></li>
+<li>C) <code>azure-mgmt-compute</code> and <code>azure-mgmt-network</code></li>
+<li>D) <code>azure-cognitiveservices</code> and <code>azure-mgmt-resource</code></li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — <code>azure-ai-projects</code> (Foundry Projects SDK) and <code>azure-identity</code> are the primary agent SDK packages.</div></details>
+<hr>
+<p><em>Practice questions created: 2026-08-04 · Source: Microsoft Learn module via MCP</em></p>
+          </div>
+        </article>
+        <article class="module-card" id="module-2" data-label="2.2 Integrate Custom Tools into Your Agent">
+          <header class="module-header">
+            <div><div class="module-number">Module 2 of 2</div><h2>2.2 Integrate Custom Tools into Your Agent</h2></div>
+            <div class="question-count">50 questions</div>
+          </header>
+          <div class="module-content">
+<h1>Module 2.2 — Practice Questions</h1>
+<p><strong>Module</strong>: Integrate custom tools into your agent <strong>Source</strong>: <a href="https://learn.microsoft.com/training/modules/build-agent-with-custom-tools/" target="_blank" rel="noopener noreferrer">Microsoft Learn</a></p>
+<p>50 practice questions covering the benefits of custom tools, custom tool options (function calling, Azure Functions, OpenAPI, Logic Apps), and how to integrate them with the Microsoft Foundry Agent Service.</p>
+<hr>
+<h2>Section 1: Why Use Custom Tools (Q1–10)</h2>
+<p class="question"><strong>Q1.</strong> What are the three core benefits of using custom tools with an agent?</p>
+<ul class="choices">
+<li>A) Lower cost, faster training, larger models</li>
+<li>B) Enhanced productivity, improved accuracy, tailored solutions</li>
+<li>C) More storage, better graphics, higher uptime</li>
+<li>D) Simpler code, fewer dependencies, no cloud</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Custom tools enhance productivity, improve accuracy, and provide tailored solutions for specific business needs.</div></details>
+<p class="question"><strong>Q2.</strong> Which statement best describes how an agent uses a custom tool?</p>
+<ul class="choices">
+<li>A) The developer writes code that explicitly calls the tool on every prompt</li>
+<li>B) The agent decides when to call the tool based on the user prompt</li>
+<li>C) The tool is called automatically before any prompt is processed</li>
+<li>D) The agent only uses tools when the model is fine-tuned</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The agent determines when to call a tool based on the user prompt and its instructions.</div></details>
+<p class="question"><strong>Q3.</strong> In the weather example, what triggers the agent to call the meteorological tool?</p>
+<ul class="choices">
+<li>A) A scheduled timer</li>
+<li>B) The user asking about weather conditions</li>
+<li>C) A manual API call from the developer</li>
+<li>D) The tool calling the agent first</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The user asks about weather; the agent determines it has a tool that can retrieve the info and calls it.</div></details>
+<p class="question"><strong>Q4.</strong> Which benefit of custom tools refers to "reducing the likelihood of human error"?</p>
+<ul class="choices">
+<li>A) Enhanced productivity</li>
+<li>B) Improved accuracy</li>
+<li>C) Tailored solutions</li>
+<li>D) Scalability</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Improved accuracy provides precise, consistent outputs and reduces human error.</div></details>
+<p class="question"><strong>Q5.</strong> A retail company connects its agent to a CRM to retrieve order histories and process refunds. This is an example of which scenario?</p>
+<ul class="choices">
+<li>A) Inventory management</li>
+<li>B) Customer support automation</li>
+<li>C) Healthcare scheduling</li>
+<li>D) IT helpdesk support</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Customer support automation connects the agent to a CRM for order history, refunds, and shipping status.</div></details>
+<p class="question"><strong>Q6.</strong> A manufacturing company links its agent to an inventory system to check stock and place supplier orders. This is an example of which scenario?</p>
+<ul class="choices">
+<li>A) Customer support automation</li>
+<li>B) E-learning and training</li>
+<li>C) Inventory management</li>
+<li>D) IT helpdesk support</li>
+</ul>
+<details><summary>Answer</summary><div><strong>C</strong> — Inventory management lets the agent check stock, predict restocking, and place orders.</div></details>
+<p class="question"><strong>Q7.</strong> Which scenario involves connecting an agent to a learning management system (LMS)?</p>
+<ul class="choices">
+<li>A) Healthcare appointment scheduling</li>
+<li>B) E-learning and training</li>
+<li>C) Inventory management</li>
+<li>D) Customer support automation</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — E-learning connects the agent to an LMS to recommend courses, track progress, and answer content questions.</div></details>
+<p class="question"><strong>Q8.</strong> An IT department connects its agent to ticketing and knowledge base systems. This is an example of which scenario?</p>
+<ul class="choices">
+<li>A) IT helpdesk support</li>
+<li>B) Healthcare scheduling</li>
+<li>C) Inventory management</li>
+<li>D) E-learning</li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — IT helpdesk support lets the agent troubleshoot, escalate, and track ticket statuses.</div></details>
+<p class="question"><strong>Q9.</strong> Which scenario connects an agent to patient records and appointment slots?</p>
+<ul class="choices">
+<li>A) Customer support automation</li>
+<li>B) Healthcare appointment scheduling</li>
+<li>C) Inventory management</li>
+<li>D) E-learning and training</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Healthcare scheduling lets the agent access patient records, suggest slots, and send reminders.</div></details>
+<p class="question"><strong>Q10.</strong> Why might built-in tools not meet all of an agent's needs?</p>
+<ul class="choices">
+<li>A) Built-in tools are always slower</li>
+<li>B) Built-in tools may not cover a specific business scenario</li>
+<li>C) Built-in tools cannot be enabled</li>
+<li>D) Built-in tools require custom code to run</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Built-in tools are useful but may not cover every specific business need, which is why custom tools exist.</div></details>
+<hr>
+<h2>Section 2: Options for Implementing Custom Tools (Q11–22)</h2>
+<p class="question"><strong>Q11.</strong> Which custom tool option lets the agent return the functions that need to be called along with their arguments?</p>
+<ul class="choices">
+<li>A) Azure Functions</li>
+<li>B) OpenAPI specification</li>
+<li>C) Function calling</li>
+<li>D) Azure Logic Apps</li>
+</ul>
+<details><summary>Answer</summary><div><strong>C</strong> — Function calling describes custom functions to the agent and returns which functions to call with their arguments.</div></details>
+<p class="question"><strong>Q12.</strong> Which option provides serverless, event-driven computing with triggers and bindings?</p>
+<ul class="choices">
+<li>A) Function calling</li>
+<li>B) Azure Functions</li>
+<li>C) OpenAPI specification tools</li>
+<li>D) Azure Logic Apps</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Azure Functions enables intelligent, event-driven applications with triggers and bindings.</div></details>
+<p class="question"><strong>Q13.</strong> Which option connects an agent to an external HTTP API using a standardized specification?</p>
+<ul class="choices">
+<li>A) Function calling</li>
+<li>B) Azure Functions</li>
+<li>C) OpenAPI specification tools</li>
+<li>D) Custom code execution</li>
+</ul>
+<details><summary>Answer</summary><div><strong>C</strong> — OpenAPI specification tools connect the agent to external APIs using an OpenAPI 3.0 spec.</div></details>
+<p class="question"><strong>Q14.</strong> Which option provides low-code/no-code workflows connecting apps, data, and services?</p>
+<ul class="choices">
+<li>A) Function calling</li>
+<li>B) Azure Functions</li>
+<li>C) OpenAPI specification tools</li>
+<li>D) Azure Logic Apps</li>
+</ul>
+<details><summary>Answer</summary><div><strong>D</strong> — Azure Logic Apps provides low-code/no-code solutions to add workflows and connect apps, data, and services.</div></details>
+<p class="question"><strong>Q15.</strong> In Azure Functions, what determines <em>when</em> a function executes?</p>
+<ul class="choices">
+<li>A) Bindings</li>
+<li>B) Triggers</li>
+<li>C) The agent's instructions</li>
+<li>D) The OpenAPI spec</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Triggers determine when a function executes; bindings connect to input/output data sources.</div></details>
+<p class="question"><strong>Q16.</strong> In Azure Functions, what facilitates streamlined connections to input or output data sources?</p>
+<ul class="choices">
+<li>A) Triggers</li>
+<li>B) Bindings</li>
+<li>C) Storage queues</li>
+<li>D) HTTP endpoints</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Bindings facilitate streamlined connections to input or output data sources.</div></details>
+<p class="question"><strong>Q17.</strong> Which custom tool option is described as integrating "custom logic and workflows, in a selection of programming languages"?</p>
+<ul class="choices">
+<li>A) Function calling</li>
+<li>B) Azure Logic Apps</li>
+<li>C) OpenAPI specification tools</li>
+<li>D) Azure Functions</li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — Function calling lets agents integrate custom logic and workflows in a selection of programming languages.</div></details>
+<p class="question"><strong>Q18.</strong> Which version of the OpenAPI specification does the Foundry Agent Service use for OpenAPI tools?</p>
+<ul class="choices">
+<li>A) OpenAPI 2.0</li>
+<li>B) OpenAPI 3.0</li>
+<li>C) OpenAPI 4.0</li>
+<li>D) Swagger 1.2</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Foundry Agent Service uses OpenAPI 3.0 specified tools.</div></details>
+<p class="question"><strong>Q19.</strong> Which of the following is NOT one of the custom tool options listed in the module?</p>
+<ul class="choices">
+<li>A) Function calling</li>
+<li>B) Azure Functions</li>
+<li>C) Power Automate flows</li>
+<li>D) OpenAPI specification tools</li>
+</ul>
+<details><summary>Answer</summary><div><strong>C</strong> — The module lists function calling, Azure Functions, OpenAPI specification tools, and Azure Logic Apps (not Power Automate).</div></details>
+<p class="question"><strong>Q20.</strong> Which option is best suited for an event-driven workflow that responds to queue messages?</p>
+<ul class="choices">
+<li>A) Function calling</li>
+<li>B) Azure Functions</li>
+<li>C) OpenAPI specification tools</li>
+<li>D) Azure Logic Apps only</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Azure Functions is ideal for event-driven workflows, responding to triggers such as HTTP requests or queue messages.</div></details>
+<p class="question"><strong>Q21.</strong> What do OpenAPI specifications describe that helps people understand how an API works?</p>
+<ul class="choices">
+<li>A) The database schema</li>
+<li>B) HTTP APIs</li>
+<li>C) The agent's instructions</li>
+<li>D) Cloud resource costs</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — OpenAPI specifications describe HTTP APIs, enabling understanding, client code generation, tests, and design standards.</div></details>
+<p class="question"><strong>Q22.</strong> Which statement correctly distinguishes function calling from Azure Functions?</p>
+<ul class="choices">
+<li>A) They are the same thing with different names</li>
+<li>B) Function calling is declarative in code; Azure Functions is a serverless service</li>
+<li>C) Azure Functions runs inside the LLM</li>
+<li>D) Function calling requires an OpenAPI spec</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Function calling describes functions your app executes; Azure Functions is serverless compute that executes them.</div></details>
+<hr>
+<h2>Section 3: How to Integrate Custom Tools (Q23–38)</h2>
+<p class="question"><strong>Q23.</strong> In the function calling example, what does the <code>FunctionTool</code> define?</p>
+<ul class="choices">
+<li>A) The model deployment name</li>
+<li>B) The function's name, parameters, and description</li>
+<li>C) The storage queue endpoint</li>
+<li>D) The API server URL</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — <code>FunctionTool</code> defines the function's name, parameter schema, and description so the model knows when/how to call it.</div></details>
+<p class="question"><strong>Q24.</strong> In the function calling example, what does the <code>recent_snowfall</code> function return?</p>
+<ul class="choices">
+<li>A) A Python dict object</li>
+<li>B) A JSON string with snowfall details</li>
+<li>C) An OpenAPI spec</li>
+<li>D) A storage queue message</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — It returns a JSON string like <code>{"location": ..., "snowfall": ...}</code> via <code>json.dumps</code>.</div></details>
+<p class="question"><strong>Q25.</strong> How is the function tool attached to the agent in the example?</p>
+<ul class="choices">
+<li>A) Via the <code>tools</code> list in <code>PromptAgentDefinition</code></li>
+<li>B) Via an environment variable</li>
+<li>C) Via a separate REST call</li>
+<li>D) Via the model deployment name</li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — The <code>tools: list[Tool] = [function_tool]</code> list is passed to <code>PromptAgentDefinition(tools=tools)</code>.</div></details>
+<p class="question"><strong>Q26.</strong> What SDK method creates an agent in the module's code examples?</p>
+<ul class="choices">
+<li>A) <code>project_client.agents.create(...)</code></li>
+<li>B) <code>project_client.agents.create_version(...)</code></li>
+<li>C) <code>project_client.agents.deploy(...)</code></li>
+<li>D) <code>project_client.agents.register(...)</code></li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — <code>project_client.agents.create_version(...)</code> creates the agent with a <code>PromptAgentDefinition</code>.</div></details>
+<p class="question"><strong>Q27.</strong> In the Azure Functions example, how does the agent communicate with the function?</p>
+<ul class="choices">
+<li>A) Direct HTTP call</li>
+<li>B) Via a storage queue (input/output bindings)</li>
+<li>C) Via email</li>
+<li>D) Via a shared database</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The agent sends requests to the Azure Function via a storage queue and processes results via output binding.</div></details>
+<p class="question"><strong>Q28.</strong> What class wraps an Azure Function as an agent tool?</p>
+<ul class="choices">
+<li>A) <code>FunctionTool</code></li>
+<li>B) <code>AzureFunctionTool</code></li>
+<li>C) <code>OpenApiTool</code></li>
+<li>D) <code>PromptAgentDefinition</code></li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — <code>AzureFunctionTool</code> wraps an <code>AzureFunctionDefinition</code> with input/output bindings.</div></details>
+<p class="question"><strong>Q29.</strong> In the OpenAPI example, what three authentication types are supported?</p>
+<ul class="choices">
+<li>A) Anonymous, API key, managed identity</li>
+<li>B) Basic, Bearer, OAuth</li>
+<li>C) Anonymous, SAS, certificate</li>
+<li>D) Client secret, password, API key</li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — OpenAPI 3.0 tools support anonymous, API key, and managed identity authentication.</div></details>
+<p class="question"><strong>Q30.</strong> Which class registers an OpenAPI-defined tool with the agent?</p>
+<ul class="choices">
+<li>A) <code>FunctionTool</code></li>
+<li>B) <code>AzureFunctionTool</code></li>
+<li>C) <code>OpenApiTool</code></li>
+<li>D) <code>OpenApiAnonymousAuthDetails</code> alone</li>
+</ul>
+<details><summary>Answer</summary><div><strong>C</strong> — <code>OpenApiTool</code> wraps an <code>OpenApiFunctionDefinition</code> containing the spec and auth details.</div></details>
+<p class="question"><strong>Q31.</strong> Why is the OpenAPI JSON loaded with <code>jsonref.loads()</code> in the example?</p>
+<ul class="choices">
+<li>A) To compress the file</li>
+<li>B) To resolve JSON references ($ref) in the spec</li>
+<li>C) To encrypt the spec</li>
+<li>D) To validate the server URL</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — <code>jsonref.loads</code> resolves JSON references so the spec is fully expanded for the tool definition.</div></details>
+<p class="question"><strong>Q32.</strong> What does the <code>auth</code> field set to <code>[]</code> in the OpenAPI JSON example indicate?</p>
+<ul class="choices">
+<li>A) No authentication is required</li>
+<li>B) API key authentication</li>
+<li>C) Managed identity authentication</li>
+<li>D) An error in the spec</li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — An empty <code>auth</code> array with <code>OpenApiAnonymousAuthDetails</code> means anonymous (no auth) access.</div></details>
+<p class="question"><strong>Q33.</strong> What is the declarative nature of custom tools?</p>
+<ul class="choices">
+<li>A) You must write code that explicitly calls each tool</li>
+<li>B) You provide function definitions and the agent decides when to call them</li>
+<li>C) Tools require a YAML manifest to run</li>
+<li>D) Tools run only at scheduled times</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — You don't write code that explicitly calls tools; the agent decides based on prompt messages.</div></details>
+<p class="question"><strong>Q34.</strong> Why is it important to give functions meaningful names and well-documented parameters?</p>
+<ul class="choices">
+<li>A) For code style only</li>
+<li>B) So the agent can "figure out" when and how to call them</li>
+<li>C) To reduce Azure costs</li>
+<li>D) To pass linters</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Meaningful names and documented parameters help the agent determine when and how to call a function.</div></details>
+<p class="question"><strong>Q35.</strong> In the function calling example, what does <code>strict=True</code> on the <code>FunctionTool</code> indicate?</p>
+<ul class="choices">
+<li>A) The function is only available to admins</li>
+<li>B) The model must conform to the parameter schema</li>
+<li>C) The function runs in a sandbox</li>
+<li>D) The tool cannot be removed</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — <code>strict=True</code> enforces strict schema conformance for the model's tool calls.</div></details>
+<p class="question"><strong>Q36.</strong> Which model deployment is used in the module's code examples?</p>
+<ul class="choices">
+<li>A) gpt-4o</li>
+<li>B) gpt-4.1</li>
+<li>C) o3-mini</li>
+<li>D) text-embedding-3</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The examples use <code>gpt-4.1</code> in <code>PromptAgentDefinition(model="gpt-4.1", ...)</code>.</div></details>
+<p class="question"><strong>Q37.</strong> What is the purpose of the agent's <code>instructions</code> in the tool examples?</p>
+<ul class="choices">
+<li>A) They define the OpenAPI spec</li>
+<li>B) They tell the agent how to behave and when to use the provided tools</li>
+<li>C) They set the model temperature</li>
+<li>D) They configure storage bindings</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Instructions define agent behavior, e.g., "Use the provided functions to answer questions."</div></details>
+<p class="question"><strong>Q38.</strong> Which statement about combining custom tool options is true?</p>
+<ul class="choices">
+<li>A) Only one tool option can be used per agent</li>
+<li>B) You can use one option or any combination of them</li>
+<li>C) Function calling and Azure Functions cannot be combined</li>
+<li>D) OpenAPI tools exclude all other tools</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — You can use one of the available custom tool options or any combination of them.</div></details>
+<hr>
+<h2>Section 4: Exercise and Application (Q39–50)</h2>
+<p class="question"><strong>Q39.</strong> What does the module's exercise have you build?</p>
+<ul class="choices">
+<li>A) A prompt flow in the Foundry portal</li>
+<li>B) An agent in code with a custom tool function</li>
+<li>C) A Power Automate workflow</li>
+<li>D) A fine-tuned model</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The exercise has you create an agent in code and connect the tool definition to a custom tool function.</div></details>
+<p class="question"><strong>Q40.</strong> Roughly how long does the exercise take?</p>
+<ul class="choices">
+<li>A) 5 minutes</li>
+<li>B) 30 minutes</li>
+<li>C) 2 hours</li>
+<li>D) 1 day</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The exercise is approximately 30 minutes.</div></details>
+<p class="question"><strong>Q41.</strong> What should you do with Azure resources after completing the exercise?</p>
+<ul class="choices">
+<li>A) Keep them for future modules</li>
+<li>B) Delete them to avoid unnecessary costs</li>
+<li>C) Scale them up</li>
+<li>D) Nothing</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The module recommends deleting the Azure resources you created during the exercise.</div></details>
+<p class="question"><strong>Q42.</strong> Which prerequisite is highly recommended before taking this module?</p>
+<ul class="choices">
+<li>A) Experience with the Microsoft Foundry Agent Service</li>
+<li>B) Experience with Azure Logic Apps</li>
+<li>C) Experience with the Azure CLI only</li>
+<li>D) Experience with Docker containers</li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — Experience with the Microsoft Foundry Agent Service is highly recommended.</div></details>
+<p class="question"><strong>Q43.</strong> A company needs its agent to call an existing public REST API with an OpenAPI spec available. Which option is the best fit?</p>
+<ul class="choices">
+<li>A) Function calling</li>
+<li>B) Azure Functions</li>
+<li>C) OpenAPI specification tool</li>
+<li>D) Azure Logic Apps</li>
+</ul>
+<details><summary>Answer</summary><div><strong>C</strong> — An OpenAPI specification tool connects the agent to external HTTP APIs using a standardized spec.</div></details>
+<p class="question"><strong>Q44.</strong> A company needs the agent to run a small piece of custom Python logic defined directly in the agent's code. Which option is the best fit?</p>
+<ul class="choices">
+<li>A) Function calling</li>
+<li>B) OpenAPI specification tool</li>
+<li>C) Azure Logic Apps</li>
+<li>D) Web search</li>
+</ul>
+<details><summary>Answer</summary><div><strong>A</strong> — Function calling lets you define custom functions in code that the agent calls dynamically.</div></details>
+<p class="question"><strong>Q45.</strong> A team wants to integrate the agent with a serverless function that runs when a queue message arrives. Which option fits best?</p>
+<ul class="choices">
+<li>A) Function calling</li>
+<li>B) Azure Functions</li>
+<li>C) OpenAPI specification tool</li>
+<li>D) Azure Logic Apps</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Azure Functions is ideal for event-driven workflows responding to triggers such as queue messages.</div></details>
+<p class="question"><strong>Q46.</strong> A non-developer wants to build an integration using visual workflows. Which option fits best?</p>
+<ul class="choices">
+<li>A) Function calling</li>
+<li>B) Azure Functions</li>
+<li>C) OpenAPI specification tool</li>
+<li>D) Azure Logic Apps</li>
+</ul>
+<details><summary>Answer</summary><div><strong>D</strong> — Azure Logic Apps provides low-code/no-code solutions to add workflows and connect apps, data, and services.</div></details>
+<p class="question"><strong>Q47.</strong> In the Azure Functions example, what is the name of the deployed function referenced by the tool?</p>
+<ul class="choices">
+<li>A) recent_snowfall</li>
+<li>B) queue_trigger</li>
+<li>C) get_weather</li>
+<li>D) process_results</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The <code>AzureFunctionDefinitionFunction</code> has <code>name="queue_trigger"</code>.</div></details>
+<p class="question"><strong>Q48.</strong> What does the input binding in the Azure Functions example use?</p>
+<ul class="choices">
+<li>A) An HTTP trigger</li>
+<li>B) A storage queue (<code>STORAGE_INPUT_QUEUE_NAME</code>)</li>
+<li>C) A timer trigger</li>
+<li>D) A blob trigger</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — The input binding uses <code>storage_queue</code> with <code>queue_name="STORAGE_INPUT_QUEUE_NAME"</code>.</div></details>
+<p class="question"><strong>Q49.</strong> Which concept do developers often have difficulty with regarding custom tools?</p>
+<ul class="choices">
+<li>A) Writing the function code</li>
+<li>B) The declarative nature — the agent decides when to call tools</li>
+<li>C) Choosing a model</li>
+<li>D) Setting up Azure credentials</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Developers often struggle with the declarative nature: no code explicitly calls the tool; the agent decides.</div></details>
+<p class="question"><strong>Q50.</strong> What is the overall goal of integrating custom tools into an agent?</p>
+<ul class="choices">
+<li>A) To replace the LLM</li>
+<li>B) To extend agent capabilities and enable seamless interaction with external systems, real-time processing, and scalable workflows</li>
+<li>C) To reduce the number of tools used</li>
+<li>D) To remove the need for instructions</li>
+</ul>
+<details><summary>Answer</summary><div><strong>B</strong> — Custom tools create powerful, flexible agents with seamless external integration, real-time processing, and scalable workflows.</div></details>
+<hr>
+<p><em>Practice questions created: 2026-08-04 · Source: Microsoft Learn module via MCP</em></p>
+          </div>
+        </article>
+    </main>
+  </div>
+  <script>
+    const search = document.querySelector("#search");
+    const filter = document.querySelector("#module-filter");
+    const cards = [...document.querySelectorAll(".module-card")];
+    const count = document.querySelector("#result-count");
+    const empty = document.querySelector("#empty");
+
+    function update() {
+      const query = search.value.trim().toLowerCase();
+      let visibleModules = 0;
+      let visibleQuestions = 0;
+      cards.forEach((card, index) => {
+        const moduleMatch = filter.value === "all" || filter.value === String(index + 1);
+        const textMatch = !query || card.textContent.toLowerCase().includes(query);
+        card.hidden = !(moduleMatch && textMatch);
+        if (!card.hidden) {
+          visibleModules++;
+          visibleQuestions += card.querySelectorAll(".question").length;
+        }
+      });
+      empty.hidden = visibleModules !== 0;
+      count.textContent = `Showing ${visibleModules} module${visibleModules === 1 ? "" : "s"} and ${visibleQuestions} questions.`;
+    }
+
+    search.addEventListener("input", update);
+    filter.addEventListener("change", update);
+    document.querySelector("#expand-all").addEventListener("click", () => document.querySelectorAll("details").forEach(item => item.open = true));
+    document.querySelector("#collapse-all").addEventListener("click", () => document.querySelectorAll("details").forEach(item => item.open = false));
+  </script>
+</body>
+</html>
