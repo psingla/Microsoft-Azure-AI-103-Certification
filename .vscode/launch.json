@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "MAF: Foundry chat",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}\\2. Develop AI agents on Azure\\projects\\maf.py",
+            "python": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
