@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 455" role="img" aria-labelledby="diagram-title diagram-desc">
+  <title id="diagram-title">Teams to Microsoft Agent Framework through Foundry Agent Service</title>
+  <desc id="diagram-desc">A Teams personal chat exchanges activities through Azure Bot Service with a custom Teams adapter hosted separately.
+    The adapter invokes a Microsoft Agent Framework agent hosted in Foundry using the Responses API.
+    Foundry sends server-sent text events back to the adapter, which buffers them and sends Teams streaming activities.
+    The adapter maps each authorized Teams conversation to a Foundry conversation or session.
+    The agent calls model deployments and optional tools or retrieval services.</desc>
+  <style>
+    svg { font-family: "Segoe UI", Arial, sans-serif; }
+    .title { font-size: 17px; font-weight: 700; fill: #182b43; }
+    .body { font-size: 12px; fill: #465c75; }
+    .label { font-size: 10px; font-weight: 700; letter-spacing: 1px; fill: #52647a; }
+    .flow { font-size: 10px; font-weight: 600; }
+  </style>
+  <defs>
+    <marker id="request-tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#245bd6"/>
+    </marker>
+    <marker id="answer-tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#087f72"/>
+    </marker>
+  </defs>
+  <rect width="1120" height="455" fill="white"/>
+  <rect x="9" y="30" width="410" height="296" rx="15" fill="#f6f5fc" stroke="#deddef"/>
+  <rect x="438" y="30" width="242" height="296" rx="15" fill="#f3f7fd" stroke="#d6e3f7"/>
+  <rect x="797" y="30" width="314" height="391" rx="15" fill="#eff8f5" stroke="#c6e4d8"/>
+  <text x="25" y="56" class="label">MICROSOFT 365 / CHANNEL</text>
+  <text x="454" y="56" class="label">YOUR APP HOSTING</text>
+  <text x="813" y="56" class="label">FOUNDRY AGENT SERVICE</text>
+  <text x="454" y="76" class="body">App Service or Container Apps</text>
+  <text x="813" y="76" class="body">Managed hosted-agent runtime</text>
+
+  <rect x="25" y="112" width="164" height="180" rx="12" fill="white" stroke="#d2cde9"/>
+  <circle cx="51" cy="140" r="14" fill="#6256a8"/>
+  <text x="51" y="145" text-anchor="middle" fill="white" font-size="13" font-weight="700">T</text>
+  <text x="42" y="177" class="title">Teams user</text>
+  <text x="42" y="199" class="body">Personal / 1:1 chat</text>
+  <text x="42" y="239" class="body">Send a question</text>
+  <text x="42" y="260" class="body">See the answer grow</text>
+
+  <rect x="256" y="112" width="146" height="180" rx="12" fill="white" stroke="#d2cde9"/>
+  <text x="272" y="143" class="label">CHANNEL ROUTING</text>
+  <text x="272" y="178" class="title">Azure Bot</text>
+  <text x="272" y="200" class="title">Service</text>
+  <text x="272" y="240" class="body">Teams channel</text>
+  <text x="272" y="261" class="body">Activity delivery</text>
+
+  <rect x="454" y="112" width="210" height="180" rx="12" fill="white" stroke="#bdd1ee"/>
+  <text x="470" y="143" class="label">YOUR INTEGRATION CODE</text>
+  <text x="470" y="178" class="title">Teams adapter</text>
+  <text x="470" y="201" class="body">Teams-capable SDK</text>
+  <text x="470" y="230" class="body">Authenticate + map context</text>
+  <text x="470" y="251" class="body">Buffer + forward text</text>
+  <text x="470" y="272" class="body">Finish / cancel / report errors</text>
+
+  <rect x="813" y="112" width="282" height="180" rx="12" fill="white" stroke="#b6dccc"/>
+  <text x="831" y="143" class="label">CUSTOM CODE IN A CONTAINER</text>
+  <text x="831" y="178" class="title">MAF agent</text>
+  <text x="831" y="201" class="body">Instructions, orchestration, tool calls</text>
+  <rect x="830" y="224" width="248" height="49" rx="7" fill="#edf7f2"/>
+  <text x="843" y="244" class="body">Foundry-compatible hosting adapter</text>
+  <text x="843" y="262" class="body">Responses protocol + streaming</text>
+
+  <path d="M189 188 H256" stroke="#245bd6" stroke-width="2" marker-end="url(#request-tip)"/>
+  <path d="M256 217 H189" stroke="#087f72" stroke-width="2" marker-end="url(#answer-tip)"/>
+  <path d="M402 188 H454" stroke="#245bd6" stroke-width="2" marker-end="url(#request-tip)"/>
+  <path d="M454 217 H402" stroke="#087f72" stroke-width="2" marker-end="url(#answer-tip)"/>
+  <path d="M664 167 H813" stroke="#245bd6" stroke-width="2" marker-end="url(#request-tip)"/>
+  <text x="738" y="138" text-anchor="middle" fill="#245bd6" class="flow">Responses API</text>
+  <text x="738" y="153" text-anchor="middle" fill="#245bd6" class="flow">stream = true</text>
+  <path d="M813 222 H664" stroke="#087f72" stroke-width="2" marker-end="url(#answer-tip)"/>
+  <text x="738" y="246" text-anchor="middle" fill="#087f72" class="flow">SSE text deltas</text>
+  <text x="738" y="261" text-anchor="middle" fill="#087f72" class="flow">+ lifecycle events</text>
+  <text x="215" y="313" text-anchor="middle" class="body">Teams streaming activities, not raw SSE</text>
+
+  <path d="M559 292 V352" stroke="#7488a2" stroke-dasharray="5 4" stroke-width="1.5"/>
+  <rect x="438" y="352" width="242" height="69" rx="10" fill="#f8fafc" stroke="#cdd7e4" stroke-dasharray="5 4"/>
+  <text x="454" y="376" class="title" style="font-size:14px">Conversation mapping / state</text>
+  <text x="454" y="397" class="body">Teams identity + chat to Foundry</text>
+  <text x="454" y="412" class="body">conversation / session; isolate users</text>
+
+  <path d="M954 292 V320 M874 320 H1035 M874 320 V339 M1035 320 V339" fill="none" stroke="#7488a2" stroke-width="1.5"/>
+  <rect x="813" y="339" width="122" height="64" rx="9" fill="white" stroke="#b6dccc"/>
+  <text x="874" y="364" text-anchor="middle" class="title" style="font-size:14px">Model</text>
+  <text x="874" y="385" text-anchor="middle" class="body">deployment</text>
+  <rect x="951" y="339" width="144" height="64" rx="9" fill="white" stroke="#b6dccc"/>
+  <text x="1023" y="364" text-anchor="middle" class="title" style="font-size:14px">Tools / retrieval</text>
+  <text x="1023" y="385" text-anchor="middle" class="body">optional dependencies</text>
+  <text x="25" y="378" class="body">Build: MAF agent + hosting adapter</text>
+  <text x="25" y="400" class="body">Deploy: container to Foundry Hosted Agents</text>
+  <text x="813" y="441" class="body">Dependencies may run outside this boundary.</text>
+</svg>

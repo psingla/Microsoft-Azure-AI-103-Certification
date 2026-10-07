@@ -134,7 +134,21 @@ For supported Teams/Copilot integrations, start with Foundry portal publishing. 
 
 Details: [Agent publishing](../2.%20Develop%20AI%20agents%20on%20Azure/notes/agent-publishing.md).
 
-## The whole idea to remember
+## 8. Architecture: bringing the concepts together
+
+**Teams is the interface; MAF defines agent behavior; Foundry Agent Service hosts the agent.**
+
+![Custom Teams adapter connecting Teams through Azure Bot Service to a Foundry-hosted MAF agent, with streaming responses, isolated conversation state, model access, and optional tools or retrieval.](../architecture/teams-foundry-agent-architecture.svg)
+
+This example uses a **custom Teams adapter**: requests travel left to right; streamed answers return right to left. Blue arrows show requests, green arrows show responses, and dashed lines show conversation-state mapping.
+
+- The agent uses the model, tools, and retrieval described above; the adapter maps each authorized Teams conversation to the correct agent session.
+- **Two streaming legs:** Foundry streams to the adapter; the adapter separately sends Teams streaming messages. Backend streaming alone does not guarantee progressive text in Teams.
+- **Simpler alternative:** publish directly through Foundry's managed Teams integration when a custom adapter is unnecessary; verify the end-to-end streaming experience.
+
+[Open the full architecture page, implementation constraints, and official references](../architecture/teams-foundry-agent-architecture.html).
+
+### The whole idea to remember
 
 **The model generates. RAG grounds. Tools extend access. Agents coordinate behavior. Sessions preserve context. Workflows control progress. A2A enables cross-agent communication. Publishing exposes the result securely when access controls are configured correctly.**
 
