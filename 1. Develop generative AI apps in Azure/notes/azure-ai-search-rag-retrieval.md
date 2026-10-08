@@ -8,6 +8,16 @@ Azure AI Search can provide the retrieval layer for RAG in Microsoft Foundry.
 
 *Diagram: Microsoft Learn.*
 
+## Foundry IQ and Azure AI Search
+
+**Remember: Foundry IQ is Azure AI Search; existing customers do not need to migrate.**
+
+- All Foundry IQ capabilities are available in Azure AI Search.
+- Existing customers have access to the latest features without moving to a new surface or experience.
+- The Foundry portal offers an integrated setup experience; Azure AI Search APIs remain available. New features still require their relevant configuration.
+
+Sources: [Azure AI Search product FAQ](https://azure.microsoft.com/en-us/products/ai-services/ai-search/) | [Foundry IQ technical FAQ](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/foundry-iq-faq) (checked 2026-10-08).
+
 ## Flow: ingest, index, retrieve, generate
 
 1. **Ingest:** bring in documents from sources such as Blob Storage, ADLS Gen2, OneLake, or file uploads, depending on the supported connector and workflow.

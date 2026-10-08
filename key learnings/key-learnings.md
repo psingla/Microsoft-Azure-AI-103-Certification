@@ -35,7 +35,7 @@ Azure AI Search can provide the retrieval layer. Prepare documents by ingesting 
 
 Query embeddings must be compatible with indexed embeddings. Hybrid + semantic ranking is a strong starting point, but evaluate relevance, latency, and cost on your questions.
 
-**Foundry IQ** builds on Azure AI Search's agentic retrieval capabilities; it is not simply a renamed Azure AI Search.
+**Foundry IQ is Azure AI Search.** All Foundry IQ capabilities are available in Azure AI Search; existing customers can access the latest features without migrating to a new surface or experience. [Microsoft product FAQ](https://azure.microsoft.com/en-us/products/ai-services/ai-search/).
 
 **Remember: search supplies evidence; the model generates the answer. Grounding reduces errors but does not guarantee truth.**
 
@@ -154,4 +154,4 @@ This example uses a **custom Teams adapter**: requests travel left to right; str
 
 Use only the layers the task needs; this is a progression of capabilities, not a mandatory runtime pipeline.
 
-*Based on the nine study notes above. Foundry IQ terminology and workflow retirement checked against Microsoft Learn on 2026-10-07. Preview, legacy, and SDK details can change. These notes focus on generative AI and agents, not the full exam; retain language and visual-data revision.*
+*Based on the nine study notes above. Foundry IQ terminology checked against Microsoft's product FAQ on 2026-10-08; workflow retirement checked against Microsoft Learn on 2026-10-07. Preview, legacy, and SDK details can change. These notes focus on generative AI and agents, not the full exam; retain language and visual-data revision.*
