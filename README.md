@@ -52,12 +52,6 @@ These concepts apply across AI platforms, not just Azure or AI-103.
 
 ---
 
-## Acknowledgments
-
-Special thanks to [himanshu231204](https://github.com/himanshu231204) for sharing [Microsoft-Azure-AI-103](https://github.com/himanshu231204/Microsoft-Azure-AI-103), the source of the question bank linked above. I haven't worked through the question bank yet, so I haven't verified its answers.
-
----
-
 <div align="center">
 
 [![Exam](https://img.shields.io/badge/Exam-AI103-blue?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/credentials/certifications/exams/ai-103)
