@@ -1,0 +1,1106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="30 advanced scenario-based questions covering all eight modules of Develop generative AI apps in Azure, with single-answer and multiple-answer choices.">
+  <title>AI-103: 30 Advanced Generative AI Practice Questions</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-alt: #eef4ff;
+      --text: #172033;
+      --muted: #5d6b82;
+      --border: #d9e2f1;
+      --brand: #175cd3;
+      --brand-dark: #0b3b8f;
+      --accent: #0f766e;
+      --answer: #ecfdf3;
+      --answer-border: #6ce9a6;
+      --shadow: 0 10px 30px rgba(16, 35, 70, 0.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c1424;
+        --surface: #131e31;
+        --surface-alt: #172844;
+        --text: #edf3ff;
+        --muted: #aebbd0;
+        --border: #2a3b57;
+        --brand: #84adff;
+        --brand-dark: #b2ccff;
+        --accent: #5fe9d0;
+        --answer: #102d28;
+        --answer-border: #159577;
+        --shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+      line-height: 1.65;
+    }
+    a { color: var(--brand); }
+    code {
+      padding: 0.12rem 0.35rem;
+      border-radius: 0.35rem;
+      background: var(--surface-alt);
+      font: 0.9em Consolas, "Cascadia Code", monospace;
+    }
+    .hero {
+      padding: 3.5rem max(1.25rem, calc((100vw - 1180px) / 2));
+      color: #fff;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(95, 233, 208, 0.35), transparent 28rem),
+        linear-gradient(135deg, #0b3b8f, #175cd3 55%, #0f766e);
+    }
+    .eyebrow {
+      margin: 0 0 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .hero h1 { max-width: 850px; margin: 0; font-size: clamp(2rem, 5vw, 3.75rem); line-height: 1.08; }
+    .hero-description { max-width: 720px; margin: 1rem 0 1.75rem; color: rgba(255, 255, 255, 0.88); font-size: 1.08rem; }
+    .stats { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .stat {
+      padding: 0.65rem 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      font-weight: 650;
+    }
+    .toolbar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding: 0.85rem max(1.25rem, calc((100vw - 1180px) / 2));
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      backdrop-filter: blur(14px);
+    }
+    .search {
+      min-width: min(100%, 330px);
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 0.65rem;
+      background: var(--surface);
+      color: var(--text);
+      font: inherit;
+    }
+    button, select {
+      padding: 0.72rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 0.65rem;
+      background: var(--surface);
+      color: var(--text);
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+    }
+    button:hover, select:hover { border-color: var(--brand); }
+    .layout {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 1.5rem;
+      width: min(1180px, calc((100% - 2.5rem)));
+      margin: 1.5rem auto 4rem;
+      align-items: start;
+    }
+    .sidebar {
+      position: sticky;
+      top: 5.2rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .sidebar h2 { margin: 0 0 0.65rem; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .sidebar nav { display: grid; gap: 0.25rem; }
+    .sidebar a {
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 0.4rem;
+      padding: 0.55rem;
+      border-radius: 0.55rem;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      line-height: 1.3;
+    }
+    .sidebar a:hover { background: var(--surface-alt); color: var(--brand); }
+    .sidebar a span { color: var(--brand); font-weight: 800; }
+    .content { min-width: 0; }
+    #result-count { margin: 0 0 1rem; color: var(--muted); font-size: 0.93rem; }
+    .module-card {
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      scroll-margin-top: 5.5rem;
+    }
+    .module-card[hidden] { display: none; }
+    .module-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, var(--surface-alt), var(--surface));
+    }
+    .module-header h2 { margin: 0.15rem 0 0; font-size: 1.35rem; }
+    .module-number { color: var(--brand); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+    .question-count {
+      flex: none;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: var(--brand);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 750;
+    }
+    .module-content { padding: 1.5rem clamp(1rem, 4vw, 2.25rem) 2.5rem; }
+    .module-content h3 { margin-top: 2.1rem; scroll-margin-top: 5.5rem; }
+    .module-content blockquote {
+      margin: 1rem 0;
+      padding: 0.75rem 1rem;
+      border-left: 4px solid var(--brand);
+      background: var(--surface-alt);
+      color: var(--muted);
+    }
+    .module-content ul, .module-content ol { padding-left: 1.6rem; }
+    .module-content li { margin: 0.25rem 0; }
+    details {
+      margin: 0.8rem 0 1.4rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--answer-border);
+      border-radius: 0.7rem;
+      background: var(--answer);
+    }
+    summary { color: var(--accent); font-weight: 800; cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.92rem; }
+    th, td { padding: 0.65rem; border: 1px solid var(--border); text-align: left; }
+    th { background: var(--surface-alt); }
+    .table-scroll { overflow-x: auto; }
+    .question { border-top: 1px solid var(--border); margin-top: 1.5rem; scroll-margin-top: 5.5rem; }
+    .question:first-child { border-top: 0; margin-top: 0; }
+    .question:first-child h3 { margin-top: 0; }
+    .no-results { padding: 2rem; border: 1px dashed var(--border); border-radius: 1rem; text-align: center; color: var(--muted); }
+    .study-note, .references { padding: 1rem; border: 1px solid var(--border); border-radius: 1rem; background: var(--surface); margin-bottom: 1.5rem; }
+    .references li { margin: 0.5rem 0; }
+    @media (max-width: 850px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .sidebar nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .toolbar { position: static; }
+    }
+    @media (max-width: 540px) {
+      .hero { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+      .layout { width: min(100% - 1rem, 1180px); }
+      .sidebar nav { grid-template-columns: 1fr; }
+      .module-header { align-items: flex-start; flex-direction: column; }
+      .toolbar > * { width: 100%; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { background: #fff; color: #000; font-size: 10pt; }
+      .toolbar, .sidebar { display: none !important; }
+      .hero { padding: 1.5rem; background: none; color: #000; }
+      .hero-description { color: #333; }
+      .stat { border-color: #999; background: none; }
+      .layout { display: block; width: 100%; margin: 0; }
+      .module-card { break-before: page; border: 0; box-shadow: none; }
+      .module-header { padding: 1rem 0; background: none; }
+      .module-content { padding: 0; }
+      details { break-inside: avoid; }
+      details:not([open]) > *:not(summary) { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Microsoft AI-103 &middot; Learning Path 1</p>
+    <h1>30 Advanced Generative AI Questions</h1>
+    <p class="hero-description">Develop generative AI apps in Azure: realistic constraints, competing technology choices, and explanations of why the tempting alternatives fail.</p>
+    <div class="stats">
+      <span class="stat">30 questions</span>
+      <span class="stat">8 modules</span>
+      <span class="stat">24 single-answer + 6 Choose TWO</span>
+      <span class="stat">Offline &amp; print ready</span>
+    </div>
+  </header>
+  <div class="toolbar" role="search">
+    <input class="search" id="search" type="search" placeholder="Search questions, answers, or topics..." aria-label="Search all content">
+    <select id="module-filter" aria-label="Filter by module">
+      <option value="all">All modules</option>
+      <option value="1">1.1 Plan and Prepare</option>
+      <option value="2">1.2 Choose and Deploy Models</option>
+      <option value="3">1.3 Develop an AI App with the Foundry SDK</option>
+      <option value="4">1.4 Get Started with Prompt Flow</option>
+      <option value="5">1.5 Develop a RAG-based Solution</option>
+      <option value="6">1.6 Fine-tune a Language Model</option>
+      <option value="7">1.7 Implement Responsible Generative AI</option>
+      <option value="8">1.8 Evaluate Generative AI Performance</option>
+    </select>
+    <button id="expand-answers" type="button">Show all answers</button>
+    <button id="collapse-answers" type="button">Hide all answers</button>
+    <button id="print" type="button">Print / Save PDF</button>
+  </div>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Jump to module</h2>
+      <nav>
+        <a href="#module-1" data-module-link="1"><span>01</span>1.1 Plan and Prepare</a>
+        <a href="#module-2" data-module-link="2"><span>02</span>1.2 Choose and Deploy Models</a>
+        <a href="#module-3" data-module-link="3"><span>03</span>1.3 Foundry SDK</a>
+        <a href="#module-4" data-module-link="4"><span>04</span>1.4 Prompt Flow</a>
+        <a href="#module-5" data-module-link="5"><span>05</span>1.5 RAG-based Solutions</a>
+        <a href="#module-6" data-module-link="6"><span>06</span>1.6 Fine-tuning</a>
+        <a href="#module-7" data-module-link="7"><span>07</span>1.7 Responsible Generative AI</a>
+        <a href="#module-8" data-module-link="8"><span>08</span>1.8 Evaluation</a>
+        <a href="#references"><span>Ref</span>Official sources</a>
+        <a href="./all-practice-questions.html"><span>420</span>Original question bank</a>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="study-note">
+        <p><strong>How to practise:</strong> Choose ONE answer unless the question says <strong>Choose TWO</strong>. For multi-select, both choices are needed for this exercise. Expand Answer only after explaining which requirement rules out each alternative.</p>
+        <p>Original practice material, not actual exam questions or a readiness guarantee. All organizations and measurements are hypothetical. Assume the specified features, APIs, models, and deployment types are supported in the stated environment. Product/API generations differ; Prompt Flow questions refer to the workspace-based flow tooling used in this learning path.</p>
+        <p>Search matches whole modules, including their explanations, as in the original bank. Clear search and select All modules to restore navigation. For an answer-key printout, select Show all answers before Print / Save PDF. Checked against official documentation on 2026-10-08.</p>
+      </div>
+      <p id="result-count" aria-live="polite">Showing all 8 modules and 30 questions.</p>
+
+      <article class="module-card" id="module-1" data-module="1" data-label="1.1 Plan and Prepare">
+        <header class="module-header">
+          <div><span class="module-number">Module 1 of 8</span><h2>1.1 Plan and Prepare</h2></div>
+          <span class="question-count">3 questions</span>
+        </header>
+        <div class="module-content">
+          <section class="question" id="q1" data-select="1">
+            <h3>1. Changing knowledge, stable writing style</h3>
+            <p>A manufacturer needs a support application that answers from approved warranty policies, which change daily. Answers must cite the current policy and use a consistent company tone. A prompt with a few examples already meets the tone requirement. The team wants the least complex design that stays current without repeated model training.</p>
+            <p><strong>Which design should you choose?</strong></p>
+            <ol class="options" type="A">
+              <li>Fine-tune on each day's policies and rely on the model to remember source citations.</li>
+              <li>Use RAG over a maintained policy index, supplying source metadata and the tested tone instructions at generation time.</li>
+              <li>Put every policy into a long-lived conversation once and reuse that conversation indefinitely.</li>
+              <li>Fine-tune for tone first, then use the model's pretrained knowledge for policy answers.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> The unresolved problem is current, attributable knowledge, not learned writing behavior. RAG supplies current evidence; the proven prompt handles tone.</p>
+              <ul>
+                <li><strong>A:</strong> Daily retraining adds operational cost and does not provide reliable source-level citations.</li>
+                <li><strong>C:</strong> Conversation state is bounded and becomes stale; it is not an updateable knowledge index.</li>
+                <li><strong>D:</strong> Fine-tuning an already-satisfied behavior does not solve access to current private policies.</li>
+              </ul>
+              <p><strong>Remember:</strong> Grounding supports citations; the application must still validate sources and unsupported claims.</p>
+            </details>
+          </section>
+          <section class="question" id="q2" data-select="1">
+            <h3>2. Development access must not become production access</h3>
+            <p>A team prototypes a generative application with developer credentials. Production must use an application identity, prohibit stored keys, and prevent developers from accidentally querying production customer data while testing. The team can provision distinct development and production resources.</p>
+            <p><strong>Which environment design best meets all requirements?</strong></p>
+            <ol class="options" type="A">
+              <li>Share the production resource, place keys in environment variables, and give test prompts a development prefix.</li>
+              <li>Use one service principal with the same client secret and broad permissions in both environments.</li>
+              <li>Keep separate projects but grant every developer and application identity access to all connected data sources.</li>
+              <li>Use separate environment resources/connections, managed identity for the production app, and environment-specific least-privilege role assignments.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Identity, authorization, and environment boundaries must be enforced independently; resource names or prompt labels are not isolation controls.</p>
+              <ul>
+                <li><strong>A:</strong> Stores keys and relies on a convention rather than access control.</li>
+                <li><strong>B:</strong> Violates the secretless requirement and creates cross-environment access.</li>
+                <li><strong>C:</strong> Separate projects alone do not constrain shared downstream permissions.</li>
+              </ul>
+            </details>
+          </section>
+          <section class="question" id="q3" data-select="2">
+            <h3>3. A leaderboard is not a deployment decision</h3>
+            <p>A model leads a public benchmark, but the application needs a specific input modality, an approved processing location, and a p95 response time below two seconds. Before approving the architecture, the team must establish both feasibility and actual workload fitness.</p>
+            <p><strong>Choose TWO checks that together address these requirements.</strong></p>
+            <ol class="options" type="A">
+              <li>Verify the model's required modality, context limits, deployment availability, quota/capacity, and processing-location constraints.</li>
+              <li>Choose the highest benchmark score and assume the application's latency will follow the same ranking.</li>
+              <li>Run representative task and load evaluations for quality, safety, latency, and cost in a compliant deployment.</li>
+              <li>Replace application evaluations with confirmation that the model accepts the request format.</li>
+              <li>Use the Azure resource's storage location as proof of where every deployment type processes inference.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: A, C</p>
+              <p><strong>Why:</strong> Capability and compliance checks eliminate infeasible candidates; workload evaluations establish whether a feasible candidate actually meets the thresholds.</p>
+              <ul>
+                <li><strong>B:</strong> A public benchmark is not a workload-specific latency or quality guarantee.</li>
+                <li><strong>D:</strong> Request acceptance establishes API compatibility, not acceptable outcomes.</li>
+                <li><strong>E:</strong> Processing geography depends on deployment type, not only the resource's storage location.</li>
+              </ul>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-2" data-module="2" data-label="1.2 Choose and Deploy Models">
+        <header class="module-header">
+          <div><span class="module-number">Module 2 of 8</span><h2>1.2 Choose and Deploy Models</h2></div>
+          <span class="question-count">4 questions</span>
+        </header>
+        <div class="module-content">
+          <section class="question" id="q4" data-select="1">
+            <h3>4. Select against every threshold</h3>
+            <p>An application must achieve at least 96% task accuracy and p95 latency no greater than 1.8 seconds. All candidates meet the safety and location requirements. These measurements include routing overhead and come from the same held-out dataset and load test. Select the lowest-cost qualifying configuration.</p>
+            <div class="table-scroll">
+              <table>
+                <caption>Measured candidate configurations</caption>
+                <thead><tr><th scope="col">Configuration</th><th scope="col">Accuracy</th><th scope="col">p95</th><th scope="col">Cost / 1,000 requests</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Small model</th><td>95.5%</td><td>0.7 s</td><td>$0.18</td></tr>
+                  <tr><th scope="row">Medium model</th><td>96.4%</td><td>1.6 s</td><td>$0.48</td></tr>
+                  <tr><th scope="row">Large model</th><td>98.2%</td><td>2.4 s</td><td>$1.10</td></tr>
+                  <tr><th scope="row">Small/large router</th><td>96.8%</td><td>1.4 s</td><td>$0.57</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p><strong>Which configuration should you deploy?</strong></p>
+            <ol class="options" type="A">
+              <li>The small model.</li><li>The large model.</li><li>The medium model.</li><li>The small/large router.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Medium satisfies both hard thresholds at $0.48, less than the qualifying router's $0.57.</p>
+              <ul>
+                <li><strong>A:</strong> Cheap and fast, but below the accuracy requirement.</li>
+                <li><strong>B:</strong> Most accurate, but exceeds the latency limit.</li>
+                <li><strong>D:</strong> Qualifies, but is not the lowest-cost qualifying option.</li>
+              </ul>
+            </details>
+          </section>
+          <section class="question" id="q5" data-select="1">
+            <h3>5. Processing location includes overflow</h3>
+            <p>A bank permits inference only within one named Azure region. It has a predictable baseline and variable bursts, and wants reserved capacity for the baseline with consumption-based overflow. The model supports both regional deployment types. The application will explicitly route overflow requests.</p>
+            <p><strong>Which deployment pair meets the location requirement?</strong></p>
+            <ol class="options" type="A">
+              <li>Regional Provisioned and Regional Standard, both in the approved region.</li>
+              <li>Data Zone Provisioned and Data Zone Standard in a data zone containing the region.</li>
+              <li>Regional Provisioned for normal traffic and Global Standard for overflow.</li>
+              <li>Global Provisioned and Global Standard resources created in the approved region.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Every permitted execution path must remain region-bound. Provisioned handles the baseline; regional Standard is the compliant overflow choice among these options.</p>
+              <ul>
+                <li><strong>B:</strong> A data zone may contain several regions.</li>
+                <li><strong>C:</strong> The overflow path breaks the same rule that the baseline satisfies.</li>
+                <li><strong>D:</strong> Resource creation location does not restrict Global inference to that region.</li>
+              </ul>
+              <p>Validate capacity and latency on both paths; this design does not guarantee that overflow capacity is always available.</p>
+            </details>
+          </section>
+          <section class="question" id="q6" data-select="1">
+            <h3>6. Isolate bulk inference from interactive quota</h3>
+            <p>A retailer runs an interactive assistant on a Standard deployment. It also needs to generate descriptions for 300,000 archived products. The archive workload can complete asynchronously, has no hard deadline, and permits global processing. The team wants lower inference cost without consuming the interactive deployment's real-time token quota.</p>
+            <p><strong>Which option should you choose for the archive workload?</strong></p>
+            <ol class="options" type="A">
+              <li>Standard calls on the same deployment, submitted through a client-side batch loop.</li>
+              <li>The same Standard deployment with streaming enabled for each archived product.</li>
+              <li>Provisioned throughput purchased solely to avoid submitting requests asynchronously.</li>
+              <li>Global Batch with its asynchronous processing and separate enqueued-token quota.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Service-side Batch matches the latency tolerance, cost objective, and quota separation.</p>
+              <ul>
+                <li><strong>A:</strong> A client loop does not turn Standard requests into the Batch service or separate their quota.</li>
+                <li><strong>B:</strong> Streaming changes response delivery, not quota accounting.</li>
+                <li><strong>C:</strong> Adds reserved-capacity cost without the stated real-time requirement.</li>
+              </ul>
+              <p>Batch turnaround is a target, not a hard completion guarantee.</p>
+            </details>
+          </section>
+          <section class="question" id="q7" data-select="1">
+            <h3>7. More retries make throttling worse</h3>
+            <p>A Python application receives 429 responses during short bursts. The SDK retries internally, while an outer application loop retries each failed SDK call three more times. Traces show synchronized retries, and responses include a retry-delay header. The allocated quota supports the measured steady workload.</p>
+            <p><strong>Which change best addresses the demonstrated failure?</strong></p>
+            <ol class="options" type="A">
+              <li>Increase retries in both layers so each request has more chances to succeed.</li>
+              <li>Use one bounded retry layer, honor the service delay, use backoff with jitter when needed, and smooth request bursts.</li>
+              <li>Reduce temperature and retain the same nested retry schedule.</li>
+              <li>Increase concurrency to drain the local queue before the next rate-limit window.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Remove retry multiplication and synchronized load. Use either the configured SDK retry behavior or a controlled outer policy, not accidental stacking.</p>
+              <ul>
+                <li><strong>A:</strong> Multiplies attempts and can prolong throttling.</li>
+                <li><strong>C:</strong> Generation variability is not the observed rate-limit problem.</li>
+                <li><strong>D:</strong> Increases burst pressure rather than respecting backpressure.</li>
+              </ul>
+              <p>Surface retry exhaustion explicitly. If sustained demand exceeds quota, capacity planning is still required.</p>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-3" data-module="3" data-label="1.3 Develop an AI App with the Foundry SDK">
+        <header class="module-header">
+          <div><span class="module-number">Module 3 of 8</span><h2>1.3 Develop an AI App with the Foundry SDK</h2></div>
+          <span class="question-count">4 questions</span>
+        </header>
+        <div class="module-content">
+          <section class="question" id="q8" data-select="1">
+            <h3>8. Project operations are not model inference</h3>
+            <p>A Python service must enumerate a Foundry project's connections and call a deployed model through the Responses API. The developer has a project endpoint and Microsoft Entra credentials but is trying to perform both operations through a standalone inference client.</p>
+            <p><strong>Which client arrangement should you use?</strong></p>
+            <ol class="options" type="A">
+              <li>Use a standalone inference client at the project endpoint for both connection enumeration and generation.</li>
+              <li>Use <code>DefaultAzureCredential</code> alone for both operations, without a service client.</li>
+              <li>Create <code>AIProjectClient</code> with the project endpoint and credential; use <code>get_openai_client()</code> for supported model operations and target the deployment name.</li>
+              <li>Use the Azure AI Search client to enumerate Foundry connections and send Responses requests.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Project management and model inference are different API surfaces. The project SDK provides the supported bridge to an authenticated OpenAI client.</p>
+              <ul>
+                <li><strong>A:</strong> An inference client does not become a project-management client merely by changing its endpoint.</li>
+                <li><strong>B:</strong> A credential obtains authentication material; it is not a service API client.</li>
+                <li><strong>D:</strong> The Search client targets another service.</li>
+              </ul>
+              <p>Match the installed SDK/API generation; do not mix legacy connection-string examples with current endpoint-based setup.</p>
+            </details>
+          </section>
+          <section class="question" id="q9" data-select="1">
+            <h3>9. Ordering: streaming is not a complete response</h3>
+            <p>An application streams a structured model response for progress feedback. It must persist a completed business result only after generation finishes and validation succeeds. A dropped connection or refusal must produce an explicit failure/review state, not a fabricated result.</p>
+            <p>Order these stages:</p>
+            <ol>
+              <li>Validate the complete structured output and its business invariants.</li>
+              <li>Start the request using a supported streaming API.</li>
+              <li>Inspect terminal status; branch explicitly on refusal, interruption, or incomplete generation.</li>
+              <li>Persist the validated result on success, otherwise the explicit failure/review state.</li>
+              <li>Accumulate the relevant output deltas without treating individual chunks as complete JSON.</li>
+            </ol>
+            <p><strong>Which sequence is correct for the successful path, with failure branches handled at their detection point?</strong></p>
+            <ol class="options" type="A">
+              <li>2 &rarr; 5 &rarr; 3 &rarr; 1 &rarr; 4</li>
+              <li>2 &rarr; 1 &rarr; 5 &rarr; 4 &rarr; 3</li>
+              <li>2 &rarr; 5 &rarr; 4 &rarr; 3 &rarr; 1</li>
+              <li>1 &rarr; 2 &rarr; 5 &rarr; 3 &rarr; 4</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Collect output, establish completion, validate, then commit the business result. Streaming improves perceived responsiveness but is not a completion guarantee.</p>
+              <ul>
+                <li><strong>B:</strong> Tries to validate before collecting the output and persists before checking terminal status.</li>
+                <li><strong>C:</strong> Commits unvalidated, potentially incomplete content.</li>
+                <li><strong>D:</strong> Cannot validate a generated response before the request exists.</li>
+              </ul>
+              <p>Use the events and completion/refusal indicators defined by the chosen API; event names differ between APIs.</p>
+            </details>
+          </section>
+          <section class="question" id="q10" data-select="2">
+            <h3>10. Local success does not prove production access</h3>
+            <p>A Foundry app works locally under a developer's identity. Its Azure-hosted deployment must authenticate without stored keys or client secrets and receive only the permissions needed for project/model operations. Network access is already verified. The team must not copy the developer's login state into production.</p>
+            <p><strong>Choose TWO actions that together implement the production authentication and authorization design.</strong></p>
+            <ol class="options" type="A">
+              <li>Copy the developer's cached token into the deployment artifact.</li>
+              <li>Enable/configure the production managed identity and use an appropriate Azure Identity credential for the service clients.</li>
+              <li>Grant subscription-wide Owner to the developer because local execution already succeeds.</li>
+              <li>Reuse a project endpoint as the credential because the URL uniquely identifies the project.</li>
+              <li>Assign the production identity the required least-privilege roles at the relevant project/resource scopes.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: B, E</p>
+              <p><strong>Why:</strong> The production workload needs its own identity and its own authorization. When using <code>DefaultAzureCredential</code>, verify which identity is selected in each environment.</p>
+              <ul>
+                <li><strong>A:</strong> Copies user authentication state and does not establish a safe workload identity.</li>
+                <li><strong>C:</strong> Changes the wrong principal and grants excessive permissions.</li>
+                <li><strong>D:</strong> An endpoint identifies a destination, not caller authority.</li>
+              </ul>
+            </details>
+          </section>
+          <section class="question" id="q11" data-select="1">
+            <h3>11. Schema compliance is not business correctness</h3>
+            <p>An app extracts invoice data with a model/API supporting structured outputs. The workflow needs mandatory fields, an approved currency enum, and a total equal to the sum of line items. Schema-valid results have occasionally contained incorrect totals. Refused or incomplete responses must not reach the accounting system.</p>
+            <p><strong>Which implementation satisfies the complete contract?</strong></p>
+            <ol class="options" type="A">
+              <li>Enable JSON mode and accept every parseable response.</li>
+              <li>Request the schema in the prompt and use low temperature instead of validation.</li>
+              <li>Use structured outputs and submit every schema-valid result directly to accounting.</li>
+              <li>Use supported schema-constrained output, then validate arithmetic/business rules and explicitly handle refusals, incomplete outputs, and validation failures.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Syntax, schema, business correctness, and exceptional outcomes are separate checks.</p>
+              <ul>
+                <li><strong>A:</strong> JSON mode does not enforce the required schema or arithmetic.</li>
+                <li><strong>B:</strong> A prompt and low temperature are not an output contract.</li>
+                <li><strong>C:</strong> Correct field types do not prove that a total was calculated correctly.</li>
+              </ul>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-4" data-module="4" data-label="1.4 Get Started with Prompt Flow">
+        <header class="module-header">
+          <div><span class="module-number">Module 4 of 8</span><h2>1.4 Get Started with Prompt Flow</h2></div>
+          <span class="question-count">3 questions</span>
+        </header>
+        <div class="module-content">
+          <section class="question" id="q12" data-select="1">
+            <h3>12. Put deterministic rules outside the LLM node</h3>
+            <p>A Prompt Flow application retrieves discount policy text and asks an LLM to draft a quotation. The discount amount must follow an exact rounding rule and an authoritative pricing function. Tests show occasional arithmetic errors when those rules are implemented only as prompt instructions.</p>
+            <p><strong>Which flow design should you use?</strong></p>
+            <ol class="options" type="A">
+              <li>Repeat the rounding rule several times in the prompt and allow the model to calculate the final price.</li>
+              <li>Use a Python tool node to call/implement the authoritative pricing logic, bind its validated result into the LLM prompt, and validate the exposed flow output.</li>
+              <li>Use an evaluation flow as the production price calculator after the quotation has already been sent.</li>
+              <li>Replace the pricing function with a larger model and remove the deterministic checks.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Prompt Flow can compose Python and LLM tools. Deterministic computation belongs in code; language generation explains the verified result rather than authorizing a new price.</p>
+              <ul>
+                <li><strong>A:</strong> Repetition does not guarantee exact computation.</li>
+                <li><strong>C:</strong> Evaluation measures results; running it after publication does not prevent an incorrect quote.</li>
+                <li><strong>D:</strong> Model size does not turn probabilistic arithmetic into an enforced business rule.</li>
+              </ul>
+            </details>
+          </section>
+          <section class="question" id="q13" data-select="1">
+            <h3>13. Perfect evaluation caused by answer leakage</h3>
+            <p>A batch dataset contains <code>question</code> and <code>expected_answer</code>. A flow accepts <code>query</code> and produces <code>answer</code>. Scores jump unexpectedly after someone maps both dataset columns into the generation prompt. The test is intended to measure answering without access to the reference answer.</p>
+            <p><strong>Which mapping should you use?</strong></p>
+            <ol class="options" type="A">
+              <li>Map <code>expected_answer</code> into both the generation prompt and the evaluation target.</li>
+              <li>Map the flow's generated answer back into <code>query</code> and use the original question as ground truth.</li>
+              <li>Map <code>question</code> to the generation flow's <code>query</code>; pass the run's generated answer and the separate reference answer to the evaluation flow.</li>
+              <li>Remove the reference answers from evaluation and report only whether the generation run completed.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Generation and evaluation require different inputs. Reference answers belong to the evaluator, not to a generation task designed to work without them.</p>
+              <ul>
+                <li><strong>A:</strong> Preserves the leakage and inflates the result.</li>
+                <li><strong>B:</strong> Reverses the semantics of inputs and reference data.</li>
+                <li><strong>D:</strong> Avoids measuring answer quality instead of fixing the mapping.</li>
+              </ul>
+              <p>Inspect sample-level inputs and outputs as well as the aggregate score.</p>
+            </details>
+          </section>
+          <section class="question" id="q14" data-select="2">
+            <h3>14. Compare prompts without confounding or leaking secrets</h3>
+            <p>A team has two alternative prompts for one LLM node. It wants to compare them fairly on the same dataset and promote the selected flow to another workspace. Credentials differ by environment and must not be embedded in prompt templates or source-controlled flow files.</p>
+            <p><strong>Choose TWO practices that meet these requirements.</strong></p>
+            <ol class="options" type="A">
+              <li>Use LLM-node prompt variants and comparable batch runs with the same dataset, model configuration, and evaluation criteria.</li>
+              <li>Evaluate each prompt on a different random subset and change the model at the same time.</li>
+              <li>Insert credentials directly into the prompt template so each variant is self-contained.</li>
+              <li>Use named Prompt Flow connections for service configuration and bind/provision the appropriate connections and permissions in each environment.</li>
+              <li>Select the prompt producing the shortest average response without assessing whether it still answers correctly.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: A, D</p>
+              <p><strong>Why:</strong> Controlled variants isolate the prompt change; connections keep service configuration and secret handling outside prompt text. Promotion still requires correct target-environment bindings and access.</p>
+              <ul>
+                <li><strong>B:</strong> Confounds prompt, dataset, and model effects.</li>
+                <li><strong>C:</strong> Exposes credentials to source control and potentially model inputs.</li>
+                <li><strong>E:</strong> Optimizes a proxy without a quality gate.</li>
+              </ul>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-5" data-module="5" data-label="1.5 Develop a RAG-based Solution">
+        <header class="module-header">
+          <div><span class="module-number">Module 5 of 8</span><h2>1.5 Develop a RAG-based Solution</h2></div>
+          <span class="question-count">5 questions</span>
+        </header>
+        <div class="module-content">
+          <blockquote>
+            <p><strong>Shared case study for Q15-19:</strong> A multi-tenant policy assistant uses Azure AI Search. Source PDFs include tables and exceptions spanning page boundaries. Chunks must retain report/page references and tenant/group access metadata. A trusted backend resolves current user permissions; this design uses application-enforced security filters. Policies change daily, and both exact policy identifiers and everyday-language questions must work. Document and query embeddings must remain compatible.</p>
+          </blockquote>
+          <section class="question" id="q15" data-select="1">
+            <h3>15. Ordering: preserve evidence through ingestion and retrieval</h3>
+            <p>The team needs an end-to-end pipeline in which vector fields represent the final chunks and no unauthorized chunk enters model context. Consider these stages:</p>
+            <ol>
+              <li>Generate an answer from eligible retrieved evidence and validate its source citations.</li>
+              <li>Extract content/layout and associate source/page and access metadata.</li>
+              <li>Generate embeddings for the finalized chunks.</li>
+              <li>Retrieve with compatible query embeddings and enforced permission filters; optionally rerank.</li>
+              <li>Create coherent chunks while preserving their source and access metadata.</li>
+              <li>Index chunk text, embeddings, and metadata with appropriate mappings/projections.</li>
+            </ol>
+            <p><strong>Which order satisfies the dependencies?</strong></p>
+            <ol class="options" type="A">
+              <li>2 &rarr; 3 &rarr; 5 &rarr; 6 &rarr; 4 &rarr; 1</li>
+              <li>2 &rarr; 5 &rarr; 6 &rarr; 4 &rarr; 3 &rarr; 1</li>
+              <li>2 &rarr; 5 &rarr; 3 &rarr; 6 &rarr; 1 &rarr; 4</li>
+              <li>2 &rarr; 5 &rarr; 3 &rarr; 6 &rarr; 4 &rarr; 1</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Extract, form evidence-preserving chunks, embed those chunks, index, perform authorized retrieval, then generate.</p>
+              <ul>
+                <li><strong>A:</strong> Embeds before the final chunk units exist.</li>
+                <li><strong>B:</strong> Attempts vector retrieval before the necessary chunk vectors have been produced and indexed.</li>
+                <li><strong>C:</strong> Generates before retrieval and access filtering.</li>
+              </ul>
+              <p>Source metadata is part of the pipeline, not something to guess from the generated answer.</p>
+            </details>
+          </section>
+          <section class="question" id="q16" data-select="1">
+            <h3>16. Retrieval finds the rule but loses its exception</h3>
+            <p>OCR is accurate, but fixed-size chunks separate policy limits from exceptions and drop table headings. Answers cite the correct report yet sometimes apply the wrong limit. Increasing the number of retrieved chunks adds unrelated text without consistently restoring the missing relationship.</p>
+            <p><strong>Which change most directly addresses the root cause?</strong></p>
+            <ol class="options" type="A">
+              <li>Use layout/section-aware chunking, preserve headings and table context, apply useful overlap where needed, and evaluate retrieval plus answers again.</li>
+              <li>Change only the chat model's temperature while retaining the broken chunk boundaries.</li>
+              <li>Remove exceptions from the index so the model receives a simpler rule.</li>
+              <li>Fine-tune the generation model on previous answers without correcting the ingestion pipeline.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Relevant words are present, but their semantic relationships were lost during preparation. Repair the evidence units rather than hide the symptom.</p>
+              <ul>
+                <li><strong>B:</strong> Does not restore missing contextual relationships.</li>
+                <li><strong>C:</strong> Deletes evidence necessary for correct decisions.</li>
+                <li><strong>D:</strong> Leaves the root cause and risks learning outdated policy behavior.</li>
+              </ul>
+              <p>No chunk size or overlap is universally best; evaluate with representative tables, cross-page exceptions, and citation requirements.</p>
+            </details>
+          </section>
+          <section class="question" id="q17" data-select="1">
+            <h3>17. Equal vector dimensions, incompatible meaning</h3>
+            <p>The index contains vectors produced by embedding model A. A developer changes only query vectorization to model B. Both outputs have 1,536 dimensions, so requests succeed, but relevance drops. Text, filters, and chunking are unchanged.</p>
+            <p><strong>Which correction should you make?</strong></p>
+            <ol class="options" type="A">
+              <li>Keep model B and increase neighbor count because equal vector length proves compatibility.</li>
+              <li>Pad or truncate every query vector to 1,536 dimensions.</li>
+              <li>Restore a compatible query configuration; if migrating to B, regenerate document vectors in a compatible field/index and evaluate before switching both sides.</li>
+              <li>Rely on semantic ranker to permanently compensate for the incompatible embedding spaces.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Dimensionality is a shape constraint, not proof that two models encode comparable coordinates. Document and query embeddings need a compatible embedding space/configuration.</p>
+              <ul>
+                <li><strong>A:</strong> More neighbors do not repair semantic incompatibility.</li>
+                <li><strong>B:</strong> The vectors already have matching lengths; padding/truncation does not align their meanings.</li>
+                <li><strong>D:</strong> Reranking may improve surviving candidates but cannot fix first-stage vector retrieval.</li>
+              </ul>
+            </details>
+          </section>
+          <section class="question" id="q18" data-select="2">
+            <h3>18. A cache can bypass an otherwise secure retriever</h3>
+            <p>The assistant's service identity can query every tenant. A browser supplies a tenant field, and the application caches answers by question text alone. Access membership can change. Both retrieval and cached answers must prevent disclosure to an unauthorized user.</p>
+            <p><strong>Choose TWO controls that address both paths.</strong></p>
+            <ol class="options" type="A">
+              <li>Derive current tenant/group scope from validated identity data in the backend and enforce it on every retrieval.</li>
+              <li>Trust the browser's tenant value if it matches a tenant name mentioned in the question.</li>
+              <li>Keep the global answer cache but remove citations when a different user receives the answer.</li>
+              <li>Ask the model to filter restricted facts after loading cached or retrieved content.</li>
+              <li>Scope cache reuse to an appropriate authorization context and source validity, rechecking or invalidating entries when access or underlying policy changes.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: A, E</p>
+              <p><strong>Why:</strong> A cache is another content-delivery path. Correct retrieval filtering does not protect answers reused across users or after access revocation.</p>
+              <ul>
+                <li><strong>B:</strong> Uses attacker-controlled claims rather than trusted identity.</li>
+                <li><strong>C:</strong> Removing a citation does not remove the confidential answer content.</li>
+                <li><strong>D:</strong> Enforces access too late and makes the model a security boundary.</li>
+              </ul>
+              <p>A tenant-only cache key can still be too broad when users within that tenant have different access.</p>
+            </details>
+          </section>
+          <section class="question" id="q19" data-select="1">
+            <h3>19. Candidates exist, but context selection is wrong</h3>
+            <p>A hybrid query returns 50 candidate passages containing the correct explanation. The application sends the first three directly to the model, and those three often omit the best passage. The team wants a language-understanding ranking stage before constructing the limited generation context.</p>
+            <p><strong>Which change should it make?</strong></p>
+            <ol class="options" type="A">
+              <li>Increase the generation model's output-token limit while using the same first three passages.</li>
+              <li>Apply semantic ranking to the retrieved candidates before selecting the passages for the generation prompt.</li>
+              <li>Shorten the indexer schedule even though the indexed policy text is current.</li>
+              <li>Apply semantic ranking only after truncating the candidate list to the same first three passages.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> The evidence is in the candidate set; the failure occurs when ordering and selecting context. Rerank before throwing useful candidates away.</p>
+              <ul>
+                <li><strong>A:</strong> Longer answers do not add missing evidence.</li>
+                <li><strong>C:</strong> Freshness is not the observed failure.</li>
+                <li><strong>D:</strong> Cannot recover a useful passage already removed by truncation.</li>
+              </ul>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-6" data-module="6" data-label="1.6 Fine-tune a Language Model">
+        <header class="module-header">
+          <div><span class="module-number">Module 6 of 8</span><h2>1.6 Fine-tune a Language Model</h2></div>
+          <span class="question-count">3 questions</span>
+        </header>
+        <div class="module-content">
+          <section class="question" id="q20" data-select="1">
+            <h3>20. Specialize behavior without freezing knowledge</h3>
+            <p>A legal application already retrieves the correct current clauses. Its remaining problem is consistently producing a specialized analysis style. Prompt iterations and schema constraints have not met the quality target. The team has many high-quality approved input/output examples. The source regulations continue to change.</p>
+            <p><strong>Which approach should it evaluate next?</strong></p>
+            <ol class="options" type="A">
+              <li>Fine-tune on the current regulations and remove retrieval entirely.</li>
+              <li>Increase only the number of retrieved passages even though evidence coverage is already sufficient.</li>
+              <li>Use JSON mode alone to learn the specialist analysis style.</li>
+              <li>Fine-tune a supported model on curated examples of the desired behavior, retain RAG for current clauses, and evaluate against the existing baseline.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Stable behavior specialization and changing knowledge are different needs. Fine-tuning is justified here by failed simpler approaches and suitable examples, not as the default first step.</p>
+              <ul>
+                <li><strong>A:</strong> Treats model weights as an updateable regulatory database.</li>
+                <li><strong>B:</strong> Targets an evidence problem the scenario says is already solved.</li>
+                <li><strong>C:</strong> Valid JSON does not teach specialist reasoning or style.</li>
+              </ul>
+              <p>Improvement is not guaranteed; preserve an independent quality and safety evaluation set.</p>
+            </details>
+          </section>
+          <section class="question" id="q21" data-select="1">
+            <h3>21. Training loss improves while generalization worsens</h3>
+            <p>A fine-tuning run reports the following losses on a fixed training set and separate validation set. The platform exposes the listed checkpoints. A final untouched test set is reserved for release evaluation.</p>
+            <div class="table-scroll">
+              <table>
+                <caption>Fine-tuning checkpoint observations</caption>
+                <thead><tr><th scope="col">Epoch</th><th scope="col">Training loss</th><th scope="col">Validation loss</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">1</th><td>0.72</td><td>0.76</td></tr>
+                  <tr><th scope="row">2</th><td>0.45</td><td>0.58</td></tr>
+                  <tr><th scope="row">3</th><td>0.28</td><td>0.66</td></tr>
+                  <tr><th scope="row">4</th><td>0.14</td><td>0.84</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p><strong>Which next step is best supported by this evidence?</strong></p>
+            <ol class="options" type="A">
+              <li>Use the epoch-2 checkpoint as a candidate, investigate overfitting, and evaluate task quality/safety before any deployment decision.</li>
+              <li>Deploy epoch 4 automatically because its training loss is lowest.</li>
+              <li>Train for more epochs until training loss approaches zero, ignoring validation loss.</li>
+              <li>Move the validation examples into training and continue to report performance on those same examples.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Validation loss is best at epoch 2 and worsens as training loss falls, suggesting overfitting. Loss nominates a candidate; it does not replace application evaluation.</p>
+              <ul>
+                <li><strong>B:</strong> Optimizes fit to training examples rather than generalization.</li>
+                <li><strong>C:</strong> Ignores the observed warning signal.</li>
+                <li><strong>D:</strong> Contaminates the evaluation and removes independent evidence.</li>
+              </ul>
+              <p>Use validation for selection and the untouched test set for the final assessment; do not repeatedly tune against the test set.</p>
+            </details>
+          </section>
+          <section class="question" id="q22" data-select="1">
+            <h3>22. More examples can mean less useful data</h3>
+            <p>A supervised fine-tuning dataset contains exported support conversations. Several conversations are duplicated with minor wording changes; some assistant replies are incorrect, and some contain personal data. A random row split puts variants of the same customer case into both training and validation.</p>
+            <p><strong>Which preparation strategy should you choose?</strong></p>
+            <ol class="options" type="A">
+              <li>Keep all examples because dataset size outweighs correctness and duplication.</li>
+              <li>Remove only exact byte-identical duplicates and keep random row splitting.</li>
+              <li>Curate approved answers, remove or appropriately sanitize sensitive data, deduplicate related cases, split by case/source group, and validate the required conversational JSONL format.</li>
+              <li>Train on the validation set too, then measure quality using the training service's success status.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Label quality, privacy, formatting, and leakage control all matter. Related-case splitting prevents near-duplicates from inflating validation results.</p>
+              <ul>
+                <li><strong>A:</strong> Incorrect targets teach unwanted behavior; volume is not a substitute for quality.</li>
+                <li><strong>B:</strong> Leaves semantic duplicates and related-case leakage.</li>
+                <li><strong>D:</strong> Eliminates independent evaluation; successful training is not proof of a useful model.</li>
+              </ul>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-7" data-module="7" data-label="1.7 Implement Responsible Generative AI">
+        <header class="module-header">
+          <div><span class="module-number">Module 7 of 8</span><h2>1.7 Implement Responsible Generative AI</h2></div>
+          <span class="question-count">4 questions</span>
+        </header>
+        <div class="module-content">
+          <section class="question" id="q23" data-select="1">
+            <h3>23. Grounded content can still contain hostile instructions</h3>
+            <p>A summarization application retrieves external reports. A report containing no violent or sexual content embeds instructions telling the model to disregard its summary task and disclose unrelated context. Existing harmful-content filters do not flag it. The team wants a control targeted at this failure, without treating retrieved text as trusted instructions.</p>
+            <p><strong>Which change should it make?</strong></p>
+            <ol class="options" type="A">
+              <li>Lower only the threshold for violence detection.</li>
+              <li>Add Prompt Shields for document attacks and preserve the separation between untrusted source content and application instructions.</li>
+              <li>Use a groundedness score as proof that the retrieved document is authorized to redefine the task.</li>
+              <li>Fine-tune on the hostile report so that the model recognizes it as company data.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> This is an indirect prompt-injection attempt in grounding content, not necessarily a harmful-content-category violation.</p>
+              <ul>
+                <li><strong>A:</strong> Tunes the wrong detection category.</li>
+                <li><strong>C:</strong> Supporting a claim with a source does not make the source a trusted instruction authority.</li>
+                <li><strong>D:</strong> Adds training work without establishing a runtime trust boundary.</li>
+              </ul>
+              <p>Detection is defense in depth, not a guarantee. Minimize available context and independently enforce access restrictions.</p>
+            </details>
+          </section>
+          <section class="question" id="q24" data-select="2">
+            <h3>24. Redacted model input, unredacted telemetry</h3>
+            <p>A trusted ingestion component may receive raw customer messages for PII detection. The summarization model, analytics store, and operational logs may receive only redacted content. A prototype redacts the model prompt but logs the raw HTTP body and exception payload first.</p>
+            <p><strong>Choose TWO controls that implement the complete data-handling requirement.</strong></p>
+            <ol class="options" type="A">
+              <li>Use PII detection/redaction inside the trusted ingestion boundary before passing content downstream.</li>
+              <li>Ask the summarizer to omit personal details while continuing to send it the raw message.</li>
+              <li>Keep raw logs and delete sensitive values after the nightly analytics job.</li>
+              <li>Configure telemetry and exception paths to exclude raw content, retaining only permitted redacted data and necessary diagnostic metadata.</li>
+              <li>Turn on model content filtering and assume it automatically redacts the application's HTTP logs.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: A, D</p>
+              <p><strong>Why:</strong> Model prompts, storage, traces, and errors are separate disclosure paths. Preprocessing and safe observability must enforce the same boundary.</p>
+              <ul>
+                <li><strong>B:</strong> Disclosure has already occurred when raw text reaches the model.</li>
+                <li><strong>C:</strong> Violates the policy before cleanup.</li>
+                <li><strong>E:</strong> A model filter does not control application logging.</li>
+              </ul>
+              <p>Evaluate detector misses and retention controls; automated redaction cannot guarantee removal of every sensitive value.</p>
+            </details>
+          </section>
+          <section class="question" id="q25" data-select="1">
+            <h3>25. A safety block is not a transient capacity error</h3>
+            <p>A generative application receives an explicit content-filter refusal or filtered completion. Its generic retry handler treats every missing answer as a transient service failure, repeatedly resubmitting the same request. Product policy requires safe handling without relaxing configured protections.</p>
+            <p><strong>Which response strategy should you implement?</strong></p>
+            <ol class="options" type="A">
+              <li>Retry until one response gets through, then present it as the normal result.</li>
+              <li>Automatically lower filter thresholds only for requests that have already failed.</li>
+              <li>Substitute a fabricated successful answer so the UI does not show an error.</li>
+              <li>Distinguish safety outcomes from retryable transport/rate-limit failures, present an appropriate safe explanation or allowed alternative, and record only permitted diagnostic metadata.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Different failure classes need different handling. A safety outcome is not fixed by blind retries or bypassing the protection.</p>
+              <ul>
+                <li><strong>A:</strong> Wastes requests and attempts to route around the safety decision.</li>
+                <li><strong>B:</strong> Silently weakens the required policy.</li>
+                <li><strong>C:</strong> Invents a result instead of accurately reporting the outcome.</li>
+              </ul>
+              <p>Do not expose raw blocked content or misleadingly report a refused response as a completed task.</p>
+            </details>
+          </section>
+          <section class="question" id="q26" data-select="1">
+            <h3>26. A strong average hides an unacceptable cohort</h3>
+            <p>A multilingual generative assistant improves average task success from 91% to 95%. A predeclared release rule requires at least 90% success for each supported language. One low-volume language falls from 90% to 74%, but its small sample share barely affects the average.</p>
+            <p><strong>Which release decision should you make?</strong></p>
+            <ol class="options" type="A">
+              <li>Hold release for the affected scope, investigate with representative language-specific evaluations, remediate, and rerun every required quality/safety gate.</li>
+              <li>Release because the weighted average improved by four percentage points.</li>
+              <li>Remove that language from the evaluation report while continuing to advertise support.</li>
+              <li>Increase temperature for all requests and assume the additional variability addresses the cohort gap.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> The per-language gate is a hard requirement. Aggregate improvement cannot cancel a failing supported cohort.</p>
+              <ul>
+                <li><strong>B:</strong> Ignores a declared release condition.</li>
+                <li><strong>C:</strong> Hides the failure rather than resolving the user impact.</li>
+                <li><strong>D:</strong> Changes a parameter without evidence that it fixes the issue.</li>
+              </ul>
+              <p>A scope restriction requires an explicit product decision and accurate user communication, not silent metric exclusion.</p>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-8" data-module="8" data-label="1.8 Evaluate Generative AI Performance">
+        <header class="module-header">
+          <div><span class="module-number">Module 8 of 8</span><h2>1.8 Evaluate Generative AI Performance</h2></div>
+          <span class="question-count">4 questions</span>
+        </header>
+        <div class="module-content">
+          <section class="question" id="q27" data-select="1">
+            <h3>27. Every claim is supported, but the question is unanswered</h3>
+            <p>A user asks when a warranty exception applies. The retrieved context contains the answer. The model instead summarizes the general warranty duration. Every statement it makes is supported by the context, and its writing is clear, so groundedness and fluency scores are high.</p>
+            <p><strong>Which evaluation dimension most directly exposes the remaining failure?</strong></p>
+            <ol class="options" type="A">
+              <li>Fluency, because unsupported statements are the main issue.</li>
+              <li>Groundedness alone, because any supported response must also answer the question.</li>
+              <li>Relevance, assessing whether the response addresses the user's actual request.</li>
+              <li>Token usage, because a shorter response is necessarily more relevant.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> The problem is answering the wrong aspect of the question, not inventing unsupported claims.</p>
+              <ul>
+                <li><strong>A:</strong> The response is already fluent; fluency does not establish task completion.</li>
+                <li><strong>B:</strong> Groundedness and relevance measure different properties.</li>
+                <li><strong>D:</strong> Output length is not a correctness metric.</li>
+              </ul>
+              <p>If an expected answer is available, a completeness check can additionally assess omitted required facts.</p>
+            </details>
+          </section>
+          <section class="question" id="q28" data-select="1">
+            <h3>28. Better relevance cannot buy a failed grounding gate</h3>
+            <p>A team compares an existing RAG application with a candidate on the same evaluation set. The release rules require at least a 90% groundedness pass rate and p95 latency at most 2.5 seconds. Safety gates pass for both. The figures below are proportions of samples passing the team's fixed evaluator thresholds, not raw evaluator scores.</p>
+            <div class="table-scroll">
+              <table>
+                <caption>Release evaluation</caption>
+                <thead><tr><th scope="col">Version</th><th scope="col">Relevance pass rate</th><th scope="col">Groundedness pass rate</th><th scope="col">p95</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Existing</th><td>86%</td><td>94%</td><td>2.2 s</td></tr>
+                  <tr><th scope="row">Candidate</th><td>93%</td><td>83%</td><td>1.7 s</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p><strong>Which decision follows the stated rules?</strong></p>
+            <ol class="options" type="A">
+              <li>Release the candidate because relevance and latency improved.</li>
+              <li>Keep the existing version while investigating unsupported claims and rerun the required gates after remediation.</li>
+              <li>Average relevance and groundedness together and substitute that value for the groundedness gate.</li>
+              <li>Lower the groundedness threshold after seeing the result and describe the original gate as passed.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> The candidate fails the independent 90% grounding requirement. Its 83% cannot be offset by lower latency or better relevance.</p>
+              <ul>
+                <li><strong>A:</strong> Trades away a mandatory requirement without authorization.</li>
+                <li><strong>C:</strong> Replaces the predeclared metric with a different one.</li>
+                <li><strong>D:</strong> Rewrites the acceptance criterion after observing a failure.</li>
+              </ul>
+            </details>
+          </section>
+          <section class="question" id="q29" data-select="2">
+            <h3>29. Debug the retrieval stage and watch the deployed system</h3>
+            <p>A RAG app's offline answer quality falls after changing retrieval settings. The team has query-to-document relevance labels and needs to identify the retrieval regression. After a fix, it also needs to detect future changes in real traffic without storing unrestricted user content.</p>
+            <p><strong>Choose TWO complementary evaluation practices.</strong></p>
+            <ol class="options" type="A">
+              <li>Use a Document Retrieval evaluator against the labeled query/document relevance data, inspecting per-query failures as well as aggregate metrics.</li>
+              <li>Evaluate only generated-text fluency because polished answers prove retrieval is correct.</li>
+              <li>Use training loss from an unrelated fine-tuning job as the retrieval metric.</li>
+              <li>Treat one successful offline run as proof that the deployed app will not drift.</li>
+              <li>Combine privacy-controlled production tracing/monitoring with sampled quality and safety evaluations, alerting on relevant regressions and reviewing affected cases.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: A, E</p>
+              <p><strong>Why:</strong> Labeled retrieval evaluation isolates a stage-specific regression; controlled production evaluation detects changes that a fixed offline set may miss.</p>
+              <ul>
+                <li><strong>B:</strong> Fluent text can be generated from irrelevant or incomplete evidence.</li>
+                <li><strong>C:</strong> Training loss measures a different process.</li>
+                <li><strong>D:</strong> Production data, indexes, model versions, and user behavior can change.</li>
+              </ul>
+              <p>Use permissions, retention controls, and redaction for any evaluation samples; observability is not permission to retain all content.</p>
+            </details>
+          </section>
+          <section class="question" id="q30" data-select="1">
+            <h3>30. The model is fast, but the application is slow</h3>
+            <p>A model deployment's latency and token usage are stable, but the application p95 rises after a retrieval change. The request path includes query embedding, search, reranking, prompt assembly, and generation. Operations needs to locate the delay and correlate it with answer quality without logging raw documents.</p>
+            <p><strong>Which measurement design should you implement?</strong></p>
+            <ol class="options" type="A">
+              <li>Monitor only the model deployment's average inference latency.</li>
+              <li>Record Azure resource-management events as a substitute for request-level spans.</li>
+              <li>Measure only final response length and assume larger outputs caused the regression.</li>
+              <li>Capture correlated application/dependency spans with safe metadata, export to Application Insights, and associate permitted evaluation results with request/run identifiers.</li>
+            </ol>
+            <details><summary>Answer</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> End-to-end observability exposes which stage is slow and allows quality investigations without requiring raw source text in logs.</p>
+              <ul>
+                <li><strong>A:</strong> Omits most of the application path and hides tail behavior in an average.</li>
+                <li><strong>B:</strong> Management-plane events are not a trace of request execution.</li>
+                <li><strong>C:</strong> Substitutes a weak proxy for direct timing evidence.</li>
+              </ul>
+              <p>Instrument relevant stages and review per-run breakdowns before changing the model or buying additional capacity.</p>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <div class="no-results" id="no-results" hidden>No modules match your search.</div>
+      <section class="references" id="references">
+        <h2>Official sources and scope</h2>
+        <p>This bank follows the eight modules in Learning Path 1, not all AI-103 domains. It deliberately excludes agent-service tool selection, multi-agent orchestration, and standalone vision/speech questions. More than one Azure product can solve many real problems; choose against the constraints stated in each scenario.</p>
+        <ul>
+          <li><a href="https://learn.microsoft.com/training/paths/create-custom-copilots-ai-studio/">Develop generative AI apps in Azure: official eight-module learning path</a></li>
+          <li><a href="https://learn.microsoft.com/credentials/certifications/resources/study-guides/ai-103">AI-103 study guide</a></li>
+          <li><a href="https://learn.microsoft.com/azure/foundry/foundry-models/concepts/deployment-types">Model deployment types</a> and <a href="https://learn.microsoft.com/azure/foundry/openai/how-to/quota">quota/retry guidance</a> &mdash; Q3-7</li>
+          <li><a href="https://learn.microsoft.com/python/api/overview/azure/ai-projects-readme?view=azure-python">Azure AI Projects Python SDK</a> and <a href="https://learn.microsoft.com/azure/foundry/openai/how-to/json-mode">JSON mode versus structured outputs</a> &mdash; Q8-11</li>
+          <li><a href="https://learn.microsoft.com/training/modules/get-started-prompt-flow-ai-studio/">Prompt Flow module</a>, <a href="https://learn.microsoft.com/azure/machine-learning/prompt-flow/concept-connections?view=azureml-api-2">connections</a>, and <a href="https://learn.microsoft.com/azure/machine-learning/prompt-flow/how-to-bulk-test-evaluate-flow?view=azureml-api-2">batch evaluation/input mapping</a> &mdash; Q12-14</li>
+          <li><a href="https://learn.microsoft.com/azure/search/search-features-list">Azure AI Search capabilities</a>, <a href="https://learn.microsoft.com/azure/search/search-security-trimming-for-azure-search">security filters</a>, and <a href="https://learn.microsoft.com/azure/search/search-faq-frequently-asked-questions#vectors">embedding compatibility</a> &mdash; Q15-19</li>
+          <li><a href="https://learn.microsoft.com/azure/ai-foundry/openai/how-to/fine-tuning">Fine-tuning and dataset preparation</a> &mdash; Q20-22</li>
+          <li><a href="https://learn.microsoft.com/azure/foundry/openai/concepts/content-filter-prompt-shields">Prompt Shields</a> and <a href="https://learn.microsoft.com/training/modules/responsible-ai-studio/">responsible generative AI module</a> &mdash; Q23-26</li>
+          <li><a href="https://learn.microsoft.com/azure/foundry/concepts/evaluation-evaluators/rag-evaluators">RAG evaluators</a> and <a href="https://learn.microsoft.com/training/modules/evaluate-models-azure-ai-studio/">generative AI evaluation module</a> &mdash; Q27-30</li>
+        </ul>
+        <p>For revision, explain why the rejected options violate the scenario. This practice set is not calibrated to Microsoft's exam score or question distribution.</p>
+      </section>
+    </main>
+  </div>
+  <script>
+    (() => {
+      const search = document.querySelector("#search");
+      const filter = document.querySelector("#module-filter");
+      const articles = [...document.querySelectorAll(".module-card")];
+      const resultCount = document.querySelector("#result-count");
+      const noResults = document.querySelector("#no-results");
+      const answers = [...document.querySelectorAll("details")];
+
+      const update = () => {
+        const term = search.value.trim().toLocaleLowerCase();
+        const moduleValue = filter.value;
+        let visible = 0;
+        let questions = 0;
+
+        for (const article of articles) {
+          const moduleMatches = moduleValue === "all" || article.dataset.module === moduleValue;
+          const textMatches = !term || article.textContent.toLocaleLowerCase().includes(term);
+          const show = moduleMatches && textMatches;
+          article.hidden = !show;
+          if (show) {
+            visible += 1;
+            const badge = article.querySelector(".question-count");
+            questions += Number.parseInt(badge.textContent, 10);
+          }
+        }
+
+        noResults.hidden = visible !== 0;
+        resultCount.textContent = term
+          ? `Found ${visible} matching module${visible === 1 ? "" : "s"} (${
+              questions
+            } total questions in those modules).`
+          : `Showing ${visible} module${visible === 1 ? "" : "s"} and ${questions} questions.`;
+      };
+
+      search.addEventListener("input", update);
+      filter.addEventListener("change", update);
+      document.querySelector("#expand-answers").addEventListener("click", () => {
+        answers.forEach((details) => {
+          details.open = true;
+        });
+      });
+      document.querySelector("#collapse-answers").addEventListener("click", () => {
+        answers.forEach((details) => {
+          details.open = false;
+        });
+      });
+      document.querySelector("#print").addEventListener("click", () => window.print());
+    })();
+  </script>
+</body>
+</html>
