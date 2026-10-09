@@ -13,6 +13,12 @@
 | Auth | Microsoft Entra ID + project permissions | Entra ID or API key, if enabled |
 | URL | `https://<resource>.services.ai.azure.com/api/projects/<project>` | `https://<resource>.openai.azure.com/openai/v1/` |
 
+**Resource host + project path = project endpoint.**
+
+- Project: `https://<resource>.services.ai.azure.com/api/projects/<project>`
+- Corresponding Foundry resource endpoint: `https://<resource>.services.ai.azure.com` (remove `/api/projects/<project>`).
+- Use the endpoint required by the specific service/client. The resource root is not automatically an OpenAI API `base_url`; OpenAI-compatible calls require the appropriate API route.
+
 ## 2. Choose MAF, Foundry SDK, or OpenAI SDK
 
 **Microsoft Agent Framework (MAF) = agent behavior; Foundry SDK = platform access; endpoint = where requests go.**

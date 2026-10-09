@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-103: Azure Language Practice Questions</title>
+  <style>
+    body { max-width: 960px; margin: 2rem auto; padding: 0 1rem; color: #172033; background: #f4f7fb; font: 16px/1.6 "Segoe UI", system-ui, sans-serif; }
+    h1, h2 { line-height: 1.3; }
+    fieldset { margin: 1.5rem 0; padding: 1.25rem; border: 1px solid #d9e2f1; border-radius: .75rem; background: #fff; }
+    legend { padding: 0 .4rem; font-weight: 700; }
+    label { display: block; padding: .45rem 0; cursor: pointer; }
+    input { margin-right: .5rem; }
+    details { margin-top: 1rem; padding: .75rem; border-radius: .5rem; background: #ecfdf3; }
+    summary { cursor: pointer; font-weight: 700; }
+    a { color: #175cd3; }
+    code { overflow-wrap: anywhere; }
+    @media print { body { background: #fff; } fieldset { break-inside: avoid; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Azure Language Practice Questions</h1>
+    <p>Learning Path 3: Develop natural language solutions in Azure.</p>
+    <p>4 single-answer questions supplied by the learner. Answer explanations are AI-generated; this is study material, not an official certification exam paper.</p>
+    <p>Select one option per question, then expand its answer. Selections are not scored or saved.</p>
+  </header>
+  <main>
+    <h2>Azure Language MCP server</h2>
+    <fieldset>
+      <legend>Q1. What is the primary role of the Azure Language MCP server?</legend>
+      <label><input type="radio" name="q1" value="A">A. To train and fine-tune custom language models for use by AI agents.</label>
+      <label><input type="radio" name="q1" value="B">B. To expose Azure Language text analysis capabilities as MCP tools for agents.</label>
+      <label><input type="radio" name="q1" value="C">C. To deploy and manage large language models in an Azure subscription.</label>
+      <details><summary>Show answer and explanation</summary>
+        <p><strong>Correct answer: B.</strong> The server exposes Azure Language capabilities, such as language detection, NER, and PII redaction, as tools an agent can use. It is not a model training or deployment service.</p>
+      </details>
+    </fieldset>
+    <fieldset>
+      <legend>Q2. How does an agent determine which Azure Language MCP tool to call when processing a user's prompt?</legend>
+      <label><input type="radio" name="q2" value="A">A. The developer writes routing logic to direct each prompt to a specific tool.</label>
+      <label><input type="radio" name="q2" value="B">B. The agent matches the prompt to tool descriptions received from the MCP server.</label>
+      <label><input type="radio" name="q2" value="C">C. The MCP server analyzes the prompt and automatically routes it to a tool.</label>
+      <details><summary>Show answer and explanation</summary>
+        <p><strong>Correct answer: B.</strong> The host discovers available tools through its MCP client and makes their descriptions and input schemas available to the agent. The agent selects a suitable tool; the MCP server executes the requested tool rather than independently choosing one from the original prompt.</p>
+      </details>
+    </fieldset>
+    <fieldset>
+      <legend>Q3. When building a Python client application, how do you reference a Foundry agent when calling the OpenAI Responses API?</legend>
+      <label><input type="radio" name="q3" value="A">A. By passing the agent's API key as a request header to the endpoint.</label>
+      <label><input type="radio" name="q3" value="B">B. By specifying the agent name in the <code>agent_reference</code> field in <code>extra_body</code>.</label>
+      <label><input type="radio" name="q3" value="C">C. By passing the agent's endpoint URL as the <code>model</code> parameter value.</label>
+      <details><summary>Show answer and explanation</summary>
+        <p><strong>Correct answer: B.</strong> With the OpenAI client obtained from the Foundry project client, pass <code>extra_body={"agent_reference": {"name": "&lt;agent-name&gt;", "type": "agent_reference"}}</code>. This references an existing configured agent.</p>
+      </details>
+    </fieldset>
+    <fieldset>
+      <legend>Q4. What authentication method is used when connecting the Azure Language MCP server to a Foundry agent?</legend>
+      <label><input type="radio" name="q4" value="A">A. OAuth 2.0 authentication with a client certificate and tenant ID.</label>
+      <label><input type="radio" name="q4" value="B">B. Key-based authentication using the <code>Ocp-Apim-Subscription-Key</code> credential.</label>
+      <label><input type="radio" name="q4" value="C">C. Anonymous access that requires no authentication or credentials.</label>
+      <details><summary>Show answer and explanation</summary>
+        <p><strong>Correct answer: B.</strong> In the documented key-based connection setup, configure the Azure Language resource key using the <code>Ocp-Apim-Subscription-Key</code> header. Store the key securely, never in source code. This setup is distinct from Microsoft Entra authentication used by a direct SDK client.</p>
+      </details>
+    </fieldset>
+  </main>
+  <footer>
+    <p>Sources: <a href="https://learn.microsoft.com/azure/ai-services/language-service/concepts/foundry-tools-agents">Azure Language tools and agents</a> | <a href="https://learn.microsoft.com/azure/foundry/agents/concepts/runtime-components#generate-responses">Generate agent responses</a> | <a href="https://modelcontextprotocol.io/docs/learn/architecture">MCP architecture</a></p>
+  </footer>
+</body>
+</html>
