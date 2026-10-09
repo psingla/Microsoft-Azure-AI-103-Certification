@@ -22,7 +22,7 @@
   <header>
     <h1>Azure Language Practice Questions</h1>
     <p>Learning Path 3: Develop natural language solutions in Azure.</p>
-    <p>4 single-answer questions supplied by the learner. Answer explanations are AI-generated; this is study material, not an official certification exam paper.</p>
+    <p>7 single-answer questions supplied by the learner. Answer explanations are AI-generated; this is study material, not an official certification exam paper.</p>
     <p>Select one option per question, then expand its answer. Selections are not scored or saved.</p>
   </header>
   <main>
@@ -63,9 +63,38 @@
         <p><strong>Correct answer: B.</strong> In the documented key-based connection setup, configure the Azure Language resource key using the <code>Ocp-Apim-Subscription-Key</code> header. Store the key securely, never in source code. This setup is distinct from Microsoft Entra authentication used by a direct SDK client.</p>
       </details>
     </fieldset>
+    <h2>Text and speech translation</h2>
+    <fieldset>
+      <legend>Q5. What function of an Azure Translator TextTranslationClient object should you use to convert the Chinese word "你好" to the English word "Hello"?</legend>
+      <label><input type="radio" name="q5" value="A">A. <code>get_supported_languages</code></label>
+      <label><input type="radio" name="q5" value="B">B. <code>translate</code></label>
+      <label><input type="radio" name="q5" value="C">C. <code>transliterate</code></label>
+      <details><summary>Show answer and explanation</summary>
+        <p><strong>Correct answer: B.</strong> <code>translate</code> converts the meaning of text into another language. <code>transliterate</code> changes its writing system, and <code>get_supported_languages</code> lists supported languages rather than converting text.</p>
+      </details>
+    </fieldset>
+    <fieldset>
+      <legend>Q6. What function of an Azure Translator TextTranslationClient object should you use to convert the Russian word "спасибо" in Cyrillic characters to "spasibo" in Latin characters?</legend>
+      <label><input type="radio" name="q6" value="A">A. <code>get_supported_languages</code></label>
+      <label><input type="radio" name="q6" value="B">B. <code>translate</code></label>
+      <label><input type="radio" name="q6" value="C">C. <code>transliterate</code></label>
+      <details><summary>Show answer and explanation</summary>
+        <p><strong>Correct answer: C.</strong> <code>transliterate</code> changes the script while preserving the word's approximate pronunciation. "Spasibo" is Russian represented in Latin characters, not its English translation ("thank you").</p>
+      </details>
+    </fieldset>
+    <fieldset>
+      <legend>Q7. Which Azure Speech SDK object should you use to specify the language(s) into which you want speech translated?</legend>
+      <label><input type="radio" name="q7" value="A">A. <code>SpeechConfig</code></label>
+      <label><input type="radio" name="q7" value="B">B. <code>SpeechTranslationConfig</code></label>
+      <label><input type="radio" name="q7" value="C">C. <code>AudioConfig</code></label>
+      <details><summary>Show answer and explanation</summary>
+        <p><strong>Correct answer: B.</strong> <code>SpeechTranslationConfig</code> specifies translation target languages through <code>target_languages</code> or <code>add_target_language()</code>. <code>AudioConfig</code> selects audio input/output, while <code>SpeechConfig</code> is the general recognition/synthesis configuration.</p>
+      </details>
+    </fieldset>
   </main>
   <footer>
     <p>Sources: <a href="https://learn.microsoft.com/azure/ai-services/language-service/concepts/foundry-tools-agents">Azure Language tools and agents</a> | <a href="https://learn.microsoft.com/azure/foundry/agents/concepts/runtime-components#generate-responses">Generate agent responses</a> | <a href="https://modelcontextprotocol.io/docs/learn/architecture">MCP architecture</a></p>
+    <p>Translation references: <a href="https://learn.microsoft.com/python/api/azure-ai-translation-text/azure.ai.translation.text.texttranslationclient?view=azure-python">TextTranslationClient</a> | <a href="https://learn.microsoft.com/python/api/azure-cognitiveservices-speech/azure.cognitiveservices.speech.translation.speechtranslationconfig?view=azure-python">SpeechTranslationConfig</a></p>
   </footer>
 </body>
 </html>
