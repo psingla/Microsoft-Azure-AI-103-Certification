@@ -40,7 +40,13 @@ The course has **4 learning paths** with **34 modules total**:
 
 *My Priority reflects my current learning focus, not exam weight: 1 = lowest, 5 = highest. Ratings can change as I progress.*
 
-I found learning paths 3 and 4 less relevant to my current code-first agent work, so my notes, projects, and practice questions focus on paths 1 and 2. This is a personal study choice, not a claim that paths 3 and 4 are unimportant for the exam.
+I found learning paths 3 and 4 less relevant to my current code-first agent work, so my notes, projects, and topic-specific question banks focus on paths 1 and 2. This is a personal study choice, not a claim that paths 3 and 4 are unimportant for the exam.
+
+### Full-Length Practice Test Papers
+
+[Full-length case-based question papers](./test-papers/) cover topics across the certification.
+
+**All practice questions in this repository are AI-generated**, not official Microsoft exam questions. They may contain errors; verify answers against current Microsoft Learn documentation.
 
 ## The AI Stack: Beyond This Certification
 
