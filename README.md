@@ -36,11 +36,11 @@ The course has **4 learning paths** with **34 modules total**:
 | [1. Develop generative AI apps in Azure](https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/) | [Notes and projects](./1.%20Develop%20generative%20AI%20apps%20in%20Azure/) | [Question bank](./1.%20Develop%20generative%20AI%20apps%20in%20Azure/questions/) | 30–35% | **5/5 — Core focus** |
 | [2. Develop AI agents on Azure](https://learn.microsoft.com/en-us/training/paths/develop-ai-agents-azure/) | [Notes and projects](./2.%20Develop%20AI%20agents%20on%20Azure/) | [Question bank](https://github.com/psingla/Microsoft-Azure-AI-103-Certification/tree/main/2.%20Develop%20AI%20agents%20on%20Azure/questions) | 30–35% | **5/5 — Core focus** |
 | [3. Develop natural language solutions in Azure](https://learn.microsoft.com/en-us/training/paths/develop-language-solutions-azure-ai/) | [Notes and projects](https://github.com/psingla/Microsoft-Azure-AI-103-Certification/tree/main/3.%20Develop%20natural%20language%20solutions%20in%20Azure) | [Question bank](https://github.com/psingla/Microsoft-Azure-AI-103-Certification/tree/main/3.%20Develop%20natural%20language%20solutions%20in%20Azure/questions) | 10–15% | **3/5 — Supporting knowledge** |
-| [4. Extract insights from visual data on Azure](https://learn.microsoft.com/en-us/training/paths/insight-visual-data/) | Less relevant to my current learning goals | Not prioritized | 20–30% | **3/5 — Supporting knowledge** |
+| [4. Extract insights from visual data on Azure](https://learn.microsoft.com/en-us/training/paths/insight-visual-data/) | [Notes and projects](https://github.com/psingla/Microsoft-Azure-AI-103-Certification/tree/main/4.%20Extract%20insights%20from%20visual%20data%20on%20Azure) | [Question bank](https://github.com/psingla/Microsoft-Azure-AI-103-Certification/tree/main/4.%20Extract%20insights%20from%20visual%20data%20on%20Azure/questions) | 20–30% | **3/5 — Supporting knowledge** |
 
 *My Priority reflects my current learning focus, not exam weight: 1 = lowest, 5 = highest. Ratings can change as I progress.*
 
-My notes, projects, and topic-specific question banks cover paths 1, 2, and 3, with paths 1 and 2 remaining my core focus. Path 4 is less relevant to my current code-first agent work. This is a personal study choice, not a claim that the supporting paths are unimportant for the exam.
+My notes, projects, and topic-specific question banks cover all four learning paths, with paths 1 and 2 remaining my core focus. This is a personal study choice, not a claim that the supporting paths are unimportant for the exam.
 
 ### Full-Length Practice Test Papers
 
@@ -58,6 +58,12 @@ These concepts apply across AI platforms, not just Azure or AI-103.
 ![AI stack illustrated using a human-body analogy: LLM, RAG, MCP, skills, and AI agents](./assets/images/ai-stack-human-body.png)
 
 *Infographic credit: GenAI.works.*
+
+### The Full AI Stack
+
+![The full AI stack explained across nine layers: LLMs, inference and access, agent frameworks, tools and protocols, memory, vector databases, embeddings and rerankers, data extraction, and evaluations and observability.](./assets/images/full-ai-stack.png)
+
+*Infographic credit: Harish Kumar, as shown in the supplied image. This is a third-party overview, not an official Microsoft architecture or certification guide; verify tool and model details against current documentation.*
 
 ---
 
