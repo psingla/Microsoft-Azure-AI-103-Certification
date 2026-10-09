@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="30 advanced multiple-choice questions for Develop AI agents on Azure, covering nine learning-path modules with six Choose TWO questions and explained answers.">
+  <title>AI-103: 30 Advanced AI Agent Practice Questions</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f7fb; --surface: #fff; --surface-alt: #eef4ff;
+      --text: #172033; --muted: #5d6b82; --border: #d9e2f1;
+      --brand: #175cd3; --accent: #0f766e; --answer: #ecfdf3;
+      --answer-border: #6ce9a6; --shadow: 0 10px 30px rgba(16,35,70,.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c1424; --surface: #131e31; --surface-alt: #172844;
+        --text: #edf3ff; --muted: #aebbd0; --border: #2a3b57;
+        --brand: #84adff; --accent: #5fe9d0; --answer: #102d28;
+        --answer-border: #159577; --shadow: 0 12px 35px rgba(0,0,0,.25);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.65 Inter, "Segoe UI", system-ui, sans-serif; }
+    a { color: var(--brand); }
+    code { padding: .12rem .35rem; border-radius: .35rem; background: var(--surface-alt); font: .9em Consolas, monospace; }
+    .hero { padding: 3.5rem max(1.25rem, calc((100vw - 1180px)/2)); color: #fff; background: radial-gradient(circle at 85% 15%,rgba(95,233,208,.35),transparent 28rem),linear-gradient(135deg,#0b3b8f,#175cd3 55%,#0f766e); }
+    .eyebrow { margin: 0 0 .5rem; font-size: .85rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .hero h1 { max-width: 850px; margin: 0; font-size: clamp(2rem,5vw,3.75rem); line-height: 1.08; }
+    .hero-description { max-width: 720px; color: rgba(255,255,255,.88); font-size: 1.08rem; }
+    .stats { display: flex; flex-wrap: wrap; gap: .75rem; }
+    .stat { padding: .65rem .95rem; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; background: rgba(255,255,255,.12); font-weight: 650; }
+    .toolbar { position: sticky; z-index: 20; top: 0; display: flex; flex-wrap: wrap; gap: .75rem; padding: .85rem max(1.25rem,calc((100vw - 1180px)/2)); border-bottom: 1px solid var(--border); background: color-mix(in srgb,var(--surface) 92%,transparent); backdrop-filter: blur(14px); }
+    input, select, button { padding: .72rem .9rem; border: 1px solid var(--border); border-radius: .65rem; background: var(--surface); color: var(--text); font: inherit; }
+    input { min-width: min(100%,330px); flex: 1; }
+    button, select { font-weight: 650; cursor: pointer; }
+    button:hover, select:hover { border-color: var(--brand); }
+    .layout { display: grid; grid-template-columns: 270px minmax(0,1fr); gap: 1.5rem; width: min(1180px,calc(100% - 2.5rem)); margin: 1.5rem auto 4rem; align-items: start; }
+    .sidebar { position: sticky; top: 5.2rem; padding: 1rem; border: 1px solid var(--border); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow); }
+    .sidebar h2 { margin: 0 0 .65rem; color: var(--muted); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+    .sidebar nav { display: grid; gap: .25rem; }
+    .sidebar a { display: grid; grid-template-columns: 2rem 1fr; gap: .4rem; padding: .55rem; border-radius: .55rem; color: var(--text); text-decoration: none; font-size: .9rem; line-height: 1.3; }
+    .sidebar a:hover { background: var(--surface-alt); color: var(--brand); }
+    .sidebar a span { color: var(--brand); font-weight: 800; }
+    .content { min-width: 0; }
+    #result-count { color: var(--muted); }
+    .module-card { margin-bottom: 1.5rem; overflow: hidden; border: 1px solid var(--border); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow); scroll-margin-top: 5.5rem; }
+    .module-card[hidden] { display: none; }
+    .module-header { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); background: linear-gradient(135deg,var(--surface-alt),var(--surface)); }
+    .module-header h2 { margin: .15rem 0 0; font-size: 1.35rem; }
+    .module-number { color: var(--brand); font-size: .75rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .question-count { flex: none; padding: .35rem .7rem; border-radius: 999px; background: var(--brand); color: #fff; font-size: .8rem; font-weight: 750; }
+    .module-content { padding: 1.5rem clamp(1rem,4vw,2.25rem) 2.5rem; }
+    .module-content h3 { margin-top: 2.1rem; scroll-margin-top: 5.5rem; }
+    .module-content ul, .module-content ol { padding-left: 1.6rem; }
+    .module-content li { margin: .25rem 0; }
+    .module-content blockquote { margin: 1rem 0; padding: .75rem 1rem; border-left: 4px solid var(--brand); background: var(--surface-alt); color: var(--muted); }
+    .question { margin-top: 1.5rem; border-top: 1px solid var(--border); scroll-margin-top: 5.5rem; }
+    .question:first-child { margin-top: 0; border-top: 0; }
+    .question:first-child h3 { margin-top: 0; }
+    details { margin: .8rem 0 1.4rem; padding: .75rem 1rem; border: 1px solid var(--answer-border); border-radius: .7rem; background: var(--answer); }
+    summary { color: var(--accent); font-weight: 800; cursor: pointer; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .92rem; }
+    th, td { padding: .65rem; border: 1px solid var(--border); text-align: left; }
+    th { background: var(--surface-alt); }
+    .study-note, .references { padding: 1rem; border: 1px solid var(--border); border-radius: 1rem; background: var(--surface); margin-bottom: 1.5rem; }
+    .references li { margin: .5rem 0; }
+    .no-results { padding: 2rem; border: 1px dashed var(--border); border-radius: 1rem; text-align: center; color: var(--muted); }
+    @media (max-width: 850px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .sidebar nav { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .toolbar { position: static; }
+    }
+    @media (max-width: 540px) {
+      .hero { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+      .layout { width: min(100% - 1rem,1180px); }
+      .sidebar nav { grid-template-columns: 1fr; }
+      .module-header { align-items: flex-start; flex-direction: column; }
+      .toolbar > * { width: 100%; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { background: #fff; color: #000; font-size: 10pt; }
+      .toolbar, .sidebar { display: none !important; }
+      .hero { padding: 1.5rem; background: none; color: #000; }
+      .hero-description { color: #333; }
+      .stat { border-color: #999; background: none; }
+      .layout { display: block; width: 100%; margin: 0; }
+      .module-card { break-before: page; border: 0; box-shadow: none; }
+      .module-header { padding: 1rem 0; background: none; }
+      .module-content { padding: 0; }
+      details { break-inside: avoid; }
+      details:not([open]) > *:not(summary) { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Microsoft AI-103 &middot; Learning Path 2</p>
+    <h1>30 Advanced AI Agent Questions</h1>
+    <p class="hero-description">Develop AI agents on Azure: choose tools, enforce permissions, coordinate specialists, and diagnose failures using realistic constraints.</p>
+    <div class="stats">
+      <span class="stat">30 questions</span>
+      <span class="stat">9 modules</span>
+      <span class="stat">24 single-answer + 6 Choose TWO</span>
+      <span class="stat">Offline &amp; print ready</span>
+    </div>
+  </header>
+  <div class="toolbar" role="search">
+    <input id="search" type="search" placeholder="Search questions, answers, or topics..." aria-label="Search all content">
+    <select id="module-filter" aria-label="Filter by module">
+      <option value="all">All modules</option>
+      <option value="1">2.1 Foundry and VS Code</option>
+      <option value="2">2.2 Custom Tools</option>
+      <option value="3">2.3 MCP Tools</option>
+      <option value="4">2.4 Foundry IQ</option>
+      <option value="5">2.5 Microsoft 365 Integration</option>
+      <option value="6">2.6 Foundry Workflows</option>
+      <option value="7">2.7 Microsoft Agent Framework</option>
+      <option value="8">2.8 Multi-agent Orchestration</option>
+      <option value="9">2.9 A2A</option>
+    </select>
+    <button id="expand-answers" type="button">Show all answers</button>
+    <button id="collapse-answers" type="button">Hide all answers</button>
+    <button id="print" type="button">Print / Save PDF</button>
+  </div>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Jump to module</h2>
+      <nav>
+        <a href="#module-1" data-module-link="1"><span>01</span>2.1 Foundry and VS Code</a>
+        <a href="#module-2" data-module-link="2"><span>02</span>2.2 Custom Tools</a>
+        <a href="#module-3" data-module-link="3"><span>03</span>2.3 MCP Tools</a>
+        <a href="#module-4" data-module-link="4"><span>04</span>2.4 Foundry IQ</a>
+        <a href="#module-5" data-module-link="5"><span>05</span>2.5 Microsoft 365</a>
+        <a href="#module-6" data-module-link="6"><span>06</span>2.6 Foundry Workflows</a>
+        <a href="#module-7" data-module-link="7"><span>07</span>2.7 Agent Framework</a>
+        <a href="#module-8" data-module-link="8"><span>08</span>2.8 Multi-agent Orchestration</a>
+        <a href="#module-9" data-module-link="9"><span>09</span>2.9 A2A</a>
+        <a href="#references"><span>Ref</span>Official sources</a>
+        <a href="./all-practice-questions.html"><span>100</span>Original question bank</a>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="study-note">
+        <p><strong>How to practise:</strong> Choose ONE answer unless the question says <strong>Choose TWO</strong>. For multi-select, both selections are required for this exercise. Explain the failed requirement for each rejected option before expanding Answer.</p>
+        <p>Original practice scenarios, not actual exam questions or a readiness guarantee. All organizations and measurements are hypothetical. Assume the selected services, API generations, identities, licenses, and preview capabilities are supported unless the scenario says otherwise. Approval, authentication, authorization, and tool selection are separate controls.</p>
+        <p><strong>Scope checked 2026-10-08:</strong> The live Microsoft Learn path lists nine modules, including Foundry IQ, Microsoft 365, Microsoft Agent Framework, and A2A. Older search results and legacy URL slugs still mention Semantic Kernel. This bank follows the current page; numbering below follows its order, not exam domain weights. Thirty questions do not cover every objective.</p>
+        <p>Search matches whole modules, including explanations. Clear search and select All modules to restore navigation. For an answer-key printout, select Show all answers before Print / Save PDF. Existing question banks are preserved.</p>
+      </div>
+      <p id="result-count" aria-live="polite">Showing all 9 modules and 30 questions.</p>
+
+      <article class="module-card" id="module-1" data-module="1" data-label="2.1 Foundry and VS Code">
+        <header class="module-header"><div><span class="module-number">Module 1 of 9</span><h2>2.1 Develop AI Agents with Foundry and VS Code</h2></div><span class="question-count">4 questions</span></header>
+        <div class="module-content">
+          <section class="question" id="q1" data-select="1">
+            <h3>1. Managed instructions or a custom runtime?</h3>
+            <p>A team already has a working containerized agent with custom orchestration and a specialized runtime dependency. It must retain this implementation rather than express everything as instructions and supported built-in tools. The target environment supports Foundry hosted agents, and the team wants managed hosting and scaling rather than running its own servers.</p>
+            <p><strong>Which deployment approach best fits?</strong></p>
+            <ol class="options" type="A">
+              <li>Convert the application into a prompt-only agent without retaining its runtime code.</li>
+              <li>Package the custom runtime as a hosted agent using the supported Foundry hosting contract.</li>
+              <li>Upload the container source files to File Search and ask a prompt agent to execute them.</li>
+              <li>Expose only the underlying model deployment and assume its endpoint will run the custom orchestration.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Hosted agents address custom runtime code with managed hosting. The requirement is not merely choosing a model or adding instructions.</p>
+              <ul><li><strong>A:</strong> Discards the explicitly required implementation.</li><li><strong>C:</strong> File retrieval does not host an application runtime.</li><li><strong>D:</strong> A model inference endpoint does not execute arbitrary application orchestration.</li></ul>
+              <p>Validate the container's supported contract, dependencies, tool access, and operational limits; managed hosting does not grant unrestricted execution permissions.</p>
+            </details>
+          </section>
+          <section class="question" id="q2" data-select="1">
+            <h3>2. Portal and VS Code tests disagree</h3>
+            <p>A support agent passes tests in the Foundry portal but calls the wrong tool when invoked by a VS Code application. Both clients authenticate successfully. Traces show that the application resolves a different project and an older agent configuration with different tool instructions. The team must make test results reproducible before changing the model.</p>
+            <p><strong>What should it do first?</strong></p>
+            <ol class="options" type="A">
+              <li>Increase temperature in both clients to make their behavior more similar.</li>
+              <li>Grant subscription-wide roles to the developer identity.</li>
+              <li>Retrain the model using the portal's successful answers.</li>
+              <li>Align the project, agent version/configuration, model deployment, and tool connections; rerun identical cases and compare traces.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> The evidence establishes configuration drift. Compare the same agent under the same inputs before diagnosing probabilistic model behavior.</p>
+              <ul><li><strong>A:</strong> Changes generation behavior without fixing the different configurations.</li><li><strong>B:</strong> Authentication works; broad roles neither align versions nor fix tool instructions.</li><li><strong>C:</strong> Adds training cost before addressing the proven deployment mismatch.</li></ul>
+              <p>Record the effective configuration and deployment identifiers in safe diagnostics, not secrets or raw customer content.</p>
+            </details>
+          </section>
+          <section class="question" id="q3" data-select="1">
+            <h3>3. Conversation continuity without cross-user memory</h3>
+            <p>A web application uses one server-side agent definition for all customers. To preserve history, it also reuses a single conversation identifier for everyone. One customer's response includes facts from a previous customer's interaction. The product needs continuity within each user's conversation but must isolate different users.</p>
+            <p><strong>Which design should replace the current state handling?</strong></p>
+            <ol class="options" type="A">
+              <li>Bind separate conversation/session state to the authenticated user and conversation, authorize access on every request, and apply retention controls.</li>
+              <li>Keep the shared conversation and append the current customer's name to the latest prompt.</li>
+              <li>Hide conversation identifiers in the browser while continuing to reuse one server-side history.</li>
+              <li>Create a separate model deployment per customer but keep the shared conversation history.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> An agent definition can be shared, but interaction state must be scoped and access-controlled. Names in prompts do not isolate stored history.</p>
+              <ul><li><strong>B:</strong> Restricted content remains available to the model.</li><li><strong>C:</strong> Concealing an identifier is not authorization or state isolation.</li><li><strong>D:</strong> Model deployment separation does not fix shared input history.</li></ul>
+            </details>
+          </section>
+          <section class="question" id="q4" data-select="2">
+            <h3>4. A correct answer can hide the wrong actions</h3>
+            <p>A refund agent's final messages score well on relevance and groundedness. Run traces nevertheless show that it sometimes issues the same refund twice or queries an unrelated account before giving the correct answer. The release gate must assess actual behavior, not just the prose.</p>
+            <p><strong>Choose TWO additions to the evaluation plan.</strong></p>
+            <ol class="options" type="A">
+              <li>Use final-answer fluency as a replacement for examining backend effects.</li>
+              <li>Evaluate tool trajectories, arguments, authorization decisions, and resulting backend effects against expected outcomes.</li>
+              <li>Increase the output-token limit and assume more explanation indicates better behavior.</li>
+              <li>Include denied-access, timeout, retry, and approval scenarios; correlate results with privacy-controlled model/tool traces.</li>
+              <li>Remove failing traces if the final response remains correct.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: B, D</p>
+              <p><strong>Why:</strong> Agent quality includes permitted actions and their effects. Failure-path tests expose behavior that answer-only metrics miss.</p>
+              <ul><li><strong>A:</strong> Fluent prose says nothing about unauthorized reads or duplicate writes.</li><li><strong>C:</strong> A longer explanation does not constrain execution.</li><li><strong>E:</strong> Hides a release-blocking failure rather than measuring it.</li></ul>
+              <p>Use controlled test backends or fixtures for consequential actions. Do not issue real refunds merely to evaluate an agent.</p>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-2" data-module="2" data-label="2.2 Custom Tools">
+        <header class="module-header"><div><span class="module-number">Module 2 of 9</span><h2>2.2 Integrate Custom Tools into Your Agent</h2></div><span class="question-count">5 questions</span></header>
+        <div class="module-content">
+          <blockquote><p><strong>Case study for Q5-9:</strong> A retailer's agent uses a maintained Azure AI Search index for current policies. The application owns authenticated order functions and must validate and execute write operations itself. Cancellations use an API supporting operation identifiers, status lookup, and deduplication. Authorization is enforced independently of model decisions; designated high-risk actions require approval.</p></blockquote>
+          <section class="question" id="q5" data-select="1">
+            <h3>5. Combine computation with current evidence</h3>
+            <p>An authorized analyst uploads a CSV of completed orders. They ask for exact monthly aggregates, a chart, and an explanation using current warranty policy. No live order action is needed. The team wants managed sandboxed computation and must reuse the existing policy index rather than create another copy.</p>
+            <p><strong>Which tool combination should you select?</strong></p>
+            <ol class="options" type="A">
+              <li>File Search for the CSV and policies, asking the model to sum only the retrieved rows.</li>
+              <li>Code Interpreter alone, relying on its model's training data for the latest policy.</li>
+              <li>Code Interpreter for calculations/charting plus authorized Azure AI Search retrieval for current policy evidence.</li>
+              <li>An order-cancellation function plus a prompt requesting a chart.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Sandbox computation and evidence retrieval solve distinct requirements. Keep interpreter inputs tenant-scoped and policy retrieval authorized.</p>
+              <ul><li><strong>A:</strong> Retrieved fragments are not necessarily the full dataset needed for correct aggregates; it also duplicates the policy store.</li><li><strong>B:</strong> Does not supply the current private policy.</li><li><strong>D:</strong> Exposes an unnecessary write action and does not provide the required computation capability.</li></ul>
+            </details>
+          </section>
+          <section class="question" id="q6" data-select="1">
+            <h3>6. Ordering: application-executed tool calls</h3>
+            <p>The agent requests a cancellation using function calling. The application must validate the requested arguments and approval before any write, then return the correlated result so the agent can continue.</p>
+            <ol>
+              <li>Validate concrete arguments, caller permissions, and required approval.</li>
+              <li>Submit the tool result with the original call identifier and continue generation.</li>
+              <li>Send the user request and available tool schemas to the model.</li>
+              <li>Execute the permitted operation and capture an authoritative result or explicit error.</li>
+              <li>Receive the model's requested tool name, arguments, and call identifier.</li>
+            </ol>
+            <p><strong>Which sequence is correct?</strong></p>
+            <ol class="options" type="A">
+              <li>3 &rarr; 5 &rarr; 4 &rarr; 1 &rarr; 2</li>
+              <li>3 &rarr; 5 &rarr; 1 &rarr; 4 &rarr; 2</li>
+              <li>1 &rarr; 3 &rarr; 5 &rarr; 4 &rarr; 2</li>
+              <li>3 &rarr; 5 &rarr; 1 &rarr; 2 &rarr; 4</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Describe the tool, receive the request, validate it, execute only if permitted, and return the matching result. Rejected calls take an explicit denied/error path without performing the write.</p>
+              <ul><li><strong>A:</strong> Checks authorization after the side effect.</li><li><strong>C:</strong> Validates concrete requested arguments before receiving them; static permission setup is not that validation.</li><li><strong>D:</strong> Returns a result before the operation produces it.</li></ul>
+            </details>
+          </section>
+          <section class="question" id="q7" data-select="1">
+            <h3>7. The timeout did not necessarily cancel the action</h3>
+            <p>An authorized cancellation reaches the backend, but the connection times out before its response arrives. The agent wants to retry. The API may already have committed the cancellation and emitted a downstream event.</p>
+            <p><strong>Which execution policy best prevents duplicate effects while reporting the truth?</strong></p>
+            <ol class="options" type="A">
+              <li>Use a new operation identifier for every retry so the backend treats each attempt independently.</li>
+              <li>Tell the agent the cancellation succeeded to prevent another call.</li>
+              <li>Retry indefinitely because a timeout proves that no server-side work completed.</li>
+              <li>Preserve the operation identifier, check authoritative status, and retry through the idempotent API only as appropriate; surface unresolved outcomes explicitly.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> An unknown outcome differs from a failed operation. Backend-supported idempotency and status checks are stronger than asking the model not to duplicate actions.</p>
+              <ul><li><strong>A:</strong> Defeats deduplication.</li><li><strong>B:</strong> Fabricates success.</li><li><strong>C:</strong> Misinterprets a transport failure and creates unbounded risk.</li></ul>
+              <p>An identifier alone provides no guarantee unless the backend actually enforces idempotency.</p>
+            </details>
+          </section>
+          <section class="question" id="q8" data-select="2">
+            <h3>8. Select integration by execution ownership</h3>
+            <p>The retailer adds a read-only supplier inventory API with a compatible OpenAPI specification and supported authentication. Its cancellation logic remains in an existing application-owned function; security requires that application to execute cancellations. The team wants to avoid unnecessary adapters.</p>
+            <p><strong>Choose TWO integrations, one for each requirement.</strong></p>
+            <ol class="options" type="A">
+              <li>Use an OpenAPI tool for the supplier's supported inventory operations.</li>
+              <li>Upload the supplier specification to File Search and treat descriptions as live inventory results.</li>
+              <li>Use function calling for cancellations, with validation, approval, and execution in the application.</li>
+              <li>Replace the cancellation executor with a model-generated success message.</li>
+              <li>Build a new MCP server for both systems solely to avoid using two supported integration mechanisms.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: A, C</p>
+              <p><strong>Why:</strong> OpenAPI reuses an existing service contract; function calling retains execution ownership where required.</p>
+              <ul><li><strong>B:</strong> Documentation is not the live inventory endpoint.</li><li><strong>D:</strong> Produces text rather than performing the authorized transaction.</li><li><strong>E:</strong> Adds an unnecessary adapter and does not itself resolve execution or authorization requirements.</li></ul>
+            </details>
+          </section>
+          <section class="question" id="q9" data-select="1">
+            <h3>9. A valid tool schema is not authorization</h3>
+            <p>The cancellation function accepts a correctly formatted order identifier and reason. A user supplies another customer's valid identifier, which passes schema validation. The agent says the user confirmed ownership. The backend has authoritative order-to-account records.</p>
+            <p><strong>Which control must decide whether the tool can execute?</strong></p>
+            <ol class="options" type="A">
+              <li>A backend ownership/permission check using trusted caller identity and authoritative order data.</li>
+              <li>The model's statement that the user confirmed ownership.</li>
+              <li>A longer description in the tool schema saying "only cancel your own orders."</li>
+              <li>The fact that the identifier matches the expected data type and pattern.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> A syntactically valid request can still be unauthorized. Schema validation, tool selection, and business authorization are distinct.</p>
+              <ul><li><strong>B:</strong> Trusts a generated interpretation rather than authoritative identity and ownership.</li><li><strong>C:</strong> Guides selection but is not an access-control boundary.</li><li><strong>D:</strong> Proves only structural validity.</li></ul>
+              <p>Human approval cannot grant permissions the approver does not possess.</p>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-3" data-module="3" data-label="2.3 MCP Tools">
+        <header class="module-header"><div><span class="module-number">Module 3 of 9</span><h2>2.3 Integrate MCP Tools with Azure AI Agents</h2></div><span class="question-count">3 questions</span></header>
+        <div class="module-content">
+          <section class="question" id="q10" data-select="1">
+            <h3>10. A local MCP command is not a cloud endpoint</h3>
+            <p>A developer uses an MCP server launched by a local command in VS Code. A cloud-hosted Foundry agent must use the same capability after the laptop is shut down. The selected Foundry integration expects a reachable remote MCP endpoint, and the service supports a remote deployment mode.</p>
+            <p><strong>Which change should the team make?</strong></p>
+            <ol class="options" type="A">
+              <li>Paste the laptop's local launch command into the agent's instructions.</li>
+              <li>Use the laptop's localhost address as the cloud agent's server address.</li>
+              <li>Host the server using a supported remote MCP transport, configure network reachability and authentication, and connect the agent to that endpoint.</li>
+              <li>Upload the local MCP configuration file as knowledge and expect Foundry to host the process automatically.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> MCP standardizes an interface, not automatic process hosting or connectivity. The calling runtime determines which transport and endpoint are reachable.</p>
+              <ul><li><strong>A:</strong> Instructions do not provision a remote process.</li><li><strong>B:</strong> Localhost refers to the caller's environment, not the developer's laptop.</li><li><strong>D:</strong> Retrieved configuration is not deployment infrastructure.</li></ul>
+            </details>
+          </section>
+          <section class="question" id="q11" data-select="1">
+            <h3>11. Approval must match the action that executes</h3>
+            <p>An MCP tool can submit purchase orders. A user approves an order for 20 items, but the agent subsequently changes the arguments to 200 items. The system currently remembers only that "this conversation has approval." Backend authorization allows both quantities, but company policy requires approval of the actual purchase.</p>
+            <p><strong>Which approval design meets the requirement?</strong></p>
+            <ol class="options" type="A">
+              <li>Reuse the conversation-level approval because the tool name did not change.</li>
+              <li>Bind approval to the concrete operation and material arguments; require renewed approval after material changes, then revalidate before execution.</li>
+              <li>Ask the model whether the quantity change is important enough to mention, without enforcing the result.</li>
+              <li>Disable approvals because successful authentication already permits the tool connection.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Consent for one operation is not consent for a different one. Preserve an auditable association between approved data and the executed action.</p>
+              <ul><li><strong>A:</strong> Grants broader authority than the user approved.</li><li><strong>C:</strong> Leaves a mandatory control to an unenforced model judgment.</li><li><strong>D:</strong> Confuses authentication with business approval.</li></ul>
+            </details>
+          </section>
+          <section class="question" id="q12" data-select="2">
+            <h3>12. Tool discovery does not imply tool trust</h3>
+            <p>A remote MCP server exposes read-only search and administrative write tools. A research agent needs only search. Tool results may contain third-party text, including instructions to call administrative tools. The team must limit capability and prevent returned content from redefining agent authority.</p>
+            <p><strong>Choose TWO controls.</strong></p>
+            <ol class="options" type="A">
+              <li>Expose only required tools and configure least-privilege server-side credentials/authorization.</li>
+              <li>Expose all tools and depend on their descriptions to discourage writes.</li>
+              <li>Treat every MCP tool result as a trusted system instruction because the protocol is standardized.</li>
+              <li>Treat results as untrusted data, apply appropriate injection defenses, and independently enforce permissions and approval on subsequent actions.</li>
+              <li>Remove source metadata from results so the agent cannot notice where hostile text originated.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: A, D</p>
+              <p><strong>Why:</strong> Restrict the available operations and the authority of the backend identity; preserve the boundary between retrieved content and executable instructions.</p>
+              <ul><li><strong>B:</strong> Tool descriptions are not an authorization mechanism.</li><li><strong>C:</strong> A protocol does not make arbitrary payloads trustworthy.</li><li><strong>E:</strong> Removes useful provenance without limiting attacks.</li></ul>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-4" data-module="4" data-label="2.4 Foundry IQ">
+        <header class="module-header"><div><span class="module-number">Module 4 of 9</span><h2>2.4 Build Knowledge-enhanced Agents with Foundry IQ</h2></div><span class="question-count">3 questions</span></header>
+        <div class="module-content">
+          <section class="question" id="q13" data-select="1">
+            <h3>13. Share a knowledge platform, not stale copies</h3>
+            <p>Three departmental agents need the same approved policy sources, updated daily. Each currently maintains a separate upload store, causing inconsistent answers and duplicate ingestion work. The team wants a reusable knowledge platform and consistent citation behavior, while preserving access restrictions.</p>
+            <p><strong>Which design should it adopt?</strong></p>
+            <ol class="options" type="A">
+              <li>Fine-tune each agent daily and remove all retrieval.</li>
+              <li>Copy one agent's entire conversation history to the other agents as their knowledge base.</li>
+              <li>Publish all source documents anonymously so every agent can retrieve the same content.</li>
+              <li>Configure shared Foundry IQ knowledge bases over appropriate sources, connect each agent with correct access configuration, and define/test retrieval and citation instructions.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> A shared knowledge layer avoids agent-specific copies while keeping retrieval, provenance, and access management explicit.</p>
+              <ul><li><strong>A:</strong> Repeated training is not a substitute for current source retrieval.</li><li><strong>B:</strong> Conversation memory mixes interaction state with enterprise knowledge and can leak data.</li><li><strong>C:</strong> Eliminates required access restrictions.</li></ul>
+              <p>Shared infrastructure does not mean every agent or user receives identical access. Validate source-specific permission behavior.</p>
+            </details>
+          </section>
+          <section class="question" id="q14" data-select="1">
+            <h3>14. A citation can be genuine and still support the wrong answer</h3>
+            <p>A knowledge-connected agent consistently cites a real policy page. The page has been superseded, but both versions remain retrievable without effective-date metadata. The agent retrieves successfully and faithfully summarizes the older page. Product policy requires current answers unless the user explicitly asks about history.</p>
+            <p><strong>Which correction targets the root cause?</strong></p>
+            <ol class="options" type="A">
+              <li>Maintain version/effective-date metadata and freshness rules, distinguish current from historical retrieval, and verify that citations support the selected policy version.</li>
+              <li>Increase the agent's confidence wording because the citation is valid.</li>
+              <li>Evaluate only whether each answer contains at least one clickable link.</li>
+              <li>Disable retrieval and use the model's prior knowledge for current policy.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Citation presence and groundedness do not prove temporal correctness. Retrieval must select evidence appropriate to the user's date requirement.</p>
+              <ul><li><strong>B:</strong> Makes a stale answer sound more certain.</li><li><strong>C:</strong> Measures link presence rather than source validity and relevance.</li><li><strong>D:</strong> Removes the reliable mechanism for accessing current private policy.</li></ul>
+            </details>
+          </section>
+          <section class="question" id="q15" data-select="2">
+            <h3>15. Correct knowledge-base access requires both identity and boundaries</h3>
+            <p>An agent must answer from HR material according to the requesting user's permissions. Its retrieval integration can enforce the required permission scope, but the application currently substitutes a broad administrator connection and caches responses by question text alone. Access membership changes over time.</p>
+            <p><strong>Choose TWO changes that address both exposure paths.</strong></p>
+            <ol class="options" type="A">
+              <li>Keep the administrator connection and tell the agent not to mention restricted records.</li>
+              <li>Use the supported identity/permission propagation or trusted backend enforcement so retrieval returns only material authorized for the caller.</li>
+              <li>Reuse cached answers across users but hide document titles.</li>
+              <li>Assume any product called a knowledge base automatically fixes the application's administrator connection.</li>
+              <li>Scope cache reuse to authorization and source validity; invalidate or revalidate when permissions or content change.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: B, E</p>
+              <p><strong>Why:</strong> Live retrieval and cached answers are separate data-delivery paths. Both must honor the caller's current access and the source's validity.</p>
+              <ul><li><strong>A:</strong> Restricted content already reaches the model.</li><li><strong>C:</strong> A title-free answer can still disclose sensitive facts.</li><li><strong>D:</strong> Ignores the explicitly misconfigured identity boundary.</li></ul>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-5" data-module="5" data-label="2.5 Microsoft 365 Integration">
+        <header class="module-header"><div><span class="module-number">Module 5 of 9</span><h2>2.5 Integrate Your Agent with Microsoft 365</h2></div><span class="question-count">3 questions</span></header>
+        <div class="module-content">
+          <section class="question" id="q16" data-select="1">
+            <h3>16. Publishing changes the effective identity</h3>
+            <p>A Foundry agent can query Azure AI Search during development. After publishing through the supported Microsoft 365 path, messages arrive from Teams but the Search tool receives a permission error. Network connectivity and tool configuration are correct. The published Agent Application has its own identity, and only the development identity was granted Search access.</p>
+            <p><strong>Which correction should you make?</strong></p>
+            <ol class="options" type="A">
+              <li>Grant every Teams user subscription-wide Owner.</li>
+              <li>Copy the developer's cached token into the publishing package.</li>
+              <li>Identify the published agent's effective identity, grant its required least-privilege resource permissions, and retest the published path.</li>
+              <li>Reword the agent's instructions so it claims permission before calling Search.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> The scenario isolates a development-versus-published identity difference. Development permissions do not automatically become the published agent's permissions.</p>
+              <ul><li><strong>A:</strong> Grants excessive rights to the wrong scope of principals.</li><li><strong>B:</strong> Substitutes user credentials for the workload identity and creates a disclosure risk.</li><li><strong>D:</strong> Prompts cannot change Azure authorization.</li></ul>
+              <p>This fixes service access; user-level document permissions still need their own correct enforcement.</p>
+            </details>
+          </section>
+          <section class="question" id="q17" data-select="1">
+            <h3>17. Choose a publishing path for custom middleware</h3>
+            <p>A company wants its Foundry agent in Teams and Microsoft 365 Copilot. Unlike a simple pilot, production requires custom single sign-on handling, message middleware, and separately managed deployment pipelines. The company wants to keep the core agent in Foundry rather than rewrite its reasoning and tools.</p>
+            <p><strong>Which approach best fits?</strong></p>
+            <ol class="options" type="A">
+              <li>Publish only a web preview and assume it appears automatically as a Teams application.</li>
+              <li>Use Microsoft 365 Agents Toolkit to build the required proxy/integration layer connected to the Foundry agent.</li>
+              <li>Fine-tune the model to understand Teams messages instead of configuring a publishing channel.</li>
+              <li>Use only the simplest portal publishing flow while assuming it implements arbitrary custom middleware.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> The toolkit path provides an application integration layer for custom SSO, middleware, and environment pipelines while retaining Foundry agent logic.</p>
+              <ul><li><strong>A:</strong> A preview URL is not Microsoft 365 distribution and channel integration.</li><li><strong>C:</strong> Model behavior does not provision an application, identity, or channel.</li><li><strong>D:</strong> The simpler flow fits simpler needs; do not assume unsupported customization.</li></ul>
+              <p>Validate tenant policy, consent, licensing, and distribution approval separately from technical deployment.</p>
+            </details>
+          </section>
+          <section class="question" id="q18" data-select="2">
+            <h3>18. Workplace context must follow the user</h3>
+            <p>An assistant development workflow uses Work IQ to retrieve relevant meetings, emails, documents, and Teams discussions. Different users have different permissions. The organization permits the supported Work IQ capability and requires its licensing/consent prerequisites to be met. A successful administrator test must not be mistaken for a valid end-user test.</p>
+            <p><strong>Choose TWO practices.</strong></p>
+            <ol class="options" type="A">
+              <li>Use the supported Work IQ integration under the intended authenticated user's permission context and satisfy the required tenant consent/licensing.</li>
+              <li>Share an administrator's Work IQ session across users so everyone receives consistent results.</li>
+              <li>Assume successful publishing to Teams automatically authorizes access to every employee's mailbox.</li>
+              <li>Test with users having different permissions and keep retrieved context, conversation state, and cached results isolated appropriately.</li>
+              <li>Copy all retrieved workplace messages into a public knowledge store to remove runtime permission issues.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: A, D</p>
+              <p><strong>Why:</strong> Work IQ exposes workplace context subject to its supported identity and access model. Actual end-user tests must verify both retrieval and downstream handling.</p>
+              <ul><li><strong>B:</strong> Replaces user permissions with an overprivileged shared session.</li><li><strong>C:</strong> Channel availability and workplace data authorization are different concerns.</li><li><strong>E:</strong> Publishes private data and defeats access controls.</li></ul>
+              <p>Work IQ capabilities and hosting options can be preview/version-dependent. A local MCP setup is not automatically a production cloud integration.</p>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-6" data-module="6" data-label="2.6 Foundry Workflows">
+        <header class="module-header"><div><span class="module-number">Module 6 of 9</span><h2>2.6 Build Agent-driven Workflows in Foundry</h2></div><span class="question-count">4 questions</span></header>
+        <div class="module-content">
+          <blockquote><p><strong>Case study for Q19-22:</strong> An invoice workflow extracts fields, validates them against authoritative records, routes exceptions for human review, and writes approved results to an accounting API. Every invoice must produce a traceable outcome. Missing, invalid, or uncertain outputs must not silently become approved invoices.</p></blockquote>
+          <section class="question" id="q19" data-select="1">
+            <h3>19. Route by a validated value, not narrative text</h3>
+            <p>The extraction agent writes a free-text recommendation such as "approved except for a possible duplicate." A condition checks whether the text contains "approved," causing some exceptions to enter the payment branch. The workflow supports structured outputs, variables, and conditional nodes.</p>
+            <p><strong>Which replacement is most reliable?</strong></p>
+            <ol class="options" type="A">
+              <li>Check whether the word "approved" occurs twice.</li>
+              <li>Ask the agent to use more confident wording for valid invoices.</li>
+              <li>Route according to response length because exceptions tend to be longer.</li>
+              <li>Use a validated structured status/required fields, map them into workflow variables, and branch explicitly with a safe invalid/unknown path.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Workflow routing needs a defined data contract and explicit error handling, not a fragile substring test over prose.</p>
+              <ul><li><strong>A:</strong> Repeats the same ambiguity rather than eliminating it.</li><li><strong>B:</strong> Confidence language is not validation.</li><li><strong>C:</strong> Uses an unrelated statistical proxy for a business decision.</li></ul>
+              <p>Structured status is still a model output; business authorization and authoritative checks remain separate.</p>
+            </details>
+          </section>
+          <section class="question" id="q20" data-select="1">
+            <h3>20. Partial batch failure without invisible missing invoices</h3>
+            <p>A request contains 25 independent invoices. Two extraction calls fail; the others can proceed to validation. The user requires a result for every input invoice, preserving its identifier, and does not want the successful invoices rerun unnecessarily. The workflow supports For-Each processing and explicit failure branches.</p>
+            <p><strong>Which design should you use?</strong></p>
+            <ol class="options" type="A">
+              <li>Process with For-Each and per-item validation/error paths; aggregate one identified success, review, or failure outcome per invoice.</li>
+              <li>Discard the two failed items and report that the batch completed successfully.</li>
+              <li>Retry all 25 indefinitely until every extraction returns text.</li>
+              <li>Combine all outputs into one unkeyed paragraph so missing results are not visible.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Independent processing plus explicit per-item outcomes allows partial progress without losing completeness or traceability.</p>
+              <ul><li><strong>B:</strong> Violates the required outcome for every input.</li><li><strong>C:</strong> Repeats successful work and has no termination guarantee.</li><li><strong>D:</strong> Removes the identifier-to-result association needed for audit and retry.</li></ul>
+              <p>Apply bounded retries where appropriate and preserve operation identifiers for any downstream writes.</p>
+            </details>
+          </section>
+          <section class="question" id="q21" data-select="1">
+            <h3>21. Human approval is stale after a material change</h3>
+            <p>An invoice waits for human approval overnight. Before the workflow resumes, a correction changes its amount and destination account. The workflow stores the original approval but does not record which invoice version was approved.</p>
+            <p><strong>Which design prevents approval from being applied to the changed invoice?</strong></p>
+            <ol class="options" type="A">
+              <li>Store only an approved Boolean on the customer account for reuse by all invoices.</li>
+              <li>Resume directly into payment because a human previously approved something in the workflow.</li>
+              <li>Bind approval to the invoice version and material fields, revalidate on resume, and request new approval when those fields change.</li>
+              <li>Ask the model whether the new destination account looks similar to the old one.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Approval must identify the state and operation being approved. Resumption is a point to recheck stale assumptions and current authorization.</p>
+              <ul><li><strong>A:</strong> Broadens approval far beyond a specific invoice.</li><li><strong>B:</strong> Executes a different transaction from the one approved.</li><li><strong>D:</strong> Replaces a deterministic policy check with a guess.</li></ul>
+            </details>
+          </section>
+          <section class="question" id="q22" data-select="1">
+            <h3>22. Power Fx: every condition is mandatory</h3>
+            <p>Within a Power Fx condition, local workflow variables have already been validated: <code>Local.Amount</code> is numeric and the other variables are Boolean. An invoice can proceed automatically only when its amount is at most 500, its account is verified, and no duplicate is flagged. All other invoices require review. Use the locale syntax shown in the options.</p>
+            <p><strong>Which condition implements the rule?</strong></p>
+            <ol class="options" type="A">
+              <li><code>Or(Local.Amount &lt;= 500, Local.AccountVerified, Not(Local.DuplicateFlag))</code></li>
+              <li><code>And(Local.Amount &lt;= 500, Local.AccountVerified, Not(Local.DuplicateFlag))</code></li>
+              <li><code>And(Local.Amount &lt; 500, Local.AccountVerified, Not(Local.DuplicateFlag))</code></li>
+              <li><code>And(Local.Amount &lt;= 500, Local.AccountVerified, Local.DuplicateFlag)</code></li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> All three requirements must be true; the amount limit includes exactly 500, and duplicate status must be false.</p>
+              <ul><li><strong>A:</strong> Allows one passing condition to override failed requirements.</li><li><strong>C:</strong> Incorrectly excludes an otherwise valid amount of exactly 500.</li><li><strong>D:</strong> Requires a duplicate rather than excluding one.</li></ul>
+              <p>Invalid or missing fields must take the explicit review/error path before this condition, not default to permissive values.</p>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-7" data-module="7" data-label="2.7 Microsoft Agent Framework">
+        <header class="module-header"><div><span class="module-number">Module 7 of 9</span><h2>2.7 Develop an Agent with Microsoft Agent Framework</h2></div><span class="question-count">3 questions</span></header>
+        <div class="module-content">
+          <section class="question" id="q23" data-select="1">
+            <h3>23. Framework abstraction versus service identity</h3>
+            <p>A team uses Microsoft Agent Framework to create and run Foundry-backed agents with application functions. It needs to select its Foundry project and model deployment, authenticate with Microsoft Entra, and keep environment configuration out of prompts. A developer claims the framework removes the need for service credentials and resource permissions.</p>
+            <p><strong>Which implementation approach is correct?</strong></p>
+            <ol class="options" type="A">
+              <li>Put the project name and desired role in the agent instructions; the framework will infer credentials.</li>
+              <li>Use the model's catalog display name as proof that the application may access any deployment.</li>
+              <li>Replace the agent with a text-only inference call and assume application functions will still execute automatically.</li>
+              <li>Configure the supported Foundry client/provider with the correct project/deployment and credential, grant appropriate permissions, and register the intended functions with the agent.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> A framework simplifies composition but does not erase API endpoints, identity, authorization, or tool registration.</p>
+              <ul><li><strong>A:</strong> Prompts are not credential or RBAC configuration.</li><li><strong>B:</strong> Catalog identity and authorized deployment access are different concepts.</li><li><strong>C:</strong> A bare model call is not an executor for application functions.</li></ul>
+              <p>Use the installed framework's current API. Legacy module URL slugs mentioning Semantic Kernel do not guarantee old class names apply to Microsoft Agent Framework.</p>
+            </details>
+          </section>
+          <section class="question" id="q24" data-select="1">
+            <h3>24. Recover a conversation after application restart</h3>
+            <p>A framework-based agent runs in a web service with multiple instances. Its process-local conversation state disappears during restarts, and users sometimes reach a different instance on the next request. The product requires authorized continuity and retention limits, not a fresh conversation on every instance switch.</p>
+            <p><strong>Which state design should you use?</strong></p>
+            <ol class="options" type="A">
+              <li>Use supported durable session/conversation persistence or a service-backed conversation, bind it to authorized user/conversation identifiers, and restore it explicitly across requests.</li>
+              <li>Keep state only in a global variable and increase the model's context window.</li>
+              <li>Persist every user's messages in one shared session so all instances can find them.</li>
+              <li>Assume the model deployment remembers past HTTP requests without receiving or resolving conversation state.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Distributed application state requires a deliberate persistence and authorization strategy. Framework support must be configured, not assumed.</p>
+              <ul><li><strong>B:</strong> Larger context does not persist process memory across instances.</li><li><strong>C:</strong> Creates cross-user disclosure.</li><li><strong>D:</strong> Confuses a model with a durable conversation store.</li></ul>
+              <p>Apply retention, concurrency controls, and deletion requirements to persisted history as well as current requests.</p>
+            </details>
+          </section>
+          <section class="question" id="q25" data-select="1">
+            <h3>25. Registered plugin function returns a misleading default</h3>
+            <p>An agent's inventory function catches every backend exception and returns <code>0</code>. The agent reports that items are out of stock during an authentication outage. Zero is a legitimate stock quantity, and the workflow must distinguish unavailable data from confirmed inventory.</p>
+            <p><strong>Which function contract and handling should replace this behavior?</strong></p>
+            <ol class="options" type="A">
+              <li>Return a larger default quantity so outages do not disappoint customers.</li>
+              <li>Keep returning zero and add "results may be approximate" to the agent instructions.</li>
+              <li>Return or propagate an explicit typed failure/status according to the framework's tool contract, apply bounded retries only to suitable failures, and let the workflow report unavailable data distinctly.</li>
+              <li>Ask the model to infer whether zero means an outage from the customer's wording.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Business data and execution failures need distinct representations. A successful-looking fallback lets the agent make a false factual claim.</p>
+              <ul><li><strong>A:</strong> Invents inventory.</li><li><strong>B:</strong> A disclaimer does not restore the lost distinction.</li><li><strong>D:</strong> The model cannot recover backend status that the tool discarded.</li></ul>
+              <p>Log safe diagnostics without exposing backend secrets or raw private payloads. Authentication errors are not automatically transient.</p>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-8" data-module="8" data-label="2.8 Multi-agent Orchestration">
+        <header class="module-header"><div><span class="module-number">Module 8 of 9</span><h2>2.8 Orchestrate Multiple Agents with Agent Framework</h2></div><span class="question-count">3 questions</span></header>
+        <div class="module-content">
+          <section class="question" id="q26" data-select="1">
+            <h3>26. Parallelize only independent work</h3>
+            <p>A proposal workflow extracts structured requirements in 3 seconds. Cost analysis takes 6 seconds and security analysis takes 9 seconds; both need the extraction output but neither needs the other's result. A final drafting agent takes 4 seconds and must receive both analyses. Ignore orchestration overhead and assume sufficient capacity.</p>
+            <p><strong>Which design meets every dependency with the lowest ideal elapsed time?</strong></p>
+            <ol class="options" type="A">
+              <li>Run all four stages sequentially: 22 seconds.</li>
+              <li>Extract, run both analyses concurrently, join, then draft: 16 seconds.</li>
+              <li>Start every stage concurrently: 9 seconds.</li>
+              <li>Extract, use only the faster analysis, then draft: 13 seconds.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> The critical path is <code>3 + max(6, 9) + 4 = 16</code> seconds. Fan-out/fan-in reduces elapsed time without discarding dependencies.</p>
+              <ul><li><strong>A:</strong> Correct but slower.</li><li><strong>C:</strong> Starts consumers before their inputs exist.</li><li><strong>D:</strong> Omits the mandatory security analysis.</li></ul>
+              <p>Production latency also includes orchestration, rate limiting, and retries; concurrency is not unlimited capacity.</p>
+            </details>
+          </section>
+          <section class="question" id="q27" data-select="2">
+            <h3>27. A reviewer loop that never concludes</h3>
+            <p>A group-chat solution has a writer and reviewer. The reviewer repeatedly requests stylistic changes after the substantive requirements have been met. Each call stays within its output-token limit, but the group continues indefinitely. The team needs useful feedback and guaranteed termination with an honest outcome.</p>
+            <p><strong>Choose TWO orchestration controls.</strong></p>
+            <ol class="options" type="A">
+              <li>Define explicit acceptance/termination criteria and a clear rule for which agent or controller determines completion.</li>
+              <li>Increase the context window so the revision history can grow without interruption.</li>
+              <li>Lower per-call output tokens and assume that bounds the number of calls.</li>
+              <li>Declare success whenever the last reviewer message is short, regardless of its content.</li>
+              <li>Enforce a workflow-wide iteration/time/token budget with an explicit incomplete or human-review outcome when exhausted.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: A, E</p>
+              <p><strong>Why:</strong> Criteria define successful completion; budgets guarantee termination when the agents fail to reach it.</p>
+              <ul><li><strong>B:</strong> Retains more history without controlling the loop.</li><li><strong>C:</strong> Bounds one call, not the total workflow.</li><li><strong>D:</strong> Substitutes a weak proxy for task completion.</li></ul>
+              <p>Selection policies decide who acts next; termination policies decide whether another turn is allowed. Neither replaces the other.</p>
+            </details>
+          </section>
+          <section class="question" id="q28" data-select="1">
+            <h3>28. Transfer control rather than ask every specialist</h3>
+            <p>A customer-support conversation begins with a triage agent. Based on the issue, one specialist should take over, ask follow-up questions, and possibly transfer to another specialist. Running every specialist for every message would expose unnecessary context and add cost. The next specialist is not known in advance.</p>
+            <p><strong>Which orchestration pattern best fits?</strong></p>
+            <ol class="options" type="A">
+              <li>A fixed sequential pipeline that invokes every specialist in the same order.</li>
+              <li>Concurrent fan-out to every specialist followed by aggregation on every turn.</li>
+              <li>A group chat requiring every specialist to comment before each user response.</li>
+              <li>Handoff orchestration with permitted transfer paths, scoped context, and explicit completion/escalation rules.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> The scenario requires dynamic transfer of conversational responsibility, not a mandatory pipeline or all-agent consensus.</p>
+              <ul><li><strong>A:</strong> Assumes a fixed sequence and unnecessary participation.</li><li><strong>B:</strong> Runs independent analyses even though the user needs a responsible specialist.</li><li><strong>C:</strong> Adds broad participation and context exposure contrary to the requirement.</li></ul>
+              <p>A handoff must not silently broaden the receiving agent's permissions or copy more history than needed.</p>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card" id="module-9" data-module="9" data-label="2.9 A2A">
+        <header class="module-header"><div><span class="module-number">Module 9 of 9</span><h2>2.9 Discover Azure AI Agents with A2A</h2></div><span class="question-count">2 questions</span></header>
+        <div class="module-content">
+          <section class="question" id="q29" data-select="1">
+            <h3>29. A remote agent is not merely a function schema</h3>
+            <p>A partner operates an autonomous specialist agent on a different platform. It already exposes an A2A endpoint, an Agent Card, and task-status handling. Your orchestrator must discover the specialist's skills and supported interaction modes, delegate a task, and track its outcome without replacing the partner's internal runtime.</p>
+            <p><strong>Which integration should you select?</strong></p>
+            <ol class="options" type="A">
+              <li>An A2A client that retrieves and validates the Agent Card, authenticates as required, and interacts with the remote agent's supported task interface.</li>
+              <li>An MCP client pointed at the A2A endpoint, assuming all agent/tool protocols are interchangeable.</li>
+              <li>File Search over a copy of the partner's Agent Card as a substitute for invoking the live agent.</li>
+              <li>A local prompt containing the partner's name, with no remote interaction.</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Reuse the advertised A2A contract for agent discovery and collaboration, including capabilities, authentication requirements, and task handling.</p>
+              <ul><li><strong>B:</strong> MCP and A2A are distinct protocols; one endpoint is not automatically compatible with both.</li><li><strong>C:</strong> Retrieves a description but never delegates a task.</li><li><strong>D:</strong> Simulates a role locally instead of using the required remote specialist.</li></ul>
+              <p>An Agent Card advertises capabilities; it is not proof of trustworthiness or an authorization grant. MCP can also expose agent-backed tools, but this scenario explicitly provides A2A.</p>
+            </details>
+          </section>
+          <section class="question" id="q30" data-select="1">
+            <h3>30. Ordering: accepted is not completed</h3>
+            <p>A remote A2A specialist accepts a long-running task. It can request additional input or finish with a result, failure, or cancellation. Your application must use its supported discovery/task capabilities and must not report a successful business outcome just because the request was accepted.</p>
+            <ol>
+              <li>Submit the delegated task through the authenticated, supported interaction.</li>
+              <li>Validate the terminal outcome and required artifact/result; return success only when the completion contract is satisfied.</li>
+              <li>Retrieve and validate the trusted agent's card, skills, interaction capabilities, and authentication requirements.</li>
+              <li>Track the returned task using supported status/streaming mechanisms, handle input requests, and apply bounded waiting/cancellation policy.</li>
+              <li>Establish the required authenticated client connection and confirm that the intended task is permitted.</li>
+            </ol>
+            <p><strong>Which sequence is correct?</strong></p>
+            <ol class="options" type="A">
+              <li>3 &rarr; 5 &rarr; 1 &rarr; 2 &rarr; 4</li>
+              <li>1 &rarr; 3 &rarr; 5 &rarr; 4 &rarr; 2</li>
+              <li>3 &rarr; 5 &rarr; 1 &rarr; 4 &rarr; 2</li>
+              <li>3 &rarr; 1 &rarr; 4 &rarr; 2 &rarr; 5</li>
+            </ol>
+            <details><summary>Answer</summary><p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Discover the contract, establish permitted access, delegate, observe progress, and validate the terminal result. Apply any required authentication to discovery itself as well.</p>
+              <ul><li><strong>A:</strong> Treats acceptance as enough to validate completion before tracking progress.</li><li><strong>B:</strong> Submits before understanding the supported interface or establishing the required access.</li><li><strong>D:</strong> Defers authorization until after the task and result handling.</li></ul>
+              <p>Honor the protocol/version's actual states and advertised capabilities. A timeout or cancellation request is not proof that all remote effects have stopped.</p>
+            </details>
+          </section>
+        </div>
+      </article>
+
+      <div class="no-results" id="no-results" hidden>No modules match your search.</div>
+      <section class="references" id="references">
+        <h2>Official sources and scope</h2>
+        <p>The live learning path was fetched directly because indexed search results showed an older seven-module version. Current module titles below take precedence over legacy URL slugs. Preview availability, API signatures, identity propagation, licensing, and publishing requirements can change; check the linked documentation for your environment.</p>
+        <ul>
+          <li><a href="https://learn.microsoft.com/training/paths/develop-ai-agents-on-azure/">Develop AI agents on Azure: current nine-module path</a></li>
+          <li><a href="https://learn.microsoft.com/training/modules/develop-ai-agents-azure-vs-code/">Develop agents with Foundry and VS Code</a> and <a href="https://learn.microsoft.com/azure/foundry/agents/overview">Foundry agent types and tools</a> &mdash; Q1-4</li>
+          <li><a href="https://learn.microsoft.com/training/modules/build-agent-with-custom-tools/">Integrate custom tools</a> &mdash; Q5-9</li>
+          <li><a href="https://learn.microsoft.com/training/modules/connect-agent-to-mcp-tools/">Integrate MCP tools</a> &mdash; Q10-12</li>
+          <li><a href="https://learn.microsoft.com/training/modules/introduction-foundry-iq/">Foundry IQ module</a> and <a href="https://learn.microsoft.com/training/modules/introduction-foundry-iq/5-configure-retrieval">retrieval configuration</a> &mdash; Q13-15</li>
+          <li><a href="https://learn.microsoft.com/training/modules/integrate-foundry-agent-with-m365/2-understand-publishing-options">Publishing options and identities</a> and <a href="https://learn.microsoft.com/training/modules/integrate-foundry-agent-with-m365/5-access-m365-data-workiq">Work IQ access</a> &mdash; Q16-18</li>
+          <li><a href="https://learn.microsoft.com/training/modules/build-agent-workflows-microsoft-foundry/">Foundry workflows, variables, Power Fx, and human review</a> &mdash; Q19-22</li>
+          <li><a href="https://learn.microsoft.com/training/modules/develop-ai-agent-with-semantic-kernel/">Develop an agent with Microsoft Agent Framework</a> &mdash; Q23-25</li>
+          <li><a href="https://learn.microsoft.com/training/modules/orchestrate-semantic-kernel-multi-agent-solution/">Microsoft Agent Framework orchestration</a> &mdash; Q26-28</li>
+          <li><a href="https://learn.microsoft.com/training/modules/discover-agents-with-a2a/">A2A module</a> and <a href="https://learn.microsoft.com/training/modules/discover-agents-with-a2a/2-define-a2a-agent">Agent Cards and skills</a> &mdash; Q29-30</li>
+        </ul>
+        <p>Practice the distinctions: <strong>schema vs authorization; authentication vs approval; retrieval vs memory; accepted vs completed; MCP tools vs A2A collaboration; per-call limits vs workflow budgets.</strong> This set is not calibrated to the official exam score or question distribution.</p>
+      </section>
+    </main>
+  </div>
+  <script>
+    (() => {
+      const search = document.querySelector("#search");
+      const filter = document.querySelector("#module-filter");
+      const articles = [...document.querySelectorAll(".module-card")];
+      const resultCount = document.querySelector("#result-count");
+      const noResults = document.querySelector("#no-results");
+      const answers = [...document.querySelectorAll("details")];
+
+      const update = () => {
+        const term = search.value.trim().toLocaleLowerCase();
+        const moduleValue = filter.value;
+        let visible = 0;
+        let questions = 0;
+        for (const article of articles) {
+          const moduleMatches = moduleValue === "all" || article.dataset.module === moduleValue;
+          const textMatches = !term || article.textContent.toLocaleLowerCase().includes(term);
+          const show = moduleMatches && textMatches;
+          article.hidden = !show;
+          if (show) {
+            visible += 1;
+            const badge = article.querySelector(".question-count");
+            questions += Number.parseInt(badge.textContent, 10);
+          }
+        }
+        noResults.hidden = visible !== 0;
+        resultCount.textContent = term
+          ? `Found ${visible} matching module${visible === 1 ? "" : "s"} (${
+              questions
+            } total questions in those modules).`
+          : `Showing ${visible} module${visible === 1 ? "" : "s"} and ${questions} questions.`;
+      };
+
+      search.addEventListener("input", update);
+      filter.addEventListener("change", update);
+      document.querySelector("#expand-answers").addEventListener("click", () => {
+        answers.forEach((details) => {
+          details.open = true;
+        });
+      });
+      document.querySelector("#collapse-answers").addEventListener("click", () => {
+        answers.forEach((details) => {
+          details.open = false;
+        });
+      });
+      document.querySelector("#print").addEventListener("click", () => window.print());
+    })();
+  </script>
+</body>
+</html>

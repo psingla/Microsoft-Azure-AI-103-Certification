@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI-103 case-based test paper 1: 60 original questions, six case studies, all five certification domains, with explained answers.">
+  <title>AI-103 Test Paper 1: Architecture and Service Selection</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f7fb; --surface: #fff; --surface-alt: #eef4ff;
+      --text: #172033; --muted: #5d6b82; --border: #d9e2f1;
+      --brand: #175cd3; --accent: #0f766e; --answer: #ecfdf3;
+      --answer-border: #6ce9a6; --shadow: 0 10px 30px rgba(16,35,70,.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c1424; --surface: #131e31; --surface-alt: #172844;
+        --text: #edf3ff; --muted: #aebbd0; --border: #2a3b57;
+        --brand: #84adff; --accent: #5fe9d0; --answer: #102d28;
+        --answer-border: #159577; --shadow: 0 12px 35px rgba(0,0,0,.25);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.65 Inter, "Segoe UI", system-ui, sans-serif; }
+    a { color: var(--brand); }
+    code { padding: .12rem .35rem; border-radius: .35rem; background: var(--surface-alt); font: .9em Consolas, monospace; }
+    .hero { padding: 3.5rem max(1.25rem, calc((100vw - 1180px)/2)); color: #fff; background: radial-gradient(circle at 85% 15%,rgba(95,233,208,.35),transparent 28rem),linear-gradient(135deg,#0b3b8f,#175cd3 55%,#0f766e); }
+    .eyebrow { margin: 0 0 .5rem; font-size: .85rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .hero h1 { max-width: 850px; margin: 0; font-size: clamp(2rem,5vw,3.75rem); line-height: 1.08; }
+    .hero-description { max-width: 720px; color: rgba(255,255,255,.88); font-size: 1.08rem; }
+    .stats { display: flex; flex-wrap: wrap; gap: .75rem; }
+    .stat { padding: .65rem .95rem; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; background: rgba(255,255,255,.12); font-weight: 650; }
+    .toolbar { position: sticky; z-index: 20; top: 0; display: flex; flex-wrap: wrap; gap: .75rem; padding: .85rem max(1.25rem,calc((100vw - 1180px)/2)); border-bottom: 1px solid var(--border); background: color-mix(in srgb,var(--surface) 92%,transparent); backdrop-filter: blur(14px); }
+    input, select, button { padding: .72rem .9rem; border: 1px solid var(--border); border-radius: .65rem; background: var(--surface); color: var(--text); font: inherit; }
+    input { min-width: min(100%,330px); flex: 1; }
+    button, select { font-weight: 650; cursor: pointer; }
+    button:hover, select:hover { border-color: var(--brand); }
+    .layout { display: grid; grid-template-columns: 270px minmax(0,1fr); gap: 1.5rem; width: min(1180px,calc(100% - 2.5rem)); margin: 1.5rem auto 4rem; align-items: start; }
+    .sidebar { position: sticky; top: 5.2rem; padding: 1rem; border: 1px solid var(--border); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow); }
+    .sidebar h2 { margin: 0 0 .65rem; color: var(--muted); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+    .sidebar nav { display: grid; gap: .25rem; }
+    .sidebar a { display: grid; grid-template-columns: 2rem 1fr; gap: .4rem; padding: .55rem; border-radius: .55rem; color: var(--text); text-decoration: none; font-size: .9rem; line-height: 1.3; }
+    .sidebar a:hover { background: var(--surface-alt); color: var(--brand); }
+    .sidebar a span { color: var(--brand); font-weight: 800; }
+    .content { min-width: 0; }
+    #result-count { color: var(--muted); }
+    .module-card { margin-bottom: 1.5rem; overflow: hidden; border: 1px solid var(--border); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow); scroll-margin-top: 5.5rem; }
+    .module-card[hidden] { display: none; }
+    .module-header { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); background: linear-gradient(135deg,var(--surface-alt),var(--surface)); }
+    .module-header h2 { margin: .15rem 0 0; font-size: 1.35rem; }
+    .module-number { color: var(--brand); font-size: .75rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .question-count { flex: none; padding: .35rem .7rem; border-radius: 999px; background: var(--brand); color: #fff; font-size: .8rem; font-weight: 750; }
+    .module-content { padding: 1.5rem clamp(1rem,4vw,2.25rem) 2.5rem; }
+    .module-content h3 { margin-top: 2.1rem; scroll-margin-top: 5.5rem; }
+    .module-content ul, .module-content ol { padding-left: 1.6rem; }
+    .module-content li { margin: .25rem 0; }
+    .module-content blockquote { margin: 1rem 0; padding: .75rem 1rem; border-left: 4px solid var(--brand); background: var(--surface-alt); color: var(--muted); }
+    .question { margin-top: 1.5rem; border-top: 1px solid var(--border); scroll-margin-top: 5.5rem; }
+    .question:first-child { margin-top: 0; border-top: 0; }
+    .question:first-child h3 { margin-top: 0; }
+    details { margin: .8rem 0 1.4rem; padding: .75rem 1rem; border: 1px solid var(--answer-border); border-radius: .7rem; background: var(--answer); }
+    summary { color: var(--accent); font-weight: 800; cursor: pointer; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .92rem; }
+    th, td { padding: .65rem; border: 1px solid var(--border); text-align: left; }
+    th { background: var(--surface-alt); }
+    .study-note, .references { padding: 1rem; border: 1px solid var(--border); border-radius: 1rem; background: var(--surface); margin-bottom: 1.5rem; }
+    .references li { margin: .5rem 0; }
+    .no-results { padding: 2rem; border: 1px dashed var(--border); border-radius: 1rem; text-align: center; color: var(--muted); }
+    @media (max-width: 850px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .sidebar nav { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .toolbar { position: static; }
+    }
+    @media (max-width: 540px) {
+      .hero { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+      .layout { width: min(100% - 1rem,1180px); }
+      .sidebar nav { grid-template-columns: 1fr; }
+      .module-header { align-items: flex-start; flex-direction: column; }
+      .toolbar > * { width: 100%; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { background: #fff; color: #000; font-size: 10pt; }
+      .toolbar, .sidebar { display: none !important; }
+      .hero { padding: 1.5rem; background: none; color: #000; }
+      .hero-description { color: #333; }
+      .stat { border-color: #999; background: none; }
+      .layout { display: block; width: 100%; margin: 0; }
+      .module-card { break-before: page; border: 0; box-shadow: none; }
+      .module-header { padding: 1rem 0; background: none; }
+      .module-content { padding: 0; }
+      details { break-inside: avoid; }
+      details:not([open]) > *:not(summary) { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Microsoft AI-103 &middot; Full-certification practice</p>
+    <h1>Test Paper 1: Architecture and Service Selection</h1>
+    <p class="hero-description">Design complete Azure AI solutions across six organizations, balancing deployment, grounding, agent actions, multimodal processing, and operational constraints.</p>
+    <div class="stats"><span class="stat">60 questions</span><span class="stat">6 case studies</span><span class="stat">48 single-answer + 12 Choose TWO</span><span class="stat">Offline &amp; print ready</span></div>
+  </header>
+  <div class="toolbar" role="search">
+    <input id="search" type="search" placeholder="Search cases, questions, or explanations..." aria-label="Search all case content">
+    <select id="module-filter" aria-label="Filter by case study"><option value="all">All case studies</option><option value="1">Case 1: Retail launch across two markets</option><option value="2">Case 2: Rail equipment maintenance library</option><option value="3">Case 3: Hotel guest-service modernization</option><option value="4">Case 4: Engineering tender review workspace</option><option value="5">Case 5: Property inventory and media platform</option><option value="6">Case 6: Pharmaceutical documentation support</option></select>
+    <button id="expand-answers" type="button">Show all answers</button>
+    <button id="collapse-answers" type="button">Hide all answers</button>
+    <button id="print" type="button">Print / Save PDF</button>
+  </div>
+  <div class="layout">
+    <aside class="sidebar"><h2>Case studies</h2><nav><a href="#module-1"><span>01</span>Retail launch across two markets</a><a href="#module-2"><span>02</span>Rail equipment maintenance library</a><a href="#module-3"><span>03</span>Hotel guest-service modernization</a><a href="#module-4"><span>04</span>Engineering tender review workspace</a><a href="#module-5"><span>05</span>Property inventory and media platform</a><a href="#module-6"><span>06</span>Pharmaceutical documentation support</a><a href="#references"><span>Ref</span>Sources and coverage</a><a href="./index.html"><span>All</span>All three test papers</a></nav></aside>
+    <main class="content">
+      <div class="study-note">
+        <p><strong>Instructions:</strong> Read each case before answering its ten questions. Choose ONE answer unless marked Choose TWO. Questions do not depend on your earlier answers. Answers start hidden; use a separate answer sheet before revealing explanations. For an answer-key printout, select Show all answers before printing. For the full paper, clear search and select All case studies.</p>
+        <p>Original practice material, not actual exam questions or a prediction of exam content. All organizations, workloads, measurements, and data are hypothetical. Assume stated models, APIs, features, regions, licenses, and preview capabilities are supported unless the scenario says otherwise. Model confidence, schema validity, authentication, authorization, and human approval are distinct concepts.</p>
+        <p><strong>Practice scoring:</strong> One point per question; for Choose TWO, both correct selections and no extras are required. This is a self-study convention, not Microsoft's scoring method. A score out of 60 cannot be converted into an official exam score or readiness guarantee.</p>
+        <p>Search matches entire cases, including explanations. This paper is mixed-domain rather than grouped by answer-revealing service names. Coverage approximates the current AI-103 blueprint checked on 2026-10-08.</p>
+      </div>
+      <p id="result-count" aria-live="polite">Showing all 6 case studies and 60 questions.</p>
+      
+      <article class="module-card" id="module-1" data-module="1" data-label="Retail launch across two markets">
+        <header class="module-header">
+          <div><span class="module-number">Case 1 of 6</span><h2>Retail launch across two markets</h2></div>
+          <span class="question-count">10 questions</span>
+        </header>
+        <div class="module-content">
+          <blockquote><p><strong>Shared case facts:</strong> Use these requirements for questions 1-10. Each question is independent of earlier answers.</p><ul><li>A retailer is launching an interactive shopping assistant. The EU business permits inference anywhere in Microsoft&#x27;s EU data zone but not outside it. The North American launch is a separate environment with its own data and access configuration.</li><li>The assistant answers from a centrally maintained catalog and warranty index that changes daily. It must cite the applicable product and policy version. Customer-specific prices are obtained from an authenticated application service rather than a daily catalog export.</li><li>Traffic is seasonal and initially difficult to forecast. The business wants consumption-based inference, secretless Azure-hosted authentication, and a staged release with predefined quality, safety, cost, and latency gates.</li><li>The application already produces the desired friendly writing style with a short prompt. Source descriptions arrive in several languages, and raw customer identifiers must not be retained in evaluation datasets.</li></ul></blockquote>
+          
+          <section class="question" id="q1" data-select="1" data-domain="plan">
+            <h3>1. Location and purchase model</h3>
+            <p>The EU team is selecting the inference deployment for unpredictable launch traffic. Procurement will not approve reserved processing capacity during the pilot. Inference may move within the approved EU data zone, and the business wants to use that flexibility rather than constrain processing to one region. Which deployment is the best match?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Global Standard in a resource created in Europe.</li><li>Data Zone Standard configured for the EU data zone.</li><li>Data Zone Provisioned configured for the EU data zone.</li><li>Global Provisioned with EU document storage.</li></ol>
+            <details><summary>Answer and explanation for question 1</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Data Zone Standard combines consumption billing with inference constrained to the specified data zone.</p>
+              <ul><li><strong>A:</strong> Resource location does not make a Global deployment&#x27;s processing EU-only.</li><li><strong>C:</strong> Provisioned capacity conflicts with the pilot&#x27;s purchasing constraint.</li><li><strong>D:</strong> Both the global processing scope and reserved-capacity model conflict with the requirements.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q2" data-select="1" data-domain="plan">
+            <h3>2. Launch model decision</h3>
+            <p>On the same evaluation set, model S achieves 95.8% task success at p95 0.9 seconds and cost $0.24 per 1,000 requests. Model M achieves 97.1%, 1.7 seconds, and $0.63. Model L achieves 98.0%, 2.8 seconds, and $1.15. The gates are at least 97% and at most 2 seconds. All safety checks pass. Which configuration is justified by the evidence?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>S, because it is the cheapest.</li><li>L, because it has the highest task success.</li><li>A router assumed to combine S&#x27;s cost with L&#x27;s accuracy without testing.</li><li>M, because it is the only measured configuration satisfying both gates.</li></ol>
+            <details><summary>Answer and explanation for question 2</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> M passes both hard thresholds; neither lower cost nor higher accuracy excuses failing a required gate.</p>
+              <ul><li><strong>A:</strong> S misses the 97% success requirement.</li><li><strong>B:</strong> L exceeds the latency limit.</li><li><strong>C:</strong> An untested router has no demonstrated aggregate accuracy, cost, or latency.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q3" data-select="1" data-domain="plan">
+            <h3>3. Regional environment boundaries</h3>
+            <p>Developers need realistic tests without accessing production customer-specific prices. Production runs in Azure App Service and must avoid stored credentials. Which design enforces both environment separation and the production identity requirement instead of depending on developers to select the correct endpoint manually?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Use environment-specific resources and connections, restrict development access, and grant a production managed identity only the needed backend permissions.</li><li>Share one production credential, but put a development prefix on every test prompt.</li><li>Keep separate project names while giving both environments the same unrestricted backend identity.</li><li>Store a production API key in each developer&#x27;s local configuration.</li></ol>
+            <details><summary>Answer and explanation for question 3</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Resources, connections, and permissions enforce environment boundaries; managed identity removes application-managed secrets for supported Azure access.</p>
+              <ul><li><strong>B:</strong> Prompt labels do not isolate data or credentials.</li><li><strong>C:</strong> Distinct names do not prevent cross-environment access through shared permissions.</li><li><strong>D:</strong> Distributes a production secret and permits the access the scenario prohibits.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q4" data-select="2" data-domain="plan">
+            <h3>4. Controlled release evidence</h3>
+            <p>A prompt change improves average shopping answers but introduces unsupported warranty exceptions in a small product category. The team must make a defensible release decision and retain evidence linking results to the deployed configuration. Which TWO practices belong in the release process?</p>
+            <p><strong>Choose TWO answers.</strong></p>
+            <ol class="options" type="A"><li>Approve if the overall average improves, regardless of category failures.</li><li>Capture the prompt/model/index configuration and inspect category-level grounding and safety results against predefined gates.</li><li>Use the candidate&#x27;s own self-reported confidence as the only release criterion.</li><li>Run representative controlled evaluations before promotion and retain a tested rollback configuration.</li><li>Delete failed examples from the dataset because the category is low volume.</li></ol>
+            <details><summary>Answer and explanation for question 4</summary>
+              <p class="correct-answer">Answer: B, D</p>
+              <p><strong>Why:</strong> Versioned evidence plus representative subgroup gates detects regressions that a blended score can conceal and supports controlled promotion or rollback.</p>
+              <ul><li><strong>A:</strong> The aggregate masks a known defect in a supported category.</li><li><strong>C:</strong> Model confidence is not independent evidence of correct warranties.</li><li><strong>E:</strong> Removing failures changes the measurement instead of fixing the product.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q5" data-select="1" data-domain="genai">
+            <h3>5. Project access plus model invocation</h3>
+            <p>The Python service must enumerate its Foundry project&#x27;s connections and invoke a selected model deployment. It has Microsoft Entra credentials. A prototype sends connection-management requests through a standalone inference client and fails. Which arrangement respects the distinct project and inference API surfaces?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Send both operations through the Azure AI Search client.</li><li>Use the credential object itself as the project-management API.</li><li>Use AIProjectClient for project operations and obtain its supported OpenAI client for model operations.</li><li>Change the model&#x27;s catalog display name until connection enumeration works.</li></ol>
+            <details><summary>Answer and explanation for question 5</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> The project SDK exposes project-scoped operations and a supported integration with an authenticated inference client.</p>
+              <ul><li><strong>A:</strong> Search is not the Foundry project-management service.</li><li><strong>B:</strong> Credentials authenticate clients; they do not implement service operations.</li><li><strong>D:</strong> A model name cannot add management methods to the wrong client.</li></ul>
+              <p><strong>Qualification:</strong> Use the installed SDK/API generation and the actual deployment name; do not mix legacy examples indiscriminately.</p>
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q6" data-select="1" data-domain="genai">
+            <h3>6. Knowledge freshness versus learned style</h3>
+            <p>The team proposes weekly fine-tuning on the catalog and keeping the current short tone prompt. Products and policy versions can change several times between training runs. What should replace the proposed knowledge approach while preserving the already satisfactory writing style?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Load one catalog snapshot into a permanent conversation and never refresh it.</li><li>Use retrieval over the maintained catalog/policy index, include source versions, and keep the tested tone instructions.</li><li>Increase temperature so the model invents more up-to-date descriptions.</li><li>Train only on product names and let the model infer current warranty terms.</li></ol>
+            <details><summary>Answer and explanation for question 6</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Retrieval supplies current evidence independently of the model&#x27;s learned behavior; the existing prompt already solves tone.</p>
+              <ul><li><strong>A:</strong> A conversation snapshot becomes stale and is not an indexing strategy.</li><li><strong>C:</strong> Variability does not create current authoritative facts.</li><li><strong>D:</strong> Product names do not establish current policy terms or source citations.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q7" data-select="1" data-domain="genai">
+            <h3>7. Streaming a price explanation</h3>
+            <p>The user interface streams an explanation while a customer-specific price is returned through an authenticated function. The application must display a final price only after receiving the authoritative tool result and a completed valid response. Which design avoids confusing progress text with a completed quotation?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Persist the first streamed number as the final quotation.</li><li>Allow the model to estimate the price if the tool is slow, then silently replace it later.</li><li>Treat any received output chunk as proof that the entire request completed.</li><li>Separate provisional display from the final result, correlate the tool result, and validate completion before committing the quotation.</li></ol>
+            <details><summary>Answer and explanation for question 7</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Streaming is a delivery mechanism, not a completion or business-validity guarantee. Final state must depend on the authoritative result.</p>
+              <ul><li><strong>A:</strong> An early number may be partial, unrelated, or superseded.</li><li><strong>B:</strong> Presents an unsupported price as authoritative.</li><li><strong>C:</strong> A stream can stop before completion or contain an error/refusal.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q8" data-select="1" data-domain="genai">
+            <h3>8. Shared prompts without shared histories</h3>
+            <p>Both markets use the same agent instructions. An engineer wants to share one conversation history to reduce token setup overhead. Customer-specific offers and identities occur in that history. The system must preserve continuity per customer without mixing customers. Which design should be used?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Share the agent definition but maintain separately authorized user/conversation state and suitable retention controls.</li><li>Share the entire history and prepend the current customer identifier.</li><li>Create two model deployments but keep a shared cross-market history.</li><li>Remove customer names from the final answer while leaving all histories in the model context.</li></ol>
+            <details><summary>Answer and explanation for question 8</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Reusable configuration does not require reusable interaction state. Conversation access must match the authenticated user and intended session.</p>
+              <ul><li><strong>B:</strong> A label does not prevent the model from seeing other customers&#x27; facts.</li><li><strong>C:</strong> Deployment separation does not repair shared input data.</li><li><strong>D:</strong> Final-output cleanup occurs after cross-user context exposure.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q9" data-select="2" data-domain="text">
+            <h3>9. Safe sentiment data for improvement</h3>
+            <p>The retailer wants to analyze sentiment and summarize recurring complaints from customer messages. A trusted ingestion boundary may temporarily receive raw text, but the summarizer and evaluation store must receive only appropriately redacted text. Which TWO steps satisfy that design?</p>
+            <p><strong>Choose TWO answers.</strong></p>
+            <ol class="options" type="A"><li>Send raw messages to the summarizer and ask it to avoid names.</li><li>Use PII detection/redaction inside the trusted boundary before downstream analysis.</li><li>Store raw exception payloads because operational logs are separate from evaluation data.</li><li>Run sentiment/topic or summarization analysis on the permitted redacted text and prevent raw message logging downstream.</li><li>Replace redaction with a confidence threshold on the sentiment score.</li></ol>
+            <details><summary>Answer and explanation for question 9</summary>
+              <p class="correct-answer">Answer: B, D</p>
+              <p><strong>Why:</strong> Privacy preprocessing and downstream analysis are complementary stages; the logging path must enforce the same boundary as the model path.</p>
+              <ul><li><strong>A:</strong> The summarizer already receives prohibited raw data.</li><li><strong>C:</strong> Logs are another disclosure path, not an exception.</li><li><strong>E:</strong> Sentiment confidence does not identify or remove personal information.</li></ul>
+              <p><strong>Qualification:</strong> Evaluate detection misses; automated redaction is not a guarantee that every sensitive value is removed.</p>
+              <p><strong>Study domain:</strong> Text and speech</p>
+            </details>
+          </section>
+          <section class="question" id="q10" data-select="1" data-domain="extraction">
+            <h3>10. Supplier-specific enrichment</h3>
+            <p>Most supplier descriptions can be indexed directly, but one supplier uses proprietary abbreviations that an existing internal API expands reliably. The team wants this expansion performed during Azure AI Search ingestion so every query benefits. Which approach adds the capability without rebuilding the entire ingestion service?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Add the API instructions to the user&#x27;s query and hope the model calls it.</li><li>Use semantic ranking to alter the stored source documents permanently.</li><li>Add an appropriately authenticated custom enrichment skill to the indexer pipeline and map its output into searchable fields.</li><li>Use query-time embeddings alone to populate the missing expanded text in the index.</li></ol>
+            <details><summary>Answer and explanation for question 10</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> A custom enrichment skill can incorporate existing domain processing during indexing, provided its input/output contract and field mappings are configured.</p>
+              <ul><li><strong>A:</strong> Does not perform consistent ingestion-time enrichment.</li><li><strong>B:</strong> Reranking orders results; it does not rewrite stored source content.</li><li><strong>D:</strong> Query embedding does not create missing document enrichment fields.</li></ul>
+              
+              <p><strong>Study domain:</strong> Information extraction</p>
+            </details>
+          </section>
+        </div>
+      </article>
+      <article class="module-card" id="module-2" data-module="2" data-label="Rail equipment maintenance library">
+        <header class="module-header">
+          <div><span class="module-number">Case 2 of 6</span><h2>Rail equipment maintenance library</h2></div>
+          <span class="question-count">10 questions</span>
+        </header>
+        <div class="module-content">
+          <blockquote><p><strong>Shared case facts:</strong> Use these requirements for questions 11-20. Each question is independent of earlier answers.</p><ul><li>A rail equipment company builds a documentation assistant for authorized maintenance planners. It provides advisory summaries and scheduling support; qualified staff make operational safety decisions.</li><li>Manuals contain diagrams, scanned tables, and revision-specific instructions. An Azure AI Search index is already maintained. Current parts availability is exposed by an application-owned authenticated function.</li><li>Inspection videos contain spoken commentary and defects visible only in the images. Staff need traceable source pages and video time ranges rather than unreferenced model judgments.</li><li>The company requires private network access to the search service, read-only document access for the assistant, and an explicit review step before any consequential scheduling change.</li></ul></blockquote>
+          
+          <section class="question" id="q11" data-select="1" data-domain="plan">
+            <h3>11. Read-only access without index administration</h3>
+            <p>The assistant has a managed identity and the private network path works. It should query documents but must not upload documents or modify index definitions. Search supports Microsoft Entra authentication. Which Azure AI Search role best matches this data-plane requirement?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Search Index Data Contributor.</li><li>Search Index Data Reader.</li><li>Search Service Contributor alone.</li><li>Subscription Owner.</li></ol>
+            <details><summary>Answer and explanation for question 11</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Search Index Data Reader grants document query/read access without document-write or index-administration capabilities.</p>
+              <ul><li><strong>A:</strong> Adds document-write permissions the assistant does not need.</li><li><strong>C:</strong> Search-object administration does not by itself grant document-query access.</li><li><strong>D:</strong> Grants excessive subscription-wide authority.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q12" data-select="1" data-domain="plan">
+            <h3>12. Private access from the correct caller</h3>
+            <p>The Search private endpoint is approved and works from a test VM. The assistant application still resolves the service hostname to a public address; public network access is disabled. The managed identity has the correct role. Which first correction follows the observed evidence?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Grant the identity additional write roles.</li><li>Reenable public access and treat the private requirement as met.</li><li>Check and correct the application&#x27;s private DNS resolution and routing to the endpoint.</li><li>Increase the model&#x27;s context window.</li></ol>
+            <details><summary>Answer and explanation for question 12</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> The demonstrated failure is the application&#x27;s network/name-resolution path, not its data-plane authorization.</p>
+              <ul><li><strong>A:</strong> Roles do not change DNS or routing.</li><li><strong>B:</strong> Bypasses the required private path rather than fixing it.</li><li><strong>D:</strong> Context capacity has no bearing on network reachability.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q13" data-select="1" data-domain="plan">
+            <h3>13. Capacity reservation for measured load</h3>
+            <p>The assistant&#x27;s deployment serves a predictable continuous workload. Repeated load tests show unacceptable latency variability on Standard, and procurement accepts reserved processing capacity. The deployment must remain in the approved processing scope. Which approach should the team evaluate rather than simply raising retry counts?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Provisioned throughput sized using representative load tests, within the required deployment geography.</li><li>Batch inference for every interactive maintenance question.</li><li>Unlimited client retries on the existing Standard deployment.</li><li>A larger maximum output length to consume the quota faster.</li></ol>
+            <details><summary>Answer and explanation for question 13</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Provisioned capacity fits forecastable throughput requirements when tested and sized within the applicable location constraints.</p>
+              <ul><li><strong>B:</strong> Asynchronous batch processing does not satisfy interactive latency needs.</li><li><strong>C:</strong> Retries cannot manufacture sustained capacity and can worsen load.</li><li><strong>D:</strong> Larger output allowances increase resource demand rather than stabilize it.</li></ul>
+              <p><strong>Qualification:</strong> Provisioned deployment is not an unconditional latency guarantee; model choice, sizing, and dependencies still matter.</p>
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q14" data-select="2" data-domain="genai">
+            <h3>14. Documents and live parts data</h3>
+            <p>A planner asks which procedure applies to a component and whether the required replacement is available now. The manuals already have a maintained index, and the application must execute its existing inventory function itself. Which TWO capabilities should the agent use?</p>
+            <p><strong>Choose TWO answers.</strong></p>
+            <ol class="options" type="A"><li>Create a second File Search store for all manuals even though duplication is prohibited.</li><li>Use a daily parts export as if it were a live inventory query.</li><li>Use authorized retrieval from the existing Azure AI Search index for the applicable manual revision.</li><li>Use application-executed function calling for current inventory, with argument and permission checks.</li><li>Fine-tune on yesterday&#x27;s stock levels to remove the inventory dependency.</li></ol>
+            <details><summary>Answer and explanation for question 14</summary>
+              <p class="correct-answer">Answer: C, D</p>
+              <p><strong>Why:</strong> Maintained knowledge retrieval and live authenticated application operations meet separate parts of the request without replacing authoritative sources.</p>
+              <ul><li><strong>A:</strong> Duplicates the existing maintained knowledge path unnecessarily.</li><li><strong>B:</strong> A snapshot cannot establish current stock.</li><li><strong>E:</strong> Training on changing stock levels does not provide live truth.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q15" data-select="1" data-domain="genai">
+            <h3>15. Approval of an exact scheduling change</h3>
+            <p>The agent prepares a draft maintenance booking, and a planner approves the proposed date and equipment identifier. Before execution, the agent changes the equipment identifier to resolve a conflict. Authorization permits both items, but approval must cover the actual change submitted. Which execution rule should apply?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Reuse approval because the same scheduling tool is called.</li><li>Bind approval to the material arguments and require renewed approval when they change.</li><li>Execute first, then notify the planner of the substitution.</li><li>Treat a high model confidence score as equivalent to approval.</li></ol>
+            <details><summary>Answer and explanation for question 15</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Approval is consent to a concrete operation, not unrestricted permission for later substitutions within a conversation.</p>
+              <ul><li><strong>A:</strong> Tool identity alone does not identify the approved action.</li><li><strong>C:</strong> Checks consent after the effect.</li><li><strong>D:</strong> Confidence and human consent are different controls.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q16" data-select="1" data-domain="genai">
+            <h3>16. Deterministic validation before drafting</h3>
+            <p>A scheduling explanation must use dates that satisfy a deterministic interval rule and an authoritative equipment calendar. The model sometimes invents a permissible date despite retrieving the correct rule. Which workflow should enforce the rule while preserving natural-language explanations?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Repeat the rule in the prompt until validation becomes unnecessary.</li><li>Let two models vote on the date and accept the majority.</li><li>Ask the agent to generate its own calendar when the source calendar disagrees.</li><li>Validate or compute permissible dates in application code, pass the validated result to the model, and prevent unvalidated dates from becoming executable actions.</li></ol>
+            <details><summary>Answer and explanation for question 16</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> A rules engine or application function enforces deterministic constraints; the model can explain the result without overriding it.</p>
+              <ul><li><strong>A:</strong> Prompt repetition is not an execution boundary.</li><li><strong>B:</strong> Agreement between models does not prove compliance with the authoritative calendar.</li><li><strong>C:</strong> Replaces the source of truth with generated data.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q17" data-select="1" data-domain="vision">
+            <h3>17. Visual evidence beyond recognized text</h3>
+            <p>A planner uploads a diagram and asks which labeled connector is adjacent to a visibly damaged region. OCR identifies labels accurately, but it does not retain enough spatial context to answer the question. There is no labeled dataset for training a dedicated detector for each equipment model. Which starting approach is most appropriate?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>A vision-capable multimodal model receiving both the diagram and the question, with source-grounded output and human verification.</li><li>A text-only model receiving a list of OCR labels after discarding the image.</li><li>An image-generation model asked to redraw a plausible connector layout.</li><li>A sentiment model over the equipment labels.</li></ol>
+            <details><summary>Answer and explanation for question 17</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> The task requires image-conditioned spatial reasoning rather than text extraction alone or generation of a replacement diagram.</p>
+              <ul><li><strong>B:</strong> Discards the visual relationships needed for the answer.</li><li><strong>C:</strong> Creates media rather than analyzing the supplied evidence.</li><li><strong>D:</strong> Sentiment does not locate diagram components.</li></ul>
+              <p><strong>Qualification:</strong> Model output is advisory; do not treat a visual answer as an autonomous equipment-safety decision.</p>
+              <p><strong>Study domain:</strong> Computer vision</p>
+            </details>
+          </section>
+          <section class="question" id="q18" data-select="1" data-domain="vision">
+            <h3>18. Generate a training animation from references</h3>
+            <p>The training department needs a short animation based on approved reference images and a written procedure. It must produce video, not just a narrated description, and the result requires subject-matter and visual-policy review. Which model capability should be selected before implementation?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>A text-only model, because any model can emit video when instructed.</li><li>An OCR model followed by a larger context window.</li><li>A supported video-generation/editing model accepting the required reference inputs and controls, followed by output review.</li><li>An image-captioning model whose text is stored with a video filename.</li></ol>
+            <details><summary>Answer and explanation for question 18</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Output modality and reference-input support are hard capability requirements; review handles fidelity and policy concerns after generation.</p>
+              <ul><li><strong>A:</strong> Instructions cannot create an unsupported output modality.</li><li><strong>B:</strong> OCR extracts text, not motion media.</li><li><strong>D:</strong> Changing a filename does not turn a caption into a video.</li></ul>
+              
+              <p><strong>Study domain:</strong> Computer vision</p>
+            </details>
+          </section>
+          <section class="question" id="q19" data-select="2" data-domain="text">
+            <h3>19. Recognize field vocabulary and speak verified results</h3>
+            <p>Staff dictate parts terminology in noisy field conditions. The base speech recognizer remains below the accuracy target after phrase-list tuning. Representative recordings with verified transcripts are available, and the language/base model supports audio customization. The assistant should also speak its validated response. Which TWO capabilities address the separate input and output needs?</p>
+            <p><strong>Choose TWO answers.</strong></p>
+            <ol class="options" type="A"><li>Train a Custom Speech recognition model and evaluate it on separate representative recordings.</li><li>Use SSML pronunciation settings as a substitute for adapting speech recognition.</li><li>Treat synthesized speech quality as the recognition accuracy metric.</li><li>Send an unverified transcript directly to the scheduling writer.</li><li>Use text-to-speech for the validated response, with supported voice/pronunciation settings where needed.</li></ol>
+            <details><summary>Answer and explanation for question 19</summary>
+              <p class="correct-answer">Answer: A, E</p>
+              <p><strong>Why:</strong> Custom Speech adapts recognition; text-to-speech produces spoken output after the response is validated.</p>
+              <ul><li><strong>B:</strong> SSML affects synthesis, not the recognizer&#x27;s acoustic/language errors.</li><li><strong>C:</strong> Output voice quality does not measure transcription accuracy.</li><li><strong>D:</strong> Skips the required validation boundary for an action.</li></ul>
+              
+              <p><strong>Study domain:</strong> Text and speech</p>
+            </details>
+          </section>
+          <section class="question" id="q20" data-select="1" data-domain="extraction">
+            <h3>20. Retain table meaning and page references</h3>
+            <p>The ingestion pipeline concatenates OCR words from scanned manuals. Limits from one table column become associated with the wrong equipment type, and page references disappear. The team needs structured fields plus readable content for retrieval. Which improvement best addresses the ingestion failure?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Increase the answer model&#x27;s temperature to recover lost structure.</li><li>Use OCR with layout/field extraction or an appropriate Content Understanding document analyzer, and preserve page/section metadata through chunking and indexing.</li><li>Index only the document title and infer the numeric limits at query time.</li><li>Remove all tables from the corpus to avoid conflicting values.</li></ol>
+            <details><summary>Answer and explanation for question 20</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> The loss occurs before retrieval. Structured extraction and preserved provenance retain the relationships and evidence needed downstream.</p>
+              <ul><li><strong>A:</strong> Generation settings cannot reconstruct discarded source relationships reliably.</li><li><strong>C:</strong> Omits the authoritative numeric evidence.</li><li><strong>D:</strong> Deletes essential content instead of correcting extraction.</li></ul>
+              
+              <p><strong>Study domain:</strong> Information extraction</p>
+            </details>
+          </section>
+        </div>
+      </article>
+      <article class="module-card" id="module-3" data-module="3" data-label="Hotel guest-service modernization">
+        <header class="module-header">
+          <div><span class="module-number">Case 3 of 6</span><h2>Hotel guest-service modernization</h2></div>
+          <span class="question-count">10 questions</span>
+        </header>
+        <div class="module-content">
+          <blockquote><p><strong>Shared case facts:</strong> Use these requirements for questions 21-30. Each question is independent of earlier answers.</p><ul><li>A hotel group is introducing a guest-service assistant across properties. Each property has current amenity policies, customer-specific reservations, and approved public information. Private reservation actions remain in the authenticated booking system.</li><li>Guests interact in several supported languages. The assistant may explain policy and prepare change requests, but it must not promise a reservation change until the booking system confirms the authorized operation.</li><li>The platform has property-level permissions, published quality thresholds for each supported language, and a limit on cloud cost per conversation. The agent uses the same definition across properties but must isolate guest conversations.</li><li>Accessible descriptions of hotel photographs, translations of formatted guest guides, and analysis of customer feedback are required alongside the conversational experience.</li></ul></blockquote>
+          
+          <section class="question" id="q21" data-select="1" data-domain="plan">
+            <h3>21. A release gate for every supported language</h3>
+            <p>A candidate improves overall task success from 92% to 95%, but the low-volume French cohort falls to 82%. The predeclared gate requires at least 90% for every supported language. Cost and latency pass. Which release decision follows the contract rather than the aggregate improvement?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Release because the global score improved.</li><li>Remove French samples from the report without changing advertised support.</li><li>Average the failing language with the highest-performing language.</li><li>Hold the affected release, investigate representative French cases, remediate, and rerun the required gates.</li></ol>
+            <details><summary>Answer and explanation for question 21</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> A per-language minimum is an independent requirement; a blended average cannot offset a supported cohort&#x27;s failure.</p>
+              <ul><li><strong>A:</strong> Ignores the declared subgroup gate.</li><li><strong>B:</strong> Conceals the failure while users remain exposed.</li><li><strong>C:</strong> Replaces the agreed metric after observing an unfavorable result.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q22" data-select="1" data-domain="plan">
+            <h3>22. Locate conversation cost before choosing a larger model</h3>
+            <p>The median conversation uses the expected tokens, but a small subset costs five times more and contains repeated policy lookups and rewrites. The team needs evidence distinguishing model expense from orchestration loops, without logging raw guest data. Which measurement design should it choose?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Track correlated model/tool spans, per-run token use and iteration counts, with content minimization and safe metadata.</li><li>Monitor only daily subscription spending.</li><li>Collect full raw conversations indefinitely because only those show cost.</li><li>Replace the model immediately and infer improvement from its catalog price.</li></ol>
+            <details><summary>Answer and explanation for question 22</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Per-run traces and usage breakdowns expose repeated steps and where cost accumulates without requiring unrestricted guest content.</p>
+              <ul><li><strong>B:</strong> Daily totals cannot identify looping trajectories.</li><li><strong>C:</strong> Violates data-minimization requirements.</li><li><strong>D:</strong> Unit price alone does not address excessive calls or reveal the cause.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q23" data-select="1" data-domain="plan">
+            <h3>23. Stop an expensive autonomous path</h3>
+            <p>An agent keeps asking itself whether another policy lookup would improve the answer. Every individual model call remains below its output limit, but the overall conversation exceeds the cost budget. The product requires a bounded attempt with a clear unresolved outcome when necessary. Which control directly enforces that requirement?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Increase the model&#x27;s context window.</li><li>Use a workflow-wide token/iteration budget and explicit completion criteria, returning a review-needed or incomplete result when exhausted.</li><li>Lower temperature and assume it guarantees termination.</li><li>Limit each output to one sentence without limiting the number of calls.</li></ol>
+            <details><summary>Answer and explanation for question 23</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Only an orchestration-level bound limits aggregate calls and cost; explicit outcomes preserve honesty when the task remains unresolved.</p>
+              <ul><li><strong>A:</strong> Stores more history without bounding work.</li><li><strong>C:</strong> Probabilistic behavior changes do not guarantee termination.</li><li><strong>D:</strong> Many short calls can still run indefinitely.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q24" data-select="2" data-domain="genai">
+            <h3>24. Distinguish policy answers from booking writes</h3>
+            <p>A guest asks whether a late checkout is allowed and requests it for a particular reservation. Current rules live in the policy index, while the booking API enforces guest ownership and availability. Which TWO components should the application combine to answer and act correctly?</p>
+            <p><strong>Choose TWO answers.</strong></p>
+            <ol class="options" type="A"><li>A stored policy snapshot in the model&#x27;s training data as the only policy authority.</li><li>A prompt that treats a persuasive guest message as proof of reservation ownership.</li><li>Current authorized retrieval for the relevant property&#x27;s policy, with source references.</li><li>A function/API tool that validates guest identity and reservation access, then reports the booking system&#x27;s authoritative outcome.</li><li>A generated confirmation message sent before the booking API completes.</li></ol>
+            <details><summary>Answer and explanation for question 24</summary>
+              <p class="correct-answer">Answer: C, D</p>
+              <p><strong>Why:</strong> Retrieval establishes policy evidence; an authorized live operation establishes whether the specific reservation can be changed.</p>
+              <ul><li><strong>A:</strong> May be stale and cannot establish property-specific current rules.</li><li><strong>B:</strong> User wording is not authenticated ownership.</li><li><strong>E:</strong> Confuses intended action with confirmed backend success.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q25" data-select="1" data-domain="genai">
+            <h3>25. A tool call accepted the change but lost its response</h3>
+            <p>The booking system supports idempotency identifiers and request-status lookup. An authorized reservation change times out after submission, and the agent cannot tell whether it committed. Which retry approach avoids creating multiple changes while keeping the guest accurately informed?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Retry with a fresh idempotency identifier each time.</li><li>Tell the guest the change failed and immediately submit a different change.</li><li>Preserve the identifier, inspect authoritative status, retry idempotently if appropriate, and report uncertainty when status cannot be established.</li><li>Assume any timeout means no backend work occurred.</li></ol>
+            <details><summary>Answer and explanation for question 25</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> An ambiguous transport outcome requires reconciliation, not a guess; preserving the operation identity allows backend deduplication.</p>
+              <ul><li><strong>A:</strong> Makes each attempt appear to be a new operation.</li><li><strong>B:</strong> Treats an unknown outcome as a known failure and may duplicate effects.</li><li><strong>D:</strong> A committed action can outlive the response connection.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q26" data-select="1" data-domain="genai">
+            <h3>26. Route conversation responsibility</h3>
+            <p>A triage agent determines whether a guest needs reservation support or local-information support. One specialist should take over the conversation, ask follow-up questions, and transfer again only when necessary. Running every specialist on every message adds unnecessary context exposure. Which orchestration is most suitable?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Handoff with permitted transfer paths, scoped conversation context, and completion/escalation rules.</li><li>A fixed pipeline invoking every specialist in order.</li><li>Concurrent execution of every specialist followed by voting on each message.</li><li>A group chat requiring all specialists to review every follow-up.</li></ol>
+            <details><summary>Answer and explanation for question 26</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Dynamic transfer of responsibility matches a conversation that needs one appropriate specialist rather than all-agent participation.</p>
+              <ul><li><strong>B:</strong> Invokes irrelevant specialists and assumes a fixed path.</li><li><strong>C:</strong> Adds the unnecessary work and context exposure the scenario rejects.</li><li><strong>D:</strong> Requires broad participation when it is not needed.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q27" data-select="1" data-domain="vision">
+            <h3>27. Alt text should describe evidence, not invent amenities</h3>
+            <p>The website needs concise accessible descriptions of room photographs, while detailed descriptions remain available separately. A prototype invents features not visible in the image, such as an accessible bathroom behind a closed door. Which generation configuration is most appropriate?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Ask a text-only model to describe the room based solely on its marketing name.</li><li>Generate a replacement image with the amenities the hotel hopes to advertise.</li><li>Use generic identical alt text for every photograph.</li><li>Use a vision-capable model with the actual image and concise evidence-based accessibility instructions, reviewing unsupported assertions and providing detail separately.</li></ol>
+            <details><summary>Answer and explanation for question 27</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Image-conditioned description and clear constraints support useful alt text without treating unseen amenities as visual facts.</p>
+              <ul><li><strong>A:</strong> Lacks the visual evidence needed for the specific photograph.</li><li><strong>B:</strong> Changes the source media rather than describing it.</li><li><strong>C:</strong> Loses the image-specific information accessibility descriptions should convey.</li></ul>
+              <p><strong>Qualification:</strong> Model-generated descriptions require validation; they do not certify accessibility compliance or physical room features.</p>
+              <p><strong>Study domain:</strong> Computer vision</p>
+            </details>
+          </section>
+          <section class="question" id="q28" data-select="1" data-domain="text">
+            <h3>28. Formatted multilingual guest guides</h3>
+            <p>The hotel must translate full Word guest guides while preserving document structure and approved terminology. It also wants a separate short summary for the chat assistant. Asynchronous processing is acceptable. Which workflow best preserves the distinction between a complete translation and a lossy summary?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Summarize first, translate only the summary, and deliver it as the complete guide.</li><li>Use Translator Document Translation with an appropriate glossary for the full guide, then create and validate a separate grounded summary.</li><li>Translate extracted paragraphs and discard headings and formatting.</li><li>Ask the chat model for a shorter guide and claim it preserves every original detail.</li></ol>
+            <details><summary>Answer and explanation for question 28</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Document Translation handles the full formatted deliverable; summarization is a separate output with a different completeness contract.</p>
+              <ul><li><strong>A:</strong> Substitutes a reduced artifact for the required complete translation.</li><li><strong>C:</strong> Does not preserve the required document structure.</li><li><strong>D:</strong> A shorter generative output cannot be assumed to retain all details.</li></ul>
+              
+              <p><strong>Study domain:</strong> Text and speech</p>
+            </details>
+          </section>
+          <section class="question" id="q29" data-select="2" data-domain="text">
+            <h3>29. Separate sentiment about service aspects</h3>
+            <p>Managers need to distinguish praise for room cleanliness from complaints about check-in within the same message. Customer identifiers must be removed before storing analytics. Which TWO capabilities form an appropriate analysis pipeline for these requirements?</p>
+            <p><strong>Choose TWO answers.</strong></p>
+            <ol class="options" type="A"><li>Summarize the whole message into a single positive/negative label and discard all aspect associations.</li><li>Keep raw identifiers because sentiment analysis is not a generative model.</li><li>Use supported sentiment analysis with opinion mining or equivalent evaluated aspect-level extraction to associate opinions with their targets.</li><li>Use PII detection/redaction and enforce permitted storage/logging of the resulting analytics.</li><li>Translate every message into an image before classifying it.</li></ol>
+            <details><summary>Answer and explanation for question 29</summary>
+              <p class="correct-answer">Answer: C, D</p>
+              <p><strong>Why:</strong> Aspect-level analysis preserves different opinions within one message, while privacy processing addresses data handling rather than sentiment itself.</p>
+              <ul><li><strong>A:</strong> Loses the required distinction between service aspects.</li><li><strong>B:</strong> Privacy rules apply regardless of whether the analysis model is generative.</li><li><strong>E:</strong> Adds an irrelevant modality conversion.</li></ul>
+              
+              <p><strong>Study domain:</strong> Text and speech</p>
+            </details>
+          </section>
+          <section class="question" id="q30" data-select="1" data-domain="extraction">
+            <h3>30. Exact amenity codes and natural questions</h3>
+            <p>Guests sometimes search a literal amenity code and sometimes describe the same amenity in everyday language. The authorized document set is already correct. Keyword-only retrieval misses paraphrases, while vector-only retrieval sometimes underweights the exact code. Which search approach should the team start with?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Semantic ranking without any first-stage retrieval query.</li><li>Only vector retrieval, after removing all amenity codes from the documents.</li><li>Only keyword retrieval with the same configuration that already misses paraphrases.</li><li>Hybrid retrieval combining lexical and compatible vector queries, optionally followed by semantic ranking.</li></ol>
+            <details><summary>Answer and explanation for question 30</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Hybrid retrieval addresses exact identifiers and semantic similarity in one candidate-generation approach; reranking can then improve ordering.</p>
+              <ul><li><strong>A:</strong> Reranking needs retrieved candidates.</li><li><strong>B:</strong> Deletes the exact evidence users provide.</li><li><strong>C:</strong> Leaves the stated paraphrase failure unresolved.</li></ul>
+              
+              <p><strong>Study domain:</strong> Information extraction</p>
+            </details>
+          </section>
+        </div>
+      </article>
+      <article class="module-card" id="module-4" data-module="4" data-label="Engineering tender review workspace">
+        <header class="module-header">
+          <div><span class="module-number">Case 4 of 6</span><h2>Engineering tender review workspace</h2></div>
+          <span class="question-count">10 questions</span>
+        </header>
+        <div class="module-content">
+          <blockquote><p><strong>Shared case facts:</strong> Use these requirements for questions 31-40. Each question is independent of earlier answers.</p><ul><li>An engineering consultancy builds an internal assistant for evaluating tender documents. It extracts obligations and dates, compares them with approved company capabilities, and drafts an evidence-linked recommendation for human reviewers.</li><li>Tender PDFs have changing revisions, scanned pages, and large technical tables. Some external documents contain instructions unrelated to the tender. The assistant must treat them as evidence, not instructions controlling its tools.</li><li>The workspace uses versioned prompts, a Foundry project, and a maintained enterprise knowledge index. Deterministic budget and deadline rules remain in application code. Only reviewers can approve submission.</li><li>The team must keep private tender contents out of unrestricted operational logs, support auditable citations, and compare candidate changes against a fixed baseline before promotion.</li></ul></blockquote>
+          
+          <section class="question" id="q31" data-select="1" data-domain="plan">
+            <h3>31. Trace without retaining tender bodies</h3>
+            <p>A candidate pipeline has high tail latency but normal model-service latency. It performs embedding, retrieval, table extraction, and drafting. Operations needs to locate the slow stage without recording confidential tender text. Which observability design is best?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Record only the total monthly token cost.</li><li>Store raw requests and every tool result in a broadly accessible log.</li><li>Capture correlated stage/dependency spans, timings, status, and permitted metadata with redaction at collection.</li><li>Use resource deployment events as a substitute for request-level traces.</li></ol>
+            <details><summary>Answer and explanation for question 31</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Stage-level traces expose runtime latency without requiring raw source bodies.</p>
+              <ul><li><strong>A:</strong> Monthly aggregates cannot locate the slow stage.</li><li><strong>B:</strong> Violates the tender-content handling restriction.</li><li><strong>D:</strong> Management events do not describe the execution of an individual tender analysis.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q32" data-select="1" data-domain="plan">
+            <h3>32. Version all parts of the release</h3>
+            <p>A new prompt appears better in development, but the test also used a different model deployment and a newer index. The team cannot determine what caused the change. Which release practice makes a comparison reproducible before choosing the winning configuration?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Record and control prompt, model, retrieval/index configuration, dataset, and evaluator versions; change one intended factor or evaluate explicit configuration bundles.</li><li>Compare only the names shown in the portal and assume identical names imply identical behavior.</li><li>Use a different evaluation dataset for each candidate.</li><li>Promote the latest edited prompt automatically regardless of its tested dependencies.</li></ol>
+            <details><summary>Answer and explanation for question 32</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Reproducibility requires the effective system configuration and evaluation inputs, not just one text file.</p>
+              <ul><li><strong>B:</strong> Display names do not establish equivalent versions or settings.</li><li><strong>C:</strong> Confounds system differences with test-population differences.</li><li><strong>D:</strong> Deploys a configuration that may never have been evaluated.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q33" data-select="1" data-domain="plan">
+            <h3>33. Guard against malicious evidence</h3>
+            <p>An external tender includes text telling the assistant to ignore its task and expose other clients&#x27; documents. The text contains no ordinary violence or sexual content. Which safety capability most directly targets this input class while independent access controls remain mandatory?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Increase the response length so the assistant can explain the instruction.</li><li>Prompt Shields for document attacks on untrusted grounding content.</li><li>Use a fluency evaluator to decide whether the tender should control the system prompt.</li><li>Disable retrieval so the assistant can invent the tender&#x27;s requirements.</li></ol>
+            <details><summary>Answer and explanation for question 33</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> The failure is indirect instruction injection within external evidence, not merely a harmful-content category or writing-quality problem.</p>
+              <ul><li><strong>A:</strong> Does not detect or constrain the instruction attempt.</li><li><strong>C:</strong> Fluency is not a trust classification or authorization check.</li><li><strong>D:</strong> Removes the evidence needed for the business task.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q34" data-select="2" data-domain="genai">
+            <h3>34. Capabilities evidence and deterministic budget checks</h3>
+            <p>The assistant must explain whether a tender fits the consultancy&#x27;s current capabilities and whether a proposed allocation respects an exact budget rule. The capability index is current, while a tested application function enforces the financial rule. Which TWO components should be combined?</p>
+            <p><strong>Choose TWO answers.</strong></p>
+            <ol class="options" type="A"><li>Use authorized retrieval from the current capability index with traceable sources.</li><li>Ask the model to replace the budget function with an approximate judgment.</li><li>Fine-tune weekly and stop querying current capability records.</li><li>Accept a generated budget figure if it is formatted as JSON.</li><li>Execute the trusted budget function through a validated tool interface and give its authoritative result to the drafting step.</li></ol>
+            <details><summary>Answer and explanation for question 34</summary>
+              <p class="correct-answer">Answer: A, E</p>
+              <p><strong>Why:</strong> Evidence retrieval supplies changing knowledge; deterministic code enforces an exact rule that generation should explain rather than override.</p>
+              <ul><li><strong>B:</strong> Replaces an exact requirement with a probabilistic judgment.</li><li><strong>C:</strong> Allows capabilities to become stale between training runs.</li><li><strong>D:</strong> Formatting does not prove arithmetic or rule compliance.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q35" data-select="1" data-domain="genai">
+            <h3>35. Reference answers belong to evaluation</h3>
+            <p>A Prompt Flow batch dataset contains tender questions and approved reference answers. Scores become nearly perfect after the expected-answer column is mapped into the generation node. The intended application will not receive reference answers at runtime. Which mapping should be used instead?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Pass reference answers into generation and evaluation because it improves scores.</li><li>Use the generated response as the input question.</li><li>Map the actual question/evidence into the generation flow, then send its output and the separate reference answer to the evaluation flow.</li><li>Remove all quality evaluation and report only successful HTTP requests.</li></ol>
+            <details><summary>Answer and explanation for question 35</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> The generation task must be tested with information available at runtime; reference answers are evaluation targets, not leaked inputs.</p>
+              <ul><li><strong>A:</strong> Preserves the source of inflated performance.</li><li><strong>B:</strong> Changes the task and loses the correct input/output relationship.</li><li><strong>D:</strong> Avoids measuring quality rather than correcting the leak.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q36" data-select="1" data-domain="genai">
+            <h3>36. Dependency-aware collaboration</h3>
+            <p>Requirement extraction takes 4 seconds. Legal analysis takes 8 seconds and cost analysis takes 5 seconds, both using extraction output independently. Drafting takes 3 seconds and needs both analyses. Ignore overhead and assume sufficient capacity. Which arrangement achieves the lowest valid ideal elapsed time?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Start every stage at once, taking 8 seconds.</li><li>Run all stages sequentially, taking 20 seconds.</li><li>Omit the legal analysis, taking 12 seconds.</li><li>Extract, run both analyses concurrently, join, then draft, taking 15 seconds.</li></ol>
+            <details><summary>Answer and explanation for question 36</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> The dependency-respecting critical path is 4 + max(8,5) + 3 = 15 seconds.</p>
+              <ul><li><strong>A:</strong> Starts downstream consumers before required inputs exist.</li><li><strong>B:</strong> Valid but slower than independent parallel analysis.</li><li><strong>C:</strong> Omits a required analysis.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q37" data-select="1" data-domain="vision">
+            <h3>37. Edit only an approved drawing region</h3>
+            <p>A presentation graphic needs a generated change within a marked region of an existing engineering illustration. Every pixel outside that region must remain unchanged in the delivered image. Tests show the editing model occasionally alters background pixels despite its mask. Which pipeline can enforce the hard boundary?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Use generated content only inside the approved region, composite it onto the original, and verify unchanged pixels outside the region in the final output.</li><li>Repeat the preservation instruction and accept every output.</li><li>Generate an entirely new image and judge similarity visually.</li><li>Lower temperature and treat preservation as guaranteed.</li></ol>
+            <details><summary>Answer and explanation for question 37</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Deterministic compositing and verification enforce exact preservation more reliably than a generative instruction alone.</p>
+              <ul><li><strong>B:</strong> Leaves the known failure unmitigated.</li><li><strong>C:</strong> Similarity is weaker than pixel equality and changes the whole image.</li><li><strong>D:</strong> Generation settings do not establish a deterministic guarantee.</li></ul>
+              <p><strong>Qualification:</strong> Lossy re-encoding can alter pixels outside the edited region; verify the final delivered representation.</p>
+              <p><strong>Study domain:</strong> Computer vision</p>
+            </details>
+          </section>
+          <section class="question" id="q38" data-select="1" data-domain="text">
+            <h3>38. Structured obligations with explicit uncertainty</h3>
+            <p>The downstream review system requires a fixed obligation category, due date, and source reference. Some tenders omit a due date. The model/API supports schema-constrained outputs, but an invented date would be worse than an explicit missing value. Which extraction design should be used?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Require a date for every record and instruct the model to guess if none is present.</li><li>Use a supported schema with an explicit missing/unknown representation, validate business rules and source evidence, and route unresolved items for review.</li><li>Use JSON mode alone and treat every parseable date as correct.</li><li>Store only a prose summary because structured validation is impossible.</li></ol>
+            <details><summary>Answer and explanation for question 38</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> A structured contract must represent genuine absence and uncertainty, not force hallucinated values to satisfy a field requirement.</p>
+              <ul><li><strong>A:</strong> Converts missing evidence into fabricated facts.</li><li><strong>C:</strong> JSON validity does not enforce schema or factual correctness.</li><li><strong>D:</strong> Discarding structure avoids rather than solves the integration requirement.</li></ul>
+              
+              <p><strong>Study domain:</strong> Text and speech</p>
+            </details>
+          </section>
+          <section class="question" id="q39" data-select="2" data-domain="extraction">
+            <h3>39. Recover relationships and retain evidence links</h3>
+            <p>Tender tables include obligations whose conditions span adjacent rows and pages. OCR is accurate, but flat text chunks lose the relationships. Reviewers also need each extracted obligation linked to its actual page or section. Which TWO ingestion changes directly address these failures?</p>
+            <p><strong>Choose TWO answers.</strong></p>
+            <ol class="options" type="A"><li>Increase only the chat model&#x27;s maximum output length.</li><li>Use layout-aware extraction and coherent chunking that preserves headings, relevant table context, and needed neighboring content.</li><li>Treat every page as an unrelated source and discard document identity.</li><li>Carry source identifiers and page/section metadata through extraction, enrichment, chunking, and indexing.</li><li>Remove conditional rows to make chunks shorter.</li></ol>
+            <details><summary>Answer and explanation for question 39</summary>
+              <p class="correct-answer">Answer: B, D</p>
+              <p><strong>Why:</strong> The extraction units must preserve semantic relationships and provenance before retrieval and generation occur.</p>
+              <ul><li><strong>A:</strong> Cannot restore discarded source structure.</li><li><strong>C:</strong> Breaks cross-page associations and traceability.</li><li><strong>E:</strong> Deletes conditions essential to correct interpretation.</li></ul>
+              
+              <p><strong>Study domain:</strong> Information extraction</p>
+            </details>
+          </section>
+          <section class="question" id="q40" data-select="1" data-domain="extraction">
+            <h3>40. Superseded versions must not remain the default</h3>
+            <p>A tender is revised, and an old version is withdrawn. The assistant still retrieves the old obligations because the ingestion process only appends new chunks and lacks version/status handling. Which design should prevent stale evidence from silently remaining current?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Ask the model to prefer larger numeric values as if they were newer.</li><li>Lower retrieval relevance thresholds to retrieve more obsolete chunks.</li><li>Manage document/chunk identity and version status, propagate updates/deletions or current-version filters, and validate retrieval after ingestion changes.</li><li>Fine-tune on the newest title while keeping both versions indistinguishable in the index.</li></ol>
+            <details><summary>Answer and explanation for question 40</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Freshness and deletion/version semantics belong in the ingestion and retrieval design, not in the model&#x27;s guesses.</p>
+              <ul><li><strong>A:</strong> Numeric magnitude does not identify revision precedence.</li><li><strong>B:</strong> Expands the stale candidate pool.</li><li><strong>D:</strong> Does not correct the index&#x27;s ambiguous current-state representation.</li></ul>
+              
+              <p><strong>Study domain:</strong> Information extraction</p>
+            </details>
+          </section>
+        </div>
+      </article>
+      <article class="module-card" id="module-5" data-module="5" data-label="Property inventory and media platform">
+        <header class="module-header">
+          <div><span class="module-number">Case 5 of 6</span><h2>Property inventory and media platform</h2></div>
+          <span class="question-count">10 questions</span>
+        </header>
+        <div class="module-content">
+          <blockquote><p><strong>Shared case facts:</strong> Use these requirements for questions 41-50. Each question is independent of earlier answers.</p><ul><li>A property-services firm creates an inventory assistant for staff. It processes room photographs, walkthrough videos, supplier documents, and written observations. Outputs support human inspection rather than autonomous legal determinations.</li><li>Inventory records require provenance to the original media, consistent room/item identifiers, and clear handling of uncertain observations. Generated promotional media must remain separate from inspection evidence.</li><li>The agent can query the inventory system and draft work orders. Any write must be authorized for the staff member and the property. High-value work orders need explicit approval of their material details.</li><li>The platform uses shared AI infrastructure but property-specific access. Operational metrics must be available without exposing full private room photographs or unredacted resident communications.</li></ul></blockquote>
+          
+          <section class="question" id="q41" data-select="1" data-domain="plan">
+            <h3>41. Separate generated media from evidence</h3>
+            <p>The team wants to save costs by using generated cleaned-up room images in both promotional listings and inspection records. Inspection records must reflect original observed conditions and permit later audit. Which architecture policy preserves that distinction?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Replace every source photograph with its enhanced version and remove the original.</li><li>Maintain separate generated-media and evidence paths, preserve original sources and provenance, and label generated outputs appropriately.</li><li>Treat the highest-resolution image as the authoritative source regardless of origin.</li><li>Remove metadata so reviewers are not distracted by whether an image was generated.</li></ol>
+            <details><summary>Answer and explanation for question 41</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Different business uses have different truth and provenance requirements; generated media cannot silently become evidence of actual conditions.</p>
+              <ul><li><strong>A:</strong> Destroys the original inspection evidence.</li><li><strong>C:</strong> Resolution does not establish authenticity.</li><li><strong>D:</strong> Conceals the distinction needed for audit.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q42" data-select="1" data-domain="plan">
+            <h3>42. Measure the system without exposing private media</h3>
+            <p>Operations needs latency, error rates, tool-call counts, and review volumes by pipeline stage. A prototype logs full tool payloads containing private room imagery and resident messages. Which design meets the diagnostic requirement without defaulting to unrestricted content retention?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Disable every metric and accept an unobservable service.</li><li>Keep all payloads because only developers can normally see logs.</li><li>Rely exclusively on a monthly bill.</li><li>Collect correlated stage metrics and permitted identifiers/statuses, exclude or redact private payloads, and apply access and retention controls to diagnostic samples.</li></ol>
+            <details><summary>Answer and explanation for question 42</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Useful operational evidence often consists of timings, states, and correlations, not raw private media or messages.</p>
+              <ul><li><strong>A:</strong> Unnecessarily gives up the operational requirement.</li><li><strong>B:</strong> Developer access does not override the data-handling policy.</li><li><strong>C:</strong> Cost totals cannot diagnose stage failures or review volume.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q43" data-select="1" data-domain="genai">
+            <h3>43. A draft is not an authorized work order</h3>
+            <p>An agent prepares a work order using inventory evidence. It then attempts to submit it for a different property because that property&#x27;s identifier appears in a retrieved supplier example. The request is structurally valid. Which component must decide whether submission is permitted?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>The backend authorization layer using trusted staff identity, property scope, and the concrete operation.</li><li>The model&#x27;s interpretation that the example author intended submission.</li><li>The JSON schema alone.</li><li>The fact that the supplier document was successfully retrieved.</li></ol>
+            <details><summary>Answer and explanation for question 43</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Tool argument validity and document relevance do not establish authority to act on a property.</p>
+              <ul><li><strong>B:</strong> Lets untrusted content influence authorization.</li><li><strong>C:</strong> Schema checks do not establish ownership or permission.</li><li><strong>D:</strong> Retrievability is not permission to execute every action described.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q44" data-select="2" data-domain="genai">
+            <h3>44. Long-running review without repeated side effects</h3>
+            <p>An agent may request human approval for a high-value work order. Approval can take hours, and application instances may restart. The same user may retry the original submission. Which TWO design elements help preserve correct state and avoid duplicate writes?</p>
+            <p><strong>Choose TWO answers.</strong></p>
+            <ol class="options" type="A"><li>Persist one conversation-level approved flag and reuse it for every later order.</li><li>Generate a new operation identifier after every restart.</li><li>Persist the workflow/approval state bound to the intended order and material arguments, revalidating changes on resume.</li><li>Use backend-supported idempotency with a stable operation identifier and authoritative status reconciliation for retries.</li><li>Treat a restart as proof that no prior write committed.</li></ol>
+            <details><summary>Answer and explanation for question 44</summary>
+              <p class="correct-answer">Answer: C, D</p>
+              <p><strong>Why:</strong> Durable, action-specific approval state preserves the consent boundary, while backend idempotency and reconciliation handle duplicate delivery and ambiguous outcomes.</p>
+              <ul><li><strong>A:</strong> Approval for one order does not authorize unrelated future writes.</li><li><strong>B:</strong> Defeats deduplication of the same logical operation.</li><li><strong>E:</strong> Remote effects can commit before local process failure.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q45" data-select="1" data-domain="genai">
+            <h3>45. Typed tool failure instead of invented inventory</h3>
+            <p>The inventory tool returns an empty list whenever its backend is unavailable. The agent interprets this as a verified empty room and closes the inspection. An empty room is also a legitimate result. Which contract should replace the ambiguous fallback?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Keep the empty list and ask the model to infer outages from context.</li><li>Return an explicit success/data or failure/status representation using the supported tool contract, and route unavailable data to retry/review rather than closure.</li><li>Return a plausible default item list.</li><li>Use the final answer&#x27;s fluency to distinguish a real empty room from an outage.</li></ol>
+            <details><summary>Answer and explanation for question 45</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Business emptiness and execution failure must remain distinguishable through the tool interface and orchestration.</p>
+              <ul><li><strong>A:</strong> The discarded backend state cannot reliably be recovered by reasoning.</li><li><strong>C:</strong> Fabricates observations.</li><li><strong>D:</strong> Writing quality does not indicate backend availability.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q46" data-select="1" data-domain="vision">
+            <h3>46. Locate observations in walkthrough video</h3>
+            <p>A video summary mentions damage to a cabinet, but reviewers cannot find the relevant moment. The damage is visible and not described in the audio. The product needs structured findings with source time ranges, not an overall narrative alone. Which capability should be configured?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>A text-only model supplied solely with the transcript.</li><li>One embedding for the entire video summary, used to guess timestamps.</li><li>A generic sentiment score for each speaker.</li><li>A Content Understanding video analyzer with suitable segmentation/custom fields and retained timing associations, followed by validation of findings.</li></ol>
+            <details><summary>Answer and explanation for question 46</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Segmented multimodal analysis can associate structured observations with their visual source intervals.</p>
+              <ul><li><strong>A:</strong> Misses unspoken visual evidence.</li><li><strong>B:</strong> Cannot reliably reconstruct timing discarded by the summary.</li><li><strong>C:</strong> Does not identify visible cabinet damage or its location in time.</li></ul>
+              
+              <p><strong>Study domain:</strong> Computer vision</p>
+            </details>
+          </section>
+          <section class="question" id="q47" data-select="1" data-domain="vision">
+            <h3>47. Image harm and business visual policy</h3>
+            <p>A listing image passes standard image harm-category checks but includes a prohibited company logo treatment. The policy requires both ordinary visual-safety moderation and compliance with brand rules. Which design should be chosen?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Combine supported image harm analysis with a separate validated brand-policy check and review/escalation for uncertain cases.</li><li>Assume a safe harm-category score proves every brand rule was met.</li><li>Replace image checks with sentiment analysis of the filename.</li><li>Publish automatically whenever OCR finds no profanity.</li></ol>
+            <details><summary>Answer and explanation for question 47</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> General harm categories and organization-specific visual policies are different tests; passing one does not satisfy the other.</p>
+              <ul><li><strong>B:</strong> Overstates what a general moderation result proves.</li><li><strong>C:</strong> A filename does not represent the visual policy evidence.</li><li><strong>D:</strong> Text-only profanity checks miss visual content and brand requirements.</li></ul>
+              
+              <p><strong>Study domain:</strong> Computer vision</p>
+            </details>
+          </section>
+          <section class="question" id="q48" data-select="1" data-domain="text">
+            <h3>48. Consistent observations without unsupported certainty</h3>
+            <p>Staff notes mix measurements, impressions, and explicit uncertainty. The inventory system needs structured item, observed_condition, and review_required fields. A prototype rewrites &#x27;possible discoloration&#x27; as &#x27;confirmed damage.&#x27; Which prompting/output design best preserves the evidence distinction?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Ask for definitive wording in every record so the database looks consistent.</li><li>Use only sentiment polarity to determine condition.</li><li>Use an explicit extraction schema and evidence-preserving instructions that retain uncertainty, validate required fields, and route uncertain records for review.</li><li>Remove uncertainty words before sending notes to the model.</li></ol>
+            <details><summary>Answer and explanation for question 48</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Structured consistency should not erase uncertainty or transform an observation into an unsupported factual conclusion.</p>
+              <ul><li><strong>A:</strong> Forces certainty beyond the source evidence.</li><li><strong>B:</strong> Sentiment does not encode the requested observation semantics.</li><li><strong>D:</strong> Deletes information needed for accurate extraction.</li></ul>
+              
+              <p><strong>Study domain:</strong> Text and speech</p>
+            </details>
+          </section>
+          <section class="question" id="q49" data-select="2" data-domain="extraction">
+            <h3>49. Evidence from multiple file types</h3>
+            <p>A property record contains PDF inventories and short walkthrough clips. The downstream agent needs structured item attributes and readable context, each connected to its source location. The team wants to avoid maintaining unrelated ad hoc extraction formats. Which TWO practices form an appropriate ingestion design?</p>
+            <p><strong>Choose TWO answers.</strong></p>
+            <ol class="options" type="A"><li>Choose appropriate Content Understanding analyzers for each input modality and configure the required output fields/representations.</li><li>Concatenate every extracted value into one string with no file boundaries.</li><li>Treat a generated summary as a replacement for all original evidence.</li><li>Drop media timestamps once item names have been extracted.</li><li>Normalize downstream records while preserving document/page or video/time provenance and validate uncertain extracted fields.</li></ol>
+            <details><summary>Answer and explanation for question 49</summary>
+              <p class="correct-answer">Answer: A, E</p>
+              <p><strong>Why:</strong> Modality-appropriate analysis and a common evidence-preserving downstream representation support cross-file reasoning without losing traceability.</p>
+              <ul><li><strong>B:</strong> Destroys source associations and useful structure.</li><li><strong>C:</strong> A summary is lossy and cannot replace all auditable evidence.</li><li><strong>D:</strong> Removes the ability to locate a video observation.</li></ul>
+              
+              <p><strong>Study domain:</strong> Information extraction</p>
+            </details>
+          </section>
+          <section class="question" id="q50" data-select="1" data-domain="extraction">
+            <h3>50. Permission metadata must survive chunking</h3>
+            <p>A document-level permission field is populated correctly, but a new chunking pipeline sends only text and embeddings to the search index. The service identity can query every property. Which correction is necessary before the chunks can safely ground property-specific answers?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Hide the property identifier in the UI while keeping all chunks retrievable.</li><li>Propagate the required access metadata to indexed chunks and enforce trusted caller scope during every retrieval.</li><li>Ask the model to guess a chunk&#x27;s property from its text.</li><li>Grant a broader role so missing metadata no longer blocks results.</li></ol>
+            <details><summary>Answer and explanation for question 50</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Authorization cannot be enforced reliably over chunks when the metadata needed to scope them has been discarded.</p>
+              <ul><li><strong>A:</strong> UI hiding does not prevent content from reaching the model.</li><li><strong>C:</strong> Inferred ownership is not authoritative access control.</li><li><strong>D:</strong> Broader permissions increase exposure rather than restore correct scope.</li></ul>
+              
+              <p><strong>Study domain:</strong> Information extraction</p>
+            </details>
+          </section>
+        </div>
+      </article>
+      <article class="module-card" id="module-6" data-module="6" data-label="Pharmaceutical documentation support">
+        <header class="module-header">
+          <div><span class="module-number">Case 6 of 6</span><h2>Pharmaceutical documentation support</h2></div>
+          <span class="question-count">10 questions</span>
+        </header>
+        <div class="module-content">
+          <blockquote><p><strong>Shared case facts:</strong> Use these requirements for questions 51-60. Each question is independent of earlier answers.</p><ul><li>A pharmaceutical manufacturer&#x27;s documentation team builds an assistant for internal technical writing and training. It does not diagnose patients or make treatment recommendations; qualified reviewers approve regulated documents.</li><li>The assistant retrieves approved procedures, summarizes change requests, translates training material, and helps prepare draft documents. Procedures have effective dates and superseded versions, and citations must refer to the correct source.</li><li>Staff provide text, recorded training questions, diagrams, and demonstration videos. Image or video generation may be used for clearly labeled training assets, never as evidence that a manufacturing event occurred.</li><li>A release must satisfy quality and safety gates across supported document categories and languages. Model, prompt, tool, and knowledge configurations must be traceable, and unknown or rejected outputs require explicit handling.</li></ul></blockquote>
+          
+          <section class="question" id="q51" data-select="1" data-domain="plan">
+            <h3>51. Independent release gates</h3>
+            <p>A candidate improves relevance pass rate from 88% to 94% and reduces latency, but groundedness pass rate falls from 96% to 87%. The release rule requires at least 93% groundedness. All figures use the same dataset and evaluator thresholds. Which decision follows the agreed contract?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Average relevance and groundedness and substitute that value for the gate.</li><li>Approve because users will notice faster answers.</li><li>Hold the candidate, investigate unsupported claims, and rerun the required gates after remediation.</li><li>Lower the groundedness requirement after seeing the candidate results.</li></ol>
+            <details><summary>Answer and explanation for question 51</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Groundedness is an independent minimum; relevance and latency improvements cannot compensate for violating it.</p>
+              <ul><li><strong>A:</strong> Changes the acceptance metric rather than satisfying it.</li><li><strong>B:</strong> Ignores a hard quality requirement.</li><li><strong>D:</strong> Rewrites the rule retrospectively to hide a failed test.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q52" data-select="1" data-domain="plan">
+            <h3>52. A stable rollback requires more than a prompt file</h3>
+            <p>The team can restore an earlier prompt but not the corresponding model configuration, tool schema, or knowledge-source settings. A new release produces different citations even after that prompt-only rollback. Which operational design should be adopted?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Keep only the newest configurations to reduce storage.</li><li>Version and test the relevant agent/application configuration bundle and compatible dependencies, with a controlled rollback procedure and post-rollback checks.</li><li>Assume identical prompt text guarantees identical retrieval and tool behavior.</li><li>Ask the model which historical settings it remembers.</li></ol>
+            <details><summary>Answer and explanation for question 52</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Behavior depends on more than prompt text. A rollback must restore or account for compatible model, tool, and retrieval configuration.</p>
+              <ul><li><strong>A:</strong> Eliminates the ability to restore a known configuration.</li><li><strong>C:</strong> Ignores other independently changing components.</li><li><strong>D:</strong> Model memory is not a deployment record.</li></ul>
+              
+              <p><strong>Study domain:</strong> Plan and manage</p>
+            </details>
+          </section>
+          <section class="question" id="q53" data-select="1" data-domain="genai">
+            <h3>53. Specialize writing while preserving current procedures</h3>
+            <p>Retrieval already returns the correct procedure, but a tested base model still fails the required internal writing style after several prompt and schema iterations. The team has many approved input/output examples. Procedures change frequently. Which next approach is most justified?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Fine-tune on current procedures and remove retrieval permanently.</li><li>Increase only the retrieval result count although evidence coverage is adequate.</li><li>Use higher temperature as a guaranteed style-learning mechanism.</li><li>Evaluate fine-tuning on curated examples of the stable behavior while retaining retrieval for current procedure evidence.</li></ol>
+            <details><summary>Answer and explanation for question 53</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Fine-tuning may address stable behavior when simpler approaches and suitable examples justify it; retrieval continues to supply changing facts.</p>
+              <ul><li><strong>A:</strong> Conflates style specialization with a current knowledge store.</li><li><strong>B:</strong> Targets a retrieval problem the scenario says is already solved.</li><li><strong>C:</strong> Variability is not a guarantee of learning the required behavior.</li></ul>
+              <p><strong>Qualification:</strong> Evaluate the tuned model independently for task quality and safety; fine-tuning does not guarantee improvement.</p>
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q54" data-select="2" data-domain="genai">
+            <h3>54. Trustworthy fine-tuning evidence</h3>
+            <p>The training export contains repeated variants of the same procedure example, occasional unapproved assistant replies, and source-specific writing conventions. The team wants credible validation of a fine-tuned candidate rather than memorization of near-duplicates. Which TWO dataset practices should it use?</p>
+            <p><strong>Choose TWO answers.</strong></p>
+            <ol class="options" type="A"><li>Keep every unapproved reply because larger datasets always improve quality.</li><li>Curate approved target outputs and remove inappropriate or sensitive material according to policy.</li><li>Split related source/case groups so near-duplicates do not cross training and validation, retaining a separate final test set.</li><li>Tune repeatedly on the final test set until the score improves.</li><li>Measure success only by whether the training job completed.</li></ol>
+            <details><summary>Answer and explanation for question 54</summary>
+              <p class="correct-answer">Answer: B, C</p>
+              <p><strong>Why:</strong> Target quality and independent data partitions are required to measure useful generalization rather than leakage or reproduction of bad examples.</p>
+              <ul><li><strong>A:</strong> Bad targets can teach incorrect behavior.</li><li><strong>D:</strong> Turns the test set into a tuning set.</li><li><strong>E:</strong> Job completion does not measure application quality.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q55" data-select="1" data-domain="genai">
+            <h3>55. Tool results must be correlated, not guessed</h3>
+            <p>An application handles two independent read-only tool requests from one model response. Their backend calls finish in the opposite order from the requests. The model needs the correct result for each requested operation. Which mechanism should the application use when returning tool outputs?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Preserve each requested call identifier and return the corresponding validated result using the supported API contract, regardless of completion order.</li><li>Attach the first completed result to the first requested tool, regardless of identity.</li><li>Combine the results into an unlabeled paragraph.</li><li>Ask the model to infer which result belongs to which request from answer length.</li></ol>
+            <details><summary>Answer and explanation for question 55</summary>
+              <p class="correct-answer">Answer: A</p>
+              <p><strong>Why:</strong> Correlation identifiers preserve the request-result association when execution order differs from request order.</p>
+              <ul><li><strong>B:</strong> Can swap semantically different results.</li><li><strong>C:</strong> Discards the correlation contract.</li><li><strong>D:</strong> Replaces exact mapping with a guess.</li></ul>
+              
+              <p><strong>Study domain:</strong> Generative AI and agents</p>
+            </details>
+          </section>
+          <section class="question" id="q56" data-select="1" data-domain="vision">
+            <h3>56. Ground answers in a supplied diagram</h3>
+            <p>A reviewer asks whether the flow arrow in an uploaded diagram connects step B to step C or to an exception branch. The diagram contains both labels and spatial relationships. The assistant must answer from that image and flag uncertainty rather than redraw it. Which capability should be chosen?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>A text-to-image generator that creates the most likely diagram.</li><li>A text-only model given only the diagram title.</li><li>A multimodal understanding model receiving the actual diagram and question, with evidence-grounded output and review for uncertainty.</li><li>A generic sentiment classifier for the step labels.</li></ol>
+            <details><summary>Answer and explanation for question 56</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> The task is visual question answering over the supplied evidence, not media generation or text classification.</p>
+              <ul><li><strong>A:</strong> Creates a new diagram instead of interpreting the original.</li><li><strong>B:</strong> Lacks the arrows and spatial evidence.</li><li><strong>D:</strong> Sentiment does not establish graph connectivity.</li></ul>
+              
+              <p><strong>Study domain:</strong> Computer vision</p>
+            </details>
+          </section>
+          <section class="question" id="q57" data-select="1" data-domain="vision">
+            <h3>57. An image may carry two different kinds of risk</h3>
+            <p>A training screenshot may contain disallowed visual content and embedded text instructing the assistant to ignore its task. The image is passed to a multimodal model, and OCR-derived text is also used as external context. Which architecture addresses both concerns without assuming one detector covers everything?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Use only a profanity list over the filename.</li><li>Combine appropriate visual harm moderation with injection defenses for extracted untrusted text and independent restrictions on agent actions.</li><li>Use groundedness scoring as the only image safety detector.</li><li>Trust the screenshot once OCR successfully extracts its text.</li></ol>
+            <details><summary>Answer and explanation for question 57</summary>
+              <p class="correct-answer">Answer: B</p>
+              <p><strong>Why:</strong> Visual content safety and instruction attacks are distinct risks requiring layered controls and maintained trust boundaries.</p>
+              <ul><li><strong>A:</strong> The filename does not represent the image&#x27;s contents or instructions.</li><li><strong>C:</strong> Answer support is not comprehensive visual moderation or injection prevention.</li><li><strong>D:</strong> Successful extraction does not make extracted content trustworthy.</li></ul>
+              <p><strong>Qualification:</strong> Scanning OCR text does not guarantee detection of every multimodal attack.</p>
+              <p><strong>Study domain:</strong> Computer vision</p>
+            </details>
+          </section>
+          <section class="question" id="q58" data-select="1" data-domain="text">
+            <h3>58. Summarize a revision without erasing an exception</h3>
+            <p>A new procedure shortens a routine review interval but retains the old interval for a named exception category. The team needs a concise change summary, not a complete rewrite. A prototype summarizes the old and new documents independently, then compares the summaries; it misses the unchanged exception. Which design best addresses the observed information loss?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Keep independent summaries but shorten them further so differences are more obvious.</li><li>Summarize only the new document; assume anything not mentioned in the summary was removed.</li><li>Increase the comparison model&#x27;s output length while supplying the same summaries.</li><li>Align relevant old/new sections, provide their actual clauses and exception context to a grounded comparison step, and validate changed/unchanged claims against source references.</li></ol>
+            <details><summary>Answer and explanation for question 58</summary>
+              <p class="correct-answer">Answer: D</p>
+              <p><strong>Why:</strong> Comparing source-aligned evidence avoids relying on summaries that already discarded the exception; concise output can still distinguish the changed rule from its retained exception.</p>
+              <ul><li><strong>A:</strong> Further compression is likely to remove more qualifying evidence.</li><li><strong>B:</strong> Absence from a summary does not establish removal from the procedure.</li><li><strong>C:</strong> More output capacity cannot recover an exception omitted from both inputs.</li></ul>
+              
+              <p><strong>Study domain:</strong> Text and speech</p>
+            </details>
+          </section>
+          <section class="question" id="q59" data-select="2" data-domain="text">
+            <h3>59. Spoken questions and translated spoken answers</h3>
+            <p>Staff ask spoken questions in one supported language and need spoken answers in another. The application must reason over recognized content and approved documentation before speaking. Which TWO selections correctly describe the input/output components without confusing speech recognition with synthesis?</p>
+            <p><strong>Choose TWO answers.</strong></p>
+            <ol class="options" type="A"><li>Use speech-to-text for incoming audio and pass the recognized content through the validated agent/translation workflow.</li><li>Use text-to-speech on validated target-language response text to produce the spoken answer.</li><li>Use a custom voice model as the only recognizer for incoming questions.</li><li>Use OCR to convert all audio directly into policy decisions.</li><li>Skip validation because synthesized speech sounds authoritative.</li></ol>
+            <details><summary>Answer and explanation for question 59</summary>
+              <p class="correct-answer">Answer: A, B</p>
+              <p><strong>Why:</strong> Speech recognition supplies the text input; synthesis voices the validated output. Translation and reasoning occur between these boundaries.</p>
+              <ul><li><strong>C:</strong> A voice-generation capability does not replace speech recognition.</li><li><strong>D:</strong> OCR is not an audio transcription pipeline.</li><li><strong>E:</strong> Natural-sounding output does not prove correctness or permission.</li></ul>
+              <p><strong>Qualification:</strong> Other supported speech-to-speech architectures may fit different requirements; this scenario explicitly requires reasoning over recognized content.</p>
+              <p><strong>Study domain:</strong> Text and speech</p>
+            </details>
+          </section>
+          <section class="question" id="q60" data-select="1" data-domain="extraction">
+            <h3>60. Validate the retrieval stage before blaming generation</h3>
+            <p>An evaluation set has query-to-document relevance labels. After an indexing change, answers become incomplete because relevant procedural passages are missing from the candidate set. The drafting model and prompt are unchanged. Which evaluation and remediation focus is most appropriate first?</p>
+            <p><strong>Choose ONE answer.</strong></p>
+            <ol class="options" type="A"><li>Measure only final-answer fluency and buy a larger generation model.</li><li>Increase response length while retaining the same incomplete evidence.</li><li>Use document-retrieval evaluation against the relevance labels, inspect ingestion/chunking/filter coverage, and fix candidate retrieval before retesting generation.</li><li>Apply semantic ranking after discarding all but the same incorrect first result.</li></ol>
+            <details><summary>Answer and explanation for question 60</summary>
+              <p class="correct-answer">Answer: C</p>
+              <p><strong>Why:</strong> Labeled retrieval evaluation isolates the failed stage. Generation and late reranking cannot reliably recover passages never retrieved.</p>
+              <ul><li><strong>A:</strong> Fluency does not measure evidence recall.</li><li><strong>B:</strong> More generated text does not supply missing source facts.</li><li><strong>D:</strong> Cannot recover a relevant passage removed before ranking.</li></ul>
+              
+              <p><strong>Study domain:</strong> Information extraction</p>
+            </details>
+          </section>
+        </div>
+      </article>
+      <div class="no-results" id="no-results" hidden>No case studies match your search.</div>
+      <section class="references" id="references">
+        <h2>Coverage and official sources</h2>
+        <ul><li>Plan and manage: 17 questions</li><li>Generative AI and agents: 19 questions</li><li>Computer vision: 8 questions</li><li>Text and speech: 8 questions</li><li>Information extraction: 8 questions</li></ul>
+        <p>Published weights: planning 25-30%, generative AI/agents 30-35%, and vision, text/speech, and information extraction 10-15% each. Each paper uses the same balanced allocation but different scenarios. Use mistakes to select targeted labs and documentation; no paper covers every possible exam objective.</p>
+        <ul><li><a href="https://learn.microsoft.com/credentials/certifications/resources/study-guides/ai-103">Official AI-103 study guide</a></li><li><a href="https://learn.microsoft.com/azure/foundry/foundry-models/concepts/deployment-types">Foundry model deployment types</a></li><li><a href="https://learn.microsoft.com/azure/foundry/agents/overview">Foundry agent overview and tools</a></li><li><a href="https://learn.microsoft.com/python/api/overview/azure/ai-projects-readme?view=azure-python">Azure AI Projects Python client</a></li><li><a href="https://learn.microsoft.com/azure/search/search-features-list">Azure AI Search capabilities</a></li><li><a href="https://learn.microsoft.com/azure/search/search-security-rbac">Azure AI Search data-plane roles</a></li><li><a href="https://learn.microsoft.com/azure/search/search-security-trimming-for-azure-search">Document security filters</a></li><li><a href="https://learn.microsoft.com/azure/foundry/openai/concepts/content-filter-prompt-shields">Prompt Shields</a></li><li><a href="https://learn.microsoft.com/azure/foundry/concepts/evaluation-evaluators/rag-evaluators">RAG evaluators</a></li><li><a href="https://learn.microsoft.com/azure/ai-services/content-understanding/video/elements">Content Understanding audiovisual elements</a></li><li><a href="https://learn.microsoft.com/azure/ai-services/translator/document-translation/overview">Translator Document Translation</a></li><li><a href="https://learn.microsoft.com/azure/ai-services/speech-service/how-to-custom-speech-test-and-train">Custom Speech training and evaluation data</a></li><li><a href="https://learn.microsoft.com/azure/foundry/openai/how-to/json-mode">JSON mode and structured outputs</a></li></ul>
+      </section>
+    </main>
+  </div>
+  <script>
+    (() => {
+      const search = document.querySelector("#search");
+      const filter = document.querySelector("#module-filter");
+      const articles = [...document.querySelectorAll(".module-card")];
+      const resultCount = document.querySelector("#result-count");
+      const noResults = document.querySelector("#no-results");
+      const answers = [...document.querySelectorAll("details")];
+
+      const update = () => {
+        const term = search.value.trim().toLocaleLowerCase();
+        const moduleValue = filter.value;
+        let visible = 0;
+        let questions = 0;
+        for (const article of articles) {
+          const moduleMatches = moduleValue === "all" || article.dataset.module === moduleValue;
+          const textMatches = !term || article.textContent.toLocaleLowerCase().includes(term);
+          const show = moduleMatches && textMatches;
+          article.hidden = !show;
+          if (show) {
+            visible += 1;
+            const badge = article.querySelector(".question-count");
+            questions += Number.parseInt(badge.textContent, 10);
+          }
+        }
+        noResults.hidden = visible !== 0;
+        resultCount.textContent = term
+          ? `Found ${visible} matching case ${visible === 1 ? "study" : "studies"} (${
+              questions
+            } total questions in those cases).`
+          : `Showing ${visible} case ${visible === 1 ? "study" : "studies"} and ${questions} questions.`;
+      };
+
+      search.addEventListener("input", update);
+      filter.addEventListener("change", update);
+      document.querySelector("#expand-answers").addEventListener("click", () => {
+        answers.forEach((details) => {
+          details.open = true;
+        });
+      });
+      document.querySelector("#collapse-answers").addEventListener("click", () => {
+        answers.forEach((details) => {
+          details.open = false;
+        });
+      });
+      document.querySelector("#print").addEventListener("click", () => window.print());
+    })();
+  </script>
+</body>
+</html>
