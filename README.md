@@ -47,6 +47,7 @@ I found learning paths 3 and 4 less relevant to my current code-first agent work
 [Full-length case-based question papers](./test-papers/) cover topics across the certification.
 
 - [60-question full practice test](./test-papers/ai-103-full-practice-test.html): 45 standalone scenarios, 8 direct questions, and one final case study with 7 questions. Includes hidden answers and explanations.
+- [60-question focused practice paper](./test-papers/ai-103-ocr-search-evaluation-practice-test.html): OCR, evaluation, Azure AI Search, built-in skills and agent tools/function calling, and OpenAI endpoints. Mostly scenarios, with one final 7-question case study and explained answers.
 
 **All practice questions in this repository are AI-generated**, not official Microsoft exam questions. They may contain errors; verify answers against current Microsoft Learn documentation.
 
