@@ -35,12 +35,12 @@ The course has **4 learning paths** with **34 modules total**:
 |------------------------|--------------|--------------------|--------|-------------------|
 | [1. Develop generative AI apps in Azure](https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/) | [Notes and projects](./1.%20Develop%20generative%20AI%20apps%20in%20Azure/) | [Question bank](./1.%20Develop%20generative%20AI%20apps%20in%20Azure/questions/) | 30–35% | **5/5 — Core focus** |
 | [2. Develop AI agents on Azure](https://learn.microsoft.com/en-us/training/paths/develop-ai-agents-azure/) | [Notes and projects](./2.%20Develop%20AI%20agents%20on%20Azure/) | [Question bank](https://github.com/psingla/Microsoft-Azure-AI-103-Certification/tree/main/2.%20Develop%20AI%20agents%20on%20Azure/questions) | 30–35% | **5/5 — Core focus** |
-| [3. Develop natural language solutions in Azure](https://learn.microsoft.com/en-us/training/paths/develop-language-solutions-azure-ai/) | Less relevant to my current learning goals | Not prioritized | 10–15% | **3/5 — Supporting knowledge** |
+| [3. Develop natural language solutions in Azure](https://learn.microsoft.com/en-us/training/paths/develop-language-solutions-azure-ai/) | [Notes and projects](https://github.com/psingla/Microsoft-Azure-AI-103-Certification/tree/main/3.%20Develop%20natural%20language%20solutions%20in%20Azure) | [Question bank](https://github.com/psingla/Microsoft-Azure-AI-103-Certification/tree/main/3.%20Develop%20natural%20language%20solutions%20in%20Azure/questions) | 10–15% | **3/5 — Supporting knowledge** |
 | [4. Extract insights from visual data on Azure](https://learn.microsoft.com/en-us/training/paths/insight-visual-data/) | Less relevant to my current learning goals | Not prioritized | 20–30% | **3/5 — Supporting knowledge** |
 
 *My Priority reflects my current learning focus, not exam weight: 1 = lowest, 5 = highest. Ratings can change as I progress.*
 
-I found learning paths 3 and 4 less relevant to my current code-first agent work, so my notes, projects, and topic-specific question banks focus on paths 1 and 2. This is a personal study choice, not a claim that paths 3 and 4 are unimportant for the exam.
+My notes, projects, and topic-specific question banks cover paths 1, 2, and 3, with paths 1 and 2 remaining my core focus. Path 4 is less relevant to my current code-first agent work. This is a personal study choice, not a claim that the supporting paths are unimportant for the exam.
 
 ### Full-Length Practice Test Papers
 
