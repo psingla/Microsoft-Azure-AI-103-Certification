@@ -18,7 +18,7 @@
 
 </div>
 ---
- ## Why I Chose This Certification
+## Why I Chose This Certification
 
 I've been using Microsoft Foundry (formerly Azure AI Foundry),the Azure Cosmos DB toolkit, and Foundry IQ (Azure AI Search) to build agents. I chose this certification to broaden my understanding of Azure AI services, discover features I haven't explored, and make better architectural decisions when building code-first AI solutions..
 
