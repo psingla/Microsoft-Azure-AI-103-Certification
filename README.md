@@ -17,7 +17,6 @@
 **Pass exam (score ≥700) + build production-grade AI agent skills**
 
 </div>
-
 ---
  ## Why I Chose This Certification
 
