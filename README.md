@@ -53,10 +53,9 @@ My notes, projects, and topic-specific question banks cover all four learning pa
 
 **All practice questions in this repository are AI-generated**, not official Microsoft exam questions. They may contain errors; verify answers against current Microsoft Learn documentation.
 
-## My Certification Reflections
+## 🎓 My Certification Reflections
 
-> [!NOTE]
-> [Completing this certification](https://learn.microsoft.com/en-us/users/pramodsingla-8568/credentials/certification/azure-ai-apps-and-agents-developer-associate?tab=credentials-tab) improved my understanding of the Microsoft services available for building AI agents. I do not use all of them in my day-to-day work, but learning about them gave me more options to consider before implementing custom solutions and filled several gaps in my knowledge.
+[Completing this certification](https://learn.microsoft.com/en-us/users/pramodsingla-8568/credentials/certification/azure-ai-apps-and-agents-developer-associate?tab=credentials-tab) improved my understanding of the Microsoft services available for building AI agents. I do not use all of them in my day-to-day work, but learning about them gave me more options to consider before implementing custom solutions and filled several gaps in my knowledge.
 
 Some exam content—particularly memorizing code syntax and learning about services less relevant to my work—felt less useful. Overall, however, it was a valuable learning experience. My next step is to build a project based on this new understanding so I can reinforce what I learned through practice.
 
