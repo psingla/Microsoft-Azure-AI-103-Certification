@@ -17,7 +17,6 @@
 **Pass exam (score ≥700) + build production-grade AI agent skills**
 
 </div>
-https://learn.microsoft.com/api/credentials/share/en-us/PramodSingla-8568/18013D495F27836E?sharingId=6F54BB82EBAF58E0
 ---
  ## Why I Chose This Certification
 
