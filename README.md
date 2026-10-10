@@ -3,7 +3,8 @@
 # AI-103: Microsoft Certified: Azure AI Apps and Agents Developer Associate
 
 [Official certification](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-apps-and-agents-developer-associate/?practice-assessment-type=certification)
- 
+
+[![Microsoft Certified Associate badge](https://learn.microsoft.com/media/learn/certification/badges/microsoft-certified-associate-badge.svg?branch=main)](https://learn.microsoft.com/en-us/users/pramodsingla-8568/credentials/certification/azure-ai-apps-and-agents-developer-associate?tab=credentials-tab)
 
 
 [![Exam](https://img.shields.io/badge/Exam-AI103-blue?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/credentials/certifications/exams/ai-103)
