@@ -4,7 +4,9 @@
 
 [Official certification](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-apps-and-agents-developer-associate/?practice-assessment-type=certification)
 
-[![Microsoft Certified Associate badge](https://learn.microsoft.com/media/learn/certification/badges/microsoft-certified-associate-badge.svg?branch=main)](https://learn.microsoft.com/en-us/users/pramodsingla-8568/credentials/certification/azure-ai-apps-and-agents-developer-associate?tab=credentials-tab)
+<a href="https://learn.microsoft.com/en-us/users/pramodsingla-8568/credentials/certification/azure-ai-apps-and-agents-developer-associate?tab=credentials-tab">
+  <img src="https://learn.microsoft.com/media/learn/certification/badges/microsoft-certified-associate-badge.svg?branch=main" alt="Microsoft Certified Associate badge" width="150">
+</a>
 
 
 [![Exam](https://img.shields.io/badge/Exam-AI103-blue?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/credentials/certifications/exams/ai-103)
