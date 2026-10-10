@@ -53,17 +53,27 @@ My notes, projects, and topic-specific question banks cover all four learning pa
 
 **All practice questions in this repository are AI-generated**, not official Microsoft exam questions. They may contain errors; verify answers against current Microsoft Learn documentation.
 
+## Final Conclusion
+
+Completing this certification improved my understanding of the Microsoft services available for building AI agents. I do not use all of them in my day-to-day work, but learning about them gave me more options to consider before implementing custom solutions and filled several gaps in my knowledge.
+
+Some exam content—particularly memorizing code syntax and learning about services less relevant to my work—felt less useful. Overall, however, it was a valuable learning experience. My next step is to build a project based on this new understanding so I can reinforce what I learned through practice.
+
+The [official Microsoft certification resources](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-apps-and-agents-developer-associate/?practice-assessment-type=certification) are a good place to study. I recommend reviewing the architecture diagrams and key concepts, then completing hands-on exercises like the sample projects in this repository. The notes here are personal to my learning needs, and the AI-generated practice questions may be useful, but their accuracy and relevance are not guaranteed.
+
+Happy learning!
+
 ## The AI Stack: Beyond This Certification
 
 These concepts apply across AI platforms, not just Azure or AI-103.
 
-![AI stack illustrated using a human-body analogy: LLM, RAG, MCP, skills, and AI agents](./assets/images/ai-stack-human-body.png)
+<img src="./assets/images/ai-stack-human-body.png" alt="AI stack illustrated using a human-body analogy: LLM, RAG, MCP, skills, and AI agents" width="650">
 
 *Infographic credit: GenAI.works.*
 
 ### The Full AI Stack
 
-![The full AI stack explained across nine layers: LLMs, inference and access, agent frameworks, tools and protocols, memory, vector databases, embeddings and rerankers, data extraction, and evaluations and observability.](./assets/images/full-ai-stack.png)
+<img src="./assets/images/full-ai-stack.png" alt="The full AI stack explained across nine layers: LLMs, inference and access, agent frameworks, tools and protocols, memory, vector databases, embeddings and rerankers, data extraction, and evaluations and observability." width="650">
 
 *Infographic credit: Harish Kumar, as shown in the supplied image. This is a third-party overview, not an official Microsoft architecture or certification guide; verify tool and model details against current documentation.*
 
