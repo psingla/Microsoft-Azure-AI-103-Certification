@@ -4,6 +4,14 @@
 
 Azure Content Understanding in Foundry Tools turns unstructured content into usable content and structured fields.
 
+**System memory aid:** Perception reads -> reasoning interprets -> grounding proves -> confidence qualifies -> schema operationalizes.
+
+**Ways to work:**
+
+- **Microsoft Foundry:** Try and run supported analyzers.
+- **Content Understanding Studio:** Author, test, and manage prebuilt or custom analyzers.
+- **REST API:** Create, run, and integrate analyzers programmatically.
+
 | Component | Purpose |
 |---|---|
 | **Inputs** | Source documents, images, video, or audio |
@@ -18,4 +26,4 @@ Azure Content Understanding in Foundry Tools turns unstructured content into usa
 
 **Exam cue:** Confidence asks **"How reliable?"**; grounding asks **"Where is the evidence?"** Route low-confidence or insufficiently grounded values for human review.
 
-[Microsoft Learn: Content Understanding components](https://learn.microsoft.com/azure/ai-services/content-understanding/overview#key-components-of-content-understanding) | [Document field extraction](https://learn.microsoft.com/azure/ai-services/content-understanding/document/overview#field-extraction)
+[Microsoft Learn: Content Understanding components](https://learn.microsoft.com/azure/ai-services/content-understanding/overview#key-components-of-content-understanding) | [Studio and Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/content-understanding/foundry-vs-content-understanding-studio) | [Document field extraction](https://learn.microsoft.com/azure/ai-services/content-understanding/document/overview#field-extraction) | [Further reading: Building a trustworthy document-understanding system](https://commandline.microsoft.com/azure-content-understanding-document-intelligence-perception-grounding-confidence-reasoning-system/)
