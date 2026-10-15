@@ -2,7 +2,7 @@
 
 # AI-103: Microsoft Certified: Azure AI Apps and Agents Developer Associate
 
-[Official certification](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-apps-and-agents-developer-associate/?practice-assessment-type=certification)
+[Official AI-103 certification](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-apps-and-agents-developer-associate/?practice-assessment-type=certification)
 
 <a href="https://learn.microsoft.com/en-us/users/pramodsingla-8568/credentials/certification/azure-ai-apps-and-agents-developer-associate?tab=credentials-tab">
   <img src="https://learn.microsoft.com/media/learn/certification/badges/microsoft-certified-associate-badge.svg?branch=main" alt="Microsoft Certified Associate badge" width="150">
@@ -12,7 +12,7 @@
 [![Exam](https://img.shields.io/badge/Exam-AI103-blue?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/credentials/certifications/exams/ai-103)
 [![Course](https://img.shields.io/badge/Course-AI103T00--A-0078D4?style=for-the-badge&logo=microsoftlearn&logoColor=white)](https://learn.microsoft.com/training/courses/ai-103t00)
 [![Azure AI Foundry](https://img.shields.io/badge/Azure_AI_Foundry-Foundry_Portal-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)](https://ai.azure.com)
-[![Modules](https://img.shields.io/badge/Modules-34-green?style=for-the-badge)](#course-structure)
+[![Modules](https://img.shields.io/badge/Modules-34-green?style=for-the-badge)](#ai-103-course-structure)
 [![Last Updated](https://img.shields.io/badge/Last_Updated-2026--10--06-purple?style=for-the-badge)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange?style=for-the-badge)](./LICENSE)
 [![Microsoft Learn Badge](https://img.shields.io/badge/Microsoft_Learn-Badge-0078D4?style=for-the-badge&logo=microsoftlearn&logoColor=white)](https://learn.microsoft.com/en-us/users/pramodsingla-8568/credentials/certification/azure-ai-apps-and-agents-developer-associate?tab=credentials-tab)
@@ -21,17 +21,26 @@
 
 </div>
 
-## Why I Chose This Certification
+This repository primarily contains **AI-103** study materials. The study approach, course structure, practice papers, and certification reflections below relate to AI-103. Separate Microsoft Fabric collections are being developed for DP-600 and DP-700.
+
+## Microsoft Fabric Study Materials — Work in Progress
+
+- [DP-600](./DP-600/): **WIP** — study notes and resources are being added.
+- [DP-700](./DP-700/): **WIP** — study notes and resources are being added.
+
+Both collections are incomplete and under active development.
+
+## Why I Chose AI-103
 
 I've been using Microsoft Foundry (formerly Azure AI Foundry),the Azure Cosmos DB toolkit, and Foundry IQ (Azure AI Search) to build agents. I chose this certification to broaden my understanding of Azure AI services, discover features I haven't explored, and make better architectural decisions when building code-first AI solutions..
 
-## My Study Approach
+## My AI-103 Study Approach
 
 I'll work through the official Microsoft Learn content to solidify my understanding, build small projects where needed, and test my knowledge with the practice questions in this repo. I'll keep the content concise and relevant.
 
-## Course Structure
+## AI-103 Course Structure
 
-The course has **4 learning paths** with **34 modules total**:
+The AI-103 course has **4 learning paths** with **34 modules total**:
 
 | Official Learning Path | My Learnings | Practice Questions | Weight | My Priority (1–5) |
 |------------------------|--------------|--------------------|--------|-------------------|
@@ -44,18 +53,18 @@ The course has **4 learning paths** with **34 modules total**:
 
 My notes, projects, and topic-specific question banks cover all four learning paths, with paths 1 and 2 remaining my core focus. This is a personal study choice, not a claim that the supporting paths are unimportant for the exam.
 
-### Full-Length Practice Test Papers
+### AI-103 Full-Length Practice Test Papers
 
-[Full-length case-based question papers](./test-papers/) cover topics across the certification.
+[Full-length case-based question papers](./test-papers/) cover topics across AI-103.
 
 - [60-question full practice test](./test-papers/ai-103-full-practice-test.html): 45 standalone scenarios, 8 direct questions, and one final case study with 7 questions. Includes hidden answers and explanations.
 - [60-question focused practice paper](./test-papers/ai-103-ocr-search-evaluation-practice-test.html): OCR, evaluation, Azure AI Search, built-in skills and agent tools/function calling, and OpenAI endpoints. Mostly scenarios, with one final 7-question case study and explained answers.
 
-**All practice questions in this repository are AI-generated**, not official Microsoft exam questions. They may contain errors; verify answers against current Microsoft Learn documentation.
+**The AI-103 practice questions in this repository are AI-generated**, not official Microsoft exam questions. They may contain errors; verify answers against current Microsoft Learn documentation.
 
-## 🎓 My Certification Reflections
+## 🎓 My AI-103 Certification Reflections
 
-[Completing this certification](https://learn.microsoft.com/en-us/users/pramodsingla-8568/credentials/certification/azure-ai-apps-and-agents-developer-associate?tab=credentials-tab) improved my understanding of the Microsoft services available for building AI agents. I do not use all of them in my day-to-day work, but learning about them gave me more options to consider before implementing custom solutions and filled several gaps in my knowledge.
+[Completing AI-103](https://learn.microsoft.com/en-us/users/pramodsingla-8568/credentials/certification/azure-ai-apps-and-agents-developer-associate?tab=credentials-tab) improved my understanding of the Microsoft services available for building AI agents. I do not use all of them in my day-to-day work, but learning about them gave me more options to consider before implementing custom solutions and filled several gaps in my knowledge.
 
 Some exam content—particularly memorizing code syntax and learning about services less relevant to my work—felt less useful. Overall, however, it was a valuable learning experience. My next step is to build a project based on this new understanding so I can reinforce what I learned through practice.
 
@@ -63,7 +72,7 @@ The [official Microsoft certification resources](https://learn.microsoft.com/en-
 
 Happy learning!
 
-## The AI Stack: Beyond This Certification
+## The AI Stack: Beyond AI-103
 
 These concepts apply across AI platforms, not just Azure or AI-103.
 
