@@ -1,6 +1,35 @@
 <div align="center">
 
-# AI-103: Microsoft Certified: Azure AI Apps and Agents Developer Associate
+# Azure AI and Data Certification Study Hub
+
+Personal study notes, projects, practice questions, and preparation resources.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-orange?style=for-the-badge)](./LICENSE)
+
+</div>
+
+## Certification Index
+
+| Certification | Focus | Status | Start here |
+| --- | --- | --- | --- |
+| [AI-103](#ai-103) | Azure AI apps and agents | Certification completed; materials available | [Learning paths](#ai-103-course-structure) and [practice papers](#ai-103-full-length-practice-test-papers) |
+| [DP-420](#dp-420) | Azure Cosmos DB and AI applications | **WIP** | [Enrollment and study guide](./DP-420/notes/dp-420-study-guide.md) |
+| [DP-600](#dp-600) | Microsoft Fabric analytics | **WIP** | [Study guide and resources](./DP-600/notes/dp-600-study-guide.md) |
+| [DP-700](#dp-700) | Microsoft Fabric data engineering | **WIP** | [Study guide and resources](./DP-700/notes/dp-700-study-guide.md) |
+
+Each certification has its own section below. [Shared resources](#shared-resources) apply across certifications.
+WIP collections are incomplete and under active development.
+
+## AI-103
+
+**Microsoft Certified: Azure AI Apps and Agents Developer Associate**
+
+> **My recommendation: AI-103 is a must-have certification for data and AI engineers working with Azure.** It broadens understanding of Azure AI services and helps inform architecture decisions for AI apps and agents. This is my recommendation, not an official requirement for these roles.
+
+**Status:** Certification completed; notes, projects, and practice materials available.
+The four numbered learning-path folders and the [test papers](./test-papers/) belong to AI-103.
+
+<div align="center">
 
 [Official AI-103 certification](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-apps-and-agents-developer-associate/?practice-assessment-type=certification)
 
@@ -13,35 +42,21 @@
 [![Course](https://img.shields.io/badge/Course-AI103T00--A-0078D4?style=for-the-badge&logo=microsoftlearn&logoColor=white)](https://learn.microsoft.com/training/courses/ai-103t00)
 [![Azure AI Foundry](https://img.shields.io/badge/Azure_AI_Foundry-Foundry_Portal-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)](https://ai.azure.com)
 [![Modules](https://img.shields.io/badge/Modules-34-green?style=for-the-badge)](#ai-103-course-structure)
-[![Last Updated](https://img.shields.io/badge/Last_Updated-2026--10--06-purple?style=for-the-badge)](#)
-[![License: MIT](https://img.shields.io/badge/License-MIT-orange?style=for-the-badge)](./LICENSE)
 [![Microsoft Learn Badge](https://img.shields.io/badge/Microsoft_Learn-Badge-0078D4?style=for-the-badge&logo=microsoftlearn&logoColor=white)](https://learn.microsoft.com/en-us/users/pramodsingla-8568/credentials/certification/azure-ai-apps-and-agents-developer-associate?tab=credentials-tab)
 
 **Pass exam (score ≥700) + build production-grade AI agent skills**
 
 </div>
 
-This repository primarily contains **AI-103** study materials. The study approach, course structure, practice papers, and certification reflections below relate to AI-103. Separate collections are being developed for DP-420 (Azure Cosmos DB) and DP-600 and DP-700 (Microsoft Fabric).
-
-> **My recommendation: AI-103 is a must-have certification for data and AI engineers working with Azure.** It broadens understanding of Azure AI services and helps inform architecture decisions for AI apps and agents. This is my recommendation, not an official requirement for these roles.
-
-## Additional Certification Study Materials — Work in Progress
-
-- [DP-420](./DP-420/): **WIP** — [enrollment and study guide](./DP-420/notes/dp-420-study-guide.md); study notes and resources are being added.
-- [DP-600](./DP-600/): **WIP** — study notes and resources are being added.
-- [DP-700](./DP-700/): **WIP** — study notes and resources are being added.
-
-These collections are incomplete and under active development.
-
-## Why I Chose AI-103
+### Why I Chose AI-103
 
 I've been using Microsoft Foundry (formerly Azure AI Foundry),the Azure Cosmos DB toolkit, and Foundry IQ (Azure AI Search) to build agents. I chose this certification to broaden my understanding of Azure AI services, discover features I haven't explored, and make better architectural decisions when building code-first AI solutions..
 
-## My AI-103 Study Approach
+### My AI-103 Study Approach
 
 I'll work through the official Microsoft Learn content to solidify my understanding, build small projects where needed, and test my knowledge with the practice questions in this repo. I'll keep the content concise and relevant.
 
-## AI-103 Course Structure
+### AI-103 Course Structure
 
 The AI-103 course has **4 learning paths** with **34 modules total**:
 
@@ -65,7 +80,7 @@ My notes, projects, and topic-specific question banks cover all four learning pa
 
 **The AI-103 practice questions in this repository are AI-generated**, not official Microsoft exam questions. They may contain errors; verify answers against current Microsoft Learn documentation.
 
-## 🎓 My AI-103 Certification Reflections
+### 🎓 My AI-103 Certification Reflections
 
 [Completing AI-103](https://learn.microsoft.com/en-us/users/pramodsingla-8568/credentials/certification/azure-ai-apps-and-agents-developer-associate?tab=credentials-tab) improved my understanding of the Microsoft services available for building AI agents. I do not use all of them in my day-to-day work, but learning about them gave me more options to consider before implementing custom solutions and filled several gaps in my knowledge.
 
@@ -73,17 +88,56 @@ Some exam content—particularly memorizing code syntax and learning about servi
 
 The [official Microsoft certification resources](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-apps-and-agents-developer-associate/?practice-assessment-type=certification) are a good place to study. I recommend reviewing the architecture diagrams and key concepts, then completing hands-on exercises like the sample projects in this repository. The notes here are personal to my learning needs, and the AI-generated practice questions may be useful, but their accuracy and relevance are not guaranteed.
 
-Happy learning!
+## DP-420
 
-## The AI Stack: Beyond AI-103
+**Microsoft Certified: Azure Cosmos DB AI Developer Associate**
 
-These concepts apply across AI platforms, not just Azure or AI-103.
+**Status: WIP** — study notes and resources are being added.
+
+**Why I'm studying it:** Deepen my Cosmos DB knowledge to understand where custom
+Cosmos DB-based agent memory fits alongside Foundry Agent Service's managed
+Memory capability and retrieval-based approaches, and understand the Cosmos DB
+toolkit better. Custom memory and retrieval can work together.
+
+- [DP-420 collection](./DP-420/)
+- [Enrollment, motivation, and study guide](./DP-420/notes/dp-420-study-guide.md)
+- [Official certification and exam booking](https://learn.microsoft.com/en-us/credentials/certifications/azure-cosmos-db-developer-specialty/?practice-assessment-type=certification)
+
+## DP-600
+
+**Implementing Analytics Solutions Using Microsoft Fabric**
+
+**Status: WIP** — study notes and resources are being added.
+
+This collection covers preparation for DP-600, focused on Microsoft Fabric analytics.
+
+- [DP-600 collection](./DP-600/)
+- [Study plan, resources, and voucher caveats](./DP-600/notes/dp-600-study-guide.md)
+- [Official study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-600)
+
+## DP-700
+
+**Implementing Data Engineering Solutions Using Microsoft Fabric**
+
+**Status: WIP** — study notes and resources are being added.
+
+This collection covers preparation for DP-700, focused on Microsoft Fabric data engineering.
+
+- [DP-700 collection](./DP-700/)
+- [Study plan, resources, and exam-day tips](./DP-700/notes/dp-700-study-guide.md)
+- [Official study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-700)
+
+## Shared Resources
+
+### The AI Stack
+
+These concepts apply across AI platforms, not just Azure or a single certification.
 
 <img src="./assets/images/ai-stack-human-body.png" alt="AI stack illustrated using a human-body analogy: LLM, RAG, MCP, skills, and AI agents" width="650">
 
 *Infographic credit: GenAI.works.*
 
-### The Full AI Stack
+#### The Full AI Stack
 
 <img src="./assets/images/full-ai-stack.png" alt="The full AI stack explained across nine layers: LLMs, inference and access, agent frameworks, tools and protocols, memory, vector databases, embeddings and rerankers, data extraction, and evaluations and observability." width="650">
 
@@ -91,13 +145,4 @@ These concepts apply across AI platforms, not just Azure or AI-103.
 
 ---
 
-<div align="center">
-
-[![Exam](https://img.shields.io/badge/Exam-AI103-blue?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/credentials/certifications/exams/ai-103)
-[![Course](https://img.shields.io/badge/Course-AI103T00--A-0078D4?style=for-the-badge&logo=microsoftlearn&logoColor=white)](https://learn.microsoft.com/training/courses/ai-103t00)
-[![Azure AI Foundry](https://img.shields.io/badge/Azure_AI_Foundry-Portal-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)](https://ai.azure.com)
-[![Microsoft Learn Badge](https://img.shields.io/badge/Microsoft_Learn-Badge-0078D4?style=for-the-badge&logo=microsoftlearn&logoColor=white)](https://learn.microsoft.com/en-us/users/pramodsingla-8568/credentials/certification/azure-ai-apps-and-agents-developer-associate?tab=credentials-tab)
-
-*Last updated: 2026-10-06*
-
-</div>
+*Last updated: 2026-10-16*
