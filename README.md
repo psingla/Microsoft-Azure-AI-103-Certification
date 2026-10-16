@@ -38,7 +38,6 @@ The four numbered learning-path folders, [key learnings](./key%20learnings/key-l
 </a>
 
 
-[![Exam](https://img.shields.io/badge/Exam-AI103-blue?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/credentials/certifications/exams/ai-103)
 [![Azure AI Foundry](https://img.shields.io/badge/Azure_AI_Foundry-Foundry_Portal-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)](https://ai.azure.com)
 [![Modules](https://img.shields.io/badge/Modules-34-green?style=for-the-badge)](#ai-103-course-structure)
 [![Microsoft Learn Badge](https://img.shields.io/badge/Microsoft_Learn-Badge-0078D4?style=for-the-badge&logo=microsoftlearn&logoColor=white)](https://learn.microsoft.com/en-us/users/pramodsingla-8568/credentials/certification/azure-ai-apps-and-agents-developer-associate?tab=credentials-tab)
@@ -99,7 +98,6 @@ The [official Microsoft certification resources](https://learn.microsoft.com/en-
 
 <div align="center">
 
-[![Exam DP-420](https://img.shields.io/badge/Exam-DP420-blue?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/en-us/credentials/certifications/azure-cosmos-db-developer-specialty/)
 [![Course DP-420T00-A](https://img.shields.io/badge/Course-DP420T00--A-0078D4?style=for-the-badge&logo=microsoftlearn&logoColor=white)](https://learn.microsoft.com/en-us/training/courses/dp-420t00)
 [![Azure Cosmos DB](https://img.shields.io/badge/Azure_Cosmos_DB-Documentation-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)](https://learn.microsoft.com/en-us/azure/cosmos-db/)
 [![Study Guide](https://img.shields.io/badge/Microsoft_Learn-Study_Guide-0078D4?style=for-the-badge&logo=microsoftlearn&logoColor=white)](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/dp-420)
