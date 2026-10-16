@@ -1,4 +1,6 @@
-# Key Learnings: Generative AI and Agents
+# AI-103 Key Learnings: Generative AI and Agents
+
+These takeaways relate to AI-103, not DP-420, DP-600, or DP-700.
 
 **Start with a model call. Add knowledge when it lacks information, tools when it needs access or actions, and orchestration when the work needs coordination.**
 

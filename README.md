@@ -27,7 +27,7 @@ WIP collections are incomplete and under active development.
 > **My recommendation: AI-103 is a must-have certification for data and AI engineers working with Azure.** It broadens understanding of Azure AI services and helps inform architecture decisions for AI apps and agents. This is my recommendation, not an official requirement for these roles.
 
 **Status:** Certification completed; notes, projects, and practice materials available.
-The four numbered learning-path folders and the [test papers](./test-papers/) belong to AI-103.
+The four numbered learning-path folders, [key learnings](./key%20learnings/key-learnings.md), and [test papers](./test-papers/) belong to AI-103.
 
 <div align="center">
 
@@ -71,7 +71,13 @@ The AI-103 course has **4 learning paths** with **34 modules total**:
 
 My notes, projects, and topic-specific question banks cover all four learning paths, with paths 1 and 2 remaining my core focus. This is a personal study choice, not a claim that the supporting paths are unimportant for the exam.
 
+### AI-103 Key Learnings
+
+[Key learnings: Generative AI and Agents](./key%20learnings/key-learnings.md) collects takeaways from studying AI-103. The current key learnings belong to AI-103, not DP-420, DP-600, or DP-700.
+
 ### AI-103 Full-Length Practice Test Papers
+
+**All current test papers and practice question banks in this repository are for AI-103 only, not DP-420, DP-600, or DP-700.**
 
 [Full-length case-based question papers](./test-papers/) cover topics across AI-103.
 
