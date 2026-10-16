@@ -1,5 +1,7 @@
 # DP-420: Enrollment and Study Guide
 
+**Status: WIP** - study notes and resources are being added.
+
 **Remember: build -> secure and optimize -> add AI and analytics.**
 
 DP-420 is **Building AI Applications with Azure Cosmos DB**, leading to

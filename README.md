@@ -21,14 +21,17 @@
 
 </div>
 
-This repository primarily contains **AI-103** study materials. The study approach, course structure, practice papers, and certification reflections below relate to AI-103. Separate Microsoft Fabric collections are being developed for DP-600 and DP-700.
+This repository primarily contains **AI-103** study materials. The study approach, course structure, practice papers, and certification reflections below relate to AI-103. Separate collections are being developed for DP-420 (Azure Cosmos DB) and DP-600 and DP-700 (Microsoft Fabric).
 
-## Microsoft Fabric Study Materials — Work in Progress
+> **My recommendation: AI-103 is a must-have certification for data and AI engineers working with Azure.** It broadens understanding of Azure AI services and helps inform architecture decisions for AI apps and agents. This is my recommendation, not an official requirement for these roles.
 
+## Additional Certification Study Materials — Work in Progress
+
+- [DP-420](./DP-420/): **WIP** — [enrollment and study guide](./DP-420/notes/dp-420-study-guide.md); study notes and resources are being added.
 - [DP-600](./DP-600/): **WIP** — study notes and resources are being added.
 - [DP-700](./DP-700/): **WIP** — study notes and resources are being added.
 
-Both collections are incomplete and under active development.
+These collections are incomplete and under active development.
 
 ## Why I Chose AI-103
 
